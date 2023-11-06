@@ -239,5 +239,73 @@ html,body,div,p {
 
 
 
+  /* Style for the image gallery */
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat (2, 1fr);
+  gap: 10px;
+  justify-content: center;  /* Center the rows of gallery items */
+}
+
+.gallery-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px; /* Add some space between rows */
+}
+
+.gallery-item {
+  flex-basis: calc(33.33% - 10px); /* Set width for each image */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+
+.gallery-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s;
+  object-fit: contain; /* Ensure the image fits within the container */
+}
+
+.gallery-image:hover {
+  transform: scale(1.1);
+}
+
+/*FOR THE CAPTIONS*/
+.image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  color: #fff; /* Text color */
+  padding: 5px;
+  text-align: center;
+  font-size: 14px;
+  transition: opacity 0.3s;
+}
+
+/* Media query for mobile layout */
+@media (max-width: 767px) {
+  .image-gallery {
+    grid-template-columns: 1fr; /* Single column layout on narrow screens */
+  }
+
+  .gallery-row {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    margin-bottom: 20px; /* Add some space between rows */
+  }
+
+}
+
+
+
 
   
