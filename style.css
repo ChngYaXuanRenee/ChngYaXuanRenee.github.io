@@ -152,7 +152,7 @@ a {
           justify-content: center;
   -webkit-box-align: center;
           align-items: center;
-  height: 130vh;
+  height: 170vh;
   position: relative;
   background: #eee;
   text-align: center;
@@ -290,7 +290,7 @@ background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
 color: #fff; /* Text color */
 padding: 5px;
 text-align: center;
-font-size: 14px;
+font-size: 30px;
 transition: opacity 0.3s;
 }
 
