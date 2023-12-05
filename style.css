@@ -24,7 +24,7 @@ html,body,div,p {
 
 .wrapper div {
   position: absolute;
-  background: #C7D35E;
+  background: #c7964d;
 }
 
 .wrapper div:nth-child(1) {
@@ -154,7 +154,7 @@ a {
           align-items: center;
   height: 170vh;
   position: relative;
-  background: #eee;
+  background: #ffeaa3;
   text-align: center;
   padding: 0 2em;
 }

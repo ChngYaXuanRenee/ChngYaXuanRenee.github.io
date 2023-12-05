@@ -46,8 +46,8 @@ body {
 #imgtext {
   position: absolute;
   bottom: 15px;
-  left: 15px;
-  color: white;
+  left: 600px;
+  color: rgb(253, 195, 102);
   font-size: 20px;
 }
 
@@ -128,7 +128,7 @@ div.backBtn {
     left: -15px;
     top: 6px;
   }
-
+  
   div.backBtn:hover span.mLine {
     opacity: 1;
     width: 30px;
@@ -139,6 +139,7 @@ div.backBtn {
     transform: rotate(45deg);
     left: -15px;
     top: 20px;
+    
   }
 </style>
 </head>
@@ -155,29 +156,29 @@ div.backBtn {
 
 
 <div style="text-align:center">
-  <h2>Tabbed Image Gallery</h2>
+  <h2>SkyCoffee branding and mockup designs</h2>
   <p>Click on the images below:</p>
 </div>
 
 <!-- The eight columns -->
 <div class="row">
   <div class="column">
-    <img src="image1.jpg" alt="Nature" style="width:100%" onclick="myFunction(this);">
+    <img src="Graphicdesign/mockups.jpg" alt="Menu Design" style="width:100%" onclick="myFunction(this);">
   </div>
   <div class="column">
-    <img src="art portrait.jpg" alt="Snow" style="width:100%" onclick="myFunction(this);">
+    <img src="Graphicdesign/brandiden.jpg" alt="Snow" style="width:100%" onclick="myFunction(this);">
   </div>
   <div class="column">
-    <img src="image1.jpg" alt="Mountains" style="width:100%" onclick="myFunction(this);">
+    <img src="Graphicdesign/coverdesign.jpg" alt="Mountains" style="width:100%" onclick="myFunction(this);">
   </div>
   <div class="column">
-    <img src="image1.jpg" alt="Lights" style="width:100%" onclick="myFunction(this);">
+    <img src="Graphicdesign/Screenshot 2023-07-19 011338.png" alt="Lights" style="width:100%" onclick="myFunction(this);">
   </div>
 </div>
 
 <div class="container">
   <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg" style="width:100%">
+  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
   <div id="imgtext"></div>
 </div>
 
