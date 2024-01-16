@@ -141,6 +141,28 @@ a {
   text-decoration: none;
 }
 
+
+.et-hero-tab {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-flex: 1;
+  flex: 1;
+  color: #000;
+  letter-spacing: 0.1rem;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  font-size: 0.8rem;
+  width: 120px; /* Set the desired width for the tabs */
+  padding: 15px 20px; /* Adjust padding as needed */
+  margin: 0; /* Remove any default margin */
+}
+
+
+
 .et-hero-tabs,
 .et-slide {
   display: -webkit-box;
