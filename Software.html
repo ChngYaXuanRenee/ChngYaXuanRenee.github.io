@@ -1,0 +1,243 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Education</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Software Skills</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" type="image/png"
+    href="https://static.codepen.io/assets/favicon/apple-touch-icon-4c660df9f7a952f3060705ee.png" />
+  <meta name="apple-mobile-web-app-title" content="CodePen">
+  <link rel="shortcut icon" type="image/x-icon"
+    href="https://static.codepen.io/assets/favicon/favicon-1f4e06caec34940fbc1a6e787974dcd360f2c6b63348d4b77743096d55480f33.ico" />
+  <link rel="mask-icon" type=""
+    href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg"
+    color="#111" />
+  <title>CodePen - Sticky Slider Navigation (Responsive)</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+
+
+  <style>
+    html,
+    body,
+    div,
+    p {
+      margin: 0;
+      padding: 0;
+      font-family: "Century Gothic", 'Lato', sans-serif;
+
+    }
+
+    .container {
+      display: flex;
+      overflow-x: auto;
+      /* Allow horizontal scrolling */
+      gap: 10px;
+      padding: 10px;
+      /* Add some padding for spacing */
+
+    }
+
+    [class^="box-"] {
+      flex: 0 0 calc(100% - 20px);
+      /* Full width with a 20px gap */
+      height: 100px;
+      background-color: lavender;
+      border: 6px solid black;
+      font-size: 20px;
+      /* Adjust font size for mobile */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        overflow-x: hidden;
+        /* Reset overflow for larger screens */
+      }
+
+      .box-1,
+      .box-2,
+      .box-3,
+      .box-4,
+      .box-5,
+      .box-6,
+      .box-7,
+      .box-8 {
+        flex-basis: calc(25% - 20px);
+        /* Four columns with a 20px gap */
+      }
+    }
+
+    /* CSS for back button */
+    div.backBtn {
+        width: 100px;
+        right: 100px;
+        top: 30px;
+        background-color: #f4f4f4;
+        transition: all 0.4s ease;
+        position: fixed;
+        cursor: pointer;
+      }
+
+      span.line {
+        bottom: auto;
+        right: auto;
+        top: auto;
+        left: auto;
+        background-color: #8f7373;
+        border-radius: 10px;
+        width: 100%;
+        left: 0px;
+        height: 2px;
+        display: block;
+        position: absolute;
+        transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
+      }
+
+      span.tLine {
+        top: 0px;
+      }
+
+      span.mLine {
+        top: 13px;
+        opacity: 0;
+      }
+
+      span.bLine {
+        top: 26px;
+      }
+
+      .label {
+        position: absolute;
+        left: 0px;
+        top: 5px;
+        width: 100%;
+        text-align: center;
+        transition: all 0.4s ease;
+        font-size: 1em;
+        color: rgb(123, 123, 123);
+      }
+
+      div.backBtn:hover span.label {
+        left: 25px
+      }
+
+      div.backBtn:hover span.line {
+        left: -10px;
+        height: 5px;
+        background-color: #a84141;
+      }
+
+      div.backBtn:hover span.tLine {
+        width: 25px;
+        transform: rotate(-45deg);
+        left: -15px;
+        top: 6px;
+      }
+
+      div.backBtn:hover span.mLine {
+        opacity: 1;
+        width: 30px;
+      }
+
+      div.backBtn:hover span.bLine {
+        width: 25px;
+        transform: rotate(45deg);
+        left: -15px;
+        top: 20px;
+
+      }
+
+      .header-color {
+        color:rgb(44, 34, 79);
+      }
+  </style>
+
+</head>
+
+<body style="background-color: rgb(255, 247, 220); ">
+  <!-- The back button -->
+  <div class="backBtn">
+    <a href="index.html#experiences">
+      <span class="line tLine"></span>
+      <span class="line mLine"></span>
+      <span class="label">Back</span>
+      <span class="line bLine"></span>
+    </a>
+  </div>
+  <h1 style="text-align: center;">Software Skills</h1>
+  <br>
+  <h2 style="text-align: center;">Design Softwares/Skills</h2>
+  <div class="container">
+    <div class="box-1"> Adobe Illustrator </div>
+    <div class="box-2"> Adobe Photoshop </div>
+    <div class="box-3"> Adobe inDesign </div>
+    <div class="box-4"> Adobe XD </div>
+    <div class="box-5"> Adobe Aero </div>
+    <div class="box-5"> Creative Ideation </div>
+    <div class="box-5"> Porduct Design/innovation </div>
+    <div class="box-5"> UI/UX Design </div>
+    <div class="box-5"> Editorial Design </div>
+    <div class="box-5"> Branding & Marketing </div>
+    <div class="box-5"> Fine Arts </div>
+  </div>
+
+  <h2 style="text-align: center;">Programming Softwares/Skills</h2>
+  <div class="container">
+    <div class="box-1"> Full stack web development (HTML, CSS, SQL, JS - Node.js, React, Bootstrap, Rust, C#) </div>
+    <div class="box-2"> C# in unity </div>
+    <div class="box-3"> Python </div>
+    <div class="box-4"> VirtualBox </div>
+    <div class="box-5"> Visual Studio </div>
+    <div class="box-6"> linux </div>
+    <div class="box-6"> Argumented Reality (AR) </div>
+   
+  </div>
+
+  <h2 style="text-align: center;">3D Softwares</h2>
+  <div class="container">
+    <div class="box-1"> MAYA </div>
+    <div class="box-2"> Substance Painter </div>
+    <div class="box-3"> Zbrush </div>
+    <div class="box-4"> UNITY </div>
+    
+  </div>
+
+  <h2 style="text-align: center;">Motion Graphics/Video Editing Softwares</h2>
+  <div class="container">
+    <div class="box-1" > Adobe Premier Pro </div>
+    <div class="box-2"> Animation Rotoscoping </div>
+    
+  </div>
+
+  <h2 style="text-align: center;">Data Visualization Softwares</h2>
+  <div class="container">
+    <div class="box-1" "> Microsoft PowerBI </div>
+    <div class="box-2"> Microsoft Excel </div>
+    
+  </div>
+
+  <h2 style="text-align: center;">Other Skills</h2>
+  <div class="container">
+    <div class="box-1" > ScrumMaster Agile Project Management </div>
+    <div class="box-2"> Leadership/Event Management </div>
+    <div class="box-3"> Art Direction </div>
+    <div class="box-4"> Human Computer Interaction </div>
+    <div class="box-5"> Outdoor & Indoor Studio Photography </div>
+    <div class="box-6"> Product Photography </div>
+    <div class="box-5"> Social Media Management </div>
+    <div class="box-6"> Creative Writing</div>
+  </div>
+</body>
+
+</html>
