@@ -329,3 +329,33 @@ transition: opacity 0.3s;
 }
 
 }
+
+
+
+
+/* About me */
+.space-div {
+  width: 80%;
+  margin: auto;
+}
+
+.size-image {
+  max-width: 100%;
+}
+
+.gray-background {
+  background-color: #e5cfbc;
+}
+
+.picture-frame {
+  max-width: 743px;
+}
+
+.well-white {
+  background-color: rgb(255, 238, 198);
+}
+
+
+.top-padding {
+  padding-top: 20px;
+}
