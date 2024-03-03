@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
+<style>
+
+  
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  
+  background:  #ddc7ff;
+
+}
+
+.imgdesc {
+  font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+  background: #b98fea;
+
+}
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8; 
+  cursor: pointer; 
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image container */
+.container {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 600px;
+  color: rgb(93, 38, 112);
+  font-size: 20px;
+}
+
+/* Closable button inside the expanded image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+
+
+/* CSS for back button */
+div.backBtn {
+    width: 100px;
+    right: 100px;
+    top: 30px;
+    background-color: #f4f4f4;
+    transition: all 0.4s ease;
+    position: fixed;
+    cursor: pointer;
+  }
+
+  span.line {
+    bottom: auto;
+    right: auto;
+    top: auto;
+    left: auto;
+    background-color: #8f7373;
+    border-radius: 10px;
+    width: 100%;
+    left: 0px;
+    height: 2px;
+    display: block;
+    position: absolute;
+    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
+  }
+
+  span.tLine {
+    top: 0px;
+  }
+
+  span.mLine {
+    top: 13px;
+    opacity: 0;
+  }
+
+  span.bLine {
+    top: 26px;
+  }
+
+  .label {
+    position: absolute;
+    left: 0px;
+    top: 5px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.4s ease;
+    font-size: 1em;
+    color: rgb(123, 123, 123);
+  }
+
+  div.backBtn:hover span.label {
+    left: 25px
+  }
+
+  div.backBtn:hover span.line {
+    left: -10px;
+    height: 5px;
+    background-color: #a84141;
+  }
+
+  div.backBtn:hover span.tLine {
+    width: 25px;
+    transform: rotate(-45deg);
+    left: -15px;
+    top: 6px;
+  }
+  
+  div.backBtn:hover span.mLine {
+    opacity: 1;
+    width: 30px;
+  }
+
+  div.backBtn:hover span.bLine {
+    width: 25px;
+    transform: rotate(45deg);
+    left: -15px;
+    top: 20px;
+    
+  }
+
+  .header-color {
+    color:rgb(44, 34, 79);
+  }
+</style>
+</head>
+<body>
+    <!-- The back button -->
+    <div class="backBtn">
+        <a href="graphicdesigngrp.html">
+          <span class="line tLine"></span>
+          <span class="line mLine"></span>
+          <span class="label">Back</span>
+          <span class="line bLine"></span>
+        </a>
+    </div>
+
+
+<div style="text-align:center" class="header-color">
+  <h2>Jean Giraud Trading Cards Design</h2>
+  <p>Click on the images below:</p>
+</div>
+
+<!-- The 4 columns -->
+<div class="row">
+  <div class="column">
+    <img src="Graphicdesign/card1-08.png" alt="" style="width:100%" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="Graphicdesign/Jeangiraud.jpg" alt="" style="width:100%" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="Graphicdesign/Jeangiraud2.jpg" alt="" style="width:100%" onclick="myFunction(this);">
+  </div>
+  </div>
+  
+</div>
+
+<div class="container">
+  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
+  <div id="imgtext"></div>
+</div>
+ 
+<!-- The img desc -->
+<div class="imgdesc" style="color:rgb(0, 0, 0)" >
+  <p style="margin: auto;
+  width: 50%;
+  padding: 10px;">Medium: Adobe Illustrator and Photoshop. Jan 2024.</p>
+
+  <p style="margin: auto;
+  width: 50%;
+  padding: 10px;">Jean Giraud Trading Cards Design   
+    </p>
+    <p style="margin: auto;
+    width: 50%;
+    padding: 10px;">
+        Creating trading cards for a renowned designer and illustrator required extensive research into the history of graphic design. 
+        It is not enough to simply replicate their work, I must also comprehend the substance of their artistic contributions and the 
+        circumstances in which they were made. This project challenged me to investigate the evolution of graphic styles, taking 
+        into account how technology, society, and philosophy have influenced them.
+        One of the most important things I learned was that I needed to conduct considerable study on my selected designer 
+        and illustrator. This included reviewing their portfolio, understanding their design philosophy, and examining the 
+        historical and cultural background of their work. This process was both tough and gratifying since it required me to consider 
+        the relevance of their work and how it has influenced the area of graphic design.
+        Another issue I had was transforming my research into a visually appealing and useful trade card. 
+        I had to carefully choose the most significant information and statements to capture the essence of the designer and illustrator's work. This necessitated a good eye for design and a thorough comprehension of the aesthetic concepts.
+        One of the greatest advantages of this project was the ability to obtain a better understanding of the history and evolution of graphic design. By researching previous designers and illustrators, I acquired insight into the numerous styles and techniques that have contributed to the industry. This has not only improved my knowledge of graphic design, but it has additionally inspired me to think more creatively and innovatively about my own projects.
+        Ultimately, this project has been quite informative and has fueled my enthusiasm for graphic design. It has taught me the value of learning history in order to develop for the future. I've learned significant abilities in research, analysis, and design that I believe will be quite useful in my future profession as a graphic designer.
+        
+    </p>
+    
+  
+</div>
+
+
+<script>
+function myFunction(imgs) {
+  var expandImg = document.getElementById("expandedImg");
+  var imgText = document.getElementById("imgtext");
+  expandImg.src = imgs.src;
+  imgText.innerHTML = imgs.alt;
+  expandImg.parentElement.style.display = "block";
+}
+</script>
+
+</body>
+</html>
