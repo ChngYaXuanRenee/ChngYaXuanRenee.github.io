@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
+<style>
+
+body {
+  background:  #ffeaa3;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+
+div.gallery {
+  border: 1px solid #ccc;
+  
+}
+
+/*
+div.gallery img {
+  max-width: 300px; 
+  max-height: 200px; 
+  width: auto; 
+  height: auto; 
+}
+*/
+
+div.gallery img {
+  width: 367px; 
+  height: 289px; 
+  object-fit: cover; 
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive {
+  padding: 0 6px;
+  float: left;
+  width: 24.99999%;
+}
+
+@media only screen and (max-width: 700px) {
+  .responsive {
+    width: 49.99999%;
+    margin: 6px 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .responsive {
+    width: 100%;
+  }
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
+
+
+
+
+div.backBtn {
+    width: 100px;
+    right: 100px;
+    top: 30px;
+    background-color: #f4f4f4;
+    transition: all 0.4s ease;
+    position: fixed;
+    cursor: pointer;
+  }
+
+  span.line {
+    bottom: auto;
+    right: auto;
+    top: auto;
+    left: auto;
+    background-color: #333;
+    border-radius: 10px;
+    width: 100%;
+    left: 0px;
+    height: 2px;
+    display: block;
+    position: absolute;
+    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
+  }
+
+  span.tLine {
+    top: 0px;
+  }
+
+  span.mLine {
+    top: 13px;
+    opacity: 0;
+  }
+
+  span.bLine {
+    top: 26px;
+  }
+
+  .label {
+    position: absolute;
+    left: 0px;
+    top: 5px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.4s ease;
+    font-size: 1em;
+  }
+
+  div.backBtn:hover span.label {
+    left: 25px
+  }
+
+  div.backBtn:hover span.line {
+    left: -10px;
+    height: 5px;
+    background-color: #F76060;
+  }
+
+  div.backBtn:hover span.tLine {
+    width: 25px;
+    transform: rotate(-45deg);
+    left: -15px;
+    top: 6px;
+  }
+
+  div.backBtn:hover span.mLine {
+    opacity: 1;
+    width: 30px;
+  }
+
+  div.backBtn:hover span.bLine {
+    width: 25px;
+    transform: rotate(45deg);
+    left: -15px;
+    top: 20px;
+  }
+</style>
+</head>
+<body>
+
+    <div class="backBtn">
+        <a href="index.html#portfolio">
+          <span class="line tLine"></span>
+          <span class="line mLine"></span>
+          <span class="label">Back</span>
+          <span class="line bLine"></span>
+        </a>
+    </div>
+
+<h1>Renee's Photography!</h1>
+
+<h2>Product Photography</h2>
+
+<div class="responsive">
+  <div class="gallery">
+
+      <img src="Photography/bowl.png" alt="Cinque Terre" width="600" height="400">
+    </a>
+    <div class="desc">Cereal Bowl</div>
+  </div>
+</div>
+
+
+<div class="responsive">
+  <div class="gallery">
+
+      <img src="Photography/Cup.png" alt="Forest" width="600" height="400">
+    </a>
+    <div class="desc">Splashing Cup</div>
+  </div>
+</div>
+
+<div class="responsive">
+  <div class="gallery">
+
+      <img src="Photography/spoon.jpg" alt="Northern Lights" width="600" height="400">
+    </a>
+    <div class="desc">Utensils</div>
+  </div>
+</div>
+
+<div class="responsive">
+  <div class="gallery">
+
+      <img src="Photography/spoon2.jpg" alt="Mountains" width="600" height="400">
+    </a>
+    <div class="desc">Utensils</div>
+  </div>
+</div>
+
+<div class="responsive">
+    <div class="gallery">
+  
+        <img src="Photography/product1.jpg" alt="Mountains" width="600" height="400">
+      </a>
+      <div class="desc">Product Photography Project</div>
+    </div>
+  </div>
+
+  <div class="responsive">
+    <div class="gallery">
+  
+        <img src="Photography/product2.jpg" alt="Mountains" width="600" height="400">
+      </a>
+      <div class="desc">Product Photography Project</div>
+    </div>
+  </div>
+
+  <div class="responsive">
+    <div class="gallery">
+  
+        <img src="Photography/product3.jpg" alt="Mountains" width="600" height="400">
+      </a>
+      <div class="desc">Product Photography Project</div>
+    </div>
+  </div>
+
+  <div class="responsive">
+    <div class="gallery">
+  
+        <img src="Photography/product4.jpg" alt="Mountains" width="600" height="400">
+      </a>
+      <div class="desc">Product Photography Project</div>
+    </div>
+  </div>
+<br>
+<br>
+<h2>Studio Portrait Photography</h2>
+<br>
+<div class="responsive">
+    <div class="gallery">
+  
+        <img src="Photography/portrait.jpg" alt="Cinque Terre" width="600" height="400">
+      </a>
+      <div class="desc">Studio Portrait Photography</div>
+    </div>
+  </div>
+  
+  
+  <div class="responsive">
+    <div class="gallery">
+  
+        <img src="Photography/portrait2.jpg" alt="Forest" width="600" height="400">
+      </a>
+      <div class="desc">Studio Portrait Photography</div>
+    </div>
+  </div>
+  
+  <div class="responsive">
+    <div class="gallery">
+  
+        <img src="Photography/photographyred.png" alt="Northern Lights" width="600" height="400">
+      </a>
+      <div class="desc">Studio Portrait Photography</div>
+    </div>
+  </div>
+  
+  <div class="responsive">
+    <div class="gallery">
+  
+        <img src="Photography/photographyrednblue.png" alt="Mountains" width="600" height="400">
+      </a>
+      <div class="desc">Studio Portrait Photography</div>
+    </div>
+  </div>
+  
+  
+<h2>Outdoor Photography</h2>
+<br>
+<br>
+
+<div class="responsive">
+    <div class="gallery">
+  
+        <img src="Photography/58c51284-50cc-40ee-b790-7a5baeac088a (1).jpg" alt="Mountains" width="600" height="400">
+      </a>
+      <div class="desc">Bird & Roof</div>
+    </div>
+  </div>
+
+  <div class="responsive">
+    <div class="gallery">
+  
+        <img src="Photography/IMG_2376.jpg" alt="Mountains" width="600" height="400">
+      </a>
+      <div class="desc">Banners</div>
+    </div>
+  </div>
+
+  <div class="responsive">
+    <div class="gallery">
+  
+        <img src="Photography/IMG_2377.jpg" alt="Mountains" width="600" height="400">
+      </a>
+      <div class="desc">Singapore</div>
+    </div>
+  </div>
+
+  <div class="responsive">
+    <div class="gallery">
+  
+        <img src="Photography/IMG_2379.jpg" alt="Mountains" width="600" height="400">
+      </a>
+      <div class="desc">Shadows</div>
+    </div>
+  </div>
+  <div class="responsive">
+    <div class="gallery">
+  
+        <img src="Photography/IMG_2378.jpg" alt="Mountains" width="600" height="400">
+      </a>
+      <div class="desc">Singapore</div>
+    </div>
+  </div>
+
+  <div class="responsive">
+    <div class="gallery">
+  
+        <img src="Photography/Repetitive buildings (1).jpg" alt="Mountains" width="600" height="400">
+      </a>
+      <div class="desc">Balance & Rhythm</div>
+    </div>
+  </div>
+
+  <div class="responsive">
+    <div class="gallery">
+  
+        <img src="Photography/IMG_2030 (1).JPG" alt="Mountains" width="600" height="400">
+      </a>
+      <div class="desc">Scale & Contrast</div>
+    </div>
+  </div>
+
+  <div class="responsive">
+    <div class="gallery">
+  
+        <img src="Photography/IMG_2031 (1).JPG" alt="Mountains" width="600" height="400">
+      </a>
+      <div class="desc">Carnival</div>
+    </div>
+  </div>
+
+<div class="clearfix"></div>
+
+
+
+</body>
+</html>
+
+
