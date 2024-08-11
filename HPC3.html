@@ -62,9 +62,13 @@ body {
 #imgtext {
   position: absolute;
   bottom: 15px;
-  left: 600px;
-  color: rgb(93, 38, 112);
+  left: 50%; /* Position the left edge of the text at 50% of the parent width */
+  transform: translateX(-50%); /* Shift the text left by 50% of its own width */
+  color: rgb(251, 239, 255);
   font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
+  padding: 10px; /* Add padding to create space around the text */
+  text-align: center; /* Center text within the element */
 }
 
 /* Closable button inside the expanded image */
@@ -187,7 +191,7 @@ div.backBtn {
 <!-- The 4 columns -->
 <div class="row">
   <div class="column">
-    <img src="HPC/sembcorpmockup-01.png" alt="" style="width:100%" onclick="myFunction(this);">
+    <img src="HPC/sembcorpmockup-01.png" alt="Designed a visually engaging and informative webpage for Sembcorp's commitment to decarbonization, focusing on their achievement of emissions intensity targets and future goals." style="width:100%" onclick="myFunction(this);">
   </div>
   <div class="column">
     <img src="HPC/websitemockups2-01.png" alt="" style="width:100%" onclick="myFunction(this);">
