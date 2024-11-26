@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
+<style>
+
+  
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  
+  background:  #005dc193;
+
+}
+
+.imgdesc {
+  font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+  background: #a2d8ff;
+
+}
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8; 
+  cursor: pointer; 
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image container */
+.container {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 50%; /* Position the left edge of the text at 50% of the parent width */
+  transform: translateX(-50%); /* Shift the text left by 50% of its own width */
+  color: rgb(251, 239, 255);
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
+  padding: 10px; /* Add padding to create space around the text */
+  text-align: center; /* Center text within the element */
+}
+
+/* Closable button inside the expanded image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+
+
+/* CSS for back button */
+div.backBtn {
+    width: 100px;
+    right: 100px;
+    top: 30px;
+    background-color: #f4f4f4;
+    transition: all 0.4s ease;
+    position: fixed;
+    cursor: pointer;
+  }
+
+  span.line {
+    bottom: auto;
+    right: auto;
+    top: auto;
+    left: auto;
+    background-color: #8f7373;
+    border-radius: 10px;
+    width: 100%;
+    left: 0px;
+    height: 2px;
+    display: block;
+    position: absolute;
+    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
+  }
+
+  span.tLine {
+    top: 0px;
+  }
+
+  span.mLine {
+    top: 13px;
+    opacity: 0;
+  }
+
+  span.bLine {
+    top: 26px;
+  }
+
+  .label {
+    position: absolute;
+    left: 0px;
+    top: 5px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.4s ease;
+    font-size: 1em;
+    color: rgb(123, 123, 123);
+  }
+
+  div.backBtn:hover span.label {
+    left: 25px
+  }
+
+  div.backBtn:hover span.line {
+    left: -10px;
+    height: 5px;
+    background-color: #a84141;
+  }
+
+  div.backBtn:hover span.tLine {
+    width: 25px;
+    transform: rotate(-45deg);
+    left: -15px;
+    top: 6px;
+  }
+  
+  div.backBtn:hover span.mLine {
+    opacity: 1;
+    width: 30px;
+  }
+
+  div.backBtn:hover span.bLine {
+    width: 25px;
+    transform: rotate(45deg);
+    left: -15px;
+    top: 20px;
+    
+  }
+
+  .header-color {
+    color:rgb(44, 34, 79);
+  }
+</style>
+</head>
+<body>
+    <!-- The back button -->
+    <div class="backBtn">
+        <a href="HPCgrp.html">
+          <span class="line tLine"></span>
+          <span class="line mLine"></span>
+          <span class="label">Back</span>
+          <span class="line bLine"></span>
+        </a>
+    </div>
+
+
+<div style="text-align:center" class="header-color">
+  <h2>HYUNDAI IONIQ 6 Car Decal Design<h2>
+  <p>Click on the images below:</p>
+</div>
+
+<!-- The 4 columns -->
+<div class="row">
+  <div class="column">
+    <img src="HPC/hyundaipresentation.jpg" alt="Presenting my proposal to HYUNDAI team, local artist TOBYATO & LASALLE lecturers" style="width:100%" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="HPC/PPT_Slides.png" alt="Awaken Your World decal design for the IONIQ 6 " style="width:100%" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="HPC/PPT_Slides6 copy 2.png" alt="Also designed carousel post where each slides builds on the theme of energy, youth's centered,
+    and the fusion of nature with technology" style="width:100%" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="HPC/PPTslidesnew-27.png" alt="" style="width:100%" onclick="myFunction(this);">
+  </div>
+  </div>
+  
+</div>
+
+<div class="container">
+  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
+  <div id="imgtext"></div>
+</div>
+ 
+<!-- The img desc -->
+<div class="imgdesc" style="color:rgb(0, 0, 0)" >
+  <p style="margin: auto;
+  width: 50%;
+  padding: 10px;">Medium: Adobe Illustrator. Oct 2024.</p>
+
+    <p style="margin: auto;
+    width: 50%;
+    padding: 10px;">
+        Awaken Your World decal design for the IONIQ 6 beautifully integrates the concepts of energy, power, and connection, 
+        all while targeting today’s single youth, a demographic that values innovation, individuality, and a forward-looking perspective.
+    </p>
+    
+    <p style="margin: auto;
+    width: 50%;
+    padding: 10px;">
+        Central Energy Burst:
+        In the center, there’s a central energy burst where electricity becomes energy and power when two positive charge 
+        ions flow together. This serves as a metaphor for the electric power that drives the IONIQ, making it a symbol of 
+        progress and innovation.
+    </p>
+    
+    <p style="margin: auto;
+    width: 50%;
+    padding: 10px;">
+        Dynamic Lines:
+        The dynamic lines running along the sides emphasize the flow of energy and the technological advancements embodied by the IONIQ. 
+        They represent the seamless connection between nature (ion energy) and technology (IONIQ).
+    </p>
+    
+    <p style="margin: auto;
+    width: 50%;
+    padding: 10px;">
+        Green Swirl Lines:
+        Green swirl lines run gracefully throughout the design, weaving through the car decal, representing eco-friendly sustainability 
+        and the flow of green energy. These swirling patterns bring a natural, organic feel, reinforcing the idea that the IONIQ is not 
+        only about technology but also about harmony with nature. It suggests that the IONIQ is rooted in eco-friendly technology, 
+        growing towards a greener future.
+    </p>
+
+    <p style="margin: auto;
+    width: 50%;
+    padding: 10px;">
+        Pixelated Elements:
+        Pixels are subtly scattered throughout the design, particularly along the front and back, symbolizing adaptability, flexibility, 
+        and personalization customization of the ambience lighting system. Representing the IONIQ 6’s commitment to youths’ customization, 
+        emotional balance, and the interplay between technology and well-being.
+    </p>
+
+    <p style="margin: auto;
+    width: 50%;
+    padding: 10px;">
+        Color Palette:
+        The use of dynamic lines and cool, electric hues like blue and purple adds a sense of speed and modernity. These colors appeal to 
+        the youthful audience by portraying the car as both trendy and cutting-edge.
+    </p>
+
+    <p style="margin: auto;
+    width: 50%;
+    padding: 10px;">
+        Target Audience:
+        This decal design resonates with today’s single youth by aligning with their values of individuality, environmental responsibility, 
+        and a desire for innovation. The bold, futuristic aesthetics speak to a generation that is tech-savvy and forward-thinking, while 
+        the underlying themes of energy and sustainability connect with their commitment to a better future.
+    </p>
+
+    <p style="margin: auto;
+    width: 50%;
+    padding: 10px;">
+        Effective Communication:
+        This design effectively communicates the IONIQ’s mission, to blend technology, sustainability, and style into a unique experience. 
+        By visually capturing the essence of energy transformation and the car’s innovative spirit, I’ve created a design that not only 
+        enhances the car’s appearance but also amplifies its brand message in a way that will appeal to the modern, youthful consumer!
+    </p>
+  
+</div>
+
+
+<script>
+function myFunction(imgs) {
+  var expandImg = document.getElementById("expandedImg");
+  var imgText = document.getElementById("imgtext");
+  expandImg.src = imgs.src;
+  imgText.innerHTML = imgs.alt;
+  expandImg.parentElement.style.display = "block";
+}
+</script>
+
+</body>
+</html>
