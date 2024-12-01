@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
+<style>
+
+  
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  
+  background:  #ff6a00;
+
+}
+
+.imgdesc {
+  font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+  background: #ff8800;
+
+}
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8; 
+  cursor: pointer; 
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image container */
+.container {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 600px;
+  color: rgb(93, 38, 112);
+  font-size: 20px;
+}
+
+/* Closable button inside the expanded image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+
+
+/* CSS for back button */
+div.backBtn {
+    width: 100px;
+    right: 100px;
+    top: 30px;
+    background-color: #f4f4f4;
+    transition: all 0.4s ease;
+    position: fixed;
+    cursor: pointer;
+  }
+
+  span.line {
+    bottom: auto;
+    right: auto;
+    top: auto;
+    left: auto;
+    background-color: #8f7373;
+    border-radius: 10px;
+    width: 100%;
+    left: 0px;
+    height: 2px;
+    display: block;
+    position: absolute;
+    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
+  }
+
+  span.tLine {
+    top: 0px;
+  }
+
+  span.mLine {
+    top: 13px;
+    opacity: 0;
+  }
+
+  span.bLine {
+    top: 26px;
+  }
+
+  .label {
+    position: absolute;
+    left: 0px;
+    top: 5px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.4s ease;
+    font-size: 1em;
+    color: rgb(123, 123, 123);
+  }
+
+  div.backBtn:hover span.label {
+    left: 25px
+  }
+
+  div.backBtn:hover span.line {
+    left: -10px;
+    height: 5px;
+    background-color: #a84141;
+  }
+
+  div.backBtn:hover span.tLine {
+    width: 25px;
+    transform: rotate(-45deg);
+    left: -15px;
+    top: 6px;
+  }
+  
+  div.backBtn:hover span.mLine {
+    opacity: 1;
+    width: 30px;
+  }
+
+  div.backBtn:hover span.bLine {
+    width: 25px;
+    transform: rotate(45deg);
+    left: -15px;
+    top: 20px;
+    
+  }
+
+  .header-color {
+    color:rgb(44, 34, 79);
+  }
+</style>
+</head>
+<body>
+    <!-- The back button -->
+    <div class="backBtn">
+        <a href="graphicdesigngrp.html">
+          <span class="line tLine"></span>
+          <span class="line mLine"></span>
+          <span class="label">Back</span>
+          <span class="line bLine"></span>
+        </a>
+    </div>
+
+
+<div style="text-align:center" class="header-color">
+  <h2>Nostalgic Noodles Branding</h2>
+  <p>Click on the images below:</p>
+</div>
+
+<div class="row">
+    <div class="column">
+        <img src="Graphicdesign/NNslide.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/NNbrandlooks.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/NNcolour.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/NNbrandspeaks.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+</div>
+<div class="row">
+    <div class="column">
+        <img src="Graphicdesign/NNname.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/NNtype.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/NNslogan.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/NNlogo.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+</div>
+<div class="row">
+    <div class="column">
+        <img src="Graphicdesign/NNlogomark.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/NNsign.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    
+    <div class="column">
+        <img src="Graphicdesign/NNsign.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+    <div class="column">
+      <img src="Graphicdesign/NNsocialmedia.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+  </div>
+</div>
+<div class="row">
+    <div class="column">
+        <img src="Graphicdesign/NNvideobillbaords.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/NNAR.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+    <div class="column">
+      <img src="Graphicdesign/3postersmockup.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+    <div class="column">
+      <img src="Animnvid/3screenmockupimg.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+</div>
+
+
+</div>
+
+<div class="container">
+  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
+  <div id="imgtext"></div>
+</div>
+ 
+<!-- The img desc -->
+<div class="imgdesc" style="color:rgb(0, 0, 0)" >
+  <p style="margin: auto;
+  width: 50%;
+  padding: 10px;">Medium: Adobe illustrator, Photoshop, After Effects, Aero, Figma. Oct 2024.</p>
+
+  <p style="margin: auto;
+  width: 50%;
+  padding: 10px;">Nostalgic Noodles Branding
+    </p>
+    <p style="margin: auto;
+    width: 50%;
+    padding: 10px;">
+    Nostalgic Noodles is centered around the comforting, flavorful experience of traditional prawn noodles, prepared with ingredients and 
+    techniques that reflect an older, cherished style of cooking. This isn’t just food; it’s a story brought to life in a bowl, each bite 
+    infused with memories of homemade meals, family gatherings, and especially, the love of a grandmother’s kitchen.
+    </p>
+    <p style="margin: auto;
+    width: 50%;
+    padding: 10px;">
+    My brand experience is designed to feel like a sensory journey. It captures the essence of familiar tastes, smells, and textures that make 
+    Singaporean cuisine unique. From the first glance at the vibrant, hearty bowls to the aromatic broth that wafts up as you lean over the dish, 
+    every detail is crafted to transport you to a place of comfort and nostalgia. This sensory experience is carefully curated to pay homage to 
+    family recipes, where the cooking methods, ingredients, and presentation all come together to recreate the warmth of home.
+    </p>
+    
+  
+</div>
+
+
+<script>
+function myFunction(imgs) {
+  var expandImg = document.getElementById("expandedImg");
+  var imgText = document.getElementById("imgtext");
+  expandImg.src = imgs.src;
+  imgText.innerHTML = imgs.alt;
+  expandImg.parentElement.style.display = "block";
+}
+</script>
+
+</body>
+</html>
