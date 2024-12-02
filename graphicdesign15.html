@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
+<style>
+
+  
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  
+  background:  #ff0000;
+
+}
+
+.imgdesc {
+  font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+  background: #ff2d2d;
+
+}
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8; 
+  cursor: pointer; 
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image container */
+.container {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 600px;
+  color: rgb(93, 38, 112);
+  font-size: 20px;
+}
+
+/* Closable button inside the expanded image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+
+
+/* CSS for back button */
+div.backBtn {
+    width: 100px;
+    right: 100px;
+    top: 30px;
+    background-color: #f4f4f4;
+    transition: all 0.4s ease;
+    position: fixed;
+    cursor: pointer;
+  }
+
+  span.line {
+    bottom: auto;
+    right: auto;
+    top: auto;
+    left: auto;
+    background-color: #8f7373;
+    border-radius: 10px;
+    width: 100%;
+    left: 0px;
+    height: 2px;
+    display: block;
+    position: absolute;
+    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
+  }
+
+  span.tLine {
+    top: 0px;
+  }
+
+  span.mLine {
+    top: 13px;
+    opacity: 0;
+  }
+
+  span.bLine {
+    top: 26px;
+  }
+
+  .label {
+    position: absolute;
+    left: 0px;
+    top: 5px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.4s ease;
+    font-size: 1em;
+    color: rgb(123, 123, 123);
+  }
+
+  div.backBtn:hover span.label {
+    left: 25px
+  }
+
+  div.backBtn:hover span.line {
+    left: -10px;
+    height: 5px;
+    background-color: #a84141;
+  }
+
+  div.backBtn:hover span.tLine {
+    width: 25px;
+    transform: rotate(-45deg);
+    left: -15px;
+    top: 6px;
+  }
+  
+  div.backBtn:hover span.mLine {
+    opacity: 1;
+    width: 30px;
+  }
+
+  div.backBtn:hover span.bLine {
+    width: 25px;
+    transform: rotate(45deg);
+    left: -15px;
+    top: 20px;
+    
+  }
+
+  .header-color {
+    color:rgb(44, 34, 79);
+  }
+</style>
+</head>
+<body>
+    <!-- The back button -->
+    <div class="backBtn">
+        <a href="graphicdesigngrp.html">
+          <span class="line tLine"></span>
+          <span class="line mLine"></span>
+          <span class="label">Back</span>
+          <span class="line bLine"></span>
+        </a>
+    </div>
+
+
+<div style="text-align:center" class="header-color">
+  <h2>Tangled Dream Zine</h2>
+  <p>Click on the images below:</p>
+</div>
+
+<div class="row">
+    <div class="column">
+        <img src="Graphicdesign/Tangledreamscover.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/TD1.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/TD2.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/TD3.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+</div>
+<div class="row">
+    <div class="column">
+        <img src="Graphicdesign/TD4.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/TD5.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/TD6.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+</div>
+
+
+
+</div>
+
+<div class="container">
+  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
+  <div id="imgtext"></div>
+</div>
+ 
+<!-- The img desc -->
+<div class="imgdesc" style="color:rgb(0, 0, 0)" >
+  <p style="margin: auto;
+  width: 50%;
+  padding: 10px;">Medium: Adobe illustrator & Photoshop - Aug 2024.</p>
+
+  <p style="margin: auto;
+  width: 50%;
+  padding: 10px;">Tangled Dreams Zine
+    </p>
+    <p style="margin: auto;
+    width: 50%;
+    padding: 10px;">
+    Through this process, I’ve explored how weaving, fragmentation, and distortion can convey the emotional and physical toll of insomnia. Using weaving to distort type allowed me to represent the repetitive and trapping nature of sleeplessness, mirroring the endless loops of exhaustion and frustration. This technique added depth to my work, making the distortion of type not just visual but symbolic of my personal struggle.
+    By incorporating fragmented images and overlapping elements, I reflected the complexity of the subconscious mind, breaking down screaming faces into unsettling pieces that evoke disorientation and unease. Combining blurring effects with dreamlike distortions further amplified the hazy, fragmented memories tied to my hallucinations, adding layers of mystery and intrigue.
+    The surrealist elements, such as hearts with mouths, unblinking eyes, and skulls, allowed me to delve into the chaos of sleeplessness. Each symbol, from a speaking heart to the unrelenting hyper-vigilance reflected in skulls, illustrated the inner turmoil of insomnia. The hands clutching my childhood teddy bear became a poignant representation of lost security, showing how my safe spaces were invaded by fear and vulnerability.
+    Incorporating chaotic ink splatters and scribbled lines enhanced the raw, emotional narrative of my work, while collaged skulls captured the uncontrolled chaos of the mind during sleepless nights. These elements, combined with surreal imagery like distorted faces and checkerboard patterns, created a visceral sense of fragmented consciousness and nightmares.
+    
+    </p>
+    <p style="margin: auto;
+    width: 50%;
+    padding: 10px;">
+    This exploration deepened my understanding of how visual storytelling can convey deeply personal themes. The interplay of weaving, distortion, and surrealism allowed me to communicate the emotional weight of sleeplessness and the complex struggles within my mind. It’s been a journey of turning internal chaos into a tangible narrative, using symbolism and composition to reflect my experiences.
+    </p>
+    
+  
+</div>
+
+
+<script>
+function myFunction(imgs) {
+  var expandImg = document.getElementById("expandedImg");
+  var imgText = document.getElementById("imgtext");
+  expandImg.src = imgs.src;
+  imgText.innerHTML = imgs.alt;
+  expandImg.parentElement.style.display = "block";
+}
+</script>
+
+</body>
+</html>
