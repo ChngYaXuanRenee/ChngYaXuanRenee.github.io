@@ -4,17 +4,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
-<style>
 
+<style>
 body {
-  background:  #ffeaa3;
+  background: #ffeaa3;
   font-family: 'Ubuntu', sans-serif;
 }
 
-
 div.gallery {
   border: 1px solid #ccc;
-  
+  transition: border 0.3s ease;
 }
 
 div.gallery:hover {
@@ -22,221 +21,182 @@ div.gallery:hover {
 }
 
 div.gallery img {
-  width: 367px; /* Set width to 600px to match the width of image1.jpg */
-  height: 289px; /* Set height to 400px to match the height of image1.jpg */
-  object-fit: cover; 
+  width: 100%;
+  height: 250px;       /* uniform height for all images */
+  object-fit: cover;   /* crops image nicely without distortion */
+  display: block;
 }
-
-
 
 div.desc {
   padding: 15px;
   text-align: center;
 }
 
-* {
-  box-sizing: border-box;
+/* Grid container for all gallery items */
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 per row on desktop */
+  gap: 16px;
+  padding: 10px;
 }
 
-.responsive {
-  padding: 0 6px;
-  float: left;
-  width: 24.99999%;
-}
-
-@media only screen and (max-width: 700px) {
-  .responsive {
-    width: 49.99999%;
-    margin: 6px 0;
+/* Tablet */
+@media (max-width: 1024px) {
+  .gallery-container {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media only screen and (max-width: 500px) {
-  .responsive {
-    width: 100%;
+/* Mobile */
+@media (max-width: 768px) {
+  .gallery-container {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-.clearfix:after {
-  content: "";
-  display: table;
-  clear: both;
+/* Small mobile */
+@media (max-width: 480px) {
+  .gallery-container {
+    grid-template-columns: 1fr;
+  }
 }
 
-
-
-
-
-
-
+/* Back button styling */
 div.backBtn {
-    width: 100px;
-    right: 100px;
-    top: 30px;
-    background-color: #f4f4f4;
-    transition: all 0.4s ease;
-    position: fixed;
-    cursor: pointer;
-  }
+  width: 100px;
+  right: 100px;
+  top: 30px;
+  background-color: #f4f4f4;
+  transition: all 0.4s ease;
+  position: fixed;
+  cursor: pointer;
+}
 
-  span.line {
-    bottom: auto;
-    right: auto;
-    top: auto;
-    left: auto;
-    background-color: #333;
-    border-radius: 10px;
-    width: 100%;
-    left: 0px;
-    height: 2px;
-    display: block;
-    position: absolute;
-    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
-  }
+span.line {
+  bottom: auto;
+  right: auto;
+  top: auto;
+  left: auto;
+  background-color: #333;
+  border-radius: 10px;
+  width: 100%;
+  left: 0px;
+  height: 2px;
+  display: block;
+  position: absolute;
+  transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
+}
 
-  span.tLine {
-    top: 0px;
-  }
+span.tLine { top: 0px; }
+span.mLine { top: 13px; opacity: 0; }
+span.bLine { top: 26px; }
 
-  span.mLine {
-    top: 13px;
-    opacity: 0;
-  }
+.label {
+  position: absolute;
+  left: 0px;
+  top: 5px;
+  width: 100%;
+  text-align: center;
+  transition: all 0.4s ease;
+  font-size: 1em;
+}
 
-  span.bLine {
-    top: 26px;
-  }
+div.backBtn:hover span.label { left: 25px; }
 
-  .label {
-    position: absolute;
-    left: 0px;
-    top: 5px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.4s ease;
-    font-size: 1em;
-  }
+div.backBtn:hover span.line {
+  left: -10px;
+  height: 5px;
+  background-color: #F76060;
+}
 
-  div.backBtn:hover span.label {
-    left: 25px
-  }
+div.backBtn:hover span.tLine {
+  width: 25px;
+  transform: rotate(-45deg);
+  left: -15px;
+  top: 6px;
+}
 
-  div.backBtn:hover span.line {
-    left: -10px;
-    height: 5px;
-    background-color: #F76060;
-  }
+div.backBtn:hover span.mLine {
+  opacity: 1;
+  width: 30px;
+}
 
-  div.backBtn:hover span.tLine {
-    width: 25px;
-    transform: rotate(-45deg);
-    left: -15px;
-    top: 6px;
-  }
-
-  div.backBtn:hover span.mLine {
-    opacity: 1;
-    width: 30px;
-  }
-
-  div.backBtn:hover span.bLine {
-    width: 25px;
-    transform: rotate(45deg);
-    left: -15px;
-    top: 20px;
-  }
+div.backBtn:hover span.bLine {
+  width: 25px;
+  transform: rotate(45deg);
+  left: -15px;
+  top: 20px;
+}
 </style>
 </head>
 <body>
 
-    <div class="backBtn">
-        <a href="index.html#portfolio">
-          <span class="line tLine"></span>
-          <span class="line mLine"></span>
-          <span class="label">Back</span>
-          <span class="line bLine"></span>
-        </a>
-    </div>
+<div class="backBtn">
+  <a href="index.html#portfolio">
+    <span class="line tLine"></span>
+    <span class="line mLine"></span>
+    <span class="label">Back</span>
+    <span class="line bLine"></span>
+  </a>
+</div>
 
 <h2>Renee's Animation/Video works!</h2>
-
 <h4>Click on the works for more descriptions.</h4>
 
-<div class="responsive">
+<!-- START gallery grid -->
+<div class="gallery-container">
+
   <div class="gallery">
     <a target="_blank" href="animvid4.html">
-      <img src="Animnvid/DancingBuildingimg.png" alt="" width="600" height="400">
+      <img src="Animnvid/DancingBuildingimg.png" alt="">
     </a>
     <div class="desc">Dancing Building</div>
   </div>
-</div>
 
-<div class="responsive">
   <div class="gallery">
     <a target="_blank" href="animvid4.html">
-      <img src="Animnvid/parkourimg.png" alt="" width="600" height="400">
+      <img src="Animnvid/parkourimg.png" alt="">
     </a>
     <div class="desc">Escape With Slime!</div>
   </div>
-</div>
 
-<div class="responsive">
   <div class="gallery">
     <a target="_blank" href="animvid4.html">
-      <img src="Animnvid/3screenmockupimg.png" alt="" width="600" height="400">
+      <img src="Animnvid/3screenmockupimg.png" alt="">
     </a>
     <div class="desc">Nostalgic Noodles with AI workflows (ComfyICU)</div>
   </div>
-</div>
 
-<div class="responsive">
   <div class="gallery">
     <a href="animvid5.html">
-      <img src="Graphicdesign/SRsocialmedia.png" alt="" width="600" height="400">
+      <img src="Graphicdesign/SRsocialmedia.png" alt="">
     </a>
     <div class="desc">SPACES REDEFINE Archifest 2025 Reels</div>
   </div>
-</div>
 
-
-<div class="clearfix"></div>
-
-
-
-<div class="responsive">
   <div class="gallery">
     <a href="animvid.html">
-      <img src="Animnvid/Screenshot 2023-10-27 203757.png" alt="" width="600" height="400">
+      <img src="Animnvid/Screenshot 2023-10-27 203757.png" alt="">
     </a>
     <div class="desc">Rotoscoping Music Video</div>
   </div>
-</div>
 
-
-<div class="responsive">
   <div class="gallery">
     <a target="_blank" href="animvid2.html">
-      <img src="Animnvid/dataspacepic.png" alt="" width="600" height="400">
+      <img src="Animnvid/dataspacepic.png" alt="">
     </a>
     <div class="desc">Data Space Video</div>
   </div>
-</div>
 
-<div class="responsive">
   <div class="gallery">
     <a target="_blank" href="animvid3.html">
-      <img src="Animnvid/deciouspic.png" alt="" width="600" height="400">
+      <img src="Animnvid/deciouspic.png" alt="">
     </a>
     <div class="desc">DECIOUS New Year Reels</div>
   </div>
+
 </div>
-
-
-<div class="clearfix"></div>
-
-
+<!-- END gallery grid -->
 
 </body>
 </html>
-
-
