@@ -1,339 +1,173 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Renee's Portfolio</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
-  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-  <link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-4c660df9f7a952f3060705ee.png" />
-    <meta name="apple-mobile-web-app-title" content="CodePen">
-    <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
-    <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
-    <title>CodePen - Sticky Slider Navigation (Responsive)</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-    <script>
-    window.console = window.console || function(t) {};
-    </script>
-    <script>
-    if (document.location.search.match(/type=embed/gi)) {
-        window.parent.postMessage("resize", "*");
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link href="style.css" rel="stylesheet" type="text/css" />
+
+  <!-- jQuery for sticky tabs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <script>
+    // Resume/Testimonial links
+    function openResume() {
+      window.open('ReneeNewResume2.pdf', '_blank');
     }
 
-
-
-    function openResume() {
-            window.open('ReneeNewResume2.pdf', '_blank');
-        }
     function openTestimonial() {
-            window.open('testimonial.pdf', '_blank');
-        }
-    </script>
+      window.open('testimonial.pdf', '_blank');
+    }
+  </script>
 </head>
-
-<body translate="no">
-
-    <section class="et-hero-tabs">
-    <h1>.</h1>
-    <h3>.</h3>
-      <br>
-      <br>
-    <div class="et-hero-tabs-container">
-    <!--<a class="et-hero-tab" href="#tab-es6">Home</a>-->
-    <a class="et-hero-tab" href="#tab-flexbox">About</a>
-    <a class="et-hero-tab" href="#tab-react">Portfolio</a>
-    <a class="et-hero-tab" href="#tab-angular">Education & Experiences</a>
-    <a class="et-hero-tab" href="#tab-other">Achievements</a>
-    <span class="et-hero-tab-slider"></span>
-    </div>
-    </section>
-
-      <main class="et-main">
-        <!--<section class="et-slide" id="tab-es6">-->
-        <!--<h1>Home</h1>-->
-        <!--<h3>something about Home</h3>-->
-        <!--</section>-->
-        <section class="et-slide" id="tab-flexbox">
-          <div class="container-fluid">
-            <h1 class="text-center" style="color:rgb(0, 0, 0);">Hello! I am Renee.</h1>
-            <h2 class="text-center" style="color:rgb(0, 0, 0);">I designed and programmed this website!</h2>
-            <h2 class="text-center" style="color:rgb(120, 120, 120);"><em>Aspiring Graphic Designer,
-              UI/UX Designer,
-              Web Developer,
-              3D Artist,
-              Video Editor,
-              Brand Developer/Marketer,
-              Data Visualization Specialist,
-              Art Director,
-              Social Media Manager,
-              Creative Writer,
-            Community Idea Developer.</em></h2>
-            <div class="space-div">
-              <div class="well gray-background">
-                <div class="well well-white picture-frame" style="margin:auto ;display:block">
-                  <img class="center-block size-image" src="websiteportrait.jpg"  style="width: 300px; height: 300px; object-fit: cover; display: block; margin-left: auto; margin-right: auto;"/>
-                  <p class="text-center top-padding">Graphic design is the beating heart of my creativity | A student immersed in the world of design</p>
-                  </div>
-                  <p class="indent top-padding">My interest in painting as a child has helped me develop my experience and skills. I am 
-                    therefore an expert in conventional illustration as well as in Adobe Illustrator, Photoshop, inDesign, XD, aero. 
-                    I worked on Python projects, full stack web development (HTML, CSS, SQL, JS - Node.js, React, Bootstrap, Rust, 
-                    C#) and C# in unity 3D games! I also have skills in 3D design in Maya, adobe substance painter and Zbrush! 
-                    I love lending a hand at events and am driven to achieve my objectives. I always think there's something new 
-                    to learn! I'm still mastering other additional programming languages. I am able to adapt to different 
-                    communication styles, which allows me to work well in cross-functional teams in a fast-paced atmosphere. 
-                    I enjoy working in a team and creating detailed reports, and I also have a wide range of interests. 
-                  </p>
-                  <br>
-                  <p>Name: Chng Ya Xuan Renee</p>
-                  <br>
-                  <p>Phone: +65 8866 2435</p>
-                  <br>
-                  <p>Email: kingskyrr@gmail.com</p>
-                  <br>
-                  <p>LinkedIn: www.linkedin.com/in/chng-ya-xuan-renee-21bba2237</p>
-                  <br>
-                  <button onclick="openResume()">View Resume</button>
-                  <button onclick="openTestimonial()">View Testimonial</button>
-
-            </div>
-          </div>
-
-        </section>
-        <section class="et-slide" id="tab-react">
-        <h1 id="portfolio">Portfolio</h1>
-        <h3>something about portfolio</h3>
-
-
-          <section class="et-slide" id="tab-react">
-            <h3>Categories</h3>
-            <div class="image-gallery">
-              <div class="gallery-row">
-                <div class="gallery-item">
-                  <a href="graphicdesigngrp.html">
-                  <img src="category1.png" alt="Image 1" class="gallery-image">
-                  <figcaption class="image-caption">GRAPHIC DESIGNS</figcaption>
-                  </a>
-                </div>
-                <div class="gallery-item">
-                  <a href="3Ddesigngrp.html">
-                  <img src="3Dimg/Screenshot 2023-07-19 080611.png" alt="Image 1" class="gallery-image">
-                  <figcaption class="image-caption">3D DESIGNS</figcaption>
-                  </a>
-                </div>
-                <div class="gallery-item">
-                  <a href="UIUXdesigngrp.html">
-                  <img src="UIUX/prototypesmartwatch-01.png" alt="Image 3" class="gallery-image">
-                  <figcaption class="image-caption">UI/UX DESIGNS</figcaption>
-                  </a>
-                </div>
-              </div>
-              <div class="image-gallery">
-                <div class="gallery-row">
-                  <div class="gallery-item">
-                    <a href="animvidgrp.html">
-                    <img src="Animnvid/Screenshot 2023-10-27 203757.png" alt="Image 1" class="gallery-image">
-                    <figcaption class="image-caption">ANIMATION & VIDEO</figcaption>
-                    </a>
-                  </div>
-                  <div class="gallery-item">
-                    <a href="Photogrp.html">
-                    <img src="Photography/IMG_2377.jpg" alt="Image 1" class="gallery-image">
-                    <figcaption class="image-caption">PHOTOGRAPHY</figcaption>
-                    </a>
-                  </div>
-                
-                  <div class="gallery-item">
-                    <a href="HPCgrp.html">
-                    <img src="Expimg/SIWWgrace.jpg" alt="Image 1" class="gallery-image">
-                    <figcaption class="image-caption">HIGH-PROFILE COLLABORATIONS: Projects with Leading Companies & Political Figures</figcaption>
-                    </a>
-                  </div>
-                  <!-- <div class="gallery-item">
-                    <a href="UIUXdesigngrp.html">
-                    <img src="image1.jpg" alt="Image 3" class="gallery-image">
-                    <figcaption class="image-caption">FINE ARTS & ILLUSTRATIONS</figcaption>
-                    </a>
-                  </div>
-                </div>
-              -->
-              
-              <!-- You can add more rows as needed -->
-            </div>
-          </section>
-
-
-
-
-          </section>
-          
-        </section>
-
-
-          
-
-
-        
-        <section class="et-slide" id="tab-angular">
-        <h1  id="experiences">Experiences</h1>
-        <h3>something about experiences</h3>
-
-        <section class="et-slide" id="tab-react">
-          <h3>Categories</h3>
-          <div class="image-gallery">
-            <div class="gallery-row">
-              <div class="gallery-item">
-                <a href="Education.html">
-                <img src="Expimg/experience-06.png" alt="Image 1" class="gallery-image">
-                <figcaption class="image-caption">EDUCATION</figcaption>
-                </a>
-              </div>
-              <div class="gallery-item">
-                <a href="Software.html">
-                <img src="Expimg/experience_software exp.png" alt="Image 1" class="gallery-image">
-                <figcaption class="image-caption">SOFTWARE EXPERIENCES</figcaption>
-                </a>
-              </div>
-              <div class="gallery-item">
-                <a href="Leadership.html">
-                <img src="Expimg/experience-07.png" alt="Image 3" class="gallery-image">
-                <figcaption class="image-caption">LEADERSHIP/VOLUNTEERING/   OTHER EXPERIENCES</figcaption>
-                </a>
-              </div>
-            </div>
-        
-        </section>
-        <section class="et-slide" id="tab-other">
-        <h1 id="achievements">Achievements</h1>
-        <h3>something about achievements</h3>
-        
-          <h3>Categories</h3>
-          <div class="image-gallery">
-            <div class="gallery-row">
-              <div class="gallery-item">
-                <a href="Awards.html">
-                <img src="achievementsexp/awards.jpg" alt="Image 1" class="gallery-image">
-                <figcaption class="image-caption">AWARDS</figcaption>
-                </a>
-              </div>
-              <div class="gallery-item">
-                <a href="Exhibited.html">
-                <img src="achievementsexp/exhibitedworks.jpg" alt="Image 1" class="gallery-image">
-                <figcaption class="image-caption">EXHIBITED WORKS</figcaption>
-                </a>
-              </div>
-              <div class="gallery-item">
-                <a href="Certification.html">
-                <img src="achievementsexp/certifications.jpg" alt="Image 3" class="gallery-image">
-                <figcaption class="image-caption">CERTIFICATIONS</figcaption>
-                </a>
-              </div>
-            </div>
-        
-        
-        </section>
-        </main>
 
 <body>
 
+
+  <!-- Navigation Tabs -->
+  <section class="et-hero-tabs">
+    <div class="et-hero-tabs-container">
+      <a class="et-hero-tab" href="#tab-flexbox">About</a>
+      <a class="et-hero-tab" href="#tab-react">Portfolio</a>
+      <a class="et-hero-tab" href="#tab-angular">Education & Experiences</a>
+      <a class="et-hero-tab" href="#tab-other">Achievements</a>
+      <span class="et-hero-tab-slider"></span>
+    </div>
+  </section>
+
+  <main class="et-main">
+
+    <!-- About Section -->
+    <section class="et-slide" id="tab-flexbox">
+      <h1>Hello! I am Renee.</h1>
+      <h2>I designed and programmed this website!</h2>
+      <h2><em>Aspiring Graphic Designer, UI/UX Designer, Web Developer, 3D Artist, Video Editor, Brand Developer/Marketer, Data Visualization Specialist, Art Director, Social Media Manager, Creative Writer, Community Idea Developer.</em></h2>
+
+      <div class="space-div">
+        <div class="well gray-background">
+          <div class="well well-white picture-frame" style="margin:auto ;display:block">
+            <img class="center-block size-image" src="websiteportrait.jpg" style="width:300px; height:300px; object-fit:cover; display:block; margin-left:auto; margin-right:auto;" />
+            <p class="text-center top-padding">Graphic design is the beating heart of my creativity | A student immersed in the world of design</p>
+          </div>
+
+          <p class="indent top-padding">My interest in painting as a child has helped me develop my experience and skills. I am therefore an expert in conventional illustration as well as in Adobe Illustrator, Photoshop, inDesign, XD, Aero. I worked on Python projects, full stack web development (HTML, CSS, SQL, JS - Node.js, React, Bootstrap, Rust, C#) and C# in Unity 3D games! I also have skills in 3D design in Maya, Adobe Substance Painter and Zbrush! I enjoy lending a hand at events and am driven to achieve my objectives. I always think there's something new to learn! I'm still mastering other programming languages. I am able to adapt to different communication styles, which allows me to work well in cross-functional teams in a fast-paced atmosphere. I enjoy working in a team and creating detailed reports, and I also have a wide range of interests.</p>
+
+          <p>Name: Chng Ya Xuan Renee</p>
+          <p>Phone: +65 8866 2435</p>
+          <p>Email: kingskyrr@gmail.com</p>
+          <p>LinkedIn: www.linkedin.com/in/chng-ya-xuan-renee-21bba2237</p>
+
+          <button onclick="openResume()">View Resume</button>
+          <button onclick="openTestimonial()">View Testimonial</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="et-slide" id="tab-react">
+      <h1 id="portfolio">Portfolio</h1>
+
+      <h3>Categories</h3>
+      <div class="image-gallery">
+        <div class="gallery-item">
+          <a href="graphicdesigngrp.html">
+            <img src="category1.png" alt="Graphic Design" class="gallery-image">
+            <figcaption class="image-caption">GRAPHIC DESIGNS</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="3Ddesigngrp.html">
+            <img src="3Dimg/Screenshot 2023-07-19 080611.png" alt="3D Design" class="gallery-image">
+            <figcaption class="image-caption">3D DESIGNS</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="UIUXdesigngrp.html">
+            <img src="UIUX/prototypesmartwatch-01.png" alt="UI/UX" class="gallery-image">
+            <figcaption class="image-caption">UI/UX DESIGNS</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="animvidgrp.html">
+            <img src="Animnvid/Screenshot 2023-10-27 203757.png" alt="Animation & Video" class="gallery-image">
+            <figcaption class="image-caption">ANIMATION & VIDEO</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="Photogrp.html">
+            <img src="Photography/IMG_2377.jpg" alt="Photography" class="gallery-image">
+            <figcaption class="image-caption">PHOTOGRAPHY</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="HPCgrp.html">
+            <img src="Expimg/SIWWgrace.jpg" alt="High-Profile Collaborations" class="gallery-image">
+            <figcaption class="image-caption">HIGH-PROFILE COLLABORATIONS</figcaption>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experiences Section -->
+    <section class="et-slide" id="tab-angular">
+      <h1 id="experiences">Experiences</h1>
+      <div class="image-gallery">
+        <div class="gallery-item">
+          <a href="Education.html">
+            <img src="Expimg/experience-06.png" alt="Education" class="gallery-image">
+            <figcaption class="image-caption">EDUCATION</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="Software.html">
+            <img src="Expimg/experience_software exp.png" alt="Software Experience" class="gallery-image">
+            <figcaption class="image-caption">SOFTWARE EXPERIENCES</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="Leadership.html">
+            <img src="Expimg/experience-07.png" alt="Leadership/Volunteering" class="gallery-image">
+            <figcaption class="image-caption">LEADERSHIP/VOLUNTEERING</figcaption>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="et-slide" id="tab-other">
+      <h1 id="achievements">Achievements</h1>
+      <div class="image-gallery">
+        <div class="gallery-item">
+          <a href="Awards.html">
+            <img src="achievementsexp/awards.jpg" alt="Awards" class="gallery-image">
+            <figcaption class="image-caption">AWARDS</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="Exhibited.html">
+            <img src="achievementsexp/exhibitedworks.jpg" alt="Exhibited Works" class="gallery-image">
+            <figcaption class="image-caption">EXHIBITED WORKS</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="Certification.html">
+            <img src="achievementsexp/certifications.jpg" alt="Certifications" class="gallery-image">
+            <figcaption class="image-caption">CERTIFICATIONS</figcaption>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Tabs Script -->
   <script src="script.js"></script>
-
-  <div class="wrapper">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <p class="text">Renee's Design<br>Portfolio.</p>
-  </div>
-
-  <script>
-    src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js">
-  </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
-    <script id="rendered-js">
-    class StickyNavigation {
-
-      constructor() {
-        this.currentId = null;
-        this.currentTab = null;
-        this.tabContainerHeight = 70;
-        let self = this;
-        $('.et-hero-tab').click(function () {
-          self.onTabClick(event, $(this));
-        });
-        $(window).scroll(() => {this.onScroll();});
-        $(window).resize(() => {this.onResize();});
-      }
-
-      onTabClick(event, element) {
-        event.preventDefault();
-        let scrollTop = $(element.attr('href')).offset().top - this.tabContainerHeight + 1;
-        $('html, body').animate({ scrollTop: scrollTop }, 600);
-      }
-
-      onScroll() {
-        this.checkTabContainerPosition();
-        this.findCurrentTabSelector();
-      }
-
-      onResize() {
-        if (this.currentId) {
-          this.setSliderCss();
-        }
-      }
-
-      checkTabContainerPosition() {
-        let offset = $('.et-hero-tabs').offset().top + $('.et-hero-tabs').height() - this.tabContainerHeight;
-        if ($(window).scrollTop() > offset) {
-          $('.et-hero-tabs-container').addClass('et-hero-tabs-container--top');
-        } else
-        {
-          $('.et-hero-tabs-container').removeClass('et-hero-tabs-container--top');
-        }
-      }
-
-      findCurrentTabSelector(element) {
-        let newCurrentId;
-        let newCurrentTab;
-        let self = this;
-        $('.et-hero-tab').each(function () {
-          let id = $(this).attr('href');
-          let offsetTop = $(id).offset().top - self.tabContainerHeight;
-          let offsetBottom = $(id).offset().top + $(id).height() - self.tabContainerHeight;
-          if ($(window).scrollTop() > offsetTop && $(window).scrollTop() < offsetBottom) {
-            newCurrentId = id;
-            newCurrentTab = $(this);
-          }
-        });
-        if (this.currentId != newCurrentId || this.currentId === null) {
-          this.currentId = newCurrentId;
-          this.currentTab = newCurrentTab;
-          this.setSliderCss();
-        }
-      }
-
-      setSliderCss() {
-        let width = 0;
-        let left = 0;
-        if (this.currentTab) {
-          width = this.currentTab.css('width');
-          left = this.currentTab.offset().left;
-        }
-        $('.et-hero-tab-slider').css('width', width);
-        $('.et-hero-tab-slider').css('left', left);
-      }}
-
-
-
-    new StickyNavigation();
-
-
-  </script>
 </body>
-
-
-
 </html>
