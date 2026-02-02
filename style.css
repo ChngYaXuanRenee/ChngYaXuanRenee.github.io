@@ -5,6 +5,7 @@
   box-sizing: border-box;
 }
 
+/* BODY */
 body {
   font-family: "Century Gothic", 'Lato', sans-serif;
   background: #ffeaa3;
@@ -21,10 +22,11 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  min-height: auto; /* Removed full height */
+  min-height: auto; /* removed full height */
   padding: 80px 1em 2em 1em; /* top padding = navbar height */
 }
 
+/* NAVBAR */
 .et-hero-tabs-container {
   display: flex;
   flex-direction: row;
@@ -35,23 +37,32 @@ body {
   background: #fff;
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
   z-index: 1000;
+
+  /* Navbar font */
+  font-family: 'Righteous', cursive;
 }
 
 .et-hero-tabs-container--top { position: fixed; top:0; }
 
+/* NAVBAR LINKS */
 .et-hero-tab {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
-  letter-spacing: 0.1rem;
+  font-size: 1.2rem;       /* navbar font size */
+  letter-spacing: 0.05rem; /* navbar letter spacing */
+  color: #333;             /* navbar text color */
+  text-transform: uppercase;
+  font-weight: 400;
+  text-decoration: none;   /* removes underline */
   transition: all 0.5s ease;
 }
 
 .et-hero-tab:hover {
-  color: white;
-  background: rgba(102, 177, 241, 0.8);
+  color: #fff;
+  background: #66B1F1; /* solid hover color */
+  border-radius: 4px;  /* subtle rounded hover effect */
 }
 
 .et-hero-tab-slider {
