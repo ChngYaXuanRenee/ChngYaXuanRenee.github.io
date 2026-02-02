@@ -4,17 +4,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
-<style>
 
+<style>
 body {
-  background:  #ffeaa3;
+  background: #ffeaa3;
   font-family: 'Ubuntu', sans-serif;
 }
 
-
 div.gallery {
   border: 1px solid #ccc;
-  
+  transition: border 0.3s ease;
 }
 
 div.gallery:hover {
@@ -22,205 +21,175 @@ div.gallery:hover {
 }
 
 div.gallery img {
-  width: 367px; /* Set width to 600px to match the width of image1.jpg */
-  height: 289px; /* Set height to 400px to match the height of image1.jpg */
-  object-fit: cover; 
+  width: 100%;
+  height: 250px;       /* uniform height for all images */
+  object-fit: cover;   /* crops images nicely without distortion */
+  display: block;
 }
-
-
 
 div.desc {
   padding: 15px;
   text-align: center;
 }
 
-* {
-  box-sizing: border-box;
+/* Grid container for all gallery items */
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 per row on desktop */
+  gap: 16px;
+  padding: 10px;
 }
 
-.responsive {
-  padding: 0 6px;
-  float: left;
-  width: 24.99999%;
-}
-
-@media only screen and (max-width: 700px) {
-  .responsive {
-    width: 49.99999%;
-    margin: 6px 0;
+/* Tablet */
+@media (max-width: 1024px) {
+  .gallery-container {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media only screen and (max-width: 500px) {
-  .responsive {
-    width: 100%;
+/* Mobile */
+@media (max-width: 768px) {
+  .gallery-container {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-.clearfix:after {
-  content: "";
-  display: table;
-  clear: both;
+/* Small mobile */
+@media (max-width: 480px) {
+  .gallery-container {
+    grid-template-columns: 1fr;
+  }
 }
 
-
-
-
-
-
-
+/* Back button styling */
 div.backBtn {
-    width: 100px;
-    right: 100px;
-    top: 30px;
-    background-color: #f4f4f4;
-    transition: all 0.4s ease;
-    position: fixed;
-    cursor: pointer;
-  }
+  width: 100px;
+  right: 100px;
+  top: 30px;
+  background-color: #f4f4f4;
+  transition: all 0.4s ease;
+  position: fixed;
+  cursor: pointer;
+}
 
-  span.line {
-    bottom: auto;
-    right: auto;
-    top: auto;
-    left: auto;
-    background-color: #333;
-    border-radius: 10px;
-    width: 100%;
-    left: 0px;
-    height: 2px;
-    display: block;
-    position: absolute;
-    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
-  }
+span.line {
+  bottom: auto;
+  right: auto;
+  top: auto;
+  left: auto;
+  background-color: #333;
+  border-radius: 10px;
+  width: 100%;
+  left: 0px;
+  height: 2px;
+  display: block;
+  position: absolute;
+  transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
+}
 
-  span.tLine {
-    top: 0px;
-  }
+span.tLine { top: 0px; }
+span.mLine { top: 13px; opacity: 0; }
+span.bLine { top: 26px; }
 
-  span.mLine {
-    top: 13px;
-    opacity: 0;
-  }
+.label {
+  position: absolute;
+  left: 0px;
+  top: 5px;
+  width: 100%;
+  text-align: center;
+  transition: all 0.4s ease;
+  font-size: 1em;
+}
 
-  span.bLine {
-    top: 26px;
-  }
+div.backBtn:hover span.label { left: 25px; }
 
-  .label {
-    position: absolute;
-    left: 0px;
-    top: 5px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.4s ease;
-    font-size: 1em;
-  }
+div.backBtn:hover span.line {
+  left: -10px;
+  height: 5px;
+  background-color: #F76060;
+}
 
-  div.backBtn:hover span.label {
-    left: 25px
-  }
+div.backBtn:hover span.tLine {
+  width: 25px;
+  transform: rotate(-45deg);
+  left: -15px;
+  top: 6px;
+}
 
-  div.backBtn:hover span.line {
-    left: -10px;
-    height: 5px;
-    background-color: #F76060;
-  }
+div.backBtn:hover span.mLine {
+  opacity: 1;
+  width: 30px;
+}
 
-  div.backBtn:hover span.tLine {
-    width: 25px;
-    transform: rotate(-45deg);
-    left: -15px;
-    top: 6px;
-  }
-
-  div.backBtn:hover span.mLine {
-    opacity: 1;
-    width: 30px;
-  }
-
-  div.backBtn:hover span.bLine {
-    width: 25px;
-    transform: rotate(45deg);
-    left: -15px;
-    top: 20px;
-  }
+div.backBtn:hover span.bLine {
+  width: 25px;
+  transform: rotate(45deg);
+  left: -15px;
+  top: 20px;
+}
 </style>
 </head>
 <body>
 
-    <div class="backBtn">
-        <a href="index.html#portfolio">
-          <span class="line tLine"></span>
-          <span class="line mLine"></span>
-          <span class="label">Back</span>
-          <span class="line bLine"></span>
-        </a>
-    </div>
+<div class="backBtn">
+  <a href="index.html#portfolio">
+    <span class="line tLine"></span>
+    <span class="line mLine"></span>
+    <span class="label">Back</span>
+    <span class="line bLine"></span>
+  </a>
+</div>
 
 <h2>Renee's HIGH-PROFILE COLLABORATIONS: Projects with Leading Companies & Political Figures!</h2>
-
 <h4>Click on the works for more descriptions.</h4>
 
-<div class="responsive">
+<!-- START gallery grid -->
+<div class="gallery-container">
+
   <div class="gallery">
     <a target="_blank" href="HPC6.html">
-      <img src="HPC/hyundaipresentation.jpg" alt="Cinque Terre" width="600" height="400">
+      <img src="HPC/hyundaipresentation.jpg" alt="">
     </a>
     <div class="desc">HYUNDAI IONIQ 6 Car Decal Design</div>
   </div>
-</div>
 
-<div class="responsive">
   <div class="gallery">
     <a target="_blank" href="HPC5.html">
-      <img src="Expimg/SIWWgrace2.jpg" alt="Cinque Terre" width="600" height="400">
+      <img src="Expimg/SIWWgrace2.jpg" alt="">
     </a>
-    <div class="desc">SEMBCORP showcase booth for Singapore International Water Week (SIWW) for Minister of 
-        Sustainability, MS GRACE FU, utility and city leaders.</div>
+    <div class="desc">SEMBCORP showcase booth for Singapore International Water Week (SIWW) for Minister of Sustainability, MS GRACE FU, utility and city leaders.</div>
   </div>
-</div>
 
-
-<div class="responsive">
   <div class="gallery">
     <a target="_blank" href="HPC4.html">
-      <img src="Expimg/1H24result1.jpg" alt="Forest" width="600" height="400">
+      <img src="Expimg/1H24result1.jpg" alt="">
     </a>
-    <div class="desc">SEMBCORP 1H2024 Financial Results Infographics and Video for Group President & CEO, Mr Wong Kim Yin and CFO, Mr Eugene Cheng </div>
+    <div class="desc">SEMBCORP 1H2024 Financial Results Infographics and Video for Group President & CEO, Mr Wong Kim Yin and CFO, Mr Eugene Cheng</div>
   </div>
-</div>
 
-<div class="responsive">
   <div class="gallery">
     <a target="_blank" href="HPC3.html">
-      <img src="HPC/sembcorpmockup-01.png" alt="Northern Lights" width="600" height="400">
+      <img src="HPC/sembcorpmockup-01.png" alt="">
     </a>
-    <div class="desc">SEMBCORP <br>Digital Experience, <br>Website Design <br>and Innovation</div>
+    <div class="desc">SEMBCORP Digital Experience, Website Design, and Innovation</div>
   </div>
-</div>
 
-<div class="responsive">
   <div class="gallery">
     <a target="_blank" href="HPC2.html">
-      <img src="Expimg/alba.JPG" alt="Mountains" width="600" height="400">
+      <img src="Expimg/alba.JPG" alt="">
     </a>
-    <div class="desc">Senior Minister of State <br>for Sustainability and the Environment of Singapore, <br>MS AMY KHOR and ALBA team.</div>
+    <div class="desc">Senior Minister of State for Sustainability and the Environment of Singapore, MS AMY KHOR and ALBA team.</div>
   </div>
+
+  <div class="gallery">
+    <a target="_blank" href="HPC.html">
+      <img src="HPC/scoot.jpg" alt="">
+    </a>
+    <div class="desc">Collaboration with Industry Partner: SCOOT Airplane Design</div>
+  </div>
+
 </div>
-
-<div class="responsive">
-    <div class="gallery">
-      <a target="_blank" href="HPC.html">
-        <img src="HPC/scoot.jpg" alt="Mountains" width="600" height="400">
-      </a>
-      <div class="desc">Collaboration with<br> Industry Partner: <br>SCOOT Airplane Design</div>
-    </div>
-  </div>
-
-
+<!-- END gallery grid -->
 
 </body>
 </html>
-
-
