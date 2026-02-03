@@ -125,14 +125,34 @@ body {
   font-weight: 600;
 }
 
-/* RESPONSIVE */
+.empty-item {
+  visibility: hidden;
+}
+
+
+/* EXPERIENCES MOBILE/TABLET SAME AS PORTFOLIO */
 @media (max-width:1024px){
-  .image-gallery { grid-template-columns: repeat(2,1fr); gap:16px; }
-  .gallery-image { height: 180px; }
+  /* 2 columns for tablet */
+  #tab-angular .image-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  /* Image height same as Portfolio */
+  #tab-angular .gallery-image {
+    height: 180px;
+  }
 }
 
 @media (max-width:600px){
-  .image-gallery { grid-template-columns:1fr; gap:16px; }
-  .gallery-image { height:160px; }
-  .et-slide { padding: 90px 1em 2em 1em; }
+  /* 1 column for mobile */
+  #tab-angular .image-gallery {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Image height same as Portfolio */
+  #tab-angular .gallery-image {
+    height: 160px;
+  }
 }
