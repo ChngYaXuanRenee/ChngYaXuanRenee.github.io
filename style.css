@@ -22,7 +22,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  min-height: auto; /* removed full height */
+  min-height: auto;
   padding: 80px 1em 2em 1em; /* top padding = navbar height */
 }
 
@@ -30,7 +30,7 @@ body {
 .et-hero-tabs-container {
   display: flex;
   flex-direction: row;
-  position: fixed; /* always at top */
+  position: fixed;
   top: 0;
   width: 100%;
   height: 70px;
@@ -42,27 +42,25 @@ body {
   font-family: 'Righteous', cursive;
 }
 
-.et-hero-tabs-container--top { position: fixed; top:0; }
-
 /* NAVBAR LINKS */
 .et-hero-tab {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2rem;       /* navbar font size */
-  letter-spacing: 0.05rem; /* navbar letter spacing */
-  color: #333;             /* navbar text color */
+  font-size: 1.2rem;
+  letter-spacing: 0.05rem;
+  color: #333;
   text-transform: uppercase;
   font-weight: 400;
-  text-decoration: none;   /* removes underline */
+  text-decoration: none;
   transition: all 0.5s ease;
 }
 
 .et-hero-tab:hover {
   color: #fff;
-  background: #66B1F1; /* solid hover color */
-  border-radius: 4px;  /* subtle rounded hover effect */
+  background: #66B1F1;
+  border-radius: 4px;
 }
 
 .et-hero-tab-slider {
@@ -74,13 +72,20 @@ body {
   transition: left 0.3s ease;
 }
 
-/* ABOUT ME SECTION */
-.space-div { width: 80%; margin: auto; }
-.size-image { max-width: 100%; }
-.gray-background { background-color: #ffffff; }
-.picture-frame { max-width: 743px; }
-.well-white { background-color: rgb(255,238,198); padding: 15px; }
-.top-padding { padding-top: 20px; }
+/* HOME HERO IMAGE */
+.home-hero {
+  padding: 70px 0 0 0; /* account for navbar */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.home-hero-image {
+  width: auto;       /* full original width */
+  max-width: 100%;   /* responsive */
+  height: auto;      /* full original height */
+  display: block;
+}
 
 /* IMAGE GALLERY */
 .image-gallery {
@@ -129,5 +134,5 @@ body {
 @media (max-width:600px){
   .image-gallery { grid-template-columns:1fr; gap:16px; }
   .gallery-image { height:160px; }
-  .et-slide { padding: 90px 1em 2em 1em; } /* top padding = navbar height + spacing */
+  .et-slide { padding: 90px 1em 2em 1em; }
 }
