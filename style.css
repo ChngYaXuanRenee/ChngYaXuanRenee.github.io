@@ -130,29 +130,34 @@ body {
 }
 
 
-/* EXPERIENCES MOBILE/TABLET SAME AS PORTFOLIO */
+/* Tablet (≤1024px) */
 @media (max-width:1024px){
-  /* 2 columns for tablet */
+  /* Portfolio + Resume/Testimonial */
+  #tab-react .image-gallery,
   #tab-angular .image-gallery {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for tablet */
     gap: 16px;
   }
 
-  /* Image height same as Portfolio */
+  #tab-react .gallery-image,
   #tab-angular .gallery-image {
-    height: 180px;
+    height: 180px; /* same height for both sections */
   }
 }
 
+/* Mobile (≤600px) */
 @media (max-width:600px){
-  /* 1 column for mobile */
+  /* Portfolio + Resume/Testimonial stacked */
+  #tab-react .image-gallery,
   #tab-angular .image-gallery {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* stack vertically */
     gap: 16px;
   }
 
-  /* Image height same as Portfolio */
+  #tab-react .gallery-image,
   #tab-angular .gallery-image {
-    height: 160px;
+    height: 160px; /* same height for both */
   }
+
+  .et-slide { padding: 90px 1em 2em 1em; } /* keep consistent padding */
 }
