@@ -6,9 +6,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
-<style>
 
-  
+<style>
 * {
   box-sizing: border-box;
 }
@@ -16,57 +15,77 @@
 body {
   margin: 0;
   font-family: 'Ubuntu', sans-serif;
-  
-  background:  #94aca3;
-
+  background: #94aca3;
 }
 
-.imgdesc {
-  font-family: 'Ubuntu', sans-serif;
-  text-align: center;
-  background:  #72837c;
+/* Header */
+.header-color {
+  color: rgb(123, 123, 123);
 }
 
-/* The grid: Four equal columns that floats next to each other */
+/* FLEX GRID */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
 .column {
-  float: left;
-  width: 25%;
+  flex: 0 0 25%;
   padding: 10px;
 }
 
-/* Style the images inside the grid */
+/* Images */
 .column img {
-  opacity: 0.8; 
-  cursor: pointer; 
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 
 .column img:hover {
   opacity: 1;
 }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+/* VIDEO FIX (16:9 ratio, not squished) */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
 }
 
-/* The expanding image container */
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Expanding image */
 .container {
   position: relative;
   display: none;
 }
 
-/* Expanding image text */
+#expandedImg {
+  display: block;
+  margin: auto;
+  width: 50%;
+}
+
 #imgtext {
   position: absolute;
   bottom: 15px;
-  left: 600px;
+  left: 50%;
+  transform: translateX(-50%);
   color: rgb(134, 209, 255);
   font-size: 20px;
 }
 
-/* Closable button inside the expanded image */
 .closebtn {
   position: absolute;
   top: 10px;
@@ -76,218 +95,145 @@ body {
   cursor: pointer;
 }
 
+/* Description */
+.imgdesc {
+  text-align: center;
+  background: #72837c;
+  padding: 40px 20px;
+  color: black;
+}
 
+.imgdesc p {
+  margin: 15px auto;
+  max-width: 700px;
+  line-height: 1.6;
+}
 
-/* CSS for back button */
+/* Back button */
 div.backBtn {
-    width: 100px;
-    right: 100px;
-    top: 30px;
-    background-color: #f4f4f4;
-    transition: all 0.4s ease;
-    position: fixed;
-    cursor: pointer;
-  }
+  width: 100px;
+  right: 100px;
+  top: 30px;
+  background-color: #f4f4f4;
+  transition: all 0.4s ease;
+  position: fixed;
+  cursor: pointer;
+  z-index: 1000;
+}
 
-  span.line {
-    bottom: auto;
+span.line {
+  background-color: #8f7373;
+  border-radius: 10px;
+  width: 100%;
+  height: 2px;
+  display: block;
+  position: absolute;
+  transition: all 0.3s ease;
+}
+
+span.tLine { top: 0px; }
+span.mLine { top: 13px; opacity: 0; }
+span.bLine { top: 26px; }
+
+.label {
+  position: absolute;
+  top: 5px;
+  width: 100%;
+  text-align: center;
+  font-size: 1em;
+  color: rgb(123, 123, 123);
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  .column { flex: 0 0 50%; }
+  #expandedImg { width: 90%; }
+}
+
+@media screen and (max-width: 480px) {
+  .column { flex: 0 0 100%; }
+  #expandedImg { width: 100%; }
+
+  div.backBtn {
+    top: 10px;
+    left: 10px;
     right: auto;
-    top: auto;
-    left: auto;
-    background-color: #8f7373;
-    border-radius: 10px;
-    width: 100%;
-    left: 0px;
-    height: 2px;
-    display: block;
-    position: absolute;
-    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
+    width: 70px;
   }
-
-  span.tLine {
-    top: 0px;
-  }
-
-  span.mLine {
-    top: 13px;
-    opacity: 0;
-  }
-
-  span.bLine {
-    top: 26px;
-  }
-
-  .label {
-    position: absolute;
-    left: 0px;
-    top: 5px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.4s ease;
-    font-size: 1em;
-    color: rgb(123, 123, 123);
-  }
-
-  div.backBtn:hover span.label {
-    left: 25px
-  }
-
-  div.backBtn:hover span.line {
-    left: -10px;
-    height: 5px;
-    background-color: #a84141;
-  }
-
-  div.backBtn:hover span.tLine {
-    width: 25px;
-    transform: rotate(-45deg);
-    left: -15px;
-    top: 6px;
-  }
-  
-  div.backBtn:hover span.mLine {
-    opacity: 1;
-    width: 30px;
-  }
-
-  div.backBtn:hover span.bLine {
-    width: 25px;
-    transform: rotate(45deg);
-    left: -15px;
-    top: 20px;
-    
-  }
-
-  .header-color {
-    color:rgb(123, 123, 123);
-  }
+}
 </style>
 </head>
-<body>
-    <!-- The back button -->
-    <div class="backBtn">
-        <a href="UIUXdesigngrp.html">
-          <span class="line tLine"></span>
-          <span class="line mLine"></span>
-          <span class="label">Back</span>
-          <span class="line bLine"></span>
-        </a>
-    </div>
 
+<body>
+
+<div class="backBtn">
+  <a href="UIUXdesigngrp.html">
+    <span class="line tLine"></span>
+    <span class="line mLine"></span>
+    <span class="label">Back</span>
+    <span class="line bLine"></span>
+  </a>
+</div>
 
 <div style="text-align:center" class="header-color">
-  <h2>interactive AR of truck in CandyLand</h2>
+  <h2>Interactive AR of Truck in CandyLand</h2>
   <p>Click on the images below:</p>
 </div>
 
-<!-- The 4 columns -->
+<!-- GRID -->
 <div class="row">
+
   <div class="column">
-    <img src="UIUX/prototypefurnitopia2-02.png" alt="" style="width:100%" onclick="myFunction(this);">
+    <img src="UIUX/prototypefurnitopia2-02.png" onclick="myFunction(this);">
   </div>
+
   <div class="column">
-    <img src="UIUX/Screenshot 2023-07-03 140139.png" alt="" style="width:100%" onclick="myFunction(this);">
+    <img src="UIUX/Screenshot 2023-07-03 140139.png" onclick="myFunction(this);">
   </div>
+
   <div class="column">
-    <img src="UIUX/moodboard.png" alt="" style="width:100%" onclick="myFunction(this);">
+    <img src="UIUX/moodboard.png" onclick="myFunction(this);">
   </div>
+
   <div class="column">
-    <iframe 
-  width="1280" 
-  height="490" 
-  style="width:100%;" 
-  scrolling="no" 
-  src="https://screenpal.com/player/cZV2DVVJicP?"  
-  allowfullscreen="true"
-  onclick="myFunction(this);">
-</iframe>
+    <div class="video-wrapper">
+      <iframe 
+        src="https://screenpal.com/player/cZV2DVVJicP?"  
+        allowfullscreen>
+      </iframe>
+    </div>
   </div>
-  
-  
+
 </div>
 
+<!-- Expanded Image -->
 <div class="container">
   <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
+  <img id="expandedImg">
   <div id="imgtext"></div>
 </div>
- 
-<!-- The img desc -->
-<div class="imgdesc" style="color:rgb(0, 0, 0)" >
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">FURNITOPIA App Design. Oct 2022.</p>
 
-<p style="margin: auto;
-width: 50%;
-padding: 10px;">Designed in Adobe XD.</p>
+<!-- Description -->
+<div class="imgdesc">
+  <p><strong>FURNITOPIA App Design. Oct 2022.</strong></p>
+  <p>Designed in Adobe XD.</p>
 
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">I present a design process and user experience considerations for an e-commerce furniture store mobile app. The goal of the app is to provide a 
-seamless and enjoyable shopping experience for users looking to purchase 
-furniture items. By understanding user needs and incorporating best practices 
-in e-commerce design, the app aims to drive and enhance customer 
-satisfaction.
-  
-    </p>
+  <p>
+    I present a design process and user experience considerations for an e-commerce furniture store mobile app. 
+    The goal of the app is to provide a seamless and enjoyable shopping experience for users looking to purchase furniture items.
+  </p>
 
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">1. Conduct market research to understand the target audience, their preferences, and their shopping behaviors.
-    I created 3 focus groups over 50 people. Online furniture shoppers group, physical furniture shoppers group and groups of people
-    that are selling furnitures, work with furnitures' stores, used to work with furnitures' stores.
-    </p>
-
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">2. I analyzed competitors' apps to identify strengths, weaknesses, and opportunities for differentiation.
-    Like IKEA and Amazon Home. 
-    </p>
-
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">3. I created user personas in CANVA for visualization.
-    </p>
-    
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">4. I brainstormed and created user flow maps and then information architecture.
-    </p>
-
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">5. I designed low fidelity wireframes in Adobe XD.
-    </p>
-
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">6. I developed interactive prototypes to simulate the app's functionality and user interactions.
-And then conducted usability testing with real users to gather feedback and make improvements.
-    </p>
-
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">7. I designed a moodboard guide that includes colors, typography, and visual elements consistent with the branding style of
-    FURNITOPIA.
-Then I created high-fidelity mockups that incorporate the visual design elements into the wireframes.
-    </p>
-
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">8.I gather feedback from 40+ users for usablity testing.
-Iterate on the designs based on feedback to improve usability. Then finalized design once completed!
-    </p>
-  
+  <p>
+    I conducted market research with over 50 participants across different groups, analyzed competitors like IKEA and Amazon Home,
+    created user personas, mapped user flows, designed wireframes, built interactive prototypes, conducted usability testing,
+    and refined the design through multiple iterations before finalizing the high-fidelity mockups.
+  </p>
 </div>
-
 
 <script>
 function myFunction(imgs) {
   var expandImg = document.getElementById("expandedImg");
-  var imgText = document.getElementById("imgtext");
   expandImg.src = imgs.src;
-  imgText.innerHTML = imgs.alt;
   expandImg.parentElement.style.display = "block";
 }
 </script>
