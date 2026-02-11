@@ -6,9 +6,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
-<style>
 
-  
+<style>
 * {
   box-sizing: border-box;
 }
@@ -16,58 +15,62 @@
 body {
   margin: 0;
   font-family: 'Ubuntu', sans-serif;
-  
   background: #4886ad;
-
 }
 
 .imgdesc {
   font-family: 'Ubuntu', sans-serif;
   text-align: center;
   background: #C1DAEA;
-
+  padding: 20px 0;
 }
 
-/* The grid: Four equal columns that floats next to each other */
+/* Grid layout using flexbox */
+.row {
+  display: flex;
+  flex-wrap: wrap;  /* Allows items to wrap */
+  margin: 0 -10px;  /* Adjust for column padding */
+}
+
 .column {
-  float: left;
-  width: 25%;
+  flex: 0 0 25%; /* Default: 4 columns */
   padding: 10px;
 }
 
-/* Style the images inside the grid */
 .column img {
+  width: 100%;
+  height: auto;
   opacity: 0.8; 
   cursor: pointer; 
+  transition: opacity 0.3s ease;
 }
 
 .column img:hover {
   opacity: 1;
 }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* The expanding image container */
+/* Expanding image container */
 .container {
   position: relative;
   display: none;
 }
 
-/* Expanding image text */
+#expandedImg {
+  display: block;
+  margin: auto;
+  width: 50%;
+}
+
 #imgtext {
   position: absolute;
   bottom: 15px;
-  left: 600px;
+  left: 50%;
+  transform: translateX(-50%);
   color: rgb(93, 38, 112);
   font-size: 20px;
 }
 
-/* Closable button inside the expanded image */
+/* Close button */
 .closebtn {
   position: absolute;
   top: 10px;
@@ -77,153 +80,148 @@ body {
   cursor: pointer;
 }
 
-
-
-/* CSS for back button */
+/* Back button */
 div.backBtn {
-    width: 100px;
-    right: 100px;
-    top: 30px;
-    background-color: #f4f4f4;
-    transition: all 0.4s ease;
-    position: fixed;
-    cursor: pointer;
-  }
+  width: 100px;
+  right: 100px;
+  top: 30px;
+  background-color: #f4f4f4;
+  transition: all 0.4s ease;
+  position: fixed;
+  cursor: pointer;
+  z-index: 1000;
+}
 
-  span.line {
-    bottom: auto;
-    right: auto;
-    top: auto;
-    left: auto;
-    background-color: #8f7373;
-    border-radius: 10px;
-    width: 100%;
-    left: 0px;
-    height: 2px;
-    display: block;
-    position: absolute;
-    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
-  }
+span.line {
+  bottom: auto;
+  right: auto;
+  top: auto;
+  left: auto;
+  background-color: #8f7373;
+  border-radius: 10px;
+  width: 100%;
+  left: 0px;
+  height: 2px;
+  display: block;
+  position: absolute;
+  transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
+}
 
-  span.tLine {
-    top: 0px;
-  }
+span.tLine { top: 0px; }
+span.mLine { top: 13px; opacity: 0; }
+span.bLine { top: 26px; }
 
-  span.mLine {
-    top: 13px;
-    opacity: 0;
-  }
+.label {
+  position: absolute;
+  left: 0px;
+  top: 5px;
+  width: 100%;
+  text-align: center;
+  transition: all 0.4s ease;
+  font-size: 1em;
+  color: rgb(123, 123, 123);
+}
 
-  span.bLine {
-    top: 26px;
-  }
+div.backBtn:hover span.label { left: 25px; }
+div.backBtn:hover span.line {
+  left: -10px;
+  height: 5px;
+  background-color: #a84141;
+}
+div.backBtn:hover span.tLine {
+  width: 25px;
+  transform: rotate(-45deg);
+  left: -15px;
+  top: 6px;
+}
+div.backBtn:hover span.mLine {
+  opacity: 1;
+  width: 30px;
+}
+div.backBtn:hover span.bLine {
+  width: 25px;
+  transform: rotate(45deg);
+  left: -15px;
+  top: 20px;
+}
 
-  .label {
-    position: absolute;
-    left: 0px;
-    top: 5px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.4s ease;
-    font-size: 1em;
-    color: rgb(123, 123, 123);
-  }
+.header-color { color: rgb(44, 34, 79); }
 
-  div.backBtn:hover span.label {
-    left: 25px
-  }
+/* Paragraph styling */
+.imgdesc p {
+  margin: auto;
+  max-width: 600px;
+  padding: 10px;
+  line-height: 1.6;
+}
 
-  div.backBtn:hover span.line {
-    left: -10px;
-    height: 5px;
-    background-color: #a84141;
-  }
+/* Responsive for tablet and mobile */
+@media screen and (max-width: 768px) {
+  .column { flex: 0 0 50%; } /* 2 columns on tablet */
+  #expandedImg { width: 90%; }
+  .imgdesc p { width: 90%; }
+}
 
-  div.backBtn:hover span.tLine {
-    width: 25px;
-    transform: rotate(-45deg);
-    left: -15px;
-    top: 6px;
-  }
-  
-  div.backBtn:hover span.mLine {
-    opacity: 1;
-    width: 30px;
-  }
-
-  div.backBtn:hover span.bLine {
-    width: 25px;
-    transform: rotate(45deg);
-    left: -15px;
-    top: 20px;
-    
-  }
-
-  .header-color {
-    color:rgb(44, 34, 79);
-  }
+@media screen and (max-width: 480px) {
+  .column { flex: 0 0 100%; } /* 1 column on mobile */
+  #expandedImg { width: 100%; }
+  .imgdesc p { width: 95%; font-size: 14px; }
+  div.backBtn { top: 10px; left: 10px; right: auto; width: 70px; }
+}
 </style>
 </head>
 <body>
-    <!-- The back button -->
-    <div class="backBtn">
-        <a href="UIUXdesigngrp.html">
-          <span class="line tLine"></span>
-          <span class="line mLine"></span>
-          <span class="label">Back</span>
-          <span class="line bLine"></span>
-        </a>
-    </div>
 
+<!-- Back button -->
+<div class="backBtn">
+  <a href="UIUXdesigngrp.html">
+    <span class="line tLine"></span>
+    <span class="line mLine"></span>
+    <span class="label">Back</span>
+    <span class="line bLine"></span>
+  </a>
+</div>
 
+<!-- Header -->
 <div style="text-align:center" class="header-color">
   <h2>Singapore Youth AI Website 2026</h2>
   <p>Click on the images below:</p>
 </div>
 
+<!-- Image grid -->
 <div class="row">
-    <div class="column">
-        <img src="UIUX/syai1.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/syai2.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/syai3.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/syai4.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
-    </div>
-</div>
-<div class="row">
-    <div class="column">
-        <img src="UIUX/Typencolor.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/syai_lowfid.png" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
+  <div class="column">
+    <img src="UIUX/syai1.png" alt="" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="UIUX/syai2.png" alt="" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="UIUX/syai3.png" alt="" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="UIUX/syai4.png" alt="" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="UIUX/Typencolor.png" alt="" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="UIUX/syai_lowfid.png" alt="" onclick="myFunction(this);">
+  </div>
 </div>
 
-
+<!-- Expanding image container -->
 <div class="container">
   <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
+  <img id="expandedImg">
   <div id="imgtext"></div>
 </div>
- 
-<!-- The img desc -->
-<div class="imgdesc" style="color:rgb(0, 0, 0)" >
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">Jan 2026</p>
 
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">Singapore Youth AI Website 2026
-    </p>
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">
+<!-- Description -->
+<div class="imgdesc">
+  <p>Jan 2026</p>
+  <p>Singapore Youth AI Website 2026</p>
+  <p>
     The Singapore Youth AI Website 2026 is a revamped digital platform designed to engage and empower Singaporean youth in the field of Artificial Intelligence. 
     I focused on designing the front-end interface to be visually appealing, intuitive, and responsive, ensuring seamless navigation and accessibility 
     across devices. The design incorporates a modern visual language with clean layouts, vibrant yet approachable colors, dynamic typography, and 
@@ -231,11 +229,8 @@ div.backBtn {
     a resource hub for tutorials and articles, an interactive calendar for workshops, and community spaces for youth to connect and showcase projects. 
     By combining aesthetics, usability, and interactive storytelling through icons, illustrations, and infographics, the front-end design encourages 
     curiosity, digital literacy, and active participation, reflecting Singapore’s vision of nurturing a technologically empowered youth.
-    </p>
-
-
+  </p>
 </div>
-
 
 <script>
 function myFunction(imgs) {
