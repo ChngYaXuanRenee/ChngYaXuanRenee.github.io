@@ -15,13 +15,13 @@
 body {
   margin: 0;
   font-family: 'Ubuntu', sans-serif;
-  background: #ffb363;
+  background: #32be68;
 }
 
 .imgdesc {
   font-family: 'Ubuntu', sans-serif;
   text-align: center;
-  background: #ffc44f;
+  background: #7ff7ad;
   padding: 20px 0;
 }
 
@@ -51,28 +51,6 @@ body {
   opacity: 1;
 }
 
-/* VIDEO WRAPPER (16:9 ratio) */
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 ratio */
-}
-
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  opacity: 0.9;
-  transition: opacity 0.3s ease;
-}
-
-.video-wrapper iframe:hover {
-  opacity: 1;
-}
-
 /* Expanding image container */
 .container {
   position: relative;
@@ -91,9 +69,9 @@ body {
   bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
-  color: rgb(251, 239, 255);
+  color: rgb(93, 38, 112);
   font-size: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0,0,0,0.4);
   padding: 10px;
   text-align: center;
 }
@@ -139,11 +117,11 @@ span.bLine { top: 26px; }
   width: 100%;
   text-align: center;
   font-size: 1em;
-  color: rgb(123, 123, 123);
+  color: rgb(123,123,123);
 }
 
 .header-color {
-  color: rgb(123, 123, 123);
+  color: rgb(44,34,79);
 }
 
 /* Paragraph styling */
@@ -182,33 +160,30 @@ span.bLine { top: 26px; }
 </div>
 
 <div style="text-align:center" class="header-color">
-  <h2>FOODHOOD App</h2>
+  <h2>BinGo App</h2>
   <p>Click on the images below:</p>
 </div>
 
 <!-- GRID -->
 <div class="row">
-  <div class="column">
-    <img src="UIUX/foodhoodmockup.png" alt="FOODHOOD Mockup" onclick="myFunction(this);">
-  </div>
-
-  <div class="column">
-    <div class="video-wrapper">
-      <iframe 
-        src="https://go.screenpal.com/player/cZln22nnecn?width=100%&height=100%&ff=1&title=0" 
-        allowfullscreen>
-      </iframe>
-    </div>
-  </div>
-
-  <div class="column">
-    <img src="UIUX/FHlowfid.png" alt="Low fidelity design" onclick="myFunction(this);">
-  </div>
-
-  <div class="column">
-    <img src="UIUX/Frame 1.png" alt="User task flow" onclick="myFunction(this);">
-  </div>
+  <div class="column"><img src="UIUX/Intro.png" alt="Intro P1US" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/About_1.png" alt="Screen 2" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/research_2.png" alt="Screen 3" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/research2_2.png" alt="Screen 4" onclick="myFunction(this);"></div>
 </div>
+
+<div class="row">
+  <div class="column"><img src="UIUX/persona_3.png" alt="Screen 5" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/UserTaskflow_4.png" alt="Screen 6" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/UXframework_5.png" alt="Screen 7" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/Wireframes_6.png" alt="Screen 8" onclick="myFunction(this);"></div>
+</div>
+
+<div class="row">
+  <div class="column"><img src="UIUX/DesignSystem_7.png" alt="Screen 9" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/Prototype.png" alt="Screen 10" onclick="myFunction(this);"></div>
+</div>
+
 
 <div class="container">
   <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
@@ -217,14 +192,15 @@ span.bLine { top: 26px; }
 </div>
 
 <div class="imgdesc">
-  <p>FOODHOOD App</p>
-
+  <p>Medium: Figma. Jan 2025.</p>
+  <p>BinGo App</p>
   <p>
-    FOODHOOD is more than just an app—it’s a community-driven platform that evokes memories of shared meals, family traditions, and the sensory delights of home-cooked dishes. Inspired by personal and collective nostalgia, it connects users through food stories, flavors, and traditions.
-  </p>
-
-  <p>
-    With the economic impact of Covid-19 leading to retrenchment, many turn to different avenues of work. This start-up is on a mission to develop software to help displaced workers in Singapore showcase their culinary skills and sell creations to the community. FOODHOOD allows anyone to order home-cooked food on demand.
+    BinGo is an interactive app that turns recycling into a fun, rewarding, and educational experience. Through bite-sized quizzes, engaging lessons, 
+    and a points-based reward system, users can test their recycling knowledge, track progress, and earn real-world perks, from reusable items to 
+    community recognition. The design process involved researching user behaviors and pain points, ideating gamified solutions, prototyping intuitive 
+    interfaces, and refining interactions through usability testing. The final app combines education with motivation, making sustainable habits 
+    approachable and enjoyable, while fostering a sense of achievement and environmental responsibility—proving that small actions can lead to a 
+    greener future.
   </p>
 </div>
 

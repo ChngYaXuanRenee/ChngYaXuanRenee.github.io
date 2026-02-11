@@ -5,10 +5,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
-<style>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">  
 
-  
+<style>
 * {
   box-sizing: border-box;
 }
@@ -16,58 +15,67 @@
 body {
   margin: 0;
   font-family: 'Ubuntu', sans-serif;
-  
-  background:  #32be92;
-
+  background: #32be92;
 }
 
 .imgdesc {
   font-family: 'Ubuntu', sans-serif;
   text-align: center;
   background: #9affeb;
-
+  padding: 20px 0;
 }
 
-/* The grid: Four equal columns that floats next to each other */
+/* FLEX GRID */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
 .column {
-  float: left;
-  width: 25%;
+  flex: 0 0 25%;
   padding: 10px;
 }
 
-/* Style the images inside the grid */
+/* Images */
 .column img {
-  opacity: 0.8; 
-  cursor: pointer; 
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+  border: none;
 }
 
 .column img:hover {
   opacity: 1;
 }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* The expanding image container */
+/* Expanding image container */
 .container {
   position: relative;
   display: none;
 }
 
-/* Expanding image text */
+#expandedImg {
+  display: block;
+  margin: auto;
+  width: 50%;
+  border-radius: 10px;
+}
+
 #imgtext {
   position: absolute;
   bottom: 15px;
-  left: 600px;
+  left: 50%;
+  transform: translateX(-50%);
   color: rgb(93, 38, 112);
   font-size: 20px;
+  background-color: rgba(0,0,0,0.4);
+  padding: 10px;
+  text-align: center;
 }
 
-/* Closable button inside the expanded image */
 .closebtn {
   position: absolute;
   top: 10px;
@@ -77,201 +85,132 @@ body {
   cursor: pointer;
 }
 
-
-
-/* CSS for back button */
+/* Back button */
 div.backBtn {
-    width: 100px;
-    right: 100px;
-    top: 30px;
-    background-color: #f4f4f4;
-    transition: all 0.4s ease;
-    position: fixed;
-    cursor: pointer;
-  }
+  width: 100px;
+  right: 100px;
+  top: 30px;
+  background-color: #f4f4f4;
+  transition: all 0.4s ease;
+  position: fixed;
+  cursor: pointer;
+  z-index: 1000;
+}
 
-  span.line {
-    bottom: auto;
-    right: auto;
-    top: auto;
-    left: auto;
-    background-color: #8f7373;
-    border-radius: 10px;
-    width: 100%;
-    left: 0px;
-    height: 2px;
-    display: block;
-    position: absolute;
-    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
-  }
+span.line {
+  background-color: #8f7373;
+  border-radius: 10px;
+  width: 100%;
+  height: 2px;
+  display: block;
+  position: absolute;
+  transition: all 0.3s ease;
+}
 
-  span.tLine {
-    top: 0px;
-  }
+span.tLine { top: 0px; }
+span.mLine { top: 13px; opacity: 0; }
+span.bLine { top: 26px; }
 
-  span.mLine {
-    top: 13px;
-    opacity: 0;
-  }
+.label {
+  position: absolute;
+  top: 5px;
+  width: 100%;
+  text-align: center;
+  font-size: 1em;
+  color: rgb(123,123,123);
+}
 
-  span.bLine {
-    top: 26px;
-  }
+.header-color {
+  color: rgb(44,34,79);
+}
 
-  .label {
-    position: absolute;
-    left: 0px;
-    top: 5px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.4s ease;
-    font-size: 1em;
-    color: rgb(123, 123, 123);
-  }
+/* Paragraph styling */
+.imgdesc p {
+  margin: auto;
+  max-width: 600px;
+  padding: 10px;
+  line-height: 1.6;
+}
 
-  div.backBtn:hover span.label {
-    left: 25px
-  }
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .column { flex: 0 0 50%; }
+  #expandedImg { width: 90%; }
+  .imgdesc p { width: 90%; }
+}
 
-  div.backBtn:hover span.line {
-    left: -10px;
-    height: 5px;
-    background-color: #a84141;
-  }
-
-  div.backBtn:hover span.tLine {
-    width: 25px;
-    transform: rotate(-45deg);
-    left: -15px;
-    top: 6px;
-  }
-  
-  div.backBtn:hover span.mLine {
-    opacity: 1;
-    width: 30px;
-  }
-
-  div.backBtn:hover span.bLine {
-    width: 25px;
-    transform: rotate(45deg);
-    left: -15px;
-    top: 20px;
-    
-  }
-
-  .header-color {
-    color:rgb(44, 34, 79);
-  }
+@media screen and (max-width: 480px) {
+  .column { flex: 0 0 100%; }
+  #expandedImg { width: 100%; }
+  .imgdesc p { width: 95%; font-size: 14px; }
+  div.backBtn { top: 10px; left: 10px; right: auto; width: 70px; }
+}
 </style>
 </head>
-<body>
-    <!-- The back button -->
-    <div class="backBtn">
-        <a href="UIUXdesigngrp.html">
-          <span class="line tLine"></span>
-          <span class="line mLine"></span>
-          <span class="label">Back</span>
-          <span class="line bLine"></span>
-        </a>
-    </div>
 
+<body>
+
+<div class="backBtn">
+  <a href="UIUXdesigngrp.html">
+    <span class="line tLine"></span>
+    <span class="line mLine"></span>
+    <span class="label">Back</span>
+    <span class="line bLine"></span>
+  </a>
+</div>
 
 <div style="text-align:center" class="header-color">
-  <h2>P1US App - For People With Visual Disabilties</h2>
+  <h2>P1US App - For People With Visual Disabilities</h2>
   <p>Click on the images below:</p>
 </div>
 
+<!-- GRID -->
 <div class="row">
-    <div class="column">
-        <img src="UIUX/Intro_P1US.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/A4 - 2.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/A4 - 3.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/A4 - 4.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
-    </div>
+  <div class="column"><img src="UIUX/Intro_P1US.png" alt="Intro P1US" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/A4 - 2.png" alt="Screen 2" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/A4 - 3.png" alt="Screen 3" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/A4 - 4.png" alt="Screen 4" onclick="myFunction(this);"></div>
 </div>
-<div class="row">
-    <div class="column">
-        <img src="UIUX/A4 - 5.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/A4 - 6.png" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/A4 - 7.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/A4 - 8.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
-    </div>
-</div>
-<div class="row">
-    <div class="column">
-        <img src="UIUX/A4 - 9.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/A4 - 10.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-      <img src="UIUX/A4 - 11.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-  </div>
-  <div class="column">
-      <img src="UIUX/A4 - 12.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-  </div>
 
-  <div class="row">
-    <div class="column">
-        <img src="UIUX/A4 - 13.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/A4 - 14.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-      <img src="UIUX/A4 - 15.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-  </div>
+<div class="row">
+  <div class="column"><img src="UIUX/A4 - 5.png" alt="Screen 5" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/A4 - 6.png" alt="Screen 6" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/A4 - 7.png" alt="Screen 7" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/A4 - 8.png" alt="Screen 8" onclick="myFunction(this);"></div>
+</div>
+
+<div class="row">
+  <div class="column"><img src="UIUX/A4 - 9.png" alt="Screen 9" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/A4 - 10.png" alt="Screen 10" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/A4 - 11.png" alt="Screen 11" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/A4 - 12.png" alt="Screen 12" onclick="myFunction(this);"></div>
+</div>
+
+<div class="row">
+  <div class="column"><img src="UIUX/A4 - 13.png" alt="Screen 13" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/A4 - 14.png" alt="Screen 14" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/A4 - 15.png" alt="Screen 15" onclick="myFunction(this);"></div>
+  <div class="column"><!-- empty for spacing --></div>
 </div>
 
 <div class="container">
   <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
+  <img id="expandedImg">
   <div id="imgtext"></div>
 </div>
- 
-<!-- The img desc -->
-<div class="imgdesc" style="color:rgb(0, 0, 0)" >
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">Medium: Figma. Mar 2023.</p>
 
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">P1US App - For People With Visual Disabilties
-    </p>
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">
-    P1US is an inclusive public transport app designed to improve accessibility and independence for all commuters, especially individuals 
-    with visual impairments, mobility challenges, and other accessibility needs. By integrating essential features such as real-time bus and 
-    MRT arrival notifications, voice feedback, and a seamless card top-up system, P1US ensures that navigating public transport is smoother, 
-    safer, and more intuitive.
-    </p>
-
-    
-    
-  
+<div class="imgdesc">
+  <p>Medium: Figma. Mar 2023.</p>
+  <p>P1US App - For People With Visual Disabilities</p>
+  <p>
+    P1US is an inclusive public transport app designed to improve accessibility and independence for all commuters, especially individuals with visual impairments, mobility challenges, and other accessibility needs. By integrating essential features such as real-time bus and MRT arrival notifications, voice feedback, and a seamless card top-up system, P1US ensures that navigating public transport is smoother, safer, and more intuitive.
+  </p>
 </div>
-
 
 <script>
 function myFunction(imgs) {
   var expandImg = document.getElementById("expandedImg");
-  var imgText = document.getElementById("imgtext");
   expandImg.src = imgs.src;
-  imgText.innerHTML = imgs.alt;
   expandImg.parentElement.style.display = "block";
 }
 </script>
