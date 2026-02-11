@@ -5,10 +5,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
-<style>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">  
 
-  
+<style>
 * {
   box-sizing: border-box;
 }
@@ -16,57 +15,77 @@
 body {
   margin: 0;
   font-family: 'Ubuntu', sans-serif;
-  
-  background:  #1f4a5f;
-
+  background: #1f4a5f;
 }
 
 .imgdesc {
   font-family: 'Ubuntu', sans-serif;
   text-align: center;
-  background:  #3b7491;
+  background: #3b7491;
+  padding: 20px 0;
 }
 
-/* The grid: Four equal columns that floats next to each other */
+/* FLEX GRID */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
 .column {
-  float: left;
-  width: 25%;
+  flex: 0 0 25%;
   padding: 10px;
 }
 
-/* Style the images inside the grid */
+/* Images */
 .column img {
-  opacity: 0.8; 
-  cursor: pointer; 
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+  border: none;
 }
 
 .column img:hover {
   opacity: 1;
 }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+/* VIDEO WRAPPER (16:9 ratio) */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 ratio */
 }
 
-/* The expanding image container */
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.video-wrapper iframe:hover {
+  opacity: 1;
+}
+
+/* Expanding image container */
 .container {
   position: relative;
   display: none;
 }
 
-/* Expanding image text */
-#imgtext {
-  position: absolute;
-  bottom: 15px;
-  left: 600px;
-  color: rgb(134, 209, 255);
-  font-size: 20px;
+#expandedImg {
+  display: block;
+  margin: auto;
+  width: 50%;
+  border-radius: 10px;
 }
 
-/* Closable button inside the expanded image */
 .closebtn {
   position: absolute;
   top: 10px;
@@ -76,190 +95,131 @@ body {
   cursor: pointer;
 }
 
-
-
-/* CSS for back button */
+/* Back button */
 div.backBtn {
-    width: 100px;
-    right: 100px;
-    top: 30px;
-    background-color: #f4f4f4;
-    transition: all 0.4s ease;
-    position: fixed;
-    cursor: pointer;
-  }
+  width: 100px;
+  right: 100px;
+  top: 30px;
+  background-color: #f4f4f4;
+  transition: all 0.4s ease;
+  position: fixed;
+  cursor: pointer;
+  z-index: 1000;
+}
 
-  span.line {
-    bottom: auto;
-    right: auto;
-    top: auto;
-    left: auto;
-    background-color: #8f7373;
-    border-radius: 10px;
-    width: 100%;
-    left: 0px;
-    height: 2px;
-    display: block;
-    position: absolute;
-    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
-  }
+span.line {
+  background-color: #8f7373;
+  border-radius: 10px;
+  width: 100%;
+  height: 2px;
+  display: block;
+  position: absolute;
+  transition: all 0.3s ease;
+}
 
-  span.tLine {
-    top: 0px;
-  }
+span.tLine { top: 0px; }
+span.mLine { top: 13px; opacity: 0; }
+span.bLine { top: 26px; }
 
-  span.mLine {
-    top: 13px;
-    opacity: 0;
-  }
+.label {
+  position: absolute;
+  top: 5px;
+  width: 100%;
+  text-align: center;
+  font-size: 1em;
+  color: rgb(123, 123, 123);
+}
 
-  span.bLine {
-    top: 26px;
-  }
+.header-color {
+  color: rgb(200, 220, 240);
+}
 
-  .label {
-    position: absolute;
-    left: 0px;
-    top: 5px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.4s ease;
-    font-size: 1em;
-    color: rgb(123, 123, 123);
-  }
+/* Paragraph styling */
+.imgdesc p {
+  margin: auto;
+  max-width: 600px;
+  padding: 10px;
+  line-height: 1.6;
+}
 
-  div.backBtn:hover span.label {
-    left: 25px
-  }
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .column { flex: 0 0 50%; }
+  #expandedImg { width: 90%; }
+  .imgdesc p { width: 90%; }
+}
 
-  div.backBtn:hover span.line {
-    left: -10px;
-    height: 5px;
-    background-color: #a84141;
-  }
-
-  div.backBtn:hover span.tLine {
-    width: 25px;
-    transform: rotate(-45deg);
-    left: -15px;
-    top: 6px;
-  }
-  
-  div.backBtn:hover span.mLine {
-    opacity: 1;
-    width: 30px;
-  }
-
-  div.backBtn:hover span.bLine {
-    width: 25px;
-    transform: rotate(45deg);
-    left: -15px;
-    top: 20px;
-    
-  }
-
-  .header-color {
-    color:rgb(123, 123, 123);
-  }
+@media screen and (max-width: 480px) {
+  .column { flex: 0 0 100%; }
+  #expandedImg { width: 100%; }
+  .imgdesc p { width: 95%; font-size: 14px; }
+  div.backBtn { top: 10px; left: 10px; right: auto; width: 70px; }
+}
 </style>
 </head>
-<body>
-    <!-- The back button -->
-    <div class="backBtn">
-        <a href="UIUXdesigngrp.html">
-          <span class="line tLine"></span>
-          <span class="line mLine"></span>
-          <span class="label">Back</span>
-          <span class="line bLine"></span>
-        </a>
-    </div>
 
+<body>
+
+<div class="backBtn">
+  <a href="UIUXdesigngrp.html">
+    <span class="line tLine"></span>
+    <span class="line mLine"></span>
+    <span class="label">Back</span>
+    <span class="line bLine"></span>
+  </a>
+</div>
 
 <div style="text-align:center" class="header-color">
   <h2>SPACES REDEFINE Archifest 2025 Rebrand Mobile App Design</h2>
   <p>Click on the images below:</p>
 </div>
 
-<!-- The 4 columns -->
+<!-- GRID -->
 <div class="row">
   <div class="column">
-    <img src="Graphicdesign/SRmobileapp.png" alt="" style="width:100%" onclick="myFunction(this);">
+    <img src="Graphicdesign/SRmobileapp.png" alt="" onclick="myFunction(this);">
   </div>
 
-  <div class="row">
-    <div class="column">
-        <iframe width="100%" height="300" style="border:0;" scrolling="no" src="https://go.screenpal.com/player/cZXuDunV8yG?width=100%&height=100%&ff=1&title=0" allowfullscreen="true"></iframe>
+  <div class="column">
+    <div class="video-wrapper">
+      <iframe 
+        src="https://go.screenpal.com/player/cZXuDunV8yG?width=100%&height=100%&ff=1&title=0" 
+        allowfullscreen>
+      </iframe>
     </div>
+  </div>
 </div>
-
 
 <div class="container">
   <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
+  <img id="expandedImg">
   <div id="imgtext"></div>
 </div>
- 
-<!-- The img desc -->
-<div class="imgdesc" style="color:rgb(0, 0, 0)" >
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">SPACES REDEFINE Archifest 2025 Rebrand Mobile App Design</p>
 
-<p style="margin: auto;
-width: 50%;
-padding: 10px;">The design approach for the Archifest 2024 app and festival assets centers on 
-blending functionality with a visually appealing aesthetic to enrich the user 
-experience. By developing assets that balance clear information delivery with creative 
-design, I aim to reflect the "Spaces Redefined" theme dynamically and effectively.
-Research on Archifest’s existing app provided insights into its strengths, clear 
-information presentation and consistent visual style, as well as areas for 
-improvement, such as adding visual interest and optimizing the information hierarchy. </p>
+<div class="imgdesc">
+  <p>SPACES REDEFINE Archifest 2025 Rebrand Mobile App Design</p>
 
-<p style="margin: auto;
-width: 50%;
-padding: 10px;">For the landing page, I established a stronger visual identity by using a dark blue 
-palette with pixelated effects, creating a unified aesthetic that reinforces the event's 
-brand. This visual strategy was applied across the program pages, where the initial
-design was simplified to emphasize essential information, reducing visual clutter to 
-better reflect my concept.</p>
+  <p>
+    The design approach for the Archifest 2024 app and festival assets blends functionality with a visually appealing aesthetic to enrich the user experience. Clear information delivery is balanced with creative design to reflect the "Spaces Redefined" theme effectively.
+  </p>
 
-<p style="margin: auto;
-width: 50%;
-padding: 10px;">Similarly, the conference landing page now uses labeled days with pixelated graphics 
-for easy navigation, and program details for each day are organized with clear 
-headings and subheadings for clarity. This organization aids in visually guiding users 
-to relevant information efficiently.</p>
+  <p>
+    Landing pages use a dark blue palette with pixelated effects, creating a unified aesthetic. Program pages emphasize essential information while reducing visual clutter. Conference pages label days with pixelated graphics for easy navigation.
+  </p>
 
-<p style="margin: auto;
-width: 50%;
-padding: 10px;">In the design for individual program days, I incorporated a flexible approach to the 
-pixelated graphics, overlapping and merging them to introduce a fluid, dynamic 
-structure that aligns with the "Spaces Redefine" theme. This change enhances the 
-representation of the festival's core concept, conveying a sense of interconnected, 
-evolving urban spaces while maintaining a visually engaging layout.</p>
+  <p>
+    Individual program days incorporate dynamic pixelated graphics that overlap and merge, representing interconnected evolving urban spaces. Unique features like interactive 3D models allow users to explore architectural designs from multiple angles, enhancing engagement.
+  </p>
 
-<p style="margin: auto;
-width: 50%;
-padding: 10px;">A unique feature of Dr. Ken Yeang’s landing page includes interactive 3D models that 
-allow users to explore architectural designs from multiple angles, adding depth and a 
-sense of realism. These models create an immersive experience, allowing users to 
-visualize architecture interactively, thus enhancing engagement and aligning with the 
-innovative spirit of the event.</p>
-
-<p style="margin: auto;
-width: 50%;
-padding: 10px;">Overall, this app design and asset creation focus on merging structured information 
-with captivating visuals, ensuring a memorable, branded experience that is both 
-practical and aesthetically appealing for the festival audience</p>
-
-
+  <p>
+    Overall, this app design merges structured information with captivating visuals to create a memorable and practical branded experience for the festival audience.
+  </p>
+</div>
 
 <script>
 function myFunction(imgs) {
   var expandImg = document.getElementById("expandedImg");
-  var imgText = document.getElementById("imgtext");
   expandImg.src = imgs.src;
-  imgText.innerHTML = imgs.alt;
   expandImg.parentElement.style.display = "block";
 }
 </script>
