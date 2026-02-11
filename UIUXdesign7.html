@@ -5,10 +5,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
-<style>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">  
 
-  
+<style>
 * {
   box-sizing: border-box;
 }
@@ -16,58 +15,67 @@
 body {
   margin: 0;
   font-family: 'Ubuntu', sans-serif;
-  
-  background:  #fff7a0;
-
+  background: #fff7a0;
 }
 
 .imgdesc {
   font-family: 'Ubuntu', sans-serif;
   text-align: center;
   background: #fad154;
-
+  padding: 20px 0;
 }
 
-/* The grid: Four equal columns that floats next to each other */
+/* FLEX GRID */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
 .column {
-  float: left;
-  width: 25%;
+  flex: 0 0 25%;
   padding: 10px;
 }
 
-/* Style the images inside the grid */
+/* Images */
 .column img {
-  opacity: 0.8; 
-  cursor: pointer; 
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+  border: none;
 }
 
 .column img:hover {
   opacity: 1;
 }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* The expanding image container */
+/* Expanding image container */
 .container {
   position: relative;
   display: none;
 }
 
-/* Expanding image text */
+#expandedImg {
+  display: block;
+  margin: auto;
+  width: 50%;
+  border-radius: 10px;
+}
+
 #imgtext {
   position: absolute;
   bottom: 15px;
-  left: 600px;
+  left: 50%;
+  transform: translateX(-50%);
   color: rgb(93, 38, 112);
   font-size: 20px;
+  background-color: rgba(0,0,0,0.4);
+  padding: 10px;
+  text-align: center;
 }
 
-/* Closable button inside the expanded image */
 .closebtn {
   position: absolute;
   top: 10px;
@@ -77,189 +85,128 @@ body {
   cursor: pointer;
 }
 
-
-
-/* CSS for back button */
+/* Back button */
 div.backBtn {
-    width: 100px;
-    right: 100px;
-    top: 30px;
-    background-color: #f4f4f4;
-    transition: all 0.4s ease;
-    position: fixed;
-    cursor: pointer;
-  }
+  width: 100px;
+  right: 100px;
+  top: 30px;
+  background-color: #f4f4f4;
+  transition: all 0.4s ease;
+  position: fixed;
+  cursor: pointer;
+  z-index: 1000;
+}
 
-  span.line {
-    bottom: auto;
-    right: auto;
-    top: auto;
-    left: auto;
-    background-color: #8f7373;
-    border-radius: 10px;
-    width: 100%;
-    left: 0px;
-    height: 2px;
-    display: block;
-    position: absolute;
-    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
-  }
+span.line {
+  background-color: #8f7373;
+  border-radius: 10px;
+  width: 100%;
+  height: 2px;
+  display: block;
+  position: absolute;
+  transition: all 0.3s ease;
+}
 
-  span.tLine {
-    top: 0px;
-  }
+span.tLine { top: 0px; }
+span.mLine { top: 13px; opacity: 0; }
+span.bLine { top: 26px; }
 
-  span.mLine {
-    top: 13px;
-    opacity: 0;
-  }
+.label {
+  position: absolute;
+  top: 5px;
+  width: 100%;
+  text-align: center;
+  font-size: 1em;
+  color: rgb(123,123,123);
+}
 
-  span.bLine {
-    top: 26px;
-  }
+.header-color {
+  color: rgb(44,34,79);
+}
 
-  .label {
-    position: absolute;
-    left: 0px;
-    top: 5px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.4s ease;
-    font-size: 1em;
-    color: rgb(123, 123, 123);
-  }
+/* Paragraph styling */
+.imgdesc p {
+  margin: auto;
+  max-width: 600px;
+  padding: 10px;
+  line-height: 1.6;
+}
 
-  div.backBtn:hover span.label {
-    left: 25px
-  }
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .column { flex: 0 0 50%; }
+  #expandedImg { width: 90%; }
+  .imgdesc p { width: 90%; }
+}
 
-  div.backBtn:hover span.line {
-    left: -10px;
-    height: 5px;
-    background-color: #a84141;
-  }
-
-  div.backBtn:hover span.tLine {
-    width: 25px;
-    transform: rotate(-45deg);
-    left: -15px;
-    top: 6px;
-  }
-  
-  div.backBtn:hover span.mLine {
-    opacity: 1;
-    width: 30px;
-  }
-
-  div.backBtn:hover span.bLine {
-    width: 25px;
-    transform: rotate(45deg);
-    left: -15px;
-    top: 20px;
-    
-  }
-
-  .header-color {
-    color:rgb(44, 34, 79);
-  }
+@media screen and (max-width: 480px) {
+  .column { flex: 0 0 100%; }
+  #expandedImg { width: 100%; }
+  .imgdesc p { width: 95%; font-size: 14px; }
+  div.backBtn { top: 10px; left: 10px; right: auto; width: 70px; }
+}
 </style>
 </head>
-<body>
-    <!-- The back button -->
-    <div class="backBtn">
-        <a href="UIUXdesigngrp.html">
-          <span class="line tLine"></span>
-          <span class="line mLine"></span>
-          <span class="label">Back</span>
-          <span class="line bLine"></span>
-        </a>
-    </div>
 
+<body>
+
+<div class="backBtn">
+  <a href="UIUXdesigngrp.html">
+    <span class="line tLine"></span>
+    <span class="line mLine"></span>
+    <span class="label">Back</span>
+    <span class="line bLine"></span>
+  </a>
+</div>
 
 <div style="text-align:center" class="header-color">
   <h2>Eezee Platform UX Research & Market Insights</h2>
   <p>Click on the images below:</p>
 </div>
 
+<!-- GRID -->
 <div class="row">
-    <div class="column">
-        <img src="UIUX/Slide 16_9 - 1.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/Slide 16_9 - 2.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/Slide 16_9 - 3.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/Slide 16_9 - 4.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
-    </div>
+  <div class="column"><img src="UIUX/Slide 16_9 - 1.png" alt="Slide 1" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/Slide 16_9 - 2.png" alt="Slide 2" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/Slide 16_9 - 3.png" alt="Slide 3" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/Slide 16_9 - 4.png" alt="Slide 4" onclick="myFunction(this);"></div>
 </div>
-<div class="row">
-    <div class="column">
-        <img src="UIUX/Slide 16_9 - 5.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/Slide 16_9 - 6.png" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/Slide 16_9 - 7.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/Slide 16_9 - 8.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
-    </div>
-</div>
-<div class="row">
-    <div class="column">
-        <img src="UIUX/Slide 16_9 - 9.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="UIUX/Slide 16_9 - 10.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
 
+<div class="row">
+  <div class="column"><img src="UIUX/Slide 16_9 - 5.png" alt="Slide 5" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/Slide 16_9 - 6.png" alt="Slide 6" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/Slide 16_9 - 7.png" alt="Slide 7" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/Slide 16_9 - 8.png" alt="Slide 8" onclick="myFunction(this);"></div>
+</div>
+
+<div class="row">
+  <div class="column"><img src="UIUX/Slide 16_9 - 9.png" alt="Slide 9" onclick="myFunction(this);"></div>
+  <div class="column"><img src="UIUX/Slide 16_9 - 10.png" alt="Slide 10" onclick="myFunction(this);"></div>
+  <div class="column"><!-- empty for spacing --></div>
+  <div class="column"><!-- empty for spacing --></div>
 </div>
 
 <div class="container">
   <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
+  <img id="expandedImg">
   <div id="imgtext"></div>
 </div>
- 
-<!-- The img desc -->
-<div class="imgdesc" style="color:rgb(0, 0, 0)" >
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">Apr 2023</p>
 
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">Eezee Platform UX Research & Market Insights
-    </p>
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">
-    During my research for Eezee, a B2B startup, I conducted an extensive market analysis focused on Indonesia to understand the business 
-    landscape, employment regulations, and competitive positioning. Using a structured approach, including PESTEL analysis, competitor analysis, 
-    and SWOT analysis. I identified key market trends that influence user needs and digital interactions.
-    </p>
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">
-    By analyzing industry pain points, procurement behaviors, and digital adoption rates, I translated market insights into potential UX strategies. 
-    This research informed recommendations on platform localization, UI enhancements, and user flows tailored to Indonesian business users. 
-    The findings support a user-centric approach to optimizing the platform’s usability, accessibility, and overall experience for the Indonesian 
-    market.
-    </p>
-
+<div class="imgdesc">
+  <p>Apr 2023</p>
+  <p>Eezee Platform UX Research & Market Insights</p>
+  <p>
+    During my research for Eezee, a B2B startup, I conducted an extensive market analysis focused on Indonesia to understand the business landscape, employment regulations, and competitive positioning. Using a structured approach, including PESTEL analysis, competitor analysis, and SWOT analysis, I identified key market trends that influence user needs and digital interactions.
+  </p>
+  <p>
+    By analyzing industry pain points, procurement behaviors, and digital adoption rates, I translated market insights into potential UX strategies. This research informed recommendations on platform localization, UI enhancements, and user flows tailored to Indonesian business users. The findings support a user-centric approach to optimizing the platform’s usability, accessibility, and overall experience for the Indonesian market.
+  </p>
 </div>
-
 
 <script>
 function myFunction(imgs) {
   var expandImg = document.getElementById("expandedImg");
-  var imgText = document.getElementById("imgtext");
   expandImg.src = imgs.src;
-  imgText.innerHTML = imgs.alt;
   expandImg.parentElement.style.display = "block";
 }
 </script>
