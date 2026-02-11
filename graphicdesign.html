@@ -6,9 +6,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
-<style>
 
-  
+<style>
 * {
   box-sizing: border-box;
 }
@@ -16,57 +15,84 @@
 body {
   margin: 0;
   font-family: 'Ubuntu', sans-serif;
-  
-  background:  #282723;
-
+  background: #ffc1f7;
 }
 
 .imgdesc {
   font-family: 'Ubuntu', sans-serif;
   text-align: center;
-  background:  #9d6d50;
+  background: #c873bd;
+  padding: 20px 0;
 }
 
-/* The grid: Four equal columns that floats next to each other */
+/* FLEX GRID */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
 .column {
-  float: left;
-  width: 25%;
+  flex: 0 0 25%;
   padding: 10px;
 }
 
-/* Style the images inside the grid */
+/* Images styling */
 .column img {
-  opacity: 0.8; 
-  cursor: pointer; 
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 
 .column img:hover {
   opacity: 1;
 }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+/* VIDEO WRAPPER (16:9) */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
 }
 
-/* The expanding image container */
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.video-wrapper iframe:hover {
+  opacity: 1;
+}
+
+/* EXPANDING IMAGE */
 .container {
   position: relative;
   display: none;
 }
 
-/* Expanding image text */
-#imgtext {
-  position: absolute;
-  bottom: 15px;
-  left: 600px;
-  color: rgb(0, 0, 0);
-  font-size: 20px;
+#expandedImg {
+  display: block;
+  margin: auto;
+  width: 50%;
+  border-radius: 10px;
 }
 
-/* Closable button inside the expanded image */
+#imgtext {
+  text-align: center;
+  margin-top: 10px;
+  color: rgb(93, 38, 112);
+  font-size: 18px;
+}
+
 .closebtn {
   position: absolute;
   top: 10px;
@@ -76,138 +102,140 @@ body {
   cursor: pointer;
 }
 
-
-
-/* CSS for back button */
+/* BACK BUTTON */
 div.backBtn {
-    width: 100px;
-    right: 100px;
-    top: 30px;
-    background-color: #f4f4f4;
-    transition: all 0.4s ease;
-    position: fixed;
-    cursor: pointer;
-  }
+  width: 100px;
+  right: 100px;
+  top: 30px;
+  background-color: #f4f4f4;
+  transition: all 0.4s ease;
+  position: fixed;
+  cursor: pointer;
+  z-index: 1000;
+}
 
-  span.line {
-    bottom: auto;
-    right: auto;
-    top: auto;
-    left: auto;
-    background-color: #8f7373;
-    border-radius: 10px;
-    width: 100%;
-    left: 0px;
-    height: 2px;
-    display: block;
-    position: absolute;
-    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
-  }
+span.line {
+  background-color: #8f7373;
+  border-radius: 10px;
+  width: 100%;
+  height: 2px;
+  display: block;
+  position: absolute;
+  transition: all 0.3s ease;
+}
 
-  span.tLine {
-    top: 0px;
-  }
+span.tLine { top: 0px; }
+span.mLine { top: 13px; opacity: 0; }
+span.bLine { top: 26px; }
 
-  span.mLine {
-    top: 13px;
-    opacity: 0;
-  }
+.label {
+  position: absolute;
+  top: 5px;
+  width: 100%;
+  text-align: center;
+  font-size: 1em;
+  color: rgb(123, 123, 123);
+}
 
-  span.bLine {
-    top: 26px;
-  }
+.header-color { color: rgb(44, 34, 79); }
 
-  .label {
-    position: absolute;
-    left: 0px;
-    top: 5px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.4s ease;
-    font-size: 1em;
-    color: rgb(123, 123, 123);
-  }
+/* DESCRIPTION TEXT */
+.imgdesc p {
+  margin: auto;
+  max-width: 600px;
+  padding: 10px;
+  line-height: 1.6;
+}
 
-  div.backBtn:hover span.label {
-    left: 25px
-  }
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  .column { flex: 0 0 50%; }
+  #expandedImg { width: 90%; }
+  .imgdesc p { width: 90%; }
+}
 
-  div.backBtn:hover span.line {
-    left: -10px;
-    height: 5px;
-    background-color: #a84141;
-  }
-
-  div.backBtn:hover span.tLine {
-    width: 25px;
-    transform: rotate(-45deg);
-    left: -15px;
-    top: 6px;
-  }
-  
-  div.backBtn:hover span.mLine {
-    opacity: 1;
-    width: 30px;
-  }
-
-  div.backBtn:hover span.bLine {
-    width: 25px;
-    transform: rotate(45deg);
-    left: -15px;
-    top: 20px;
-    
-  }
-
-  .header-color {
-    color:rgb(123, 123, 123);
-  }
+@media screen and (max-width: 480px) {
+  .column { flex: 0 0 100%; }
+  #expandedImg { width: 95%; }
+  .imgdesc p { width: 95%; font-size: 14px; }
+  div.backBtn { top: 10px; left: 10px; right: auto; width: 70px; }
+}
 </style>
 </head>
 <body>
-    <!-- The back button -->
-    <div class="backBtn">
-        <a href="graphicdesigngrp.html">
-          <span class="line tLine"></span>
-          <span class="line mLine"></span>
-          <span class="label">Back</span>
-          <span class="line bLine"></span>
-        </a>
-    </div>
 
+<!-- BACK BUTTON -->
+<div class="backBtn">
+  <a href="UIUXdesigngrp.html">
+    <span class="line tLine"></span>
+    <span class="line mLine"></span>
+    <span class="label">Back</span>
+    <span class="line bLine"></span>
+  </a>
+</div>
 
 <div style="text-align:center" class="header-color">
-  <h2>SkyCoffee branding and mockup designs</h2>
+  <h2>Karu Saves Jalan Besar Interactive Map</h2>
   <p>Click on the images below:</p>
 </div>
 
-<!-- The 4 columns -->
+<!-- IMAGE GRID -->
 <div class="row">
   <div class="column">
-    <img src="Graphicdesign/mockups.jpg" alt="Menu Design" style="width:100%" onclick="myFunction(this);">
+    <img src="Graphicdesign/IMG_9711.JPG" alt="" onclick="myFunction(this);">
   </div>
   <div class="column">
-    <img src="Graphicdesign/brandiden.jpg" alt="Brand Studies" style="width:100%" onclick="myFunction(this);">
+    <img src="Graphicdesign/IMG_9693.JPG" alt="" onclick="myFunction(this);">
   </div>
   <div class="column">
-    <img src="Graphicdesign/coverdesign.jpg" alt="Brand patterns" style="width:100%" onclick="myFunction(this);">
+    <img src="Graphicdesign/IMG_9697.JPG" alt="" onclick="myFunction(this);">
   </div>
   <div class="column">
-    <img src="Graphicdesign/Screenshot 2023-07-19 011338.png" alt="Implemented line art style" style="width:100%" onclick="myFunction(this);">
+    <img src="Graphicdesign/IMG_9708.JPG" alt="" onclick="myFunction(this);">
   </div>
 </div>
 
+<div class="row">
+  <div class="column">
+    <img src="Graphicdesign/IMG_9721.JPG" alt="" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="Graphicdesign/IMG_9729.JPG" alt="" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <div class="video-wrapper">
+      <iframe 
+        src="https://go.screenpal.com/player/cOnXbHn0QVD?ff=1&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1" 
+        allowfullscreen scrolling="no">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<!-- EXPANDING IMAGE -->
 <div class="container">
   <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
+  <img id="expandedImg">
   <div id="imgtext"></div>
 </div>
 
-<!-- The img desc -->
-<div class="imgdesc" style="color:rgb(0, 0, 0)" >
-  <p>Medium: Adobe Illustrator & Photoshop. July 2022.</p>
-  
+<!-- IMAGE DESCRIPTION -->
+<div class="imgdesc">
+  <p>Sept 2025</p>
+  <p>Karu Saves Jalan Besar Interactive Map</p>
+  <p>
+    I’m designing an interactive map to make exploring Jalan Besar fun and engaging. The map features a character called “Jalan Besar”, whose job is to restore and bring the area to life. Visitors join him on his mission, turning a simple walk into an interactive adventure.
+  </p>
+  <p>
+    The map includes a comic introducing Jalan Besar and his story, and a trail around Jalan Besar where visitors can collect stickers of the places they visit. Each sticker marks a milestone on the trail, making the exploration personal and playful.
+  </p>
+  <p>
+    At the final location, there’s a QR code that visitors can scan to unlock a celebratory AR animation, bringing Jalan Besar’s restoration story to life and rewarding those who complete the trail.
+  </p>
+  <p>
+    This project lets me combine storytelling, play, and digital technology to create a fun, memorable, and educational experience that connects people to Jalan Besar in a new way.
+  </p>
 </div>
-
 
 <script>
 function myFunction(imgs) {

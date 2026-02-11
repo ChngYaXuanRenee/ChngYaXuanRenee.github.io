@@ -15,13 +15,13 @@
 body {
   margin: 0;
   font-family: 'Ubuntu', sans-serif;
-  background: #e7caae;
+  background:  #ffc1f7;
 }
 
 .imgdesc {
   font-family: 'Ubuntu', sans-serif;
   text-align: center;
-  background: #b9ccbb;
+  background: #c873bd;
   padding: 20px 0;
 }
 
@@ -38,39 +38,35 @@ body {
 }
 
 /* Images + Video wrapper same sizing */
-.column img {
+.column img,
+.column iframe {
   width: 100%;
-  height: auto;
   display: block;
   opacity: 0.9;
   transition: opacity 0.3s ease;
   border: none;
+  height: auto; /* Images naturally scale */
 }
 
-.column img:hover {
+.column img:hover,
+.column iframe:hover {
   opacity: 1;
 }
 
-/* VIDEO WRAPPER (16:9 ratio) */
+/* VIDEO WRAPPER for videos inside grid */
 .video-wrapper {
-  position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 ratio */
+  height: 100%;
+  position: relative;
 }
 
 .video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
+  display: block;
   border: none;
   opacity: 0.9;
   transition: opacity 0.3s ease;
-}
-
-.video-wrapper iframe:hover {
-  opacity: 1;
 }
 
 /* Expanding image container */
@@ -131,7 +127,7 @@ span.bLine { top: 26px; }
 }
 
 .header-color {
-  color: rgb(55, 28, 80);
+  color: rgb(44, 34, 79);
 }
 
 /* Paragraph styling */
@@ -142,7 +138,7 @@ span.bLine { top: 26px; }
   line-height: 1.6;
 }
 
-/* Responsive */
+/* RESPONSIVE */
 @media screen and (max-width: 768px) {
   .column { flex: 0 0 50%; }
   #expandedImg { width: 90%; }
@@ -157,66 +153,78 @@ span.bLine { top: 26px; }
 }
 </style>
 </head>
-
 <body>
 
+<!-- BACK BUTTON -->
 <div class="backBtn">
-  <a href="UIUXdesigngrp.html">
-    <span class="line tLine"></span>
-    <span class="line mLine"></span>
-    <span class="label">Back</span>
-    <span class="line bLine"></span>
-  </a>
+    <a href="UIUXdesigngrp.html">
+      <span class="line tLine"></span>
+      <span class="line mLine"></span>
+      <span class="label">Back</span>
+      <span class="line bLine"></span>
+    </a>
 </div>
 
 <div style="text-align:center" class="header-color">
-  <h2>Furnitopia Web</h2>
+  <h2>Karu Saves Jalan Besar Interactive Map</h2>
   <p>Click on the images below:</p>
 </div>
 
 <!-- GRID -->
 <div class="row">
-  <div class="column">
-    <img src="UIUX/prototypeweb-03.png" alt="" onclick="myFunction(this);">
-  </div>
-
-  <div class="column">
-    <img src="UIUX/prototypeweb2-04.png" alt="" onclick="myFunction(this);">
-  </div>
-
-  <div class="column">
-    <div class="video-wrapper">
-      <iframe 
-        src="https://screenpal.com/player/cZVo1cVJjld?"
-        allowfullscreen>
-      </iframe>
+    <div class="column">
+        <img src="Graphicdesign/IMG_9711.JPG" alt="" onclick="myFunction(this);">
     </div>
-  </div>
-
-  <div class="column">
-    <div class="video-wrapper">
-      <iframe 
-        src="https://screenpal.com/player/cZVohaVJj6i?"
-        allowfullscreen>
-      </iframe>
+    <div class="column">
+        <img src="Graphicdesign/IMG_9693.JPG" alt="" onclick="myFunction(this);">
     </div>
-  </div>
+    <div class="column">
+        <img src="Graphicdesign/IMG_9697.JPG" alt="" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/IMG_9708.JPG" alt="" onclick="myFunction(this);">
+    </div>
 </div>
 
+<div class="row">
+    <div class="column">
+        <img src="Graphicdesign/IMG_9721.JPG" alt="" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/IMG_9729.JPG" alt="" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <div class="video-wrapper">
+          <iframe 
+            src="https://go.screenpal.com/player/cOnXbHn0QVD?ff=1&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1" 
+            allowfullscreen scrolling="no">
+          </iframe>
+        </div>
+    </div>
+</div>
+
+<!-- EXPANDING IMAGE -->
 <div class="container">
   <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
   <img id="expandedImg">
   <div id="imgtext"></div>
 </div>
 
+<!-- DESCRIPTION -->
 <div class="imgdesc">
-  <p>Furnitopia Web Design</p>
-  <p>Programmed both front-end and back-end with API code. 3D furniture models were created in MAYA and textured in Substance Painter.</p>
-
+  <p>Sept 2025</p>
+  <p>Karu Saves Jalan Besar Interactive Map</p>
   <p>
-    This e-commerce website provides a unique, immersive shopping experience, simulating 3D in-person purchasing. 
-    Products have three-dimensional images for detailed viewing. Gamification and interactive design enhance user engagement 
-    while offering branding opportunities for retailers and suppliers.
+    I’m designing an interactive map to make exploring Jalan Besar fun and engaging. The map features a character called “Jalan Besar”, whose job is to restore and bring the area to life. Visitors join him on his mission, turning a simple walk into an interactive adventure.
+  </p>
+  <p>
+    The map includes a comic introducing Jalan Besar and his story, and a trail around Jalan Besar where visitors can collect stickers of the places they visit. Each sticker marks a milestone on the trail, making the exploration personal and playful.
+  </p>
+  <p>
+    At the final location, there’s a QR code that visitors can scan to unlock a celebratory AR animation, bringing Jalan Besar’s restoration story to life and rewarding those who complete the trail.
+  </p>
+  <p>
+    This project lets me combine storytelling, play, and digital technology to create a fun, memorable, and educational experience that connects people to Jalan Besar in a new way.
   </p>
 </div>
 
