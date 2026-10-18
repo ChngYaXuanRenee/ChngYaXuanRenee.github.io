@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  background: #ffc1f7;
+}
+
+.imgdesc {
+  font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+  background: #c873bd;
+  padding: 20px 0;
+}
+
+/* FLEX GRID */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
+.column {
+  flex: 0 0 25%;
+  padding: 10px;
+}
+
+/* Images styling */
+.column img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* VIDEO WRAPPER (16:9) */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.video-wrapper iframe:hover {
+  opacity: 1;
+}
+
+/* EXPANDING IMAGE */
+.container {
+  position: relative;
+  display: none;
+}
+
+#expandedImg {
+  display: block;
+  margin: auto;
+  width: 50%;
+  border-radius: 10px;
+}
+
+#imgtext {
+  text-align: center;
+  margin-top: 10px;
+  color: rgb(93, 38, 112);
+  font-size: 18px;
+}
+
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+/* BACK BUTTON */
+div.backBtn {
+  width: 100px;
+  right: 100px;
+  top: 30px;
+  background-color: #f4f4f4;
+  transition: all 0.4s ease;
+  position: fixed;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+span.line {
+  background-color: #8f7373;
+  border-radius: 10px;
+  width: 100%;
+  height: 2px;
+  display: block;
+  position: absolute;
+  transition: all 0.3s ease;
+}
+
+span.tLine { top: 0px; }
+span.mLine { top: 13px; opacity: 0; }
+span.bLine { top: 26px; }
+
+.label {
+  position: absolute;
+  top: 5px;
+  width: 100%;
+  text-align: center;
+  font-size: 1em;
+  color: rgb(123, 123, 123);
+}
+
+.header-color { color: rgb(44, 34, 79); }
+
+/* DESCRIPTION TEXT */
+.imgdesc p {
+  margin: auto;
+  max-width: 600px;
+  padding: 10px;
+  line-height: 1.6;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  .column { flex: 0 0 50%; }
+  #expandedImg { width: 90%; }
+  .imgdesc p { width: 90%; }
+}
+
+@media screen and (max-width: 480px) {
+  .column { flex: 0 0 100%; }
+  #expandedImg { width: 95%; }
+  .imgdesc p { width: 95%; font-size: 14px; }
+  div.backBtn { top: 10px; left: 10px; right: auto; width: 70px; }
+}
+</style>
+</head>
+<body>
+
+<!-- BACK BUTTON -->
+<div class="backBtn">
+  <a href="graphicdesigngrp.html">
+    <span class="line tLine"></span>
+    <span class="line mLine"></span>
+    <span class="label">Back</span>
+    <span class="line bLine"></span>
+  </a>
+</div>
+
+<div style="text-align:center" class="header-color">
+  <h2>The Missing Archive</h2>
+  <p>Click on the images below:</p>
+</div>
+
+<!-- IMAGE GRID -->
+<div class="row">
+  <div class="column">
+    <img src="Graphicdesign/The M SS NG Archive Cover Image.jpg" alt="" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="Graphicdesign/The M SS NG Archive Deck 1.jpg" alt="" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="Graphicdesign/The M SS NG Archive Deck 2.jpg" alt="" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="Graphicdesign/The M SS NG Archive Deck 3.jpg" alt="" onclick="myFunction(this);">
+  </div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <img src="Graphicdesign/The M SS NG Archive Deck 4.jpg" alt="" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <div class="video-wrapper">
+      <iframe 
+        src="https://go.screenpal.com/player/cOh3q0ntHri?ff=1&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1" 
+        allowfullscreen scrolling="no">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+
+<!-- EXPANDING IMAGE -->
+<div class="container">
+  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+  <img id="expandedImg">
+  <div id="imgtext"></div>
+</div>
+
+<!-- IMAGE DESCRIPTION -->
+<div class="imgdesc">
+  <p>March 2026</p>
+  <p>The Missing Archive</p>
+  <p>
+    The M SS NG Archive reframes absence as evidence. By collectivising individual experiences of censorship, the campaign transforms 
+    what platforms dismiss as minor moderation decisions into an undeniable, documented pattern of systemic bias. Not just a tool for our 
+    championed cause, we place emphasis on the individuals impacted by suppression — especially the generation of young women developing 
+    their own bodily awareness and autonomy. We provide a platform to not just women's rights organizations and social campaigns, but also 
+    the everyday woman to understand she is not alone. We are the first step to real change — to make suppression undeniable.
+  </p>
+</div>
+
+<script>
+function myFunction(imgs) {
+  var expandImg = document.getElementById("expandedImg");
+  var imgText = document.getElementById("imgtext");
+  expandImg.src = imgs.src;
+  imgText.innerHTML = imgs.alt;
+  expandImg.parentElement.style.display = "block";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
+<style>
+
+  
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  
+  background:  #ffd694;
+
+}
+
+.imgdesc {
+  font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+  background:  #ffa01c;
+}
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8; 
+  cursor: pointer; 
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image container */
+.container {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 600px;
+  color: rgb(134, 209, 255);
+  font-size: 20px;
+}
+
+/* Closable button inside the expanded image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+
+
+/* CSS for back button */
+div.backBtn {
+    width: 100px;
+    right: 100px;
+    top: 30px;
+    background-color: #f4f4f4;
+    transition: all 0.4s ease;
+    position: fixed;
+    cursor: pointer;
+  }
+
+  span.line {
+    bottom: auto;
+    right: auto;
+    top: auto;
+    left: auto;
+    background-color: #8f7373;
+    border-radius: 10px;
+    width: 100%;
+    left: 0px;
+    height: 2px;
+    display: block;
+    position: absolute;
+    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
+  }
+
+  span.tLine {
+    top: 0px;
+  }
+
+  span.mLine {
+    top: 13px;
+    opacity: 0;
+  }
+
+  span.bLine {
+    top: 26px;
+  }
+
+  .label {
+    position: absolute;
+    left: 0px;
+    top: 5px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.4s ease;
+    font-size: 1em;
+    color: rgb(123, 123, 123);
+  }
+
+  div.backBtn:hover span.label {
+    left: 25px
+  }
+
+  div.backBtn:hover span.line {
+    left: -10px;
+    height: 5px;
+    background-color: #a84141;
+  }
+
+  div.backBtn:hover span.tLine {
+    width: 25px;
+    transform: rotate(-45deg);
+    left: -15px;
+    top: 6px;
+  }
+  
+  div.backBtn:hover span.mLine {
+    opacity: 1;
+    width: 30px;
+  }
+
+  div.backBtn:hover span.bLine {
+    width: 25px;
+    transform: rotate(45deg);
+    left: -15px;
+    top: 20px;
+    
+  }
+
+  .header-color {
+    color:rgb(149, 75, 1);
+  }
+</style>
+</head>
+<body>
+    <!-- The back button -->
+    <div class="backBtn">
+        <a href="animvidgrp.html">
+          <span class="line tLine"></span>
+          <span class="line mLine"></span>
+          <span class="label">Back</span>
+          <span class="line bLine"></span>
+        </a>
+    </div>
+
+
+<div style="text-align:center" class="header-color">
+  <h2>Nostalgic Noodles with AI workflows (ComfyICU)</h2>
+  <p>Click on the images below:</p>
+</div>
+
+<div class="row" style="display: flex; gap: 20px; justify-content: center;">
+    <div class="column">
+      <iframe width="400" height="300" style="border:0;" scrolling="no" src="https://go.screenpal.com/player/cZXO6onVJQZ?width=100%&height=100%&ff=1&title=0" allowfullscreen="true"></iframe>
+    </div>
+    <div class="column">
+      <iframe width="400" height="300" style="border:0;" scrolling="no" src="https://go.screenpal.com/player/cZXtDnnVMX5?width=100%&height=100%&ff=1&title=0" allowfullscreen="true"></iframe>
+    </div>
+    <div class="column">
+        <iframe width="400" height="300" style="border:0;" scrolling="no" src="https://go.screenpal.com/player/cZXtDInVM2h?width=100%&height=100%&ff=1&title=0" allowfullscreen="true"></iframe>
+    </div>
+      
+</div>
+  
+
+<br>
+<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+<!-- The img desc -->
+<div class="imgdesc" style="color:rgb(0, 0, 0)" >
+  <p style="margin: auto;
+  width: 50%;
+  padding: 10px;">Nostalgic Noodles with AI workflows (ComfyICU). Oct 2024</p>
+
+<p style="margin: auto;
+width: 50%;
+padding: 10px;">Designed with AI Comfy.icu, Adobe After Effects, Resolume VJ, Adobe Aero.</p>
+
+  <p style="margin: auto;
+  width: 50%;
+  padding: 10px;">AI Integration: <br> Comfy.icu AI was instrumental in brainstorming and generating visuals that aligned with the 
+  project's theme of nostalgia. By feeding keywords such as "warmth," "tradition," and "family moments," the AI produced stunning, evocative imagery that captured the essence of old-world Singapore.
+    </p>
+
+    <p style="margin: auto;
+  width: 50%;
+  padding: 10px;">After Effects: <br> I added more animation with the mask, animation related to my brand identity and it conveys a sense 
+  of nostalgia and comfort, evoking memories of classic noodle dishes while adding a modern touch! The motion and evolving colors of my logo 
+  reinforce my brand’s presence and make it instantly recognizable. The flowing linework represent the essence of noodles or the 
+  interconnectedness of memories and emotions tied to my brand too!
+    </p>
+
+    <p style="margin: auto;
+  width: 50%;
+  padding: 10px;">Resolume VJ software: <br> For the Nostalgic Noodles project, my experience with VJ software allowed me to explore the dynamic interplay 
+  of visuals and storytelling. Using the VJ tools, I crafted visually engaging sequences that reflected the nostalgic theme of the project. 
+  I manipulated motion graphics, textures, and patterns to create fluid transitions, emphasizing the warmth and sentimental value of the concept.
+  The software’s real-time rendering capabilities enabled me to experiment with live visual layering, such as overlaying vintage-style graphics 
+  with contemporary animations. This process gave me a deeper appreciation for the synergy between visual design and emotional storytelling, as 
+  I was able to evoke a sense of nostalgia while maintaining a modern and cohesive aesthetic. Through this, I translated the project’s themes into 
+  an immersive visual journey that captivated audiences.
+    </p>
+
+    <p style="margin: auto;
+  width: 50%;
+  padding: 10px;">AR integration with Adobe Aero: <br> AR is a powerful tool that helps me align Nostalgic Noodles’ brand identity with modern 
+  expectations. It transforms customer interactions into memorable, engaging experiences while reinforcing the core emotional and cultural 
+  values of my brand. Through personalization, fun, and storytelling, AR ensures that my brand leaves a lasting impression and builds stronger 
+  connections with my customers.
+    </p>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+
+</div>
+
+
+<script>
+function myFunction(imgs) {
+  var expandImg = document.getElementById("expandedImg");
+  var imgText = document.getElementById("imgtext");
+  expandImg.src = imgs.src;
+  imgText.innerHTML = imgs.alt;
+  expandImg.parentElement.style.display = "block";
+}
+</script>
+
+</body>
+</html>

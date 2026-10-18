@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renee's Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link href="style.css" rel="stylesheet" type="text/css" />
+
+  <!-- jQuery for sticky tabs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <script>
+    // Resume/Testimonial links
+    function openResume() {
+      window.open('ReneeNewResume2.pdf', '_blank');
+    }
+
+    function openTestimonial() {
+      window.open('testimonial.pdf', '_blank');
+    }
+  </script>
+</head>
+
+<body>
+
+  <!-- Navigation Tabs -->
+  <section class="et-hero-tabs">
+    <div class="et-hero-tabs-container">
+      <a class="et-hero-tab" href="#tab-flexbox">Home</a>
+      <a class="et-hero-tab" href="#tab-react">Portfolio</a>
+      <a class="et-hero-tab" href="#tab-angular">Resume / Testimonial</a>
+      <a class="et-hero-tab" href="#tab-other">Contact</a>
+      <span class="et-hero-tab-slider"></span>
+    </div>
+  </section>
+
+  <main class="et-main">
+
+    <!-- Home Section -->
+    <section class="et-slide" id="tab-flexbox">
+      <div class="home-hero">
+        <img src="homewebsite.png" class="home-hero-image" alt="Home Website">
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="et-slide" id="tab-react">
+      <h1 id="portfolio">Portfolio</h1>
+
+      <h3>Categories</h3>
+      <div class="image-gallery">
+        <div class="gallery-item">
+          <a href="graphicdesigngrp.html">
+            <img src="category1.png" alt="Graphic Design" class="gallery-image">
+            <figcaption class="image-caption">GRAPHIC DESIGNS</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="3Ddesigngrp.html">
+            <img src="3Dimg/Screenshot 2023-07-19 080611.png" alt="3D Design" class="gallery-image">
+            <figcaption class="image-caption">3D DESIGNS</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="UIUXdesigngrp.html">
+            <img src="UIUX/prototypesmartwatch-01.png" alt="UI/UX" class="gallery-image">
+            <figcaption class="image-caption">UI/UX DESIGNS</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="animvidgrp.html">
+            <img src="Animnvid/Screenshot 2023-10-27 203757.png" alt="Animation & Video" class="gallery-image">
+            <figcaption class="image-caption">ANIMATION & VIDEO</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="Photogrp.html">
+            <img src="Photography/IMG_2377.jpg" alt="Photography" class="gallery-image">
+            <figcaption class="image-caption">PHOTOGRAPHY</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="HPCgrp.html">
+            <img src="Expimg/SIWWgrace.jpg" alt="High-Profile Collaborations" class="gallery-image">
+            <figcaption class="image-caption">HIGH-PROFILE COLLABORATIONS</figcaption>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resume / Portfolio Section -->
+    <section class="et-slide" id="tab-angular">
+      <h1 id="Resume / Testimonial">Resume / Testimonials</h1>
+
+      <h3>Categories</h3>
+      <div class="image-gallery">
+        <div class="gallery-item">
+          <a href="ReneeResume_main.pdf" target="_blank" rel="noopener noreferrer">
+            <img src="webresume.png" alt="resume" class="gallery-image">
+            <figcaption class="image-caption">RESUME</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="TESTIMONIAL_2026.pdf" target="_blank" rel="noopener noreferrer">
+            <img src="webtestimonials.png" alt="testimonials" class="gallery-image">
+            <figcaption class="image-caption">TESTIMONIALS</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="https://www.linkedin.com/in/chng-ya-xuan-renee-21bba2237/" target="_blank" rel="noopener noreferrer">
+            <img src="weblinkedln.png" alt="socials" class="gallery-image">
+            <figcaption class="image-caption">SOCIALS</figcaption>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2026 Renee Chng. All Rights Reserved.</p>
+  <p>Email: kingskyrr@gmail.com | Phone: +65 88662435</p>
+</footer>
+
+    <!-- Achievements Section (optional) -->
+    <!--<section class="et-slide" id="tab-other">
+      <h1 id="achievements">Achievements</h1>
+      <div class="image-gallery">
+        <div class="gallery-item">
+          <a href="Awards.html">
+            <img src="achievementsexp/awards.jpg" alt="Awards" class="gallery-image">
+            <figcaption class="image-caption">AWARDS</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="Exhibited.html">
+            <img src="achievementsexp/exhibitedworks.jpg" alt="Exhibited Works" class="gallery-image">
+            <figcaption class="image-caption">EXHIBITED WORKS</figcaption>
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="Certification.html">
+            <img src="achievementsexp/certifications.jpg" alt="Certifications" class="gallery-image">
+            <figcaption class="image-caption">CERTIFICATIONS</figcaption>
+          </a>
+        </div>
+      </div>
+    </section>-->
+
+  </main>
+
+  <!-- Sticky Tabs Script -->
+  <script src="script.js"></script>
+</body>
+</html>

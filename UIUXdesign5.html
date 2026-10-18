@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">  
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  background: #ffb363;
+}
+
+.imgdesc {
+  font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+  background: #ffc44f;
+  padding: 20px 0;
+}
+
+/* FLEX GRID */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
+.column {
+  flex: 0 0 25%;
+  padding: 10px;
+}
+
+/* Images */
+.column img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+  border: none;
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* VIDEO WRAPPER (16:9 ratio) */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 ratio */
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.video-wrapper iframe:hover {
+  opacity: 1;
+}
+
+/* Expanding image container */
+.container {
+  position: relative;
+  display: none;
+}
+
+#expandedImg {
+  display: block;
+  margin: auto;
+  width: 50%;
+  border-radius: 10px;
+}
+
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgb(251, 239, 255);
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  text-align: center;
+}
+
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+/* Back button */
+div.backBtn {
+  width: 100px;
+  right: 100px;
+  top: 30px;
+  background-color: #f4f4f4;
+  transition: all 0.4s ease;
+  position: fixed;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+span.line {
+  background-color: #8f7373;
+  border-radius: 10px;
+  width: 100%;
+  height: 2px;
+  display: block;
+  position: absolute;
+  transition: all 0.3s ease;
+}
+
+span.tLine { top: 0px; }
+span.mLine { top: 13px; opacity: 0; }
+span.bLine { top: 26px; }
+
+.label {
+  position: absolute;
+  top: 5px;
+  width: 100%;
+  text-align: center;
+  font-size: 1em;
+  color: rgb(123, 123, 123);
+}
+
+.header-color {
+  color: rgb(123, 123, 123);
+}
+
+/* Paragraph styling */
+.imgdesc p {
+  margin: auto;
+  max-width: 600px;
+  padding: 10px;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .column { flex: 0 0 50%; }
+  #expandedImg { width: 90%; }
+  .imgdesc p { width: 90%; }
+}
+
+@media screen and (max-width: 480px) {
+  .column { flex: 0 0 100%; }
+  #expandedImg { width: 100%; }
+  .imgdesc p { width: 95%; font-size: 14px; }
+  div.backBtn { top: 10px; left: 10px; right: auto; width: 70px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="backBtn">
+  <a href="UIUXdesigngrp.html">
+    <span class="line tLine"></span>
+    <span class="line mLine"></span>
+    <span class="label">Back</span>
+    <span class="line bLine"></span>
+  </a>
+</div>
+
+<div style="text-align:center" class="header-color">
+  <h2>FOODHOOD App</h2>
+  <p>Click on the images below:</p>
+</div>
+
+<!-- GRID -->
+<div class="row">
+  <div class="column">
+    <img src="UIUX/foodhoodmockup.png" alt="FOODHOOD Mockup" onclick="myFunction(this);">
+  </div>
+
+  <div class="column">
+    <div class="video-wrapper">
+      <iframe 
+        src="https://go.screenpal.com/player/cZln22nnecn?width=100%&height=100%&ff=1&title=0" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <div class="column">
+    <img src="UIUX/FHlowfid.png" alt="Low fidelity design" onclick="myFunction(this);">
+  </div>
+
+  <div class="column">
+    <img src="UIUX/Frame 1.png" alt="User task flow" onclick="myFunction(this);">
+  </div>
+</div>
+
+<div class="container">
+  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+  <img id="expandedImg">
+  <div id="imgtext"></div>
+</div>
+
+<div class="imgdesc">
+  <p>FOODHOOD App</p>
+
+  <p>
+    FOODHOOD is more than just an app—it’s a community-driven platform that evokes memories of shared meals, family traditions, and the sensory delights of home-cooked dishes. Inspired by personal and collective nostalgia, it connects users through food stories, flavors, and traditions.
+  </p>
+
+  <p>
+    With the economic impact of Covid-19 leading to retrenchment, many turn to different avenues of work. This start-up is on a mission to develop software to help displaced workers in Singapore showcase their culinary skills and sell creations to the community. FOODHOOD allows anyone to order home-cooked food on demand.
+  </p>
+</div>
+
+<script>
+function myFunction(imgs) {
+  var expandImg = document.getElementById("expandedImg");
+  expandImg.src = imgs.src;
+  expandImg.parentElement.style.display = "block";
+}
+</script>
+
+</body>
+</html>

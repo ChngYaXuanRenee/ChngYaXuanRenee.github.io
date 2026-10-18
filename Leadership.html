@@ -1,0 +1,694 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Experiences</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Renee's Portfolio</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-4c660df9f7a952f3060705ee.png" />
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+    <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-1f4e06caec34940fbc1a6e787974dcd360f2c6b63348d4b77743096d55480f33.ico" />
+    <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+    <title>CodePen - Sticky Slider Navigation (Responsive)</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,body,div,p {
+      margin: 0;
+      padding: 0;
+      font-family: "Century Gothic", 'Lato', sans-serif;
+      
+    }
+
+    /* The actual timeline (the vertical ruler) */
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* The actual timeline (the vertical ruler) */
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: white;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+    }
+
+    /* Container around content */
+    .container {
+      padding: 10px 40px;
+      position: relative;
+      background-color: inherit;
+      width: 50%;
+    }
+
+    /* The circles on the timeline */
+    .container::after {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      right: -17px;
+      background-color: white;
+      border: 4px solid #FF9F55;
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    /* Place the container to the left */
+    .left {
+      left: 0;
+    }
+
+    /* Place the container to the right */
+    .right {
+      left: 50%;
+    }
+
+    /* Add arrows to the left container (pointing right) */
+    .left::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 22px;
+      width: 0;
+      z-index: 1;
+      right: 30px;
+      border: medium solid white;
+      border-width: 10px 0 10px 10px;
+      border-color: transparent transparent transparent white;
+    }
+
+    /* Add arrows to the right container (pointing left) */
+    .right::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 22px;
+      width: 0;
+      z-index: 1;
+      left: 30px;
+      border: medium solid white;
+      border-width: 10px 10px 10px 0;
+      border-color: transparent white transparent transparent;
+    }
+
+    /* Fix the circle for containers on the right side */
+    .right::after {
+      left: -16px;
+    }
+
+    /* The actual content */
+    .content {
+      padding: 20px 30px;
+      background-color: white;
+      position: relative;
+      border-radius: 6px;
+    }
+
+    /* Media queries - Responsive timeline on screens less than 600px wide */
+    @media screen and (max-width: 600px) {
+
+      /* Place the timelime to the left */
+      .timeline::after {
+        left: 31px;
+      }
+
+      /* Full-width containers */
+      .container {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+
+      /* Make sure that all arrows are pointing leftwards */
+      .container::before {
+        left: 60px;
+        border: medium solid white;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent white transparent transparent;
+      }
+
+      /* Make sure all circles are at the same spot */
+      .left::after,
+      .right::after {
+        left: 15px;
+      }
+
+      /* Make all right containers behave like the left ones */
+      .right {
+        left: 0%;
+      }
+    }
+
+
+
+    /* CSS for back button */
+    div.backBtn {
+        width: 100px;
+        right: 100px;
+        top: 30px;
+        background-color: #f4f4f4;
+        transition: all 0.4s ease;
+        position: fixed;
+        cursor: pointer;
+      }
+
+      span.line {
+        bottom: auto;
+        right: auto;
+        top: auto;
+        left: auto;
+        background-color: #8f7373;
+        border-radius: 10px;
+        width: 100%;
+        left: 0px;
+        height: 2px;
+        display: block;
+        position: absolute;
+        transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
+      }
+
+      span.tLine {
+        top: 0px;
+      }
+
+      span.mLine {
+        top: 13px;
+        opacity: 0;
+      }
+
+      span.bLine {
+        top: 26px;
+      }
+
+      .label {
+        position: absolute;
+        left: 0px;
+        top: 5px;
+        width: 100%;
+        text-align: center;
+        transition: all 0.4s ease;
+        font-size: 1em;
+        color: rgb(123, 123, 123);
+      }
+
+      div.backBtn:hover span.label {
+        left: 25px
+      }
+
+      div.backBtn:hover span.line {
+        left: -10px;
+        height: 5px;
+        background-color: #a84141;
+      }
+
+      div.backBtn:hover span.tLine {
+        width: 25px;
+        transform: rotate(-45deg);
+        left: -15px;
+        top: 6px;
+      }
+
+      div.backBtn:hover span.mLine {
+        opacity: 1;
+        width: 30px;
+      }
+
+      div.backBtn:hover span.bLine {
+        width: 25px;
+        transform: rotate(45deg);
+        left: -15px;
+        top: 20px;
+
+      }
+
+      .header-color {
+        color:rgb(44, 34, 79);
+      }
+  </style>
+
+</head>
+  <!-- The back button -->
+  <div class="backBtn">
+      <a href="index.html#experiences">
+        <span class="line tLine"></span>
+        <span class="line mLine"></span>
+        <span class="label">Back</span>
+        <span class="line bLine"></span>
+      </a>
+  </div>
+
+<body style="background-color: FAD46C;">
+  <h1 style="text-align: center;">LEADERSHIP, VOLUNTEERING, INTERNSHIPS, OTHER EXPERIENCES</h1>
+  <br>
+  <h2 style="text-align: center;">My Industry Experiences</h2>
+
+  <div class="timeline">
+    <div class="container left">
+      <div class="content">
+        <h2>Oct 2024 - present</h2>
+        <h2>Meet-The-People Session Case Writer</h2>
+        <h3>Recurring Weekly Commitment</h3>
+        <h3 style="color: grey;">People’s Action Party PAP</h3>
+        <p>Case Writer at Weekly Meet-The-People Sessions</p>
+        <br>
+        <li>Assisting with resident inquiries and drafting correspondence to relevant agencies, ministries, 
+          and statutory boards while working closely with MP Ms. Sim Ann to address community needs and facilitate resolutions.</li>
+        <li>My experience as a Case Writer has enhanced my ability to empathize with users, communicate effectively with stakeholders, 
+          and improve processes, skills that are directly applicable to designing user-centered, intuitive UI/UX solutions.</li>
+      </div>
+    </div>
+    <div class="container right">
+      <div class="content">
+        <h2>Apr 2024 - Aug 2024 </h2>
+        <h2>Graphic Designer</h2>
+        <h3>Intern</h3>
+        <h3 style="color: grey;">Sembcorp</h3>
+        <p>I am part of the Group Corporate Communications & Investor Relations team where it involves project management support, engagement with internal and external
+          stakeholders, and contributing to the success of the company owned by Temasek Holdings. It was an exciting opportunity for a budding designer to immerse myself in the 
+          dynamic intersection of sustainability and the energy industry, crafting digital media graphics that enhance Sembcorp's communication campaigns
+          across various platforms. 
+        </p>
+            <br>
+        <li>Helps with Sembcorp’s website design for china and indonesia site.</li>
+        <li>Designs Sembcorp showcase booth for Singapore International Water Week (SIWW) for utility, city leaders, & Minister for Sustainability and the Environment of Singapore, Ms Grace Fu
+          exhibited in the MBS.</li>
+        <li>Designs infographics and creation of videos for 1H2024 Group Financials for Mr Wong Kim Yin, Group President & CEO</li>
+        <li>Designs social media post in Linkedin.</li>
+        <li>Designs Sembcorp's infographics and branding icons. Collaborating with branding team. </li>
+        <li>Designs corporate communications (annual financial & sustainability reports) </li>
+      </div>
+    </div>
+
+
+    <div class="container left">
+      <div class="content">
+        <h2>Jul 2021 - Jan 2024</h2>
+        <h2>Social Media Graphic Designer & Marketer</h2>
+        <h3>Part Time</h3>
+        <h3 style="color: grey;">Decious</h3>
+        <p>Responsible for Social Media Business Instagram and Tiktok accounts and now holds 10.2k followers!</p>
+        <br>
+        <li>Develop and execute online marketing materials for promotions or campaigns.</li>
+        <li>Plans Video contents</li>
+        <li>Responsible in editing videos</li>
+        <li>Designs promotional menus and graphics</li>
+        <li>Ideate brand persona and image</li>
+        <li>Create video or photo content for product exposure and awareness.</li>
+      </div>
+    </div>
+    <div class="container right">
+      <div class="content">
+        <h2>Apr 2023 - May 2023 </h2>
+        <h2>Market Research Analyst</h2>
+        <h3>Intern</h3>
+        <h3 style="color: grey;">Eezee</h3>
+        <p>I was assisting with the research on import channel of Eezee, 
+            largest MRO & Business supplies Marketplace. I was in a team 
+            of 5 researchers from Ngee Ann Polytechnic. </p>
+            <br>
+        <li>What I’ve learnt from this are about the supplier relationships, 
+            logistics process, customer regulations, product assortment, 
+            pricing strategies and potential expansions plans! </li>
+        <li>Understanding the import channel of Eezee and the business aspects behind it 
+            could potentially influence my artistic skills by providing inspiration for my artwork. For instance, 
+            I might create art that reflects the intricate logistics of global trade, the diversity of products, 
+            or the connections between different industries. Additionally, insights into business strategies and 
+            operations could help me develop a more holistic perspective, which might indirectly impact my creative 
+            thinking and problem-solving abilities. Art can often draw from various sources of knowledge and 
+            experience to create unique and meaningful expressions.</li>
+      </div>
+    </div>
+    
+  </div>
+
+  <h2 style="text-align: center;">My Experiences</h2>
+  <div class="timeline">
+    <div class="container left">
+      <div style="background-color: rgb(255, 247, 220);" class="content">
+        <h2>May - Jun 2024</h2>
+        <h2>Assisting In 1H2024 Financial Results Infographics and Video for Group President & CEO, Mr Wong Kim Yin
+        </h2>
+        <h3 style="color: grey;">SEMBCORP</h3>
+        <p>I was given an opportunity to design infographics and creation of videos for 1H2024 Group Financials for Mr Wong Kim Yin, Group President & CEO</p>
+          <br>
+        <li>Designed visually engaging infographics to summarize and present key financial highlights for 1H2024 Group Financials.</li>
+        <li>Developed graphics for use in internal and external communications, ensuring alignment with corporate branding and messaging standards.</li>
+        <li>Produced a video interview with the CFO & CEO, focusing on the financial highlights and achievements of the first half of 2024, with video editing.</li>
+        <li>Designed tailored content for Sembcorp’s LinkedIn page to promote the 1H2024 financial results, enhancing engagement and visibility among stakeholders.</li>
+        <img src="Expimg/1H24result1.jpg" alt="ndp" style="width: 50%; height: 18%;">
+        <img src="Expimg/1H24result2.jpg" alt="ndpprocess" style="width: 40%; height: 18%;">
+        <img src="Expimg/1H24result3.png" alt="ndpprocess" style="width: 25%; height: 30%;">
+      </div>
+    </div>
+    
+    <div class="container right">
+      <div style="background-color: rgb(255, 247, 220);" class="content">
+        <h2>May - Jun 2024</h2>
+        <h2>Assisting In Art Direction For Sembcorp </h2>
+        <h3 style="color: grey;">SEMBCORP</h3>
+        <p>I was chosen to manage art direction and designs Sembcorb showcase booth for Singapore International Water Week (SIWW) for Minister
+          of Sustainability, Ms Grace Fu, utility and city leaders.</p>
+          <br>
+        <li>Gain the ability to oversee the visual elements of the booth, ensuring they align with the overall brand and messaging of Sembcorp.</li>
+        <li>Enhancing my skills in using visuals to communicate complex information in an engaging and understandable way.</li>
+        <li> The project pushes me to think creatively and innovatively, finding new ways to capture and retain the attention of booth visitors.</li>
+        <img src="Expimg/sembcorpSIWW.jpg" alt="SIWW" style="width: 40%; height: 18%;">
+        <img src="Expimg/SembcorpSIWW2.jpg" alt="SIWW" style="width: 40%; height: 18%;">
+        <img src="Expimg/SIWWgrace.jpg" alt="SIWW" style="width: 40%; height: 18%;">
+        <img src="Expimg/SIWWgrace2.jpg" alt="SIWW" style="width: 40%; height: 18%;">
+        <img src="Expimg/SIWWdisplay.jpg" alt="SIWW" style="width: 40%; height: 18%;">
+        <img src="Expimg/SIWWwork.jpg" alt="SIWW" style="width: 40%; height: 18%;">
+      </div>
+    </div>
+    <div class="container left">
+      <div style="background-color: rgb(255, 247, 220);" class="content">
+        <h2>Jun 2024 - present</h2>
+        <h2>Youth Volunteer Under The People's Association (PA), Bukit Timah</h2>
+        <h3 style="color: grey;">The People's Association (PA)</h3>
+        <p>I was really honored to get involved as a Youth Volunteer with the People's Association in Bukit Timah. 
+          It actually came about through a referral from the Senior Minister of State for National Development, Ms Sim Ann, which was such a meaningful endorsement for me. 
+          It opened up a great opportunity to contribute to the community!
+        </p>
+          <br>
+        <li>Helped out in Bukit Timah Youth Network Community Resilience.</li>
+        <li>Assisted in Bukit Timah Sports Event.</li>
+        <li>Volunteered as an event facilator for National Day Celebrations at Firefly Park.</li>
+      </div>
+    </div>
+    <div class="container right">
+      <div style="background-color: rgb(255, 247, 220);" class="content">
+        <h2>Jun 2024 - present</h2>
+        <h2>Part Of Publicity Team In Engagement Taskforce, Youth Corps Singapore</h2>
+        
+        <h3 style="color: grey;">Youth Corps Singapore</h3>
+        <p>After a challenging and thought-provoking interview for a popular role in Youth Corps, I successfully managed to get a place to handle
+          the creatives and art direction of their social media post, website development, events and manages public relations activities, including press releases, 
+          media relations, and crisis communication.
+        </p>
+            <br>
+        <li>I gain strategic thinking and creative writing abilities through content creation, deepen my understanding of design principles and 
+          brand consistency in graphic design, and improve my knowledge of digital marketing techniques and media relations in marketing 
+          and public relations. </li>
+        <li>This diversification will make me more versatile and adaptable, boosting my confidence and keeping me competitive in the job market.</li>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div style="background-color: rgb(255, 247, 220);" class="content">
+        <h2>Jan 2024 - Present</h2>
+        <h2>Collaborated with SCOOT</h2>
+        <h3 style="color: grey;">SCOOT</h3>
+        <p>Participated in this competition with a group of 40 students, selected to be part of the 
+          Illustration Club
+          with the collaboration of LASALLE X SCOOT, designing scoot airplane!</p>
+          <br>
+        <li>Learnt how does the real industry works, how do we present designs, and worked with the
+          engineer team for the placements of designs. </li>
+        <li>Received feedbacks from SCOOT's design team.</li>
+        <li>Presenting my pitch to SCOOT's team. Felt like internship too!</li>
+      </div>
+    </div>
+    <div class="container right">
+      <div style="background-color: rgb(255, 247, 220);" class="content">
+        <h2>Apr 2023</h2>
+        <h2>Collaborated with NDP Executive committee</h2>
+        
+        <h3 style="color: grey;">NDP</h3>
+        <p>I was selected to a team of 5 to collaborate with each other, to redesign digitally of designated works
+          of students of special needs designs.</p>
+            <br>
+        <li>I was appointed to lead my team, motivating my team with vision.</li>
+        <li>Constantly seeking feedbacks from NDP Excutive Committee members.</li>
+        <img src="Expimg/ndp.jpg" alt="ndp" style="width: 33.33%; height: auto;">
+        <img src="Expimg/ndp2.png" alt="ndpprocess" style="width: 60%; height: 18%;">
+      </div>
+    </div>
+    <div class="container left">
+      <div style="background-color: rgb(255, 247, 220);" class="content">
+        <h2>Oct 2022 - Nov 2022 </h2>
+        <h2>Presenting my winning design with Senior Minister of State for Sustainability and the Environment of Singapore, MS AMY KHOR 
+          and ALBA team.
+        </h2>
+        <h3 style="color: grey;">ALBA E-Waste Singapore</h3>
+        <p>I won Singapore's International E-waste Day Art Competition, and was exhibited in Lot One Shoppers'
+          Mall. I was given the opportunity to share and explain my design to Ms Amy Khor and ALBA team 
+          on that day.
+        </p>
+            <br>
+        <img src="Expimg/alba.JPG" alt="alba" style="width: 50%; height: auto;">
+        <img src="Expimg/alba2.JPG" alt="alba" style="width: 50%; height: 18%;">
+        <img src="Expimg/alba3.JPG" alt="alba" style="width: 50%; height: auto;">
+        <img src="Expimg/alba4.jpg" alt="alba" style="width: 50%; height: 18%;">
+      </div>
+    </div>
+
+    <div class="container right">
+      <div style="background-color: rgb(255, 247, 220);" class="content">
+        <h2>Jan 2019</h2>
+        <h2>Designed Whatsapp stickers for New Moon</h2>
+        
+        <h3 style="color: grey;">New Moon</h3>
+        <p>Participated New Moon's Whatsapp Sticker Design Contest and won!</p>
+            <br>
+        <img src="Expimg/newmoon.jpg" alt="ndp" style="width: 33.33%; height: auto;">
+      </div>
+    </div>
+    
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <h2 style="text-align: center;">My Leadership Experiences</h2>
+  <div class="timeline">
+    
+    <div class="container left">
+      <div  class="content">
+        <h2>Dec 2024 - ongoing</h2>
+        <h2>Co-leader | Youth Corps</h2>
+        <h3>Appointed to be in-charge of programmes for Youth Corps’s ETF event.
+        </h3>
+        <h3 style="color: grey;">YouthCorps</h3>
+        <p></p>
+          <img src="Expimg/rotaractrace.png" alt="Description" style="width: 33.33%; height: auto;">
+      </div>
+    </div>
+    <div class="container right">
+      <div class="content">
+        <h2>Aug 2024</h2>
+        <h2>Student Representative AY24/25</h2>
+        <h3 style="color: grey;">LASALLE</h3>
+        <p>Appointed as a class representative</p>
+            <br>
+        <li>Enhancing industry engagement, assessing resource effectiveness, strengthening student support, 
+          actively contributed to feedback aimed at creating a programme that inspires students to lead and make a lasting impact.</li>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div  class="content">
+        <h2>July 2023</h2>
+        <h2>Rotaract Race</h2>
+        <h3>Event Manager</h3>
+        <h3 style="color: grey;">Ngee Ann Polytechnic</h3>
+        <p>Rotaract Race is a bonding event organised by the club service pillar of Rotaract Club. 
+          Bonding within the club is essential for members to get closer to one another and work 
+          more effectively. This event serves as an opportunity for members to do just that. 
+          Through the 3 activities planned for this event - Name Swap, Scavenger Hunt, Charades; 
+          members will be able to get to know one another better while fostering a sense of teamwork.
+          This event will be held on 8 July 2023, from 1.00pm to 5.00pm (to be confirmed) at Ngee Ann 
+          Polytechnic. During this event, members will participate in a series of games mentioned 
+          earlier. No lunch and transportation will be provided.
+          </p>
+          <img src="Expimg/rotaractrace.png" alt="Description" style="width: 33.33%; height: auto;">
+          <img src="Expimg/rotaract2.png" alt="Description" style="width: 33.33%; height: auto;">
+          <img src="Expimg/rotaract3.jpg" alt="event brainstorm" style="width: 33.33%; height: auto;">
+      </div>
+    </div>
+    <div class="container right">
+      <div class="content">
+        <h2>Mar 2023</h2>
+        <h2>Leader representative of my team P1US mobile app pitch in NP X MAPLETREE Hackathon.</h2>
+        <h3 style="color: grey;">NP X MAPLETREE</h3>
+        <p>I was leading my team of 3 for the study of "People With Visual Disabilities", and my goals were to create
+          a brand and design an app called P1US that creates a more inclusive Singapore for PWDs so that 
+          they live enriching and meaningful lives.
+          </p>
+            <br>
+        <li>I provide clarity of purpose, motivate and guide my team members the goal of the project.</li>
+        <li>Emphatize with my team members' needs and goals too.</li>
+        <li>I collaborated with team members from different courses, so that it provides different
+          insights and experiences that benefits this project.
+        </li>
+        <li>Recommendations given from one of my team members in Linkedin - "Collaborating with Renee on the Maple 
+          Tree X NP Hack 2023 Hackathon was a pleasure! She took the initiative to kickstart discussions, ensured 
+          everyone felt heard, and offered insightful points of her own. She took great care to ensure the timely 
+          completion of her delegated tasks. Her meticulously designed prototype blew me away — a user-friendly 
+          design, practical and comprehensive on its own. Yet, she readily sought feedback. Truly, a teammate who goes above and beyond.</li>
+          <img src="Expimg/npmapletree.jpg" alt="npmapletree" style="width: 50%; height: 30%;">
+          <img src="Expimg/npmapletree2.png" alt="npmapletree" style="width: 50%; height: 18%;">
+          <img src="Expimg/npmapletree3.png" alt="npmapletree" style="width: 50%; height: 18%;">
+      </div>
+    </div>
+
+    <div class="container left">
+      <div class="content">
+        <h2>Oct 2022 - Nov 2022</h2>
+        <h2>Art Director Of OhSoSushi Card Game</h2>
+        <h3 style="color: grey;">Ngee Ann Polytechnic</h3>
+        <p> <a href="https://www.linkedin.com/in/chng-ya-xuan-renee-21bba2237/details/projects/1427582900/multiple-media-viewer/?profileId=ACoAADsWLLcB1YAgEMGyTquxZmsMJLiEfNUJMRw&treasuryMediaId=1635542597451" target="_blank">Visit Our Pitch</a></p>
+        <br>
+        <li>As an art director, I developed visual concept that enhances the gameplay experience and supports the game's narrative.</li>
+        <li>I oversees the creation of all visual assets, including card designs, illustrations, and graphic elements. 
+          I manage the workflow, ensuring that assets are delivered on time and meet quality standards. And also designed the assets!</li>
+      </div>
+    </div>
+    <div class="container right">
+      <div class="content">
+        <h2>Mar 2023</h2>
+        <h2>Usher Lead for NP60 Planting Event</h2>
+        <h3 style="color: grey;">Ngee Ann Polytechnic</h3>
+        <p>Was selected as an usher lead, that controls and supervises other ushers for handling different departments
+          staffs that were going to the designated area for plantation. 
+          </p>
+          <p>Have to regularly check for the time when needed to guide the staffs, to avoid crowds and jams.
+            </p>
+          <img src="Expimg/treeplanting.jpg" alt="tree" style="width: 50%; height: auto;">
+          <img src="Expimg/Treeplanting2.jpg" alt="tree" style="width: 40%; height: auto;">
+      </div>
+  </div>
+
+  <div class="container left">
+    <div class="content">
+      <h2>Oct 2022 - Nov 2022</h2>
+      <h2>Usher Lead for ICT Open House</h2>
+      <h3 style="color: grey;">ICT Society</h3>
+      <p>After an interview, I successfully got a place as an usher lead, to guide students and parents to designated areas of the school, to
+        places with the use of AR to understand our school's system.
+      </p>
+      <img src="Expimg/ictsociety.jpg" alt="tree" style="width: 50%; height: auto;">
+    </div>
+  </div>
+
+  <div class="container right">
+    <div class="content">
+      <h2>2023</h2>
+      <h2>Class Representative of 2023 (Design User Experience)</h2>
+      <h3 style="color: grey;">Ngee Ann Polytechnic</h3>
+      <p>I was appointed as a class representative for the module, Design User Experience.</p>
+      <br>
+      <li>Help out my lecturer by forwarding important message to my class</li>
+      <li>Assisting in attendance taking.</li>
+    </div>
+  </div>
+
+  <div class="container left">
+    <div class="content">
+      <h2>2022</h2>
+      <h2>Class Representative of 2022 (Production Management)</h2>
+      <h3 style="color: grey;">Ngee Ann Polytechnic</h3>
+      <p>I was appointed as a class representative for the module, Production Management</p>
+      <br>
+      <li>Help out my lecturer by forwarding important message to my class</li>
+      <li>Assisting in attendance taking.</li>
+    </div>
+  </div>
+
+  <div class="container right">
+    <div class="content">
+      <h2>Feb 2020</h2>
+      <h2>Leader in charge of Design Group for Yellow Ribbon Project (2020)</h2>
+      <h3 style="color: grey;">New Town Secondary School X Yellow Ribbon Singapore</h3>
+      <p>Gather design ideas from my teammates, implement brainstorm sessions. After that, I planned and consolidate great designs into 
+        a logo design.
+      </p>
+      <br>
+      <li>Initiated group discussions weekly.</li>
+      <li>Constantly conslidating feedbacks from teacher in charge and share it with my fellow teammates.</li>
+      <img src="Expimg/yellowribbon.jpg" alt="sticker" style="width: 50%; height: auto;">
+    </div>
+  </div>
+  <div class="container left">
+    <div class="content">
+      <h2>Jan 2018</h2>
+      <h2>Appointed As Aesthetic Ambassador</h2>
+      <h3 style="color: grey;">New Town Secondary School</h3>
+      <p>As an aesthetic ambassador, I planned designs implemented for advertising for school's events and activities. I also organised 
+        areas to publish advertising posters.
+      </p>
+    </div>
+  </div>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <h2 style="text-align: center;">My Volunteering Experiences</h2>
+  <div class="timeline">
+    <div class="container left">
+      <div class="content">
+        <h2>Jan 2024</h2>
+        <h2>Usher for LASALLE OPEN HOUSE 24</h2>
+        <h3 style="color: grey;">Lasalle College Of Arts</h3>
+        <p>I guided people from the main entrance to the registration counter for collection of goodie bags. </p>
+        <li>I answers questions from students and parents.</li>
+        <li>Also guide them towards their preferred location of the activities if needed.</li>
+        <li>I learnt how to communicate to different people with a welcoming and friendly tone.</li>
+        <img src="Expimg/openhouse.jpg" alt="openhouse" style="width: 40%; height: 30%;">
+      </div>
+    </div>
+    <div class="container right">
+      <div class="content">
+        <h2>Nov 2023</h2>
+        <h2>Volunteer Staff For Affordable Art Fair</h2>
+        <h3 style="color: grey;">Affordable Art Fair Singapore</h3>
+        <p>I’ve selected to volunteer in Affordable Art Fair Singapore - that holds 1000s of original 
+          contemporary artworks by over 80 galleries from 20 countries! </p>
+            <br>
+        <li>I volunteered in the ticketing sector holding 4000+ people. To add on, I also helped out as an usher and people count clicker! 
+        </li>
+        <li>This volunteering event not only gives me a meaningful experiences but also gives me 
+          additional learning opportunities - various ways to manage a big fine arts event.</li>
+          <li>I’ve learnt art managements that managed arts and cultures! Giving me inspiration 
+            and techniques to apply art to the business world!</li>
+            <img src="Expimg/affordableartfair.jpg" alt="sticker" style="width: 50%; height: auto;">
+      </div>
+    </div>
+    <div class="container left">
+      <div class="content">
+        <h2>May 2023</h2>
+        <h2>Helping Out Pathlight School Student Immersing Themselves In Activities In Ngee Ann Polytechnic.</h2>
+        <h3 style="color: grey;">Ngee Ann Polytechnic</h3>
+        <p>I was helping out with the ushering of group of students to designated location of the activities held. 
+          Also teach them how to use VR headset, and how does VR works.
+        </p>
+        <br>
+        <li>I gained some leadership skills from lecturing students.</li>
+        <li>Planned out activities that suits them, I learnt how to emphatize with student with austism needs.</li>
+        <img src="Expimg/pathlight.jpg" alt="activties" style="width: 50%; height: auto;">
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

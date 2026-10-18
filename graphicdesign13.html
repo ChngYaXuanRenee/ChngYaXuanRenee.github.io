@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
+<style>
+
+  
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  
+  background:  #364a8c;
+
+}
+
+.imgdesc {
+  font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+  background: #5a80a9;
+
+}
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8; 
+  cursor: pointer; 
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image container */
+.container {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 600px;
+  color: rgb(93, 38, 112);
+  font-size: 20px;
+}
+
+/* Closable button inside the expanded image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+
+
+/* CSS for back button */
+div.backBtn {
+    width: 100px;
+    right: 100px;
+    top: 30px;
+    background-color: #f4f4f4;
+    transition: all 0.4s ease;
+    position: fixed;
+    cursor: pointer;
+  }
+
+  span.line {
+    bottom: auto;
+    right: auto;
+    top: auto;
+    left: auto;
+    background-color: #8f7373;
+    border-radius: 10px;
+    width: 100%;
+    left: 0px;
+    height: 2px;
+    display: block;
+    position: absolute;
+    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
+  }
+
+  span.tLine {
+    top: 0px;
+  }
+
+  span.mLine {
+    top: 13px;
+    opacity: 0;
+  }
+
+  span.bLine {
+    top: 26px;
+  }
+
+  .label {
+    position: absolute;
+    left: 0px;
+    top: 5px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.4s ease;
+    font-size: 1em;
+    color: rgb(123, 123, 123);
+  }
+
+  div.backBtn:hover span.label {
+    left: 25px
+  }
+
+  div.backBtn:hover span.line {
+    left: -10px;
+    height: 5px;
+    background-color: #a84141;
+  }
+
+  div.backBtn:hover span.tLine {
+    width: 25px;
+    transform: rotate(-45deg);
+    left: -15px;
+    top: 6px;
+  }
+  
+  div.backBtn:hover span.mLine {
+    opacity: 1;
+    width: 30px;
+  }
+
+  div.backBtn:hover span.bLine {
+    width: 25px;
+    transform: rotate(45deg);
+    left: -15px;
+    top: 20px;
+    
+  }
+
+  .header-color {
+    color:rgb(44, 34, 79);
+  }
+</style>
+</head>
+<body>
+    <!-- The back button -->
+    <div class="backBtn">
+        <a href="graphicdesigngrp.html">
+          <span class="line tLine"></span>
+          <span class="line mLine"></span>
+          <span class="label">Back</span>
+          <span class="line bLine"></span>
+        </a>
+    </div>
+
+
+<div style="text-align:center" class="header-color">
+  <h2>SPACES REDEFINE Archifest 2025 Rebrand</h2>
+  <p>Click on the images below:</p>
+</div>
+
+<div class="row">
+    <div class="column">
+        <img src="Graphicdesign/spacesredefineposter.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/SRconcept.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/SRtype.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/SRcolour.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+</div>
+<div class="row">
+    <div class="column">
+        <img src="Graphicdesign/SRasset.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/SRimg.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/SRmobileapp.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/SRbrochure.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+</div>
+<div class="row">
+    <div class="column">
+        <img src="Graphicdesign/SRAR.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/SRbanner.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/SRwayfinding.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/SRstairs.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+</div>
+<div class="row">
+    <div class="column">
+        <img src="Graphicdesign/SRfloor.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/SRlanyard.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/SRtangram.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="Graphicdesign/SRsocialmedia.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+    </div>
+</div>
+
+<div class="container">
+  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
+  <div id="imgtext"></div>
+</div>
+ 
+<!-- The img desc -->
+<div class="imgdesc" style="color:rgb(0, 0, 0)" >
+  <p style="margin: auto;
+  width: 50%;
+  padding: 10px;">Medium: Adobe illustrator, Photoshop, After Effects, Aero, Figma. Sept 2024.</p>
+
+  <p style="margin: auto;
+  width: 50%;
+  padding: 10px;">SPACES REDEFINE Archifest 2025 Rebrand
+    </p>
+    <p style="margin: auto;
+    width: 50%;
+    padding: 10px;">
+    In land-scarce Singapore, singapore archifest 2025 envisions adaptable, multifunctional, and human-centered environments for future urban 
+    living. The goals are clear: solve by maximizing space for a growing population, improve by designing adaptable spaces for evolving needs, 
+    and inspire bold, creative solutions for urban challenges.
+    </p>
+    <p style="margin: auto;
+    width: 50%;
+    padding: 10px;">
+    "Spaces Redefine" seeks to challenge the conventional understanding of space as a commodity with defined boundaries. Instead, it presents 
+    the future of urban living as a dynamic interplay between different needs, where the concept of space is fluid and ever-changing. Through 
+    the overlapping squares, the design encourages a rethinking of spatial organization, where every inch of space must be maximized, 
+    multifunctional, and adaptable to the future needs of a densely populated city.
+    The concept reinforces the idea that the future of Singapore's urban landscape will require bold and creative solutions to optimize 
+    limited land, creating spaces that are both efficient and livable. This design proposes a vision of future urban spaces where innovation, 
+    collaboration, and adaptability are key to achieving a harmonious balance between density and quality of life.
+    </p>
+    
+  
+</div>
+
+
+<script>
+function myFunction(imgs) {
+  var expandImg = document.getElementById("expandedImg");
+  var imgText = document.getElementById("imgtext");
+  expandImg.src = imgs.src;
+  imgText.innerHTML = imgs.alt;
+  expandImg.parentElement.style.display = "block";
+}
+</script>
+
+</body>
+</html>
