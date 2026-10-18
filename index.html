@@ -1,162 +1,1676 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Renee's Portfolio</title>
+  <meta name="theme-color" content="#f7f3ed">
+  <title>Renee Chng — Design Portfolio</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
-  <link href="style.css" rel="stylesheet" type="text/css" />
-
-  <!-- jQuery for sticky tabs -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
-  <script>
-    // Resume/Testimonial links
-    function openResume() {
-      window.open('ReneeNewResume2.pdf', '_blank');
+  <style>
+    :root {
+      --bg: #f7f3ed;
+      --ink: #303a95;
+      --lime: #d8e022;
+      --orange: #ef7148;
+      --white: #fffdf9;
+      --line: rgba(48, 58, 149, 0.2);
+      --mono: "DM Mono", monospace;
+      --sans: "Manrope", sans-serif;
     }
 
-    function openTestimonial() {
-      window.open('testimonial.pdf', '_blank');
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-  </script>
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .mono {
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .section-wrap {
+      padding: 90px 6%;
+    }
+
+    .section-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding-bottom: 18px;
+      margin-bottom: 36px;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    /* NAVIGATION */
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      min-height: 70px;
+      padding: 16px 6%;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--orange);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .nav-links a {
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--orange);
+    }
+
+    .nav-contact {
+      padding: 10px 15px;
+      border: 1px solid var(--ink);
+      border-radius: 100px;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 590px;
+      padding: 65px 6% 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      font-family: var(--mono);
+      font-size: 11px;
+      line-height: 1.8;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .hero-top-right {
+      text-align: right;
+    }
+
+    .hero h1 {
+      margin: 65px 0 45px;
+      font-size: clamp(58px, 10.5vw, 158px);
+      line-height: 0.86;
+      font-weight: 800;
+      letter-spacing: -0.095em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 .accent {
+      color: var(--orange);
+    }
+
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+    }
+
+    .hero-description {
+      max-width: 470px;
+      font-size: clamp(15px, 1.7vw, 20px);
+      line-height: 1.65;
+    }
+
+    .hero-description strong {
+      font-weight: 800;
+    }
+
+    .hero-scroll {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .scroll-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--lime);
+      border: 1px solid var(--ink);
+    }
+
+    /* TICKER */
+
+    .ticker {
+      overflow: hidden;
+      background: var(--lime);
+      color: var(--ink);
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: tickerMove 25s linear infinite;
+    }
+
+    .ticker-content {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding: 17px 14px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .ticker-star {
+      color: var(--orange);
+      font-size: 20px;
+    }
+
+    @keyframes tickerMove {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* FEATURED WORK */
+
+    .featured-section {
+      padding: 85px 6% 35px;
+    }
+
+    .featured-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .featured-heading h2 {
+      font-size: clamp(32px, 5vw, 65px);
+      line-height: 0.95;
+      letter-spacing: -0.075em;
+      text-transform: uppercase;
+    }
+
+    .featured-heading p {
+      max-width: 240px;
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.7;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: right;
+    }
+
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      background: var(--ink);
+      color: var(--bg);
+      touch-action: pan-y;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+
+    .featured-slide {
+      flex: 0 0 100%;
+      min-width: 0;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      min-height: 430px;
+    }
+
+    .featured-image-wrap {
+      position: relative;
+      min-width: 0;
+      min-height: 360px;
+      overflow: hidden;
+      background: #e4dfd5;
+    }
+
+    .featured-image-wrap img {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.7s ease;
+    }
+
+    .featured-slide:hover .featured-image-wrap img {
+      transform: scale(1.035);
+    }
+
+    .image-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+      background:
+        radial-gradient(circle at 25% 30%, rgba(216, 224, 34, 0.9), transparent 28%),
+        radial-gradient(circle at 75% 70%, rgba(239, 113, 72, 0.75), transparent 28%),
+        #e9e3d9;
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 11px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .featured-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(24px, 4vw, 55px);
+      min-width: 0;
+    }
+
+    .featured-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.7;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(247, 243, 237, 0.75);
+    }
+
+    .featured-info h3 {
+      margin: 35px 0 18px;
+      font-size: clamp(36px, 5.5vw, 76px);
+      line-height: 0.9;
+      letter-spacing: -0.085em;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .featured-info h3 .lime {
+      color: var(--lime);
+    }
+
+    .featured-description {
+      max-width: 400px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: rgba(247, 243, 237, 0.88);
+    }
+
+    .featured-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .featured-tags {
+      max-width: 220px;
+      font-family: var(--mono);
+      font-size: 9px;
+      line-height: 1.9;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: rgba(247, 243, 237, 0.65);
+    }
+
+    .featured-link {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 17px;
+      background: var(--lime);
+      color: var(--ink);
+      border-radius: 100px;
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .featured-link:hover {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .carousel-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 18px 0 0;
+    }
+
+    .carousel-dots {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .carousel-dot.active {
+      background: var(--orange);
+      transform: scale(1.2);
+    }
+
+    .carousel-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .carousel-arrow {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 20px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .carousel-arrow:hover {
+      background: var(--ink);
+      color: var(--bg);
+    }
+
+    .carousel-status {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+    }
+
+    /* CATEGORY GRID */
+
+    .work-section {
+      padding-top: 75px;
+    }
+
+    .work-intro {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 35px;
+    }
+
+    .work-intro h2 {
+      max-width: 650px;
+      font-size: clamp(38px, 7vw, 88px);
+      line-height: 0.9;
+      letter-spacing: -0.085em;
+      text-transform: uppercase;
+    }
+
+    .work-intro p {
+      max-width: 250px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 38px 22px;
+    }
+
+    .category-card {
+      min-width: 0;
+      display: block;
+    }
+
+    .category-image {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #e7e1d7;
+      border: 1px solid var(--line);
+    }
+
+    .category-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.55s ease;
+    }
+
+    .category-card:hover .category-image img {
+      transform: scale(1.045);
+    }
+
+    .category-image::after {
+      content: "VIEW PROJECTS ↗";
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      padding: 10px 13px;
+      background: var(--lime);
+      color: var(--ink);
+      border-radius: 100px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .category-card:hover .category-image::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .category-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 15px;
+      padding-top: 15px;
+    }
+
+    .category-info h3 {
+      font-size: clamp(19px, 2.5vw, 30px);
+      line-height: 1.1;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+    }
+
+    .category-info p {
+      margin-top: 7px;
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.6;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.7;
+    }
+
+    .category-number {
+      flex-shrink: 0;
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    /* ABOUT */
+
+    .about-section {
+      padding: 85px 6%;
+      background: var(--lime);
+      color: var(--ink);
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .about-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 60px;
+      margin-top: 55px;
+      align-items: start;
+    }
+
+    .about-content h2 {
+      font-size: clamp(48px, 8vw, 105px);
+      line-height: 0.85;
+      letter-spacing: -0.09em;
+      text-transform: uppercase;
+    }
+
+    .about-copy {
+      max-width: 650px;
+      font-size: clamp(16px, 1.8vw, 21px);
+      line-height: 1.8;
+    }
+
+    .about-copy p + p {
+      margin-top: 20px;
+    }
+
+    .about-copy strong {
+      font-weight: 800;
+    }
+
+    .about-link {
+      display: inline-flex;
+      margin-top: 30px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--ink);
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* RESOURCES: RESUME, PORTFOLIO, LINKEDIN, TESTIMONIAL */
+
+    .resources-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 30px;
+      margin-bottom: 45px;
+    }
+
+    .resources-heading h2 {
+      font-size: clamp(45px, 8vw, 100px);
+      line-height: 0.88;
+      letter-spacing: -0.09em;
+      text-transform: uppercase;
+    }
+
+    .resources-heading h2 span {
+      color: var(--orange);
+    }
+
+    .resources-heading > p {
+      max-width: 300px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .resource-card {
+      min-width: 0;
+      min-height: 155px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 28px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .resource-card:hover {
+      background: var(--ink);
+      color: var(--bg);
+    }
+
+    .resource-number {
+      padding-top: 5px;
+      font-family: var(--mono);
+      font-size: 10px;
+      opacity: 0.65;
+    }
+
+    .resource-card > div {
+      flex: 1;
+    }
+
+    .resource-card h3 {
+      font-size: clamp(23px, 3vw, 36px);
+      line-height: 1.1;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+    }
+
+    .resource-card p {
+      margin-top: 10px;
+      font-size: 12px;
+      line-height: 1.6;
+      opacity: 0.7;
+    }
+
+    .resource-arrow {
+      font-size: 23px;
+      transition: transform 0.25s ease;
+    }
+
+    .resource-card:hover .resource-arrow {
+      transform: translate(3px, -3px);
+    }
+
+    /* CONTACT */
+
+    .contact-section {
+      padding: 90px 6% 55px;
+      background: var(--ink);
+      color: var(--bg);
+    }
+
+    .contact-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(247, 243, 237, 0.7);
+    }
+
+    .contact-section h2 {
+      margin: 75px 0 40px;
+      max-width: 1000px;
+      font-size: clamp(55px, 11vw, 150px);
+      line-height: 0.82;
+      letter-spacing: -0.095em;
+      text-transform: uppercase;
+    }
+
+    .contact-section h2 span {
+      color: var(--lime);
+    }
+
+    .contact-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 30px;
+      padding-bottom: 45px;
+    }
+
+    .contact-email {
+      display: inline-block;
+      margin-top: 10px;
+      padding-bottom: 7px;
+      border-bottom: 1px solid var(--lime);
+      font-size: clamp(16px, 2vw, 23px);
+      overflow-wrap: anywhere;
+    }
+
+    .contact-socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .contact-socials a {
+      padding: 12px 16px;
+      border: 1px solid rgba(247, 243, 237, 0.5);
+      border-radius: 100px;
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .contact-socials a:hover {
+      background: var(--lime);
+      border-color: var(--lime);
+      color: var(--ink);
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(247, 243, 237, 0.25);
+      font-family: var(--mono);
+      font-size: 9px;
+      line-height: 1.7;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: rgba(247, 243, 237, 0.65);
+    }
+
+    /* BACK TO TOP */
+
+    .back-to-top {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 90;
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      background: var(--lime);
+      color: var(--ink);
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 800px) {
+      .nav {
+        padding: 15px 5%;
+      }
+
+      .nav-links {
+        gap: 15px;
+      }
+
+      .nav-links a:not(.nav-contact) {
+        display: none;
+      }
+
+      .hero {
+        min-height: 520px;
+        padding: 45px 5%;
+      }
+
+      .hero h1 {
+        margin: 75px 0 55px;
+      }
+
+      .section-wrap,
+      .featured-section {
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+
+      .featured-slide {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-image-wrap,
+      .featured-image-wrap img {
+        min-height: 320px;
+        height: 320px;
+      }
+
+      .featured-info {
+        min-height: 350px;
+      }
+
+      .featured-info h3 {
+        margin-top: 35px;
+      }
+
+      .work-intro {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .work-intro p {
+        max-width: 450px;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .contact-section {
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .resources-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .resources-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .resource-card {
+        min-height: 125px;
+        padding: 23px 18px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero-top {
+        font-size: 9px;
+      }
+
+      .hero-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero-scroll {
+        margin-top: 12px;
+      }
+
+      .featured-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .featured-heading p {
+        text-align: left;
+      }
+
+      .featured-info {
+        padding: 25px;
+      }
+
+      .featured-info h3 {
+        font-size: clamp(38px, 12vw, 58px);
+      }
+
+      .featured-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .featured-tags {
+        max-width: 100%;
+      }
+
+      .category-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .category-info h3 {
+        font-size: 24px;
+      }
+
+      .contact-section h2 {
+        margin-top: 65px;
+      }
+
+      .contact-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- Navigation Tabs -->
-  <section class="et-hero-tabs">
-    <div class="et-hero-tabs-container">
-      <a class="et-hero-tab" href="#tab-flexbox">Home</a>
-      <a class="et-hero-tab" href="#tab-react">Portfolio</a>
-      <a class="et-hero-tab" href="#tab-angular">Resume / Testimonial</a>
-      <a class="et-hero-tab" href="#tab-other">Contact</a>
-      <span class="et-hero-tab-slider"></span>
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <a class="logo" href="#top">RENEE CHNG<span>®</span></a>
+
+    <div class="nav-links">
+      <a href="#featured">Featured</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#resources">Links</a>
+      <a class="nav-contact" href="#contact">Let's talk ↗</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="hero-top">
+      <div>
+        Independent thinker<br>
+        Multidisciplinary designer
+      </div>
+
+      <div class="hero-top-right">
+        Singapore<br>
+        Portfolio / 2026
+      </div>
+    </div>
+
+    <h1>
+      IDEAS INTO<br>
+      <span class="accent">EXPERIENCE.</span>
+    </h1>
+
+    <div class="hero-bottom">
+      <p class="hero-description">
+        I’m Renee, a <strong>multidisciplinary designer</strong> exploring the
+        intersection of visual communication, digital experiences and
+        storytelling.
+      </p>
+
+      <a class="hero-scroll" href="#featured">
+        <span class="scroll-dot"></span>
+        Scroll to explore ↓
+      </a>
+    </div>
+  </header>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-label="Design, storytelling and digital experiences">
+    <div class="ticker-track">
+      <div class="ticker-content">
+        <span>Design with intention</span>
+        <span class="ticker-star">✳</span>
+        <span>Ideas into experience</span>
+        <span class="ticker-star">✳</span>
+        <span>Visual storytelling</span>
+        <span class="ticker-star">✳</span>
+        <span>Digital experiences</span>
+        <span class="ticker-star">✳</span>
+      </div>
+
+      <div class="ticker-content" aria-hidden="true">
+        <span>Design with intention</span>
+        <span class="ticker-star">✳</span>
+        <span>Ideas into experience</span>
+        <span class="ticker-star">✳</span>
+        <span>Visual storytelling</span>
+        <span class="ticker-star">✳</span>
+        <span>Digital experiences</span>
+        <span class="ticker-star">✳</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURED WORK CAROUSEL -->
+  <section class="featured-section" id="featured">
+    <div class="featured-heading">
+      <h2>Selected<br>work<span style="color:var(--orange)">.</span></h2>
+      <p>A few ideas, made tangible.<br>Explore my featured projects.</p>
+    </div>
+
+    <div class="carousel" id="featuredCarousel">
+      <div class="carousel-track" id="carouselTrack">
+
+        <!-- SLIDE 1: SPACES -->
+        <article class="featured-slide">
+          <div class="featured-image-wrap">
+            <div class="image-placeholder">
+              Replace with your SPACES project image
+            </div>
+            <img
+              src="YOUR-SPACES-IMAGE-PATH"
+              alt="SPACES project"
+              onerror="this.style.display='none'"
+            >
+          </div>
+
+          <div class="featured-info">
+            <div class="featured-meta">
+              <span>Featured project / 01</span>
+              <span>Design exploration</span>
+            </div>
+
+            <div>
+              <h3>SPACES<span class="lime">.</span></h3>
+              <p class="featured-description">
+                Exploring how design can shape the way people experience,
+                understand and interact with spaces.
+              </p>
+            </div>
+
+            <div class="featured-bottom">
+              <p class="featured-tags">
+                Visual communication<br>
+                Concept development
+              </p>
+              <a class="featured-link" href="graphicdesigngrp.html">
+                Explore project ↗
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- SLIDE 2: REDEFINE WORK -->
+        <article class="featured-slide">
+          <div class="featured-image-wrap">
+            <div class="image-placeholder">
+              Replace with your Redefine Work project image
+            </div>
+            <img
+              src="YOUR-REDEFINE-WORK-IMAGE-PATH"
+              alt="Redefine Work project"
+              onerror="this.style.display='none'"
+            >
+          </div>
+
+          <div class="featured-info">
+            <div class="featured-meta">
+              <span>Featured project / 02</span>
+              <span>Research-led design</span>
+            </div>
+
+            <div>
+              <h3>REDEFINE<br><span class="lime">WORK.</span></h3>
+              <p class="featured-description">
+                Rethinking how people connect with work through research,
+                visual storytelling and experience-led design.
+              </p>
+            </div>
+
+            <div class="featured-bottom">
+              <p class="featured-tags">
+                Research<br>
+                Design communication
+              </p>
+              <a class="featured-link" href="graphicdesigngrp.html">
+                Explore project ↗
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- SLIDE 3: BINGO -->
+        <article class="featured-slide">
+          <div class="featured-image-wrap">
+            <div class="image-placeholder">
+              Replace with your BinGo project image
+            </div>
+            <img
+              src="YOUR-BINGO-IMAGE-PATH"
+              alt="BinGo project"
+              onerror="this.style.display='none'"
+            >
+          </div>
+
+          <div class="featured-info">
+            <div class="featured-meta">
+              <span>Featured project / 03</span>
+              <span>Digital experience</span>
+            </div>
+
+            <div>
+              <h3>Bin<span class="lime">Go.</span></h3>
+              <p class="featured-description">
+                A design concept focused on making everyday recycling more
+                accessible through a clearer and more engaging user experience.
+              </p>
+            </div>
+
+            <div class="featured-bottom">
+              <p class="featured-tags">
+                UI/UX design<br>
+                Interaction design
+              </p>
+              <a class="featured-link" href="UIUXdesigngrp.html">
+                Explore project ↗
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- SLIDE 4: XIN.BETA -->
+        <article class="featured-slide">
+          <div class="featured-image-wrap">
+            <div class="image-placeholder">
+              Replace with your XIN.BETA project image
+            </div>
+            <img
+              src="YOUR-XIN-BETA-IMAGE-PATH"
+              alt="XIN.BETA project"
+              onerror="this.style.display='none'"
+            >
+          </div>
+
+          <div class="featured-info">
+            <div class="featured-meta">
+              <span>Featured project / 04</span>
+              <span>Culture meets technology</span>
+            </div>
+
+            <div>
+              <h3>XIN<span class="lime">.BETA</span></h3>
+              <p class="featured-description">
+                Reimagining traditional Chinese medicine for a younger
+                generation through contemporary visual identity, digital
+                experiences and playful storytelling.
+              </p>
+            </div>
+
+            <div class="featured-bottom">
+              <p class="featured-tags">
+                Branding<br>
+                Digital storytelling
+              </p>
+              <a class="featured-link" href="graphicdesigngrp.html">
+                Explore project ↗
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <div class="carousel-controls">
+      <div class="carousel-dots" id="carouselDots" aria-label="Choose featured project">
+        <button class="carousel-dot active" type="button" aria-label="Show SPACES" aria-current="true"></button>
+        <button class="carousel-dot" type="button" aria-label="Show Redefine Work"></button>
+        <button class="carousel-dot" type="button" aria-label="Show BinGo"></button>
+        <button class="carousel-dot" type="button" aria-label="Show XIN.BETA"></button>
+      </div>
+
+      <span class="carousel-status" id="carouselStatus" aria-live="polite">01 / 04</span>
+
+      <div class="carousel-actions">
+        <button class="carousel-arrow" id="carouselPrev" type="button" aria-label="Previous project">←</button>
+        <button class="carousel-arrow" id="carouselNext" type="button" aria-label="Next project">→</button>
+      </div>
     </div>
   </section>
 
-  <main class="et-main">
+  <!-- PROJECT CATEGORIES -->
+  <section class="section-wrap work-section" id="work">
+    <div class="section-label">
+      <span>01 / Areas of practice</span>
+      <span>Explore the archive ↘</span>
+    </div>
 
-    <!-- Home Section -->
-    <section class="et-slide" id="tab-flexbox">
-      <div class="home-hero">
-        <img src="homewebsite.png" class="home-hero-image" alt="Home Website">
+    <div class="work-intro">
+      <h2>More than<br>one medium.</h2>
+      <p>
+        From visual identities to interactive experiences, each project is
+        an opportunity to explore a different way of communicating ideas.
+      </p>
+    </div>
+
+    <div class="category-grid">
+
+      <a class="category-card" href="graphicdesigngrp.html">
+        <div class="category-image">
+          <img src="category1.png" alt="Graphic design project collection" loading="lazy">
+        </div>
+        <div class="category-info">
+          <div>
+            <h3>Graphic Design</h3>
+            <p>Identity / Editorial / Campaigns</p>
+          </div>
+          <span class="category-number">01 ↗</span>
+        </div>
+      </a>
+
+      <a class="category-card" href="3Ddesigngrp.html">
+        <div class="category-image">
+          <img src="3Dimg/Screenshot 2023-07-19 080611.png" alt="Three-dimensional design project" loading="lazy">
+        </div>
+        <div class="category-info">
+          <div>
+            <h3>3D Design</h3>
+            <p>Form / Space / Material</p>
+          </div>
+          <span class="category-number">02 ↗</span>
+        </div>
+      </a>
+
+      <a class="category-card" href="UIUXdesigngrp.html">
+        <div class="category-image">
+          <img src="UIUX/prototypesmartwatch-01.png" alt="UI and UX design project" loading="lazy">
+        </div>
+        <div class="category-info">
+          <div>
+            <h3>UI/UX Design</h3>
+            <p>Research / Interfaces / Prototypes</p>
+          </div>
+          <span class="category-number">03 ↗</span>
+        </div>
+      </a>
+
+      <a class="category-card" href="animvidgrp.html">
+        <div class="category-image">
+          <img src="Animnvid/Screenshot 2023-10-27 203757.png" alt="Animation and video project" loading="lazy">
+        </div>
+        <div class="category-info">
+          <div>
+            <h3>Animation & Video</h3>
+            <p>Motion / Film / Storytelling</p>
+          </div>
+          <span class="category-number">04 ↗</span>
+        </div>
+      </a>
+
+      <a class="category-card" href="Photogrp.html">
+        <div class="category-image">
+          <img src="Photography/IMG_2377.jpg" alt="Photography project" loading="lazy">
+        </div>
+        <div class="category-info">
+          <div>
+            <h3>Photography</h3>
+            <p>People / Places / Perspectives</p>
+          </div>
+          <span class="category-number">05 ↗</span>
+        </div>
+      </a>
+
+      <a class="category-card" href="HPCgrp.html">
+        <div class="category-image">
+          <img src="Expimg/SIWWgrace.jpg" alt="Experience and communication project" loading="lazy">
+        </div>
+        <div class="category-info">
+          <div>
+            <h3>Experience & Communication</h3>
+            <p>Campaigns / Events / Public engagement</p>
+          </div>
+          <span class="category-number">06 ↗</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-section" id="about">
+    <div class="about-top">
+      <span>02 / A little about me</span>
+      <span>Curiosity is the starting point ✳</span>
+    </div>
+
+    <div class="about-content">
+      <h2>Hi,<br>I'm Renee.</h2>
+
+      <div class="about-copy">
+        <p>
+          I’m a Singapore-based designer interested in how
+          <strong>design, technology and storytelling</strong> can shape the
+          way people understand and experience the world.
+        </p>
+
+        <p>
+          My practice spans visual communication, UI/UX, digital media and
+          creative experimentation. I enjoy translating complex ideas into
+          clear, thoughtful and engaging experiences.
+        </p>
+
+        <p>
+          Currently pursuing Design Communication at LASALLE College of the
+          Arts, I’m always looking for new perspectives, meaningful
+          collaborations and opportunities to learn through making.
+        </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Portfolio Section -->
-    <section class="et-slide" id="tab-react">
-      <h1 id="portfolio">Portfolio</h1>
+  <!-- RESOURCES -->
+  <section class="section-wrap" id="resources">
+    <div class="section-label">
+      <span>03 / More about me</span>
+      <span>Explore beyond this page ↗</span>
+    </div>
 
-      <h3>Categories</h3>
-      <div class="image-gallery">
-        <div class="gallery-item">
-          <a href="graphicdesigngrp.html">
-            <img src="category1.png" alt="Graphic Design" class="gallery-image">
-            <figcaption class="image-caption">GRAPHIC DESIGNS</figcaption>
-          </a>
+    <div class="resources-heading">
+      <h2>Find me<br>elsewhere<span>.</span></h2>
+      <p>
+        Want to know more about my work, experience or creative journey?
+        Find everything here.
+      </p>
+    </div>
+
+    <div class="resources-grid">
+
+      <a class="resource-card" href="ReneeResume_main.pdf" target="_blank" rel="noopener">
+        <span class="resource-number">01</span>
+        <div>
+          <h3>Resume</h3>
+          <p>My experience, education and skills</p>
         </div>
-        <div class="gallery-item">
-          <a href="3Ddesigngrp.html">
-            <img src="3Dimg/Screenshot 2023-07-19 080611.png" alt="3D Design" class="gallery-image">
-            <figcaption class="image-caption">3D DESIGNS</figcaption>
-          </a>
+        <span class="resource-arrow">↗</span>
+      </a>
+
+      <a class="resource-card" href="#featured">
+        <span class="resource-number">02</span>
+        <div>
+          <h3>Portfolio</h3>
+          <p>Selected projects and creative work</p>
         </div>
-        <div class="gallery-item">
-          <a href="UIUXdesigngrp.html">
-            <img src="UIUX/prototypesmartwatch-01.png" alt="UI/UX" class="gallery-image">
-            <figcaption class="image-caption">UI/UX DESIGNS</figcaption>
-          </a>
+        <span class="resource-arrow">↗</span>
+      </a>
+
+      <a class="resource-card"
+         href="https://www.linkedin.com/in/chng-ya-xuan-renee-21bba2237/"
+         target="_blank" rel="noopener">
+        <span class="resource-number">03</span>
+        <div>
+          <h3>LinkedIn</h3>
+          <p>Connect with me professionally</p>
         </div>
-        <div class="gallery-item">
-          <a href="animvidgrp.html">
-            <img src="Animnvid/Screenshot 2023-10-27 203757.png" alt="Animation & Video" class="gallery-image">
-            <figcaption class="image-caption">ANIMATION & VIDEO</figcaption>
-          </a>
+        <span class="resource-arrow">↗</span>
+      </a>
+
+      <a class="resource-card"
+         href="TESTIMONIAL_2026.pdf"
+         target="_blank" rel="noopener">
+        <span class="resource-number">04</span>
+        <div>
+          <h3>Testimonial</h3>
+          <p>Read my testimonial</p>
         </div>
-        <div class="gallery-item">
-          <a href="Photogrp.html">
-            <img src="Photography/IMG_2377.jpg" alt="Photography" class="gallery-image">
-            <figcaption class="image-caption">PHOTOGRAPHY</figcaption>
-          </a>
+        <span class="resource-arrow">↗</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="contact-top">
+      <span>04 / Contact</span>
+      <span>Have an idea? Let's make it real.</span>
+    </div>
+
+    <h2>Let's make<br>something <span>matter.</span></h2>
+
+    <div class="contact-bottom">
+      <div>
+        <div class="mono" style="font-size:10px; color:rgba(247,243,237,0.7)">
+          For opportunities & collaborations
         </div>
-        <div class="gallery-item">
-          <a href="HPCgrp.html">
-            <img src="Expimg/SIWWgrace.jpg" alt="High-Profile Collaborations" class="gallery-image">
-            <figcaption class="image-caption">HIGH-PROFILE COLLABORATIONS</figcaption>
-          </a>
-        </div>
+        <a class="contact-email" href="mailto:kingskyrr@gmail.com">
+          kingskyrr@gmail.com ↗
+        </a>
       </div>
-    </section>
 
-    <!-- Resume / Portfolio Section -->
-    <section class="et-slide" id="tab-angular">
-      <h1 id="Resume / Testimonial">Resume / Testimonials</h1>
-
-      <h3>Categories</h3>
-      <div class="image-gallery">
-        <div class="gallery-item">
-          <a href="ReneeResume_main.pdf" target="_blank" rel="noopener noreferrer">
-            <img src="webresume.png" alt="resume" class="gallery-image">
-            <figcaption class="image-caption">RESUME</figcaption>
-          </a>
-        </div>
-        <div class="gallery-item">
-          <a href="TESTIMONIAL_2026.pdf" target="_blank" rel="noopener noreferrer">
-            <img src="webtestimonials.png" alt="testimonials" class="gallery-image">
-            <figcaption class="image-caption">TESTIMONIALS</figcaption>
-          </a>
-        </div>
-        <div class="gallery-item">
-          <a href="https://www.linkedin.com/in/chng-ya-xuan-renee-21bba2237/" target="_blank" rel="noopener noreferrer">
-            <img src="weblinkedln.png" alt="socials" class="gallery-image">
-            <figcaption class="image-caption">SOCIALS</figcaption>
-          </a>
-        </div>
+      <div class="contact-socials">
+        <a href="https://www.linkedin.com/in/chng-ya-xuan-renee-21bba2237/" target="_blank" rel="noopener">
+          LinkedIn ↗
+        </a>
+        <a href="ReneeResume_main.pdf" target="_blank" rel="noopener">
+          Resume ↗
+        </a>
       </div>
-    </section>
+    </div>
+
+    <footer class="footer">
+      <span>© 2026 Renee Chng. All rights reserved.</span>
+      <span>Designed with curiosity, built with intention.</span>
+      <a href="#top">Back to top ↑</a>
+    </footer>
+  </section>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+    ↑
+  </button>
+
+  <script>
+    // FEATURED CAROUSEL — AUTOPLAY EVERY 4 SECONDS
+
+    const carousel = document.getElementById("featuredCarousel");
+    const track = document.getElementById("carouselTrack");
+    const slides = Array.from(track.querySelectorAll(".featured-slide"));
+    const dots = Array.from(document.querySelectorAll(".carousel-dot"));
+    const prevButton = document.getElementById("carouselPrev");
+    const nextButton = document.getElementById("carouselNext");
+    const status = document.getElementById("carouselStatus");
+
+    let currentSlide = 0;
+    let autoplayInterval = null;
+    const autoplayDelay = 4000;
+
+    function showSlide(index) {
+      currentSlide = (index + slides.length) % slides.length;
+
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+      dots.forEach((dot, dotIndex) => {
+        const active = dotIndex === currentSlide;
+
+        dot.classList.toggle("active", active);
+
+        if (active) {
+          dot.setAttribute("aria-current", "true");
+        } else {
+          dot.removeAttribute("aria-current");
+        }
+      });
+
+      status.textContent =
+        `${String(currentSlide + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+
+      slides.forEach((slide, slideIndex) => {
+        slide.setAttribute(
+          "aria-hidden",
+          slideIndex === currentSlide ? "false" : "true"
+        );
+      });
+    }
+
+    function nextSlide() {
+      showSlide(currentSlide + 1);
+    }
+
+    function previousSlide() {
+      showSlide(currentSlide - 1);
+    }
+
+    function stopAutoplay() {
+      if (autoplayInterval !== null) {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+      }
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+
+      if (
+        document.hidden ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        return;
+      }
+
+      autoplayInterval = setInterval(nextSlide, autoplayDelay);
+    }
+
+    nextButton.addEventListener("click", () => {
+      nextSlide();
+      startAutoplay();
+    });
+
+    prevButton.addEventListener("click", () => {
+      previousSlide();
+      startAutoplay();
+    });
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        showSlide(index);
+        startAutoplay();
+      });
+    });
+
+    // Touch swipe support
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    carousel.addEventListener("touchstart", (event) => {
+      touchStartX = event.changedTouches[0].screenX;
+      touchStartY = event.changedTouches[0].screenY;
+    }, { passive: true });
+
+    carousel.addEventListener("touchend", (event) => {
+      const touchEndX = event.changedTouches[0].screenX;
+      const touchEndY = event.changedTouches[0].screenY;
+      const deltaX = touchEndX - touchStartX;
+      const deltaY = touchEndY - touchStartY;
+
+      if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX < 0) {
+          nextSlide();
+        } else {
+          previousSlide();
+        }
+
+        startAutoplay();
+      }
+    }, { passive: true });
+
+    // Pause when the browser tab is hidden.
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
+    });
+
+    // Respect reduced-motion preferences.
+    const reducedMotionQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
+
+    function handleReducedMotionChange() {
+      if (reducedMotionQuery.matches) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
+    }
+
+    if (reducedMotionQuery.addEventListener) {
+      reducedMotionQuery.addEventListener("change", handleReducedMotionChange);
+    }
+
+    showSlide(0);
+    startAutoplay();
 
 
-<!-- Footerr -->
-<footer>
-  <p>&copy; 2026 Renee Chng. All Rights Reserved.</p>
-  <p>Email: kingskyrr@gmail.com | Phone: +65 88662435</p>
-</footer>
+    // BACK TO TOP BUTTON
 
-    <!-- Achievements Section (optional) -->
-    <!--<section class="et-slide" id="tab-other">
-      <h1 id="achievements">Achievements</h1>
-      <div class="image-gallery">
-        <div class="gallery-item">
-          <a href="Awards.html">
-            <img src="achievementsexp/awards.jpg" alt="Awards" class="gallery-image">
-            <figcaption class="image-caption">AWARDS</figcaption>
-          </a>
-        </div>
-        <div class="gallery-item">
-          <a href="Exhibited.html">
-            <img src="achievementsexp/exhibitedworks.jpg" alt="Exhibited Works" class="gallery-image">
-            <figcaption class="image-caption">EXHIBITED WORKS</figcaption>
-          </a>
-        </div>
-        <div class="gallery-item">
-          <a href="Certification.html">
-            <img src="achievementsexp/certifications.jpg" alt="Certifications" class="gallery-image">
-            <figcaption class="image-caption">CERTIFICATIONS</figcaption>
-          </a>
-        </div>
-      </div>
-    </section>-->
+    const backToTopButton = document.getElementById("backToTop");
 
-  </main>
+    function updateBackToTop() {
+      if (window.scrollY > 450) {
+        backToTopButton.classList.add("visible");
+      } else {
+        backToTopButton.classList.remove("visible");
+      }
+    }
 
-  <!-- Sticky Tabs Script -->
-  <script src="script.js"></script>
+    window.addEventListener("scroll", updateBackToTop, { passive: true });
+
+    backToTopButton.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: reducedMotionQuery.matches ? "auto" : "smooth"
+      });
+    });
+
+    updateBackToTop();
+  </script>
+
 </body>
 </html>
