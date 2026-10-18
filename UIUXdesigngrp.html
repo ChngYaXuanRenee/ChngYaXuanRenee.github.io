@@ -1,217 +1,1031 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI/UX & Research — Renee Chng</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<style>
-body {
-  background: #ffeaa3;
-  font-family: 'Ubuntu', sans-serif;
-}
+  <style>
+    :root {
+      --paper: #f6f3eb;
+      --ink: #202c50;
+      --blue: #303a95;
+      --lime: #d8e01e;
+      --orange: #ef7148;
+      --white: #fffefa;
+      --muted: #77796f;
+      --line: #d9d7ce;
+    }
 
-div.gallery {
-  border: 1px solid #ccc;
-  transition: border 0.3s ease;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-div.gallery:hover {
-  border: 1px solid #777;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-div.gallery img {
-  width: 100%;
-  height: 250px;       /* uniform height */
-  object-fit: cover;
-  display: block;
-}
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Manrope', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
 
-div.desc {
-  padding: 15px;
-  text-align: center;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-/* Gallery grid container */
-.gallery-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 per row on desktop */
-  gap: 16px;
-  padding: 10px;
-}
+    button,
+    input {
+      font: inherit;
+    }
 
-/* Tablet */
-@media (max-width: 1024px) {
-  .gallery-container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+    /* NAVIGATION */
 
-/* Mobile */
-@media (max-width: 768px) {
-  .gallery-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+    .topbar {
+      min-height: 66px;
+      padding: 0 5.5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid var(--line);
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
 
-/* Small mobile */
-@media (max-width: 480px) {
-  .gallery-container {
-    grid-template-columns: 1fr;
-  }
-}
+    .logo {
+      font-family: 'Manrope', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      white-space: nowrap;
+    }
 
-/* Back button styling */
-div.backBtn {
-  width: 100px;
-  right: 100px;
-  top: 30px;
-  background-color: #f4f4f4;
-  transition: all 0.4s ease;
-  position: fixed;
-  cursor: pointer;
-}
+    .topbar-mid {
+      color: var(--muted);
+      text-align: center;
+    }
 
-span.line {
-  bottom: auto;
-  right: auto;
-  top: auto;
-  left: auto;
-  background-color: #333;
-  border-radius: 10px;
-  width: 100%;
-  left: 0px;
-  height: 2px;
-  display: block;
-  position: absolute;
-  transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
-}
+    .back-link {
+      white-space: nowrap;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 3px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
 
-span.tLine { top: 0px; }
-span.mLine { top: 13px; opacity: 0; }
-span.bLine { top: 26px; }
+    .back-link:hover {
+      color: var(--orange);
+      border-color: var(--orange);
+    }
 
-.label {
-  position: absolute;
-  left: 0px;
-  top: 5px;
-  width: 100%;
-  text-align: center;
-  transition: all 0.4s ease;
-  font-size: 1em;
-}
+    /* HERO */
 
-div.backBtn:hover span.label { left: 25px; }
+    .hero {
+      padding: 75px 5.5% 54px;
+      position: relative;
+      overflow: hidden;
+    }
 
-div.backBtn:hover span.line {
-  left: -10px;
-  height: 5px;
-  background-color: #F76060;
-}
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
-div.backBtn:hover span.tLine {
-  width: 25px;
-  transform: rotate(-45deg);
-  left: -15px;
-  top: 6px;
-}
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
 
-div.backBtn:hover span.mLine {
-  opacity: 1;
-  width: 30px;
-}
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(0.7);
+        opacity: 0.55;
+      }
+    }
 
-div.backBtn:hover span.bLine {
-  width: 25px;
-  transform: rotate(45deg);
-  left: -15px;
-  top: 20px;
-}
+    .hero h1 {
+      font-size: clamp(64px, 12.8vw, 184px);
+      font-weight: 800;
+      line-height: 0.79;
+      letter-spacing: -0.095em;
+      text-transform: uppercase;
+      margin: 0;
+    }
 
-</style>
+    .hero h1 .line-two {
+      display: block;
+      color: var(--blue);
+      margin-top: 0.13em;
+    }
+
+    .hero-bottom {
+      margin-top: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 30px;
+    }
+
+    .hero-description {
+      max-width: 390px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #55574f;
+    }
+
+    .hero-description strong {
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .hero-count {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: right;
+      line-height: 1.9;
+      white-space: nowrap;
+    }
+
+    .hero-count strong {
+      display: block;
+      font-family: 'Manrope', sans-serif;
+      font-size: 48px;
+      line-height: 1;
+      letter-spacing: -0.07em;
+      font-weight: 800;
+    }
+
+    .hero-sticker {
+      width: 108px;
+      height: 108px;
+      background: var(--lime);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 115px;
+      right: 9%;
+      transform: rotate(12deg);
+      animation: rotateSticker 14s linear infinite;
+    }
+
+    .hero-sticker span {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      text-align: center;
+      line-height: 1.5;
+      transform: rotate(-12deg);
+    }
+
+    @keyframes rotateSticker {
+      from {
+        transform: rotate(12deg);
+      }
+      to {
+        transform: rotate(372deg);
+      }
+    }
+
+    /* TICKER */
+
+    .ticker {
+      overflow: hidden;
+      background: var(--lime);
+      padding: 14px 0;
+      white-space: nowrap;
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: tickerMove 32s linear infinite;
+    }
+
+    .ticker-content {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 28px;
+      padding-right: 28px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .ticker-star {
+      color: var(--orange);
+      font-size: 19px;
+      line-height: 1;
+    }
+
+    @keyframes tickerMove {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* GALLERY SECTION */
+
+    .gallery-section {
+      padding: 74px 5.5% 100px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 34px;
+    }
+
+    .section-kicker {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 15px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(30px, 4.5vw, 62px);
+      font-weight: 800;
+      letter-spacing: -0.075em;
+      line-height: 0.98;
+      margin: 0;
+    }
+
+    .section-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      line-height: 1.8;
+      color: var(--muted);
+      text-align: right;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      max-width: 190px;
+    }
+
+    /* SEARCH */
+
+    .search-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 26px;
+    }
+
+    .search-wrap {
+      width: min(100%, 260px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--ink);
+      padding: 8px 0;
+    }
+
+    .search-icon {
+      font-family: 'DM Mono', monospace;
+      font-size: 15px;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      min-width: 0;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .search-wrap input::placeholder {
+      color: var(--muted);
+      opacity: 1;
+    }
+
+    /* PROJECT GRID */
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 42px 18px;
+    }
+
+    .project-card[hidden] {
+      display: none !important;
+    }
+
+    .project-card {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      animation: cardIn 0.5s ease both;
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .project-link {
+      display: block;
+    }
+
+    .project-image {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      background: var(--white);
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+
+    .project-card:nth-child(4n + 2) .project-image {
+      background: #e9e7dc;
+    }
+
+    .project-card:nth-child(4n + 3) .project-image {
+      background: #e9eaf3;
+    }
+
+    .project-card:nth-child(4n + 4) .project-image {
+      background: #f0e5d8;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      padding: 12px;
+      transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .project-card:hover .project-image img {
+      transform: scale(1.035);
+    }
+
+    .project-label {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 1;
+      padding: 6px 8px;
+      background: var(--paper);
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .project-arrow {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--lime);
+      color: var(--ink);
+      font-size: 18px;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .project-card:hover .project-arrow {
+      transform: rotate(45deg);
+      background: var(--orange);
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      padding-top: 15px;
+    }
+
+    .project-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.045em;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    .project-category {
+      margin-top: 6px;
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      line-height: 1.7;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.035em;
+    }
+
+    .project-number {
+      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+    }
+
+    /* EMPTY SEARCH */
+
+    .empty-state {
+      display: none;
+      padding: 60px 20px;
+      border: 1px solid var(--line);
+      text-align: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      line-height: 1.8;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .empty-state.visible {
+      display: block;
+    }
+
+    /* END BANNER */
+
+    .end-banner {
+      margin: 0 5.5% 80px;
+      padding: 42px;
+      background: var(--blue);
+      color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .end-banner p {
+      margin: 0 0 10px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--lime);
+    }
+
+    .end-banner h2 {
+      max-width: 600px;
+      margin: 0;
+      font-size: clamp(27px, 4vw, 48px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.07em;
+    }
+
+    .end-arrow {
+      flex-shrink: 0;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--lime);
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      transition: transform 0.3s ease;
+    }
+
+    .end-arrow:hover {
+      transform: rotate(45deg);
+    }
+
+    /* FOOTER */
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 5.5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .footer strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* RESPONSIVE */
+
+    @media (min-width: 1500px) {
+      .project-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 1000px) {
+      .project-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-sticker {
+        width: 88px;
+        height: 88px;
+        right: 7%;
+        top: 100px;
+      }
+
+      .hero-sticker span {
+        font-size: 8px;
+      }
+
+      .hero h1 {
+        font-size: clamp(62px, 13vw, 120px);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .topbar {
+        padding: 0 5%;
+        min-height: 58px;
+        font-size: 8px;
+        gap: 10px;
+      }
+
+      .logo {
+        font-size: 11px;
+      }
+
+      .topbar-mid {
+        display: none;
+      }
+
+      .hero {
+        padding: 55px 5% 40px;
+      }
+
+      .eyebrow {
+        margin-bottom: 26px;
+        font-size: 9px;
+      }
+
+      .hero h1 {
+        font-size: clamp(56px, 14vw, 90px);
+      }
+
+      .hero-sticker {
+        width: 66px;
+        height: 66px;
+        top: 72px;
+        right: 6%;
+      }
+
+      .hero-sticker span {
+        font-size: 7px;
+      }
+
+      .hero-bottom {
+        margin-top: 35px;
+        align-items: flex-start;
+        gap: 18px;
+      }
+
+      .hero-description {
+        font-size: 12px;
+        max-width: 75%;
+      }
+
+      .hero-count strong {
+        font-size: 34px;
+      }
+
+      .hero-count {
+        font-size: 8px;
+      }
+
+      .gallery-section {
+        padding: 54px 5% 70px;
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .section-heading h2 {
+        font-size: 38px;
+      }
+
+      .section-note {
+        text-align: left;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+
+      .project-title {
+        font-size: 17px;
+      }
+
+      .search-row {
+        margin-bottom: 22px;
+      }
+
+      .search-wrap {
+        width: 100%;
+      }
+
+      .end-banner {
+        margin: 0 5% 55px;
+        padding: 28px 22px;
+      }
+
+      .end-arrow {
+        width: 48px;
+        height: 48px;
+        font-size: 22px;
+      }
+
+      .footer {
+        padding: 20px 5%;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="backBtn">
-  <a href="index.html#portfolio">
-    <span class="line tLine"></span>
-    <span class="line mLine"></span>
-    <span class="label">Back</span>
-    <span class="line bLine"></span>
-  </a>
-</div>
+  <!-- NAVIGATION -->
+  <nav class="topbar">
+    <a href="index.html" class="logo">RENEE CHNG®</a>
+    <div class="topbar-mid">Independent visual practice / 2023—2026</div>
+    <a href="index.html#portfolio" class="back-link">← Back home</a>
+  </nav>
 
-<h2>Renee's UI/UX works/research!</h2>
-<h4>Click on the works for more descriptions.</h4>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      Singapore · 2023—2026
+    </div>
 
-<!-- Gallery grid container -->
-<div class="gallery-container">
+    <h1>
+      UI/UX &
+      <span class="line-two">RESEARCH.</span>
+    </h1>
 
-  <div class="gallery">
-    <a href="UIUXdesign.html">
-      <img src="UIUX/prototypesmartwatch-01.png" alt="">
-    </a>
-    <div class="desc">LOCAL EATS Smartwatch</div>
+    <div class="hero-sticker">
+      <span>Think<br>Make<br>Improve<br>✳</span>
+    </div>
+
+    <div class="hero-bottom">
+      <div class="hero-description">
+        Designing <strong>thoughtful digital experiences</strong> through user-centred design, prototyping, and research. From mobile apps to web platforms, each project explores how design can make everyday interactions more intuitive.
+      </div>
+
+      <div class="hero-count">
+        <strong id="project-count">09</strong>
+        Selected projects
+      </div>
+    </div>
+  </header>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-label="UI/UX design, user research, prototyping, digital experiences">
+    <div class="ticker-track">
+      <div class="ticker-content">
+        <span class="ticker-item">UI/UX Design <span class="ticker-star">✳</span></span>
+        <span class="ticker-item">User Research <span class="ticker-star">✳</span></span>
+        <span class="ticker-item">Digital Experiences <span class="ticker-star">✳</span></span>
+        <span class="ticker-item">Prototyping <span class="ticker-star">✳</span></span>
+        <span class="ticker-item">Human-Centred Design <span class="ticker-star">✳</span></span>
+        <span class="ticker-item">Interaction Design <span class="ticker-star">✳</span></span>
+      </div>
+      <div class="ticker-content" aria-hidden="true">
+        <span class="ticker-item">UI/UX Design <span class="ticker-star">✳</span></span>
+        <span class="ticker-item">User Research <span class="ticker-star">✳</span></span>
+        <span class="ticker-item">Digital Experiences <span class="ticker-star">✳</span></span>
+        <span class="ticker-item">Prototyping <span class="ticker-star">✳</span></span>
+        <span class="ticker-item">Human-Centred Design <span class="ticker-star">✳</span></span>
+        <span class="ticker-item">Interaction Design <span class="ticker-star">✳</span></span>
+      </div>
+    </div>
   </div>
 
-  <div class="gallery">
-    <a target="_blank" href="UIUXdesign4.html">
-      <img src="Graphicdesign/SRmobileapp.png" alt="">
-    </a>
-    <div class="desc">SPACES REDEFINE Archifest 2025 Rebrand Mobile App Design</div>
-  </div>
+  <!-- GALLERY -->
+  <main class="gallery-section" id="projects">
 
-  <div class="gallery">
-    <a target="_blank" href="UIUXdesign5.html">
-      <img src="UIUX/foodhoodmockup.png" alt="">
-    </a>
-    <div class="desc">FOODHOOD App</div>
-  </div>
+    <div class="section-heading">
+      <div>
+        <div class="section-kicker">03 / The projects</div>
+        <h2>Designing better<br>digital experiences.</h2>
+      </div>
+      <div class="section-note">
+        Apps. Platforms.<br>
+        Research. Real people.
+      </div>
+    </div>
 
-  <div class="gallery">
-    <a target="_blank" href="UIUXdesign9.html">
-      <img src="UIUX/Intro.png" alt="">
-    </a>
-    <div class="desc">BinGo App</div>
-  </div>
+    <!-- SEARCH -->
+    <div class="search-row">
+      <label class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input
+          type="search"
+          id="project-search"
+          placeholder="Search projects..."
+          aria-label="Search UI/UX projects"
+        >
+      </label>
+    </div>
 
-  <div class="gallery">
-    <a target="_blank" href="UIUXdesign6.html">
-      <img src="UIUX/A4 - 10.png" alt="">
-    </a>
-    <div class="desc">P1US App - For People With Visual Disabilities</div>
-  </div>
+    <!-- PROJECT GRID -->
+    <div class="project-grid" id="project-grid">
 
-  <div class="gallery">
-    <a target="_blank" href="UIUXdesign8.html">
-      <img src="UIUX/syai1.png" alt="">
-    </a>
-    <div class="desc">Singapore Youth AI New Website 2026</div>
-  </div>
+      <!-- 01 LOCAL EATS -->
+      <article class="project-card" data-search="local eats smartwatch mobile app ui ux interaction design">
+        <a class="project-link" href="UIUXdesign.html">
+          <div class="project-image">
+            <span class="project-label">Wearable</span>
+            <img src="UIUX/prototypesmartwatch-01.png" alt="LOCAL EATS smartwatch design">
+            <span class="project-arrow">↗</span>
+          </div>
+        </a>
+        <div class="project-meta">
+          <div>
+            <h3 class="project-title">LOCAL EATS Smartwatch</h3>
+            <div class="project-category">01 / UI/UX · Wearable Design</div>
+          </div>
+          <span class="project-number">01</span>
+        </div>
+      </article>
 
-    <div class="gallery">
-    <a target="_blank" href="UIUXdesign2.html">
-      <img src="UIUX/prototypefurnitopia2-02.png" alt="">
-    </a>
-    <div class="desc">Furnitopia App</div>
-  </div>
+      <!-- 02 ARCHIFEST -->
+      <article class="project-card" data-search="spaces redefine archifest 2025 rebrand mobile app design ui ux architecture">
+        <a class="project-link" target="_blank" rel="noopener noreferrer" href="UIUXdesign4.html">
+          <div class="project-image">
+            <span class="project-label">Mobile App</span>
+            <img src="Graphicdesign/SRmobileapp.png" alt="SPACES REDEFINE Archifest 2025 mobile app design">
+            <span class="project-arrow">↗</span>
+          </div>
+        </a>
+        <div class="project-meta">
+          <div>
+            <h3 class="project-title">SPACES REDEFINE — Archifest 2025</h3>
+            <div class="project-category">02 / Rebrand · Mobile App Design</div>
+          </div>
+          <span class="project-number">02</span>
+        </div>
+      </article>
 
-  <div class="gallery">
-    <a target="_blank" href="UIUXdesign3.html">
-      <img src="UIUX/prototypeweb-03.png" alt="">
-    </a>
-    <div class="desc">Furnitopia Web</div>
-  </div>
+      <!-- 03 FOODHOOD -->
+      <article class="project-card" data-search="foodhood app food community mobile ui ux">
+        <a class="project-link" target="_blank" rel="noopener noreferrer" href="UIUXdesign5.html">
+          <div class="project-image">
+            <span class="project-label">Mobile App</span>
+            <img src="UIUX/foodhoodmockup.png" alt="FOODHOOD app design">
+            <span class="project-arrow">↗</span>
+          </div>
+        </a>
+        <div class="project-meta">
+          <div>
+            <h3 class="project-title">FOODHOOD App</h3>
+            <div class="project-category">03 / UI/UX · Food & Community</div>
+          </div>
+          <span class="project-number">03</span>
+        </div>
+      </article>
 
-     <div class="gallery">
-    <a target="_blank" href="UIUXdesign7.html">
-      <img src="UIUX/Slide 16_9 - 1.png" alt="">
-    </a>
-    <div class="desc">EEZEE Platform UX Research & Market Insights</div>
-  </div>
+      <!-- 04 BINGO -->
+      <article class="project-card" data-search="bingo bin go app recycling sustainability mobile ui ux">
+        <a class="project-link" target="_blank" rel="noopener noreferrer" href="UIUXdesign9.html">
+          <div class="project-image">
+            <span class="project-label">Mobile App</span>
+            <img src="UIUX/Intro.png" alt="BinGo app design">
+            <span class="project-arrow">↗</span>
+          </div>
+        </a>
+        <div class="project-meta">
+          <div>
+            <h3 class="project-title">BinGo App</h3>
+            <div class="project-category">04 / UI/UX · Digital Experience</div>
+          </div>
+          <span class="project-number">04</span>
+        </div>
+      </article>
 
-</div>
-<!-- END gallery grid -->
+      <!-- 05 P1US -->
+      <article class="project-card" data-search="p1us accessibility app visual disabilities inclusive design mobile ui ux">
+        <a class="project-link" target="_blank" rel="noopener noreferrer" href="UIUXdesign6.html">
+          <div class="project-image">
+            <span class="project-label">Accessibility</span>
+            <img src="UIUX/A4 - 10.png" alt="P1US accessibility app for people with visual disabilities">
+            <span class="project-arrow">↗</span>
+          </div>
+        </a>
+        <div class="project-meta">
+          <div>
+            <h3 class="project-title">P1US — App for People with Visual Disabilities</h3>
+            <div class="project-category">05 / Inclusive Design · Accessibility</div>
+          </div>
+          <span class="project-number">05</span>
+        </div>
+      </article>
+
+      <!-- 06 SINGAPORE YOUTH AI -->
+      <article class="project-card" data-search="singapore youth ai syai new website 2026 web design ui ux">
+        <a class="project-link" target="_blank" rel="noopener noreferrer" href="UIUXdesign8.html">
+          <div class="project-image">
+            <span class="project-label">Web Design</span>
+            <img src="UIUX/syai1.png" alt="Singapore Youth AI website redesign 2026">
+            <span class="project-arrow">↗</span>
+          </div>
+        </a>
+        <div class="project-meta">
+          <div>
+            <h3 class="project-title">Singapore Youth AI — Website 2026</h3>
+            <div class="project-category">06 / Website · Digital Experience</div>
+          </div>
+          <span class="project-number">06</span>
+        </div>
+      </article>
+
+      <!-- 07 FURNITOPIA APP -->
+      <article class="project-card" data-search="furnitopia app furniture interior design mobile ui ux">
+        <a class="project-link" target="_blank" rel="noopener noreferrer" href="UIUXdesign2.html">
+          <div class="project-image">
+            <span class="project-label">Mobile App</span>
+            <img src="UIUX/prototypefurnitopia2-02.png" alt="Furnitopia mobile app design">
+            <span class="project-arrow">↗</span>
+          </div>
+        </a>
+        <div class="project-meta">
+          <div>
+            <h3 class="project-title">Furnitopia App</h3>
+            <div class="project-category">07 / UI/UX · Furniture & Lifestyle</div>
+          </div>
+          <span class="project-number">07</span>
+        </div>
+      </article>
+
+      <!-- 08 FURNITOPIA WEB -->
+      <article class="project-card" data-search="furnitopia web website furniture interior design ui ux">
+        <a class="project-link" target="_blank" rel="noopener noreferrer" href="UIUXdesign3.html">
+          <div class="project-image">
+            <span class="project-label">Web Design</span>
+            <img src="UIUX/prototypeweb-03.png" alt="Furnitopia website design">
+            <span class="project-arrow">↗</span>
+          </div>
+        </a>
+        <div class="project-meta">
+          <div>
+            <h3 class="project-title">Furnitopia Web</h3>
+            <div class="project-category">08 / UI/UX · Website Design</div>
+          </div>
+          <span class="project-number">08</span>
+        </div>
+      </article>
+
+      <!-- 09 EEZEE -->
+      <article class="project-card" data-search="eezee platform ux research market insights user research">
+        <a class="project-link" target="_blank" rel="noopener noreferrer" href="UIUXdesign7.html">
+          <div class="project-image">
+            <span class="project-label">UX Research</span>
+            <img src="UIUX/Slide 16_9 - 1.png" alt="EEZEE platform UX research and market insights">
+            <span class="project-arrow">↗</span>
+          </div>
+        </a>
+        <div class="project-meta">
+          <div>
+            <h3 class="project-title">EEZEE Platform — UX Research & Market Insights</h3>
+            <div class="project-category">09 / User Research · Market Insights</div>
+          </div>
+          <span class="project-number">09</span>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="empty-state" id="empty-state">
+      No projects found.<br>
+      Try another search.
+    </div>
+
+  </main>
+
+  <!-- END BANNER -->
+  <section class="end-banner">
+    <div>
+      <p>More to explore</p>
+      <h2>Good design starts with understanding people.</h2>
+    </div>
+    <a href="index.html#portfolio" class="end-arrow" aria-label="Back to portfolio">↗</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div><strong>RENEE CHNG®</strong> — Independent visual practice</div>
+    <div>Singapore · 2023—2026</div>
+    <div>UI/UX · Research · Digital Design</div>
+  </footer>
+
+  <!-- SEARCH FUNCTION -->
+  <script>
+    const searchInput = document.getElementById('project-search');
+    const projectCards = Array.from(document.querySelectorAll('.project-card'));
+    const emptyState = document.getElementById('empty-state');
+    const projectCount = document.getElementById('project-count');
+
+    function filterProjects() {
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      projectCards.forEach((card) => {
+        const searchableText =
+          (card.innerText + ' ' + card.dataset.search).toLowerCase();
+
+        const matches = searchableText.includes(query);
+
+        card.hidden = !matches;
+
+        if (matches) {
+          visibleCount++;
+        }
+      });
+
+      projectCount.textContent = String(visibleCount).padStart(2, '0');
+      emptyState.classList.toggle('visible', visibleCount === 0);
+    }
+
+    searchInput.addEventListener('input', filterProjects);
+  </script>
 
 </body>
 </html>
