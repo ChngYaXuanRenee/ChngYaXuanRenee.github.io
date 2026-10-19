@@ -1,260 +1,1105 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
-<style>
+  <title>Tangled Dreams Zine — Portfolio</title>
 
-  
-* {
-  box-sizing: border-box;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-body {
-  margin: 0;
-  font-family: 'Ubuntu', sans-serif;
-  
-  background:  #ff0000;
+  <style>
+    :root {
+      --bg: #f5f4ef;
+      --paper: #fbfaf7;
+      --ink: #202c50;
+      --muted: #777b86;
+      --line: #dcdcd5;
+      --accent: #a84141;
+      --gutter: clamp(16px, 3.5vw, 56px);
+      --mono: "DM Mono", monospace;
+      --sans: "Manrope", sans-serif;
+    }
 
-}
+    * {
+      box-sizing: border-box;
+    }
 
-.imgdesc {
-  font-family: 'Ubuntu', sans-serif;
-  text-align: center;
-  background: #ff2d2d;
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
 
-}
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* The grid: Four equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 25%;
-  padding: 10px;
-}
+    body.lightbox-open {
+      overflow: hidden;
+    }
 
-/* Style the images inside the grid */
-.column img {
-  opacity: 0.8; 
-  cursor: pointer; 
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-.column img:hover {
-  opacity: 1;
-}
+    button {
+      font: inherit;
+    }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
-/* The expanding image container */
-.container {
-  position: relative;
-  display: none;
-}
+    /* NAVIGATION */
 
-/* Expanding image text */
-#imgtext {
-  position: absolute;
-  bottom: 15px;
-  left: 600px;
-  color: rgb(93, 38, 112);
-  font-size: 20px;
-}
+    .topbar {
+      min-height: 76px;
+      padding: 0 var(--gutter);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
 
-/* Closable button inside the expanded image */
-.closebtn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  color: white;
-  font-size: 35px;
-  cursor: pointer;
-}
+    .back-link,
+    .top-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
+    .back-link {
+      transition: opacity 0.2s ease;
+    }
 
+    .back-link:hover {
+      opacity: 0.55;
+    }
 
-/* CSS for back button */
-div.backBtn {
-    width: 100px;
-    right: 100px;
-    top: 30px;
-    background-color: #f4f4f4;
-    transition: all 0.4s ease;
-    position: fixed;
-    cursor: pointer;
-  }
+    .back-arrow {
+      font-size: 19px;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
 
-  span.line {
-    bottom: auto;
-    right: auto;
-    top: auto;
-    left: auto;
-    background-color: #8f7373;
-    border-radius: 10px;
-    width: 100%;
-    left: 0px;
-    height: 2px;
-    display: block;
-    position: absolute;
-    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
-  }
+    .back-link:hover .back-arrow {
+      transform: translateX(-4px);
+    }
 
-  span.tLine {
-    top: 0px;
-  }
+    .top-label {
+      color: var(--muted);
+      text-align: right;
+    }
 
-  span.mLine {
-    top: 13px;
-    opacity: 0;
-  }
+    /* MAIN CONTENT */
 
-  span.bLine {
-    top: 26px;
-  }
+    main {
+      width: 100%;
+      padding: 0 var(--gutter);
+    }
 
-  .label {
-    position: absolute;
-    left: 0px;
-    top: 5px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.4s ease;
-    font-size: 1em;
-    color: rgb(123, 123, 123);
-  }
+    .hero {
+      padding: clamp(48px, 9vw, 120px) 0 52px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(220px, 0.65fr);
+      gap: clamp(28px, 6vw, 100px);
+      align-items: end;
+    }
 
-  div.backBtn:hover span.label {
-    left: 25px
-  }
+    .eyebrow,
+    .section-label,
+    .meta-label,
+    .image-index {
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.6;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
 
-  div.backBtn:hover span.line {
-    left: -10px;
-    height: 5px;
-    background-color: #a84141;
-  }
+    .eyebrow {
+      margin: 0 0 26px;
+      color: var(--accent);
+    }
 
-  div.backBtn:hover span.tLine {
-    width: 25px;
-    transform: rotate(-45deg);
-    left: -15px;
-    top: 6px;
-  }
-  
-  div.backBtn:hover span.mLine {
-    opacity: 1;
-    width: 30px;
-  }
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(42px, 8.5vw, 112px);
+      font-weight: 600;
+      line-height: 0.94;
+      letter-spacing: -0.085em;
+    }
 
-  div.backBtn:hover span.bLine {
-    width: 25px;
-    transform: rotate(45deg);
-    left: -15px;
-    top: 20px;
-    
-  }
+    h1 span {
+      display: block;
+      color: var(--accent);
+    }
 
-  .header-color {
-    color:rgb(44, 34, 79);
-  }
-</style>
+    .hero-aside {
+      padding-bottom: 5px;
+    }
+
+    .hero-aside p {
+      margin: 0;
+      max-width: 360px;
+      color: #565d6d;
+      font-size: clamp(14px, 1.2vw, 16px);
+      line-height: 1.9;
+    }
+
+    .project-number {
+      display: block;
+      margin-top: 32px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    /* HERO IMAGE */
+
+    .hero-artwork {
+      position: relative;
+      margin: 0;
+      background: #e6e6df;
+      overflow: hidden;
+    }
+
+    .hero-artwork button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: zoom-in;
+    }
+
+    .hero-artwork img {
+      width: 100%;
+      max-height: 820px;
+      object-fit: contain;
+      margin: auto;
+      transition: transform 0.65s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .hero-artwork button:hover img {
+      transform: scale(1.015);
+    }
+
+    .artwork-caption {
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.7;
+      letter-spacing: 0.04em;
+    }
+
+    /* PROJECT INFORMATION */
+
+    .project-info {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: clamp(32px, 8vw, 130px);
+      padding: clamp(64px, 10vw, 130px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-label {
+      margin: 0 0 25px;
+      color: var(--accent);
+    }
+
+    h2 {
+      margin: 0 0 24px;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 500;
+      letter-spacing: -0.065em;
+      line-height: 1.1;
+    }
+
+    .project-description p {
+      max-width: 650px;
+      margin: 0 0 18px;
+      color: #565d6d;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .project-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-meta {
+      display: grid;
+      align-content: start;
+      gap: 0;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+      padding: 17px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .meta-label {
+      color: var(--muted);
+    }
+
+    .meta-value {
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    /* GALLERY */
+
+    .gallery-section {
+      padding: clamp(64px, 9vw, 110px) 0;
+    }
+
+    .gallery-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+
+    .gallery-heading h2 {
+      margin: 0;
+    }
+
+    .gallery-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 18px;
+      row-gap: 38px;
+    }
+
+    .gallery-item {
+      min-width: 0;
+      margin: 0;
+    }
+
+    .gallery-button {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      background: #e8e7e0;
+      cursor: zoom-in;
+    }
+
+    .gallery-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.5s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .gallery-button:hover img {
+      transform: scale(1.035);
+    }
+
+    .zoom-hint {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      background: rgba(251, 250, 247, 0.92);
+      color: var(--ink);
+      font-size: 18px;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .gallery-button:hover .zoom-hint,
+    .gallery-button:focus-visible .zoom-hint {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-caption {
+      padding-top: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .gallery-caption h3 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .image-index {
+      flex-shrink: 0;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    /* CLOSING NOTE */
+
+    .closing {
+      padding: 40px 0 70px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+    }
+
+    .closing a {
+      color: var(--ink);
+    }
+
+    .closing a:hover {
+      color: var(--accent);
+    }
+
+    /* LIGHTBOX */
+
+    .lightbox {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: none;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      padding: 20px clamp(14px, 4vw, 56px);
+      background: rgba(20, 25, 42, 0.97);
+      color: #fbfaf7;
+    }
+
+    .lightbox.is-open {
+      display: grid;
+    }
+
+    .lightbox-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      min-height: 48px;
+    }
+
+    .lightbox-counter {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    .lightbox-close {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 27px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .lightbox-stage {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) 48px;
+      align-items: center;
+      gap: clamp(8px, 2vw, 30px);
+    }
+
+    .lightbox-image-wrap {
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox-image {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .lightbox-nav {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .lightbox-bottom {
+      padding: 16px 0 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .lightbox-title {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .lightbox-help {
+      color: rgba(255,255,255,0.6);
+      font-family: var(--mono);
+      font-size: 10px;
+      text-align: right;
+    }
+
+    /* ACCESSIBILITY */
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (min-width: 1500px) {
+      main {
+        max-width: 1800px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding-top: 70px;
+      }
+
+      .hero-aside {
+        max-width: 520px;
+      }
+
+      .project-number {
+        margin-top: 18px;
+      }
+
+      .project-info {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px 14px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 38px minmax(0, 1fr) 38px;
+        gap: 6px;
+      }
+
+      .lightbox-nav {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .topbar {
+        min-height: 62px;
+      }
+
+      .top-label {
+        max-width: 145px;
+        font-size: 9px;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+
+      h1 {
+        font-size: clamp(42px, 13vw, 65px);
+      }
+
+      .gallery-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .gallery-heading p {
+        text-align: left;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        row-gap: 28px;
+      }
+
+      .gallery-button {
+        aspect-ratio: 4 / 3;
+      }
+
+      .meta-row {
+        grid-template-columns: 90px 1fr;
+      }
+
+      .closing {
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .lightbox {
+        padding: 12px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 32px minmax(0, 1fr) 32px;
+        gap: 4px;
+      }
+
+      .lightbox-nav {
+        width: 30px;
+        height: 38px;
+        font-size: 19px;
+      }
+
+      .lightbox-bottom {
+        align-items: start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .lightbox-help {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- The back button -->
-    <div class="backBtn">
-        <a href="graphicdesigngrp.html">
-          <span class="line tLine"></span>
-          <span class="line mLine"></span>
-          <span class="label">Back</span>
-          <span class="line bLine"></span>
-        </a>
+
+  <!-- NAVIGATION -->
+  <header class="topbar">
+    <a class="back-link" href="graphicdesigngrp.html">
+      <span class="back-arrow" aria-hidden="true">←</span>
+      <span>Back to projects</span>
+    </a>
+
+    <div class="top-label">Selected work / Editorial design</div>
+  </header>
+
+  <main>
+
+    <!-- PROJECT INTRODUCTION -->
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Editorial design · Zine · 2024</p>
+
+        <h1>
+          TANGLED
+          <span>DREAMS.</span>
+        </h1>
+      </div>
+
+      <div class="hero-aside">
+        <p>
+          Exploring the emotional and physical toll of insomnia through
+          distorted typography, fragmented imagery and surrealist
+          compositions. A personal zine that transforms sleeplessness,
+          hallucinations and inner turmoil into a visual narrative.
+        </p>
+
+        <span class="project-number">PROJECT — PERSONAL NARRATIVE</span>
+      </div>
+    </section>
+
+    <!-- FEATURE IMAGE -->
+    <figure class="hero-artwork">
+      <button
+        type="button"
+        class="image-trigger"
+        data-image="Graphicdesign/Tangledreamscover.png"
+        data-title="Tangled Dreams — Zine cover"
+        aria-label="Enlarge the Tangled Dreams zine cover"
+      >
+        <img
+          src="Graphicdesign/Tangledreamscover.png"
+          alt="Tangled Dreams zine cover exploring insomnia through surrealist imagery and distorted typography"
+          fetchpriority="high"
+        >
+      </button>
+    </figure>
+
+    <div class="artwork-caption">
+      <span>01 / ZINE COVER</span>
+      <span>TANGLED DREAMS — VISUAL NARRATIVE</span>
     </div>
 
+    <!-- PROJECT STORY AND METADATA -->
+    <section class="project-info">
+      <div class="project-description">
+        <p class="section-label">01 — The concept</p>
 
-<div style="text-align:center" class="header-color">
-  <h2>Tangled Dream Zine</h2>
-  <p>Click on the images below:</p>
-</div>
+        <h2>Visualising the chaos of sleeplessness.</h2>
 
-<div class="row">
-    <div class="column">
-        <img src="Graphicdesign/Tangledreamscover.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+        <p>
+          Tangled Dreams explores how insomnia can affect the mind and body,
+          turning ordinary thoughts and memories into experiences of
+          exhaustion, frustration and disorientation. Through this project,
+          I wanted to communicate the unsettling experience of sleeplessness
+          using visual elements rather than relying solely on written
+          descriptions.
+        </p>
+
+        <p>
+          Weaving and distorting typography became a way to represent the
+          repetitive, trapping nature of insomnia. The intertwined letterforms
+          suggest endless loops of thought, reflecting the feeling of being
+          unable to escape the cycle of exhaustion. Fragmented images,
+          overlapping elements and blurred compositions further evoke the
+          unstable, dreamlike quality of memories and hallucinations.
+        </p>
+
+        <p>
+          Surrealist imagery, including hearts with mouths, unblinking eyes
+          and skulls, adds to the psychological tension of the zine.
+          Hands clutching a childhood teddy bear symbolise the loss of
+          security, as a once-familiar source of comfort becomes entangled
+          with fear and vulnerability. Chaotic ink splatters, scribbled
+          lines and collaged imagery reinforce the sense of a mind that
+          feels increasingly difficult to control.
+        </p>
+
+        <p>
+          This exploration deepened my understanding of how visual
+          storytelling can communicate personal experiences. By combining
+          distortion, fragmentation and surrealism, I transformed the
+          internal chaos of sleepless nights into a tangible visual
+          narrative, using symbolism and composition to express the
+          emotional weight of insomnia.
+        </p>
+      </div>
+
+      <aside class="project-meta">
+        <div class="meta-row">
+          <span class="meta-label">Project</span>
+          <span class="meta-value">Tangled Dreams Zine</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Discipline</span>
+          <span class="meta-value">Editorial design<br>Publication design<br>Visual storytelling</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Tools</span>
+          <span class="meta-value">Adobe Illustrator<br>Adobe Photoshop</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Date</span>
+          <span class="meta-value">August 2024</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Approach</span>
+          <span class="meta-value">Distorted typography, image fragmentation, surrealism, collage and symbolic imagery</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Theme</span>
+          <span class="meta-value">Insomnia, hallucinations, vulnerability and fragmented consciousness</span>
+        </div>
+      </aside>
+    </section>
+
+    <!-- IMAGE GALLERY -->
+    <section class="gallery-section" aria-labelledby="gallery-title">
+      <div class="gallery-heading">
+        <div>
+          <p class="section-label">02 — Inside the zine</p>
+          <h2 id="gallery-title">Fragments of a restless mind.</h2>
+        </div>
+
+        <p>SELECT AN IMAGE TO EXPLORE<br>FULL-SIZE ARTWORK ↗</p>
+      </div>
+
+      <div class="gallery-grid">
+
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/TD1.png"
+            data-title="Zine spread — 01"
+            aria-label="Enlarge zine spread 01"
+          >
+            <img
+              src="Graphicdesign/TD1.png"
+              alt="Tangled Dreams zine spread 01"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Zine spread — 01</h3>
+            <span class="image-index">02</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/TD2.png"
+            data-title="Zine spread — 02"
+            aria-label="Enlarge zine spread 02"
+          >
+            <img
+              src="Graphicdesign/TD2.png"
+              alt="Tangled Dreams zine spread 02"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Zine spread — 02</h3>
+            <span class="image-index">03</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/TD3.png"
+            data-title="Zine spread — 03"
+            aria-label="Enlarge zine spread 03"
+          >
+            <img
+              src="Graphicdesign/TD3.png"
+              alt="Tangled Dreams zine spread 03"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Zine spread — 03</h3>
+            <span class="image-index">04</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/TD4.png"
+            data-title="Zine spread — 04"
+            aria-label="Enlarge zine spread 04"
+          >
+            <img
+              src="Graphicdesign/TD4.png"
+              alt="Tangled Dreams zine spread 04"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Zine spread — 04</h3>
+            <span class="image-index">05</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/TD5.png"
+            data-title="Zine spread — 05"
+            aria-label="Enlarge zine spread 05"
+          >
+            <img
+              src="Graphicdesign/TD5.png"
+              alt="Tangled Dreams zine spread 05"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Zine spread — 05</h3>
+            <span class="image-index">06</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/TD6.png"
+            data-title="Zine spread — 06"
+            aria-label="Enlarge zine spread 06"
+          >
+            <img
+              src="Graphicdesign/TD6.png"
+              alt="Tangled Dreams zine spread 06"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Zine spread — 06</h3>
+            <span class="image-index">07</span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="closing">
+      <span>TANGLED DREAMS — ZINE / 2024</span>
+      <a href="graphicdesigngrp.html">← Back to selected work</a>
+    </footer>
+
+  </main>
+
+  <!-- FULL-SCREEN IMAGE VIEWER -->
+  <div
+    class="lightbox"
+    id="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Artwork image viewer"
+    aria-hidden="true"
+  >
+    <div class="lightbox-top">
+      <span class="lightbox-counter" id="lightboxCounter">01 / 07</span>
+
+      <button
+        class="lightbox-close"
+        id="lightboxClose"
+        type="button"
+        aria-label="Close image viewer"
+      >×</button>
     </div>
-    <div class="column">
-        <img src="Graphicdesign/TD1.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
+
+    <div class="lightbox-stage">
+      <button
+        class="lightbox-nav"
+        id="lightboxPrev"
+        type="button"
+        aria-label="Previous image"
+      >‹</button>
+
+      <div class="lightbox-image-wrap">
+        <img class="lightbox-image" id="lightboxImage" src="" alt="">
+      </div>
+
+      <button
+        class="lightbox-nav"
+        id="lightboxNext"
+        type="button"
+        aria-label="Next image"
+      >›</button>
     </div>
-    <div class="column">
-        <img src="Graphicdesign/TD2.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
+
+    <div class="lightbox-bottom">
+      <p class="lightbox-title" id="lightboxTitle"></p>
+      <span class="lightbox-help">USE ← → TO NAVIGATE · ESC TO CLOSE</span>
     </div>
-    <div class="column">
-        <img src="Graphicdesign/TD3.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
-    </div>
-</div>
-<div class="row">
-    <div class="column">
-        <img src="Graphicdesign/TD4.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="Graphicdesign/TD5.png" alt="" style="width:100%; height:auto;" onclick="myFunction(this);">
-    </div>
-    <div class="column">
-        <img src="Graphicdesign/TD6.png" alt="" style="width:100%; height:auto;"  onclick="myFunction(this);">
-    </div>
-</div>
+  </div>
 
+  <script>
+    (() => {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightboxImage");
+      const lightboxTitle = document.getElementById("lightboxTitle");
+      const lightboxCounter = document.getElementById("lightboxCounter");
+      const closeButton = document.getElementById("lightboxClose");
+      const prevButton = document.getElementById("lightboxPrev");
+      const nextButton = document.getElementById("lightboxNext");
 
+      const triggers = Array.from(
+        document.querySelectorAll(".image-trigger")
+      );
 
-</div>
+      let currentIndex = 0;
+      let lastFocusedElement = null;
 
-<div class="container">
-  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
-  <div id="imgtext"></div>
-</div>
- 
-<!-- The img desc -->
-<div class="imgdesc" style="color:rgb(0, 0, 0)" >
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">Medium: Adobe illustrator & Photoshop - Aug 2024.</p>
+      const images = triggers.map((trigger) => {
+        const image = trigger.querySelector("img");
 
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">Tangled Dreams Zine
-    </p>
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">
-    Through this process, I’ve explored how weaving, fragmentation, and distortion can convey the emotional and physical toll of insomnia. Using weaving to distort type allowed me to represent the repetitive and trapping nature of sleeplessness, mirroring the endless loops of exhaustion and frustration. This technique added depth to my work, making the distortion of type not just visual but symbolic of my personal struggle.
-    By incorporating fragmented images and overlapping elements, I reflected the complexity of the subconscious mind, breaking down screaming faces into unsettling pieces that evoke disorientation and unease. Combining blurring effects with dreamlike distortions further amplified the hazy, fragmented memories tied to my hallucinations, adding layers of mystery and intrigue.
-    The surrealist elements, such as hearts with mouths, unblinking eyes, and skulls, allowed me to delve into the chaos of sleeplessness. Each symbol, from a speaking heart to the unrelenting hyper-vigilance reflected in skulls, illustrated the inner turmoil of insomnia. The hands clutching my childhood teddy bear became a poignant representation of lost security, showing how my safe spaces were invaded by fear and vulnerability.
-    Incorporating chaotic ink splatters and scribbled lines enhanced the raw, emotional narrative of my work, while collaged skulls captured the uncontrolled chaos of the mind during sleepless nights. These elements, combined with surreal imagery like distorted faces and checkerboard patterns, created a visceral sense of fragmented consciousness and nightmares.
-    
-    </p>
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">
-    This exploration deepened my understanding of how visual storytelling can convey deeply personal themes. The interplay of weaving, distortion, and surrealism allowed me to communicate the emotional weight of sleeplessness and the complex struggles within my mind. It’s been a journey of turning internal chaos into a tangible narrative, using symbolism and composition to reflect my experiences.
-    </p>
-    
-  
-</div>
+        return {
+          src: trigger.dataset.image,
+          title: trigger.dataset.title,
+          alt: image ? image.alt : trigger.dataset.title
+        };
+      });
 
+      function showImage(index) {
+        currentIndex = (index + images.length) % images.length;
 
-<script>
-function myFunction(imgs) {
-  var expandImg = document.getElementById("expandedImg");
-  var imgText = document.getElementById("imgtext");
-  expandImg.src = imgs.src;
-  imgText.innerHTML = imgs.alt;
-  expandImg.parentElement.style.display = "block";
-}
-</script>
+        const image = images[currentIndex];
+
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.alt;
+        lightboxTitle.textContent = image.title;
+
+        lightboxCounter.textContent =
+          String(currentIndex + 1).padStart(2, "0") +
+          " / " +
+          String(images.length).padStart(2, "0");
+
+        // Preload adjacent images for smoother navigation.
+        [currentIndex + 1, currentIndex - 1].forEach((i) => {
+          const adjacent = images[(i + images.length) % images.length];
+          const preload = new Image();
+          preload.src = adjacent.src;
+        });
+      }
+
+      function openLightbox(index) {
+        lastFocusedElement = document.activeElement;
+
+        showImage(index);
+
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.classList.add("lightbox-open");
+
+        closeButton.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("lightbox-open");
+
+        lightboxImage.src = "";
+
+        if (lastFocusedElement) {
+          lastFocusedElement.focus();
+        }
+      }
+
+      function nextImage() {
+        showImage(currentIndex + 1);
+      }
+
+      function previousImage() {
+        showImage(currentIndex - 1);
+      }
+
+      triggers.forEach((trigger, index) => {
+        trigger.addEventListener("click", () => {
+          openLightbox(index);
+        });
+      });
+
+      closeButton.addEventListener("click", closeLightbox);
+      nextButton.addEventListener("click", nextImage);
+      prevButton.addEventListener("click", previousImage);
+
+      // Close when clicking the dark background.
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      // Keyboard navigation.
+      document.addEventListener("keydown", (event) => {
+        if (!lightbox.classList.contains("is-open")) return;
+
+        if (event.key === "Escape") {
+          closeLightbox();
+        } else if (event.key === "ArrowRight") {
+          nextImage();
+        } else if (event.key === "ArrowLeft") {
+          previousImage();
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>
+```
