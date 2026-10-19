@@ -1,232 +1,1235 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
-<style>
+  <title>Oh So Sushi — Game Box & Card Design | Portfolio</title>
 
-  
-* {
-  box-sizing: border-box;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-body {
-  margin: 0;
-  font-family: 'Ubuntu', sans-serif;
-  
-  background:  #ffa9c9;
+  <style>
+    :root {
+      --bg: #f5f4ef;
+      --paper: #fbfaf7;
+      --ink: #202c50;
+      --muted: #777b86;
+      --line: #dcdcd5;
+      --accent: #a84141;
+      --gutter: clamp(16px, 3.5vw, 56px);
+      --mono: "DM Mono", monospace;
+      --sans: "Manrope", sans-serif;
+    }
 
-}
+    * {
+      box-sizing: border-box;
+    }
 
-.imgdesc {
-  font-family: 'Ubuntu', sans-serif;
-  text-align: center;
-  background:  #b37289;
-}
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
 
-/* The grid: Four equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 25%;
-  padding: 10px;
-}
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* Style the images inside the grid */
-.column img {
-  opacity: 0.8; 
-  cursor: pointer; 
-}
+    body.lightbox-open {
+      overflow: hidden;
+    }
 
-.column img:hover {
-  opacity: 1;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+    button {
+      font: inherit;
+    }
 
-/* The expanding image container */
-.container {
-  position: relative;
-  display: none;
-}
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
-/* Expanding image text */
-#imgtext {
-  position: absolute;
-  bottom: 15px;
-  left: 600px;
-  color: rgb(0, 0, 0);
-  font-size: 20px;
-}
+    /* NAVIGATION */
 
-/* Closable button inside the expanded image */
-.closebtn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  color: white;
-  font-size: 35px;
-  cursor: pointer;
-}
+    .topbar {
+      min-height: 76px;
+      padding: 0 var(--gutter);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
 
+    .back-link,
+    .top-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
+    .back-link {
+      transition: opacity 0.2s ease;
+    }
 
-/* CSS for back button */
-div.backBtn {
-    width: 100px;
-    right: 100px;
-    top: 30px;
-    background-color: #f4f4f4;
-    transition: all 0.4s ease;
-    position: fixed;
-    cursor: pointer;
-  }
+    .back-link:hover {
+      opacity: 0.55;
+    }
 
-  span.line {
-    bottom: auto;
-    right: auto;
-    top: auto;
-    left: auto;
-    background-color: #8f7373;
-    border-radius: 10px;
-    width: 100%;
-    left: 0px;
-    height: 2px;
-    display: block;
-    position: absolute;
-    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
-  }
+    .back-arrow {
+      font-size: 19px;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
 
-  span.tLine {
-    top: 0px;
-  }
+    .back-link:hover .back-arrow {
+      transform: translateX(-4px);
+    }
 
-  span.mLine {
-    top: 13px;
-    opacity: 0;
-  }
+    .top-label {
+      color: var(--muted);
+      text-align: right;
+    }
 
-  span.bLine {
-    top: 26px;
-  }
+    /* MAIN CONTENT */
 
-  .label {
-    position: absolute;
-    left: 0px;
-    top: 5px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.4s ease;
-    font-size: 1em;
-    color: rgb(123, 123, 123);
-  }
+    main {
+      width: 100%;
+      padding: 0 var(--gutter);
+    }
 
-  div.backBtn:hover span.label {
-    left: 25px
-  }
+    .hero {
+      padding: clamp(48px, 9vw, 120px) 0 52px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(220px, 0.65fr);
+      gap: clamp(28px, 6vw, 100px);
+      align-items: end;
+    }
 
-  div.backBtn:hover span.line {
-    left: -10px;
-    height: 5px;
-    background-color: #a84141;
-  }
+    .eyebrow,
+    .section-label,
+    .meta-label,
+    .image-index {
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.6;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
 
-  div.backBtn:hover span.tLine {
-    width: 25px;
-    transform: rotate(-45deg);
-    left: -15px;
-    top: 6px;
-  }
-  
-  div.backBtn:hover span.mLine {
-    opacity: 1;
-    width: 30px;
-  }
+    .eyebrow {
+      margin: 0 0 26px;
+      color: var(--accent);
+    }
 
-  div.backBtn:hover span.bLine {
-    width: 25px;
-    transform: rotate(45deg);
-    left: -15px;
-    top: 20px;
-    
-  }
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(42px, 8.5vw, 112px);
+      font-weight: 600;
+      line-height: 0.94;
+      letter-spacing: -0.085em;
+    }
 
-  .header-color {
-    color:rgb(123, 123, 123);
-  }
-</style>
+    h1 span {
+      display: block;
+      color: var(--accent);
+    }
+
+    .hero-aside {
+      padding-bottom: 5px;
+    }
+
+    .hero-aside p {
+      margin: 0;
+      max-width: 360px;
+      color: #565d6d;
+      font-size: clamp(14px, 1.2vw, 16px);
+      line-height: 1.9;
+    }
+
+    .project-number {
+      display: block;
+      margin-top: 32px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    /* HERO IMAGE */
+
+    .hero-artwork {
+      position: relative;
+      margin: 0;
+      background: #e6e6df;
+      overflow: hidden;
+    }
+
+    .hero-artwork button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: zoom-in;
+    }
+
+    .hero-artwork img {
+      width: 100%;
+      max-height: 820px;
+      object-fit: contain;
+      margin: auto;
+      transition: transform 0.65s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .hero-artwork button:hover img {
+      transform: scale(1.015);
+    }
+
+    .artwork-caption {
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.7;
+      letter-spacing: 0.04em;
+    }
+
+    /* PROJECT INFORMATION */
+
+    .project-info {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: clamp(32px, 8vw, 130px);
+      padding: clamp(64px, 10vw, 130px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-label {
+      margin: 0 0 25px;
+      color: var(--accent);
+    }
+
+    h2 {
+      margin: 0 0 24px;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 500;
+      letter-spacing: -0.065em;
+      line-height: 1.1;
+    }
+
+    .project-description p {
+      max-width: 650px;
+      margin: 0 0 18px;
+      color: #565d6d;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .project-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-meta {
+      display: grid;
+      align-content: start;
+      gap: 0;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+      padding: 17px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .meta-label {
+      color: var(--muted);
+    }
+
+    .meta-value {
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    /* VIDEO */
+
+    .video-section {
+      padding: clamp(64px, 9vw, 110px) 0 0;
+    }
+
+    .video-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+
+    .video-heading h2 {
+      margin: 0;
+    }
+
+    .video-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #e6e6df;
+      overflow: hidden;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-caption {
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    /* GALLERY */
+
+    .gallery-section {
+      padding: clamp(64px, 9vw, 110px) 0;
+    }
+
+    .gallery-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+
+    .gallery-heading h2 {
+      margin: 0;
+    }
+
+    .gallery-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 18px;
+      row-gap: 38px;
+    }
+
+    .gallery-item {
+      min-width: 0;
+      margin: 0;
+    }
+
+    .gallery-button {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      background: #e8e7e0;
+      cursor: zoom-in;
+    }
+
+    .gallery-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.5s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .gallery-button:hover img {
+      transform: scale(1.035);
+    }
+
+    .zoom-hint {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      background: rgba(251, 250, 247, 0.92);
+      color: var(--ink);
+      font-size: 18px;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .gallery-button:hover .zoom-hint,
+    .gallery-button:focus-visible .zoom-hint {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-caption {
+      padding-top: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .gallery-caption h3 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .image-index {
+      flex-shrink: 0;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    /* CLOSING NOTE */
+
+    .closing {
+      padding: 40px 0 70px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+    }
+
+    .closing a {
+      color: var(--ink);
+    }
+
+    .closing a:hover {
+      color: var(--accent);
+    }
+
+    /* LIGHTBOX */
+
+    .lightbox {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: none;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      padding: 20px clamp(14px, 4vw, 56px);
+      background: rgba(20, 25, 42, 0.97);
+      color: #fbfaf7;
+    }
+
+    .lightbox.is-open {
+      display: grid;
+    }
+
+    .lightbox-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      min-height: 48px;
+    }
+
+    .lightbox-counter {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    .lightbox-close {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 27px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .lightbox-stage {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) 48px;
+      align-items: center;
+      gap: clamp(8px, 2vw, 30px);
+    }
+
+    .lightbox-image-wrap {
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox-image {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .lightbox-nav {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .lightbox-bottom {
+      padding: 16px 0 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .lightbox-title {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .lightbox-help {
+      color: rgba(255,255,255,0.6);
+      font-family: var(--mono);
+      font-size: 10px;
+      text-align: right;
+    }
+
+    /* ACCESSIBILITY */
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (min-width: 1500px) {
+      main {
+        max-width: 1800px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding-top: 70px;
+      }
+
+      .hero-aside {
+        max-width: 520px;
+      }
+
+      .project-number {
+        margin-top: 18px;
+      }
+
+      .project-info {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px 14px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 38px minmax(0, 1fr) 38px;
+        gap: 6px;
+      }
+
+      .lightbox-nav {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .topbar {
+        min-height: 62px;
+      }
+
+      .top-label {
+        max-width: 145px;
+        font-size: 9px;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+
+      h1 {
+        font-size: clamp(42px, 13vw, 65px);
+      }
+
+      .gallery-heading,
+      .video-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .gallery-heading p,
+      .video-heading p {
+        text-align: left;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        row-gap: 28px;
+      }
+
+      .gallery-button {
+        aspect-ratio: 4 / 3;
+      }
+
+      .meta-row {
+        grid-template-columns: 90px 1fr;
+      }
+
+      .closing {
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .lightbox {
+        padding: 12px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 32px minmax(0, 1fr) 32px;
+        gap: 4px;
+      }
+
+      .lightbox-nav {
+        width: 30px;
+        height: 38px;
+        font-size: 19px;
+      }
+
+      .lightbox-bottom {
+        align-items: start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .lightbox-help {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- The back button -->
-    <div class="backBtn">
-        <a href="graphicdesigngrp.html">
-          <span class="line tLine"></span>
-          <span class="line mLine"></span>
-          <span class="label">Back</span>
-          <span class="line bLine"></span>
-        </a>
+
+  <!-- NAVIGATION -->
+  <header class="topbar">
+    <a class="back-link" href="graphicdesigngrp.html">
+      <span class="back-arrow" aria-hidden="true">←</span>
+      <span>Back to projects</span>
+    </a>
+
+    <div class="top-label">Selected work / Coding Interaction Design</div>
+  </header>
+
+  <main>
+
+    <!-- PROJECT INTRODUCTION -->
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Interaction · P5JS · 2026</p>
+
+        <h1>
+          BIOCODE
+          <span>LAB.</span>
+        </h1>
+      </div>
+
+      <div class="hero-aside">
+        <p>
+This project explores plant responses to touch through bio-digital experiments, translating biometric data and botanical sounds into generative visuals and audio using p5.js, TouchDesigner, and Arduino.
+        </p>
+
+        <span class="project-number">PROJECT — CODING INTERACTION DESIGN</span>
+      </div>
+    </section>
+
+    <!-- FEATURE IMAGE -->
+    <figure class="hero-artwork">
+      <button
+        type="button"
+        class="image-trigger"
+        data-image="Graphicdesign/biocodelab3.png"
+        data-title="Oh So Sushi — Game poster"
+        aria-label="Enlarge the Oh So Sushi game poster"
+      >
+        <img
+          src="Graphicdesign/Biocodelab3.png"
+          alt="Biocodelab3"
+          fetchpriority="high"
+        >
+      </button>
+    </figure>
+
+    <div class="artwork-caption">
+      <span>01 / BIOCODELAB SOUND SHEET</span>
+      <span>BIOCODE LAB — INTERACTION DESIGN</span>
     </div>
 
+    <!-- PROJECT STORY AND METADATA -->
+    <section class="project-info">
+      <div class="project-description">
+        <p class="section-label">01 — The concept</p>
 
-<div style="text-align:center" class="header-color">
-  <h2>Oh So Sushi Game Box & Card Design</h2>
-  <p>Click on the images below:</p>
-</div>
+        <h2>Building a sushi restaurant, one card at a time.</h2>
 
-<!-- The 4 columns -->
-<div class="row">
-  <div class="column">
-    <img src="Graphicdesign/ohsosushiposter-01.jpg" alt="Game poster" style="width:100%" onclick="myFunction(this);">
+        <p>
+          This research document records an early acoustic experiment uncovering the undisclosed mysteries of an ancient botanical specimen discovered today. Bridging archaic botany and contemporary sound science, the project investigates the plant’s biological response through three distinct physical methods of exploration: water application, stem fracture, and surface pressure. By translating these interactions into core behavioral notations, Flow, Fracture, and Compression, it reveals an unseen, resonant sound vocabulary hidden within living plant tissue.
+        </p>
+
+        <p>
+          Our multi-stage framework bridges human vitals, botanical structures, and generative code into dynamic visual and acoustic outputs. First, we used p5.js to translate human breath, pulse, and blinks into geometric patterns mimicking leaf stomata, sap flow, and phototropism. Next, we fed these biometric inputs and plant acoustics into TouchDesigner, distorting 2D/3D grids and
+point clouds to simulate cellular stress, fluid movement, and structural tension. We then built audio-driven animations where procedural 3D forms deform in real time to a biological sound chord based on Flow, Fracture, and Compression. Finally, we used Arduino leaf contact sensors to track real-time electrical impedance and touch micro-reactions, completing a unified bio-digital study.
+        </p>
+      </div>
+
+      <aside class="project-meta">
+        <div class="meta-row">
+          <span class="meta-label">Project</span>
+          <span class="meta-value">BIOCODE LAB Interactive Technology Design</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Discipline</span>
+          <span class="meta-value">Interaction Design<br>Technology Design<br>Graphic Design</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Tools</span>
+          <span class="meta-value">Adobe Illustrator<br>p5.js<br>TouchDesigner<br>Arduino</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Date</span>
+          <span class="meta-value">October 2026</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Deliverables</span>
+          <span class="meta-value">Interactive installation, visualizations, and audio experiences</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Theme</span>
+          <span class="meta-value">Plant responses to touch, bio-digital interaction, and generative design</span>
+        </div>
+      </aside>
+    </section>
+
+    <!-- VIDEO DEMONSTRATION -->
+    <section class="video-section" aria-labelledby="video-title">
+      <div class="video-heading">
+        <div>
+          <p class="section-label">02 — In action</p>
+          <h2 id="video-title">See the system come to life.</h2>
+        </div>
+
+        <p>
+          PROJECT DEMONSTRATION<br>
+          WATCH THE VIDEO ↗
+        </p>
+      </div>
+
+      <div class="video-wrapper">
+        <iframe
+          src="https://go.screenpal.com/player/cO6qF6nyYhI?ff=1&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1"
+          title="BIOCODE LAB — Project demonstration"
+          allow="fullscreen *;"
+          allowfullscreen
+          loading="lazy"
+          scrolling="no"
+        ></iframe>
+      </div>
+
+      <div class="video-caption">
+        <span>02 / PROJECT DEMONSTRATION</span>
+        <span>SCREENPAL VIDEO</span>
+      </div>
+    </section>
+
+    <!-- IMAGE GALLERY: 9 IMAGE SLOTS -->
+    <section class="gallery-section" aria-labelledby="gallery-title">
+      <div class="gallery-heading">
+        <div>
+          <p class="section-label">02 — The game in detail</p>
+          <h2 id="gallery-title">From cards to packaging.</h2>
+        </div>
+
+        <p>SELECT AN IMAGE TO EXPLORE<br>FULL-SIZE ARTWORK ↗</p>
+      </div>
+
+      <div class="gallery-grid">
+
+        <!-- IMAGE 01: EXISTING FILE -->
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/biocodelab5.png"
+            data-title="Biocodelab5"
+            aria-label="Enlarge Biocodelab5"
+          >
+            <img
+              src="Graphicdesign/biocodelab5.png"
+              alt="Biocodelab5"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Sound Sheet</h3>
+            <span class="image-index">02</span>
+          </figcaption>
+        </figure>
+
+        <!-- IMAGE 02: EXISTING FILE -->
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/biocodelab4.png"
+            data-title="Printed game packaging"
+            aria-label="Enlarge printed game packaging"
+          >
+            <img
+              src="Graphicdesign/biocodelab4.png"
+              alt="biocode"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Printed packaging</h3>
+            <span class="image-index">03</span>
+          </figcaption>
+        </figure>
+
+        <!-- IMAGE 03: EXISTING FILE -->
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/biocodelab2.png"
+            data-title="Game box design"
+            aria-label="Enlarge game box design"
+          >
+            <img
+              src="Graphicdesign/biocodelab2.png"
+              alt="biocode"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Game box design</h3>
+            <span class="image-index">04</span>
+          </figcaption>
+        </figure>
+
+        <!-- IMAGE 04: EXISTING FILE -->
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/biocodelab7.png"
+            data-title="Playing card design"
+            aria-label="Enlarge playing card design"
+          >
+            <img
+              src="Graphicdesign/biocodelab7.png"
+              alt="biocode"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Playing card design</h3>
+            <span class="image-index">05</span>
+          </figcaption>
+        </figure>
+
+        <!-- IMAGE 05: PLACEHOLDER -->
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/biocodelab9.png"
+            data-title="Image placeholder 05"
+            aria-label="Enlarge image 05"
+          >
+            <img
+              src="Graphicdesign/biocodelab9.png"
+              alt="biocode"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Additional artwork 01</h3>
+            <span class="image-index">06</span>
+          </figcaption>
+        </figure>
+
+        <!-- IMAGE 06: PLACEHOLDER -->
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/biocodelab8.png"
+            data-title="Image placeholder 06"
+            aria-label="Enlarge image 06"
+          >
+            <img
+              src="Graphicdesign/biocodelab8.png"
+              alt="biocode"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Additional artwork 02</h3>
+            <span class="image-index">07</span>
+          </figcaption>
+        </figure>
+
+        <!-- IMAGE 07: PLACEHOLDER -->
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/biocodelab6.png"
+            data-title="Image placeholder 07"
+            aria-label="Enlarge image 07"
+          >
+            <img
+              src="Graphicdesign/biocodelab6.png"
+              alt="biocode"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Additional artwork 03</h3>
+            <span class="image-index">08</span>
+          </figcaption>
+        </figure>
+
+        <!-- IMAGE 08: PLACEHOLDER -->
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/biocodelab.png"
+            data-title="Image placeholder 08"
+            aria-label="Enlarge image 08"
+          >
+            <img
+              src="Graphicdesign/biocodelab.png"
+              alt="biocode"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Additional artwork 04</h3>
+            <span class="image-index">09</span>
+          </figcaption>
+        </figure>
+
+        <!-- IMAGE 09: PLACEHOLDER -->
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/biocodelab10.jpg"
+            data-title="Image placeholder 09"
+            aria-label="Enlarge image 09"
+          >
+            <img
+              src="Graphicdesign/biocodelab10.jpg"
+              alt="biocode"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Additional artwork 05</h3>
+            <span class="image-index">10</span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="closing">
+      <span>BIOCODE LAB — INTERACTION DESIGN / 2021</span>
+      <a href="graphicdesigngrp.html">← Back to selected work</a>
+    </footer>
+
+  </main>
+
+  <!-- FULL-SCREEN IMAGE VIEWER -->
+  <div
+    class="lightbox"
+    id="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Artwork image viewer"
+    aria-hidden="true"
+  >
+    <div class="lightbox-top">
+      <span class="lightbox-counter" id="lightboxCounter">01 / 10</span>
+
+      <button
+        class="lightbox-close"
+        id="lightboxClose"
+        type="button"
+        aria-label="Close image viewer"
+      >×</button>
+    </div>
+
+    <div class="lightbox-stage">
+      <button
+        class="lightbox-nav"
+        id="lightboxPrev"
+        type="button"
+        aria-label="Previous image"
+      >‹</button>
+
+      <div class="lightbox-image-wrap">
+        <img class="lightbox-image" id="lightboxImage" src="" alt="">
+      </div>
+
+      <button
+        class="lightbox-nav"
+        id="lightboxNext"
+        type="button"
+        aria-label="Next image"
+      >›</button>
+    </div>
+
+    <div class="lightbox-bottom">
+      <p class="lightbox-title" id="lightboxTitle"></p>
+      <span class="lightbox-help">USE ← → TO NAVIGATE · ESC TO CLOSE</span>
+    </div>
   </div>
-  <div class="column">
-    <img src="Graphicdesign/ohsosushi1.png" alt="Printed onto the packaging" style="width:100%" onclick="myFunction(this);">
-  </div>
-  <div class="column">
-    <img src="Graphicdesign/Ohsosushi3.png" alt="Design on the box" style="width:100%" onclick="myFunction(this);">
-  </div>
-  <div class="column">
-    <img src="Graphicdesign/Ohsosushi2.png" alt="Card design" style="width:100%" onclick="myFunction(this);">
-  </div>
-</div>
 
-<div class="container">
-  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
-  <div id="imgtext"></div>
-</div>
+  <script>
+    (() => {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightboxImage");
+      const lightboxTitle = document.getElementById("lightboxTitle");
+      const lightboxCounter = document.getElementById("lightboxCounter");
+      const closeButton = document.getElementById("lightboxClose");
+      const prevButton = document.getElementById("lightboxPrev");
+      const nextButton = document.getElementById("lightboxNext");
 
-<!-- The img desc -->
-<div class="imgdesc" style="color:rgb(0, 0, 0)" >
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">Medium: Adobe Illustrator. Nov 2021.</p>
+      const triggers = Array.from(
+        document.querySelectorAll(".image-trigger")
+      );
 
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">Theme: Every player is a chef at a sushi restaurant! In order to open the sushi restaurant, 
-a chef needs ingredients and items on their menu. They will have to earn 
-themselves different popular sushi ingredients and build their sushi to add to 
-the menu. At the same time, take down their competitors and open the best 
-sushi restaurant on the street</p>
-</div>
+      let currentIndex = 0;
+      let lastFocusedElement = null;
 
+      const images = triggers.map((trigger) => {
+        const image = trigger.querySelector("img");
 
-<script>
-function myFunction(imgs) {
-  var expandImg = document.getElementById("expandedImg");
-  var imgText = document.getElementById("imgtext");
-  expandImg.src = imgs.src;
-  imgText.innerHTML = imgs.alt;
-  expandImg.parentElement.style.display = "block";
-}
-</script>
+        return {
+          src: trigger.dataset.image,
+          title: trigger.dataset.title,
+          alt: image ? image.alt : trigger.dataset.title
+        };
+      });
+
+      function showImage(index) {
+        currentIndex = (index + images.length) % images.length;
+
+        const image = images[currentIndex];
+
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.alt;
+        lightboxTitle.textContent = image.title;
+
+        lightboxCounter.textContent =
+          String(currentIndex + 1).padStart(2, "0") +
+          " / " +
+          String(images.length).padStart(2, "0");
+
+        // Preload adjacent images for smoother navigation.
+        [currentIndex + 1, currentIndex - 1].forEach((i) => {
+          const adjacent = images[(i + images.length) % images.length];
+          const preload = new Image();
+          preload.src = adjacent.src;
+        });
+      }
+
+      function openLightbox(index) {
+        lastFocusedElement = document.activeElement;
+
+        showImage(index);
+
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.classList.add("lightbox-open");
+
+        closeButton.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("lightbox-open");
+
+        lightboxImage.src = "";
+
+        if (lastFocusedElement) {
+          lastFocusedElement.focus();
+        }
+      }
+
+      function nextImage() {
+        showImage(currentIndex + 1);
+      }
+
+      function previousImage() {
+        showImage(currentIndex - 1);
+      }
+
+      triggers.forEach((trigger, index) => {
+        trigger.addEventListener("click", () => {
+          openLightbox(index);
+        });
+      });
+
+      closeButton.addEventListener("click", closeLightbox);
+      nextButton.addEventListener("click", nextImage);
+      prevButton.addEventListener("click", previousImage);
+
+      // Close when clicking the dark background.
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      // Keyboard navigation.
+      document.addEventListener("keydown", (event) => {
+        if (!lightbox.classList.contains("is-open")) return;
+
+        if (event.key === "Escape") {
+          closeLightbox();
+        } else if (event.key === "ArrowRight") {
+          nextImage();
+        } else if (event.key === "ArrowLeft") {
+          previousImage();
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>
+```
