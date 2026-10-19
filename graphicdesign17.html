@@ -1,300 +1,1159 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
+  <title>XIN.BETA — Branding & Experiential Design | Portfolio</title>
 
-<style>
-* {
-  box-sizing: border-box;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-body {
-  margin: 0;
-  font-family: 'Ubuntu', sans-serif;
-  background: #ff7259;
-}
+  <style>
+    :root {
+      --bg: #f5f4ef;
+      --paper: #fbfaf7;
+      --ink: #202c50;
+      --muted: #777b86;
+      --line: #dcdcd5;
+      --accent: #e87528;
+      --gutter: clamp(16px, 3.5vw, 56px);
+      --mono: "DM Mono", monospace;
+      --sans: "Manrope", sans-serif;
+    }
 
-.imgdesc {
-  font-family: 'Ubuntu', sans-serif;
-  text-align: center;
-  background: #f33030;
-  padding: 20px 0;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-/* FLEX GRID */
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 -10px;
-}
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
 
-.column {
-  flex: 0 0 25%;
-  padding: 10px;
-}
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* Images styling */
-.column img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  display: block;
-  opacity: 0.9;
-  transition: opacity 0.3s ease;
-  cursor: pointer;
-}
+    body.lightbox-open {
+      overflow: hidden;
+    }
 
-.column img:hover {
-  opacity: 1;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-/* EXPANDING IMAGE */
-.container {
-  position: relative;
-  display: none;
-  padding: 20px;
-}
+    button {
+      font: inherit;
+    }
 
-#expandedImg {
-  display: block;
-  margin: auto;
-  width: 50%;
-  border-radius: 10px;
-}
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
-#imgtext {
-  text-align: center;
-  margin-top: 10px;
-  color: rgb(93, 38, 112);
-  font-size: 18px;
-}
+    /* NAVIGATION */
 
-.closebtn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  color: white;
-  font-size: 35px;
-  cursor: pointer;
-}
+    .topbar {
+      min-height: 76px;
+      padding: 0 var(--gutter);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
 
-/* BACK BUTTON */
-div.backBtn {
-  width: 100px;
-  right: 100px;
-  top: 30px;
-  background-color: #f4f4f4;
-  transition: all 0.4s ease;
-  position: fixed;
-  cursor: pointer;
-  z-index: 1000;
-}
+    .back-link,
+    .top-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
-span.line {
-  background-color: #8f7373;
-  border-radius: 10px;
-  width: 100%;
-  height: 2px;
-  display: block;
-  position: absolute;
-  transition: all 0.3s ease;
-}
+    .back-link {
+      transition: opacity 0.2s ease;
+    }
 
-span.tLine { top: 0px; }
-span.mLine { top: 13px; opacity: 0; }
-span.bLine { top: 26px; }
+    .back-link:hover {
+      opacity: 0.55;
+    }
 
-.label {
-  position: absolute;
-  top: 5px;
-  width: 100%;
-  text-align: center;
-  font-size: 1em;
-  color: rgb(123, 123, 123);
-}
+    .back-arrow {
+      font-size: 19px;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
 
-.header-color { 
-  color: rgb(44, 34, 79); 
-  padding-top: 30px;
-}
+    .back-link:hover .back-arrow {
+      transform: translateX(-4px);
+    }
 
-/* DESCRIPTION TEXT */
-.imgdesc p {
-  margin: auto;
-  max-width: 700px;
-  padding: 10px;
-  line-height: 1.6;
-}
+    .top-label {
+      color: var(--muted);
+      text-align: right;
+    }
 
-/* RESPONSIVE */
-@media screen and (max-width: 768px) {
-  .column { flex: 0 0 50%; }
-  #expandedImg { width: 90%; }
-  .imgdesc p { width: 90%; }
-}
+    /* MAIN CONTENT */
 
-@media screen and (max-width: 480px) {
-  .column { flex: 0 0 100%; }
-  #expandedImg { width: 95%; }
-  .imgdesc p { width: 95%; font-size: 14px; }
+    main {
+      width: 100%;
+      padding: 0 var(--gutter);
+    }
 
-  div.backBtn { 
-    top: 10px; 
-    left: 10px; 
-    right: auto; 
-    width: 70px; 
-  }
-}
-</style>
+    .hero {
+      padding: clamp(48px, 9vw, 120px) 0 52px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(220px, 0.65fr);
+      gap: clamp(28px, 6vw, 100px);
+      align-items: end;
+    }
+
+    .eyebrow,
+    .section-label,
+    .meta-label,
+    .image-index {
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.6;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      margin: 0 0 26px;
+      color: var(--accent);
+    }
+
+    h1 {
+      max-width: 950px;
+      margin: 0;
+      font-size: clamp(42px, 8.5vw, 112px);
+      font-weight: 600;
+      line-height: 0.94;
+      letter-spacing: -0.085em;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--accent);
+    }
+
+    .hero-aside {
+      padding-bottom: 5px;
+    }
+
+    .hero-aside p {
+      margin: 0;
+      max-width: 360px;
+      color: #565d6d;
+      font-size: clamp(14px, 1.2vw, 16px);
+      line-height: 1.9;
+    }
+
+    .project-number {
+      display: block;
+      margin-top: 32px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    /* HERO IMAGE */
+
+    .hero-artwork {
+      position: relative;
+      margin: 0;
+      background: #eee6dc;
+      overflow: hidden;
+    }
+
+    .hero-artwork button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: zoom-in;
+    }
+
+    .hero-artwork img {
+      width: 100%;
+      max-height: 820px;
+      object-fit: contain;
+      margin: auto;
+      transition: transform 0.65s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .hero-artwork button:hover img {
+      transform: scale(1.015);
+    }
+
+    .artwork-caption {
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.7;
+      letter-spacing: 0.04em;
+    }
+
+    /* PROJECT INFORMATION */
+
+    .project-info {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: clamp(32px, 8vw, 130px);
+      padding: clamp(64px, 10vw, 130px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-label {
+      margin: 0 0 25px;
+      color: var(--accent);
+    }
+
+    h2 {
+      margin: 0 0 24px;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 500;
+      letter-spacing: -0.065em;
+      line-height: 1.1;
+    }
+
+    .project-description p {
+      max-width: 650px;
+      margin: 0 0 18px;
+      color: #565d6d;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .project-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-meta {
+      display: grid;
+      align-content: start;
+      gap: 0;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+      padding: 17px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .meta-label {
+      color: var(--muted);
+    }
+
+    .meta-value {
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    /* GALLERY */
+
+    .gallery-section {
+      padding: clamp(64px, 9vw, 110px) 0;
+    }
+
+    .gallery-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+
+    .gallery-heading h2 {
+      margin: 0;
+    }
+
+    .gallery-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 18px;
+      row-gap: 38px;
+    }
+
+    .gallery-item {
+      min-width: 0;
+      margin: 0;
+    }
+
+    .gallery-button {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      background: #eee6dc;
+      cursor: zoom-in;
+    }
+
+    .gallery-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.5s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .gallery-button:hover img {
+      transform: scale(1.035);
+    }
+
+    .zoom-hint {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      background: rgba(251, 250, 247, 0.92);
+      color: var(--ink);
+      font-size: 18px;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .gallery-button:hover .zoom-hint,
+    .gallery-button:focus-visible .zoom-hint {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-caption {
+      padding-top: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .gallery-caption h3 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .image-index {
+      flex-shrink: 0;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    /* CLOSING */
+
+    .closing {
+      padding: 40px 0 70px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+    }
+
+    .closing a {
+      color: var(--ink);
+    }
+
+    .closing a:hover {
+      color: var(--accent);
+    }
+
+    /* LIGHTBOX */
+
+    .lightbox {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: none;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      padding: 20px clamp(14px, 4vw, 56px);
+      background: rgba(20, 25, 42, 0.97);
+      color: #fbfaf7;
+    }
+
+    .lightbox.is-open {
+      display: grid;
+    }
+
+    .lightbox-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      min-height: 48px;
+    }
+
+    .lightbox-counter {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    .lightbox-close {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 27px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .lightbox-stage {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) 48px;
+      align-items: center;
+      gap: clamp(8px, 2vw, 30px);
+    }
+
+    .lightbox-image-wrap {
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox-image {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .lightbox-nav {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .lightbox-bottom {
+      padding: 16px 0 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .lightbox-title {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .lightbox-help {
+      color: rgba(255,255,255,0.6);
+      font-family: var(--mono);
+      font-size: 10px;
+      text-align: right;
+    }
+
+    /* ACCESSIBILITY */
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (min-width: 1500px) {
+      main {
+        max-width: 1800px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding-top: 70px;
+      }
+
+      .hero-aside {
+        max-width: 520px;
+      }
+
+      .project-number {
+        margin-top: 18px;
+      }
+
+      .project-info {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px 14px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 38px minmax(0, 1fr) 38px;
+        gap: 6px;
+      }
+
+      .lightbox-nav {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .topbar {
+        min-height: 62px;
+      }
+
+      .top-label {
+        max-width: 145px;
+        font-size: 9px;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+
+      h1 {
+        font-size: clamp(42px, 13vw, 65px);
+      }
+
+      .gallery-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .gallery-heading p {
+        text-align: left;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        row-gap: 28px;
+      }
+
+      .meta-row {
+        grid-template-columns: 90px 1fr;
+      }
+
+      .closing {
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .lightbox {
+        padding: 12px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 32px minmax(0, 1fr) 32px;
+        gap: 4px;
+      }
+
+      .lightbox-nav {
+        width: 30px;
+        height: 38px;
+        font-size: 19px;
+      }
+
+      .lightbox-bottom {
+        align-items: start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .lightbox-help {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- BACK BUTTON -->
-<div class="backBtn">
-  <a href="graphicdesigngrp.html">
-    <span class="line tLine"></span>
-    <span class="line mLine"></span>
-    <span class="label">Back</span>
-    <span class="line bLine"></span>
-  </a>
-</div>
+  <!-- NAVIGATION -->
+  <header class="topbar">
+    <a class="back-link" href="graphicdesigngrp.html">
+      <span class="back-arrow" aria-hidden="true">←</span>
+      <span>Back to projects</span>
+    </a>
 
-<!-- PAGE TITLE -->
-<div style="text-align:center" class="header-color">
-  <h2>XIN.BETA</h2>
-  <p>Click on the images below:</p>
-</div>
+    <div class="top-label">Selected work / Experiential design</div>
+  </header>
 
-<!-- IMAGE GRID -->
-<div class="row">
+  <main>
 
-  <div class="column">
-    <img src="Graphicdesign/TCMsign.jpg" alt="Image 1" onclick="myFunction(this);">
+    <!-- PROJECT INTRODUCTION -->
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Experiential design · TCM · May 2026</p>
+
+        <h1>
+          XIN<span>.BETA</span>
+        </h1>
+      </div>
+
+      <div class="hero-aside">
+        <p>
+          Reimagining Traditional Chinese Medicine as a dynamic,
+          experience-led framework for contemporary balance, designed
+          around Gen Z sensibilities and everyday interaction.
+        </p>
+
+        <span class="project-number">PROJECT — CULTURAL EXPERIENCE</span>
+      </div>
+    </section>
+
+    <!-- FEATURE IMAGE -->
+    <figure class="hero-artwork">
+      <button
+        type="button"
+        class="image-trigger"
+        data-image="Graphicdesign/TCMsign.jpg"
+        data-title="XIN.BETA — Project signage"
+        aria-label="Enlarge the XIN.BETA project signage"
+      >
+        <img
+          src="Graphicdesign/TCMsign.jpg"
+          alt="XIN.BETA project signage and visual identity"
+          fetchpriority="high"
+        >
+      </button>
+    </figure>
+
+    <div class="artwork-caption">
+      <span>01 / PROJECT SIGNAGE</span>
+      <span>XIN.BETA — TCM REIMAGINED</span>
+    </div>
+
+    <!-- PROJECT STORY AND METADATA -->
+    <section class="project-info">
+      <div class="project-description">
+        <p class="section-label">01 — The concept</p>
+
+        <h2>Making cultural wisdom part of everyday life.</h2>
+
+        <p>
+          XIN.BETA repositions Traditional Chinese Medicine (TCM) as a
+          dynamic, experience-led framework for contemporary balance,
+          designed specifically for Gen Z sensibilities.
+        </p>
+
+        <p>
+          Rather than preserving TCM as a fixed or historical system,
+          the project reframes it as a living cultural language—fluid,
+          interpretable and embedded within everyday interaction. Its
+          core ambition is to shift perception from instruction to
+          immersion, allowing users to understand principles such as
+          yin-yang balance, energy flow and elemental harmony through
+          intuitive, sensory engagement rather than clinical explanation.
+        </p>
+
+        <p>
+          Through playful interfaces, interactive rituals and
+          context-aware experiences, XIN.BETA translates abstract
+          wellness philosophies into tangible, accessible moments
+          within daily life. This approach encourages users to engage
+          with health not as a set of rules, but as an evolving dialogue
+          between body, environment and behaviour. In doing so, it
+          challenges dominant Western-centric models of modern medicine
+          that often prioritise separation between mind, body and culture.
+        </p>
+
+        <p>
+          Instead, the project positions TCM as adaptive and
+          future-facing—capable of coexisting with digital lifestyles,
+          social platforms and hybrid realities. It draws on cultural
+          heritage not as nostalgia, but as a design resource for
+          innovation, reframing tradition as a tool for experimentation.
+          Ultimately, XIN.BETA proposes a shift in how wellness systems
+          are experienced: from static knowledge to embodied exploration,
+          where balance becomes something learned through participation,
+          not prescription.
+        </p>
+      </div>
+
+      <aside class="project-meta">
+        <div class="meta-row">
+          <span class="meta-label">Project</span>
+          <span class="meta-value">
+            XIN.BETA<br>
+            Contemporary TCM experience
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Discipline</span>
+          <span class="meta-value">
+            Experiential design<br>
+            Visual identity & communication<br>
+            Cultural interpretation<br>
+            Interactive touchpoints
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Approach</span>
+          <span class="meta-value">
+            Playful interfaces<br>
+            Interactive rituals<br>
+            Sensory engagement
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Audience</span>
+          <span class="meta-value">Generation Z</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Date</span>
+          <span class="meta-value">May 2026</span>
+        </div>
+      </aside>
+    </section>
+
+    <!-- IMAGE GALLERY -->
+    <section class="gallery-section" aria-labelledby="gallery-title">
+      <div class="gallery-heading">
+        <div>
+          <p class="section-label">02 — The visual system</p>
+          <h2 id="gallery-title">From tradition to interaction.</h2>
+        </div>
+
+        <p>
+          SELECT AN IMAGE TO EXPLORE<br>
+          FULL-SIZE ARTWORK ↗
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+
+        <figure class="gallery-item">
+          <button type="button" class="gallery-button image-trigger"
+            data-image="Graphicdesign/TCMposter.jpg"
+            data-title="Campaign poster"
+            aria-label="Enlarge XIN.BETA campaign poster">
+            <img src="Graphicdesign/TCMposter.jpg"
+              alt="XIN.BETA campaign poster" loading="lazy">
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Campaign poster</h3>
+            <span class="image-index">02</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button type="button" class="gallery-button image-trigger"
+            data-image="Graphicdesign/togethershot.jpg"
+            data-title="XIN.BETA experience overview"
+            aria-label="Enlarge XIN.BETA experience overview">
+            <img src="Graphicdesign/togethershot.jpg"
+              alt="XIN.BETA installation and experience overview" loading="lazy">
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Experience overview</h3>
+            <span class="image-index">03</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button type="button" class="gallery-button image-trigger"
+            data-image="Graphicdesign/takefortune.jpg"
+            data-title="Fortune cards"
+            aria-label="Enlarge XIN.BETA fortune cards">
+            <img src="Graphicdesign/takefortune.jpg"
+              alt="XIN.BETA fortune cards and interactive ritual" loading="lazy">
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Fortune cards</h3>
+            <span class="image-index">04</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button type="button" class="gallery-button image-trigger"
+            data-image="Graphicdesign/redpackets.jpg"
+            data-title="Red packet series"
+            aria-label="Enlarge XIN.BETA red packet designs">
+            <img src="Graphicdesign/redpackets.jpg"
+              alt="XIN.BETA red packet designs" loading="lazy">
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Red packet series</h3>
+            <span class="image-index">05</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button type="button" class="gallery-button image-trigger"
+            data-image="Graphicdesign/cupnoodles.jpg"
+            data-title="Cup noodle packaging"
+            aria-label="Enlarge XIN.BETA cup noodle packaging">
+            <img src="Graphicdesign/cupnoodles.jpg"
+              alt="XIN.BETA cup noodle packaging" loading="lazy">
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Cup noodle packaging</h3>
+            <span class="image-index">06</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button type="button" class="gallery-button image-trigger"
+            data-image="Graphicdesign/cardcloseup.jpg"
+            data-title="Card details"
+            aria-label="Enlarge XIN.BETA card details">
+            <img src="Graphicdesign/cardcloseup.jpg"
+              alt="Close-up of XIN.BETA cards" loading="lazy">
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Card details</h3>
+            <span class="image-index">07</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button type="button" class="gallery-button image-trigger"
+            data-image="Graphicdesign/can.jpg"
+            data-title="Beverage can"
+            aria-label="Enlarge XIN.BETA beverage can">
+            <img src="Graphicdesign/can.jpg"
+              alt="XIN.BETA beverage can design" loading="lazy">
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Beverage can</h3>
+            <span class="image-index">08</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button type="button" class="gallery-button image-trigger"
+            data-image="Graphicdesign/boxes.jpg"
+            data-title="Packaging boxes"
+            aria-label="Enlarge XIN.BETA packaging boxes">
+            <img src="Graphicdesign/boxes.jpg"
+              alt="XIN.BETA packaging boxes" loading="lazy">
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Packaging boxes</h3>
+            <span class="image-index">09</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button type="button" class="gallery-button image-trigger"
+            data-image="Graphicdesign/TCM1.png"
+            data-title="TCM character study 01"
+            aria-label="Enlarge first TCM character illustration">
+            <img src="Graphicdesign/TCM1.png"
+              alt="XIN.BETA TCM character illustration one" loading="lazy">
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Character study 01</h3>
+            <span class="image-index">10</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button type="button" class="gallery-button image-trigger"
+            data-image="Graphicdesign/TCM2.png"
+            data-title="TCM character study 02"
+            aria-label="Enlarge second TCM character illustration">
+            <img src="Graphicdesign/TCM2.png"
+              alt="XIN.BETA TCM character illustration two" loading="lazy">
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Character study 02</h3>
+            <span class="image-index">11</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button type="button" class="gallery-button image-trigger"
+            data-image="Graphicdesign/TCM3.png"
+            data-title="TCM character study 03"
+            aria-label="Enlarge third TCM character illustration">
+            <img src="Graphicdesign/TCM3.png"
+              alt="XIN.BETA TCM character illustration three" loading="lazy">
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Character study 03</h3>
+            <span class="image-index">12</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button type="button" class="gallery-button image-trigger"
+            data-image="Graphicdesign/TCM4.png"
+            data-title="TCM character study 04"
+            aria-label="Enlarge fourth TCM character illustration">
+            <img src="Graphicdesign/TCM4.png"
+              alt="XIN.BETA TCM character illustration four" loading="lazy">
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+          <figcaption class="gallery-caption">
+            <h3>Character study 04</h3>
+            <span class="image-index">13</span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="closing">
+      <span>XIN.BETA — CULTURAL & EXPERIENTIAL DESIGN</span>
+      <a href="graphicdesigngrp.html">← Back to selected work</a>
+    </footer>
+
+  </main>
+
+  <!-- FULL-SCREEN IMAGE VIEWER -->
+  <div
+    class="lightbox"
+    id="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Artwork image viewer"
+    aria-hidden="true"
+  >
+    <div class="lightbox-top">
+      <span class="lightbox-counter" id="lightboxCounter">01 / 13</span>
+
+      <button
+        class="lightbox-close"
+        id="lightboxClose"
+        type="button"
+        aria-label="Close image viewer"
+      >×</button>
+    </div>
+
+    <div class="lightbox-stage">
+      <button
+        class="lightbox-nav"
+        id="lightboxPrev"
+        type="button"
+        aria-label="Previous image"
+      >‹</button>
+
+      <div class="lightbox-image-wrap">
+        <img class="lightbox-image" id="lightboxImage" src="" alt="">
+      </div>
+
+      <button
+        class="lightbox-nav"
+        id="lightboxNext"
+        type="button"
+        aria-label="Next image"
+      >›</button>
+    </div>
+
+    <div class="lightbox-bottom">
+      <p class="lightbox-title" id="lightboxTitle"></p>
+      <span class="lightbox-help">USE ← → TO NAVIGATE · ESC TO CLOSE</span>
+    </div>
   </div>
 
-  <div class="column">
-    <img src="Graphicdesign/TCMposter.jpg" alt="Image 2" onclick="myFunction(this);">
-  </div>
+  <script>
+    (() => {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightboxImage");
+      const lightboxTitle = document.getElementById("lightboxTitle");
+      const lightboxCounter = document.getElementById("lightboxCounter");
+      const closeButton = document.getElementById("lightboxClose");
+      const prevButton = document.getElementById("lightboxPrev");
+      const nextButton = document.getElementById("lightboxNext");
 
-  <div class="column">
-    <img src="Graphicdesign/togethershot.jpg" alt="Image 3" onclick="myFunction(this);">
-  </div>
+      const triggers = Array.from(
+        document.querySelectorAll(".image-trigger")
+      );
 
-  <div class="column">
-    <img src="Graphicdesign/takefortune.jpg" alt="Image 4" onclick="myFunction(this);">
-  </div>
+      let currentIndex = 0;
+      let lastFocusedElement = null;
 
-</div>
+      const images = triggers.map((trigger) => {
+        const image = trigger.querySelector("img");
 
-<div class="row">
+        return {
+          src: trigger.dataset.image,
+          title: trigger.dataset.title,
+          alt: image ? image.alt : trigger.dataset.title
+        };
+      });
 
-  <div class="column">
-    <img src="Graphicdesign/redpackets.jpg" alt="Image 5" onclick="myFunction(this);">
-  </div>
+      function showImage(index) {
+        currentIndex = (index + images.length) % images.length;
 
-  <div class="column">
-    <img src="Graphicdesign/cupnoodles.jpg" alt="Image 6" onclick="myFunction(this);">
-  </div>
+        const image = images[currentIndex];
 
-  <div class="column">
-    <img src="Graphicdesign/cardcloseup.jpg" alt="Image 7" onclick="myFunction(this);">
-  </div>
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.alt;
+        lightboxTitle.textContent = image.title;
 
-  <div class="column">
-    <img src="Graphicdesign/can.jpg" alt="Image 8" onclick="myFunction(this);">
-  </div>
+        lightboxCounter.textContent =
+          String(currentIndex + 1).padStart(2, "0") +
+          " / " +
+          String(images.length).padStart(2, "0");
 
-</div>
+        [currentIndex + 1, currentIndex - 1].forEach((i) => {
+          const adjacent = images[(i + images.length) % images.length];
+          const preload = new Image();
+          preload.src = adjacent.src;
+        });
+      }
 
-<div class="row">
+      function openLightbox(index) {
+        lastFocusedElement = document.activeElement;
+        showImage(index);
 
-  <div class="column">
-    <img src="Graphicdesign/boxes.jpg" alt="Image 5" onclick="myFunction(this);">
-  </div>
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.classList.add("lightbox-open");
 
-  <div class="column">
-    <img src="Graphicdesign/TCM1.png" alt="Image 6" onclick="myFunction(this);">
-  </div>
+        closeButton.focus();
+      }
 
-  <div class="column">
-    <img src="Graphicdesign/TCM2.png" alt="Image 7" onclick="myFunction(this);">
-  </div>
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("lightbox-open");
+        lightboxImage.src = "";
 
-  <div class="column">
-    <img src="Graphicdesign/TCM3.png" alt="Image 8" onclick="myFunction(this);">
-  </div>
+        if (lastFocusedElement) {
+          lastFocusedElement.focus();
+        }
+      }
 
-</div>
+      function nextImage() {
+        showImage(currentIndex + 1);
+      }
 
-<div class="row">
+      function previousImage() {
+        showImage(currentIndex - 1);
+      }
 
-  <div class="column">
-    <img src="Graphicdesign/TCM4.png" alt="Image 5" onclick="myFunction(this);">
-  </div>
+      triggers.forEach((trigger, index) => {
+        trigger.addEventListener("click", () => {
+          openLightbox(index);
+        });
+      });
 
-</div>
+      closeButton.addEventListener("click", closeLightbox);
+      nextButton.addEventListener("click", nextImage);
+      prevButton.addEventListener("click", previousImage);
 
-<!-- EXPANDING IMAGE -->
-<div class="container">
-  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
 
-  <img id="expandedImg">
+      document.addEventListener("keydown", (event) => {
+        if (!lightbox.classList.contains("is-open")) return;
 
-  <div id="imgtext"></div>
-</div>
-
-<!-- IMAGE DESCRIPTION -->
-<div class="imgdesc">
-
-  <p>May 2026</p>
-
-  <p>XIN.BETA</p>
-
-  <p>
-    XIN.BETA repositions Traditional Chinese Medicine (TCM) as a dynamic, experience-led framework for contemporary balance, 
-    designed specifically for Gen Z sensibilities.
-  </p>
-
-  <p>
-    Rather than preserving TCM as a fixed or historical system, the project reframes it as a living cultural language—fluid, 
-    interpretable and embedded within everyday interaction. Its core ambition is to shift perception from instruction to immersion, 
-    allowing users to understand principles such as yin-yang balance, energy flow and elemental harmony through intuitive, 
-    sensory engagement rather than clinical explanation.
-  </p>
-
-  <p>
-    Through playful interfaces, interactive rituals and context-aware experiences, XIN.BETA translates abstract wellness philosophies 
-    into tangible, accessible moments within daily life. This approach encourages users to engage with health not as a set of rules, 
-    but as an evolving dialogue between body, environment and behaviour. In doing so, it challenges dominant Western-centric models 
-    of modern medicine that often prioritise separation between mind, body and culture.
-  </p>
-
-    <p>
-    Instead, the project positions TCM as adaptive and future-facing—capable of coexisting with digital lifestyles, social platforms 
-    and hybrid realities. It draws on cultural heritage not as nostalgia, but as a design resource for innovation, reframing tradition 
-    as a tool for experimentation. Ultimately, XIN.BETA proposes a shift in how wellness systems are experienced: from static knowledge 
-    to embodied exploration, where balance becomes something learned through participation, not prescription.
-  </p>
-
-</div>
-
-<script>
-function myFunction(imgs) {
-
-  var expandImg = document.getElementById("expandedImg");
-  var imgText = document.getElementById("imgtext");
-
-  expandImg.src = imgs.src;
-  imgText.innerHTML = imgs.alt;
-
-  expandImg.parentElement.style.display = "block";
-}
-</script>
+        if (event.key === "Escape") {
+          closeLightbox();
+        } else if (event.key === "ArrowRight") {
+          nextImage();
+        } else if (event.key === "ArrowLeft") {
+          previousImage();
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>
