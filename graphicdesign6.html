@@ -1,245 +1,1520 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
-<style>
+  <title>Find Boni — Portfolio</title>
 
-  
-* {
-  box-sizing: border-box;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-body {
-  margin: 0;
-  font-family: 'Ubuntu', sans-serif;
-  
-  background:  #7c5ab4;
+  <style>
+    :root {
+      --bg: #f5f4ef;
+      --paper: #fbfaf7;
+      --ink: #202c50;
+      --muted: #777b86;
+      --line: #dcdcd5;
+      --accent: #e87528;
+      --gutter: clamp(16px, 3.5vw, 56px);
+      --mono: "DM Mono", monospace;
+      --sans: "Manrope", sans-serif;
+    }
 
-}
+    * {
+      box-sizing: border-box;
+    }
 
-.imgdesc {
-  font-family: 'Ubuntu', sans-serif;
-  text-align: center;
-  background: #9173b3;
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
 
-}
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* The grid: Four equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 25%;
-  padding: 10px;
-}
+    body.lightbox-open {
+      overflow: hidden;
+    }
 
-/* Style the images inside the grid */
-.column img {
-  opacity: 0.8; 
-  cursor: pointer; 
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-.column img:hover {
-  opacity: 1;
-}
+    button {
+      font: inherit;
+    }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
-/* The expanding image container */
-.container {
-  position: relative;
-  display: none;
-}
+    /* NAVIGATION */
 
-/* Expanding image text */
-#imgtext {
-  position: absolute;
-  bottom: 15px;
-  left: 600px;
-  color: rgb(93, 38, 112);
-  font-size: 20px;
-}
+    .topbar {
+      min-height: 76px;
+      padding: 0 var(--gutter);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
 
-/* Closable button inside the expanded image */
-.closebtn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  color: white;
-  font-size: 35px;
-  cursor: pointer;
-}
+    .back-link,
+    .top-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
+    .back-link {
+      transition: opacity 0.2s ease;
+    }
 
+    .back-link:hover {
+      opacity: 0.55;
+    }
 
-/* CSS for back button */
-div.backBtn {
-    width: 100px;
-    right: 100px;
-    top: 30px;
-    background-color: #f4f4f4;
-    transition: all 0.4s ease;
-    position: fixed;
-    cursor: pointer;
-  }
+    .back-arrow {
+      font-size: 19px;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
 
-  span.line {
-    bottom: auto;
-    right: auto;
-    top: auto;
-    left: auto;
-    background-color: #8f7373;
-    border-radius: 10px;
-    width: 100%;
-    left: 0px;
-    height: 2px;
-    display: block;
-    position: absolute;
-    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
-  }
+    .back-link:hover .back-arrow {
+      transform: translateX(-4px);
+    }
 
-  span.tLine {
-    top: 0px;
-  }
+    .top-label {
+      color: var(--muted);
+      text-align: right;
+    }
 
-  span.mLine {
-    top: 13px;
-    opacity: 0;
-  }
+    /* MAIN CONTENT */
 
-  span.bLine {
-    top: 26px;
-  }
+    main {
+      width: 100%;
+      padding: 0 var(--gutter);
+    }
 
-  .label {
-    position: absolute;
-    left: 0px;
-    top: 5px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.4s ease;
-    font-size: 1em;
-    color: rgb(123, 123, 123);
-  }
+    .hero {
+      padding: clamp(48px, 9vw, 120px) 0 52px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(220px, 0.65fr);
+      gap: clamp(28px, 6vw, 100px);
+      align-items: end;
+    }
 
-  div.backBtn:hover span.label {
-    left: 25px
-  }
+    .eyebrow,
+    .section-label,
+    .meta-label,
+    .image-index {
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.6;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
 
-  div.backBtn:hover span.line {
-    left: -10px;
-    height: 5px;
-    background-color: #a84141;
-  }
+    .eyebrow {
+      margin: 0 0 26px;
+      color: var(--accent);
+    }
 
-  div.backBtn:hover span.tLine {
-    width: 25px;
-    transform: rotate(-45deg);
-    left: -15px;
-    top: 6px;
-  }
-  
-  div.backBtn:hover span.mLine {
-    opacity: 1;
-    width: 30px;
-  }
+    h1 {
+      max-width: 1000px;
+      margin: 0;
+      font-size: clamp(42px, 8.5vw, 112px);
+      font-weight: 600;
+      line-height: 0.94;
+      letter-spacing: -0.085em;
+    }
 
-  div.backBtn:hover span.bLine {
-    width: 25px;
-    transform: rotate(45deg);
-    left: -15px;
-    top: 20px;
-    
-  }
+    h1 span {
+      display: block;
+      color: var(--accent);
+    }
 
-  .header-color {
-    color:rgb(44, 34, 79);
-  }
-</style>
+    .hero-aside {
+      padding-bottom: 5px;
+    }
+
+    .hero-aside p {
+      margin: 0;
+      max-width: 360px;
+      color: #565d6d;
+      font-size: clamp(14px, 1.2vw, 16px);
+      line-height: 1.9;
+    }
+
+    .project-number {
+      display: block;
+      margin-top: 32px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    /* HERO IMAGE */
+
+    .hero-artwork {
+      position: relative;
+      margin: 0;
+      background: #f0e6ef;
+      overflow: hidden;
+    }
+
+    .hero-artwork button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: zoom-in;
+    }
+
+    .hero-artwork img {
+      width: 100%;
+      max-height: 820px;
+      object-fit: contain;
+      margin: auto;
+      transition: transform 0.65s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .hero-artwork button:hover img {
+      transform: scale(1.015);
+    }
+
+    .artwork-caption {
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.7;
+      letter-spacing: 0.04em;
+    }
+
+    /* PROJECT INFORMATION */
+
+    .project-info {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: clamp(32px, 8vw, 130px);
+      padding: clamp(64px, 10vw, 130px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-label {
+      margin: 0 0 25px;
+      color: var(--accent);
+    }
+
+    h2 {
+      margin: 0 0 24px;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 500;
+      letter-spacing: -0.065em;
+      line-height: 1.1;
+    }
+
+    .project-description p {
+      max-width: 650px;
+      margin: 0 0 18px;
+      color: #565d6d;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .project-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-meta {
+      display: grid;
+      align-content: start;
+      gap: 0;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+      padding: 17px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .meta-label {
+      color: var(--muted);
+    }
+
+    .meta-value {
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    /* VIDEO */
+
+    .video-section {
+      padding: clamp(64px, 9vw, 110px) 0 0;
+    }
+
+    .video-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+
+    .video-heading h2 {
+      margin: 0;
+    }
+
+    .video-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #e9e5df;
+      overflow: hidden;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-caption {
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    /* GALLERY */
+
+    .gallery-section {
+      padding: clamp(64px, 9vw, 110px) 0;
+    }
+
+    .gallery-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+
+    .gallery-heading h2 {
+      margin: 0;
+    }
+
+    .gallery-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 18px;
+      row-gap: 38px;
+    }
+
+    .gallery-item {
+      min-width: 0;
+      margin: 0;
+    }
+
+    .gallery-button {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      background: #f0e6ef;
+      cursor: zoom-in;
+    }
+
+    .gallery-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.5s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .gallery-button:hover img {
+      transform: scale(1.035);
+    }
+
+    .zoom-hint {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      background: rgba(251, 250, 247, 0.92);
+      color: var(--ink);
+      font-size: 18px;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .gallery-button:hover .zoom-hint,
+    .gallery-button:focus-visible .zoom-hint {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-caption {
+      padding-top: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .gallery-caption h3 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .image-index {
+      flex-shrink: 0;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    /* CLOSING */
+
+    .closing {
+      padding: 40px 0 70px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+    }
+
+    .closing a {
+      color: var(--ink);
+    }
+
+    .closing a:hover {
+      color: var(--accent);
+    }
+
+    /* LIGHTBOX */
+
+    .lightbox {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: none;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      padding: 20px clamp(14px, 4vw, 56px);
+      background: rgba(20, 25, 42, 0.97);
+      color: #fbfaf7;
+    }
+
+    .lightbox.is-open {
+      display: grid;
+    }
+
+    .lightbox-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      min-height: 48px;
+    }
+
+    .lightbox-counter {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    .lightbox-close {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 27px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .lightbox-stage {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) 48px;
+      align-items: center;
+      gap: clamp(8px, 2vw, 30px);
+    }
+
+    .lightbox-image-wrap {
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox-image {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .lightbox-nav {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .lightbox-bottom {
+      padding: 16px 0 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .lightbox-title {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .lightbox-help {
+      color: rgba(255,255,255,0.6);
+      font-family: var(--mono);
+      font-size: 10px;
+      text-align: right;
+    }
+
+    /* ACCESSIBILITY */
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (min-width: 1500px) {
+      main {
+        max-width: 1800px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding-top: 70px;
+      }
+
+      .hero-aside {
+        max-width: 520px;
+      }
+
+      .project-number {
+        margin-top: 18px;
+      }
+
+      .project-info {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px 14px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 38px minmax(0, 1fr) 38px;
+        gap: 6px;
+      }
+
+      .lightbox-nav {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .topbar {
+        min-height: 62px;
+      }
+
+      .top-label {
+        max-width: 145px;
+        font-size: 9px;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+
+      h1 {
+        font-size: clamp(42px, 13vw, 65px);
+      }
+
+      .gallery-heading,
+      .video-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .gallery-heading p,
+      .video-heading p {
+        text-align: left;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        row-gap: 28px;
+      }
+
+      .meta-row {
+        grid-template-columns: 90px 1fr;
+      }
+
+      .closing {
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .lightbox {
+        padding: 12px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 32px minmax(0, 1fr) 32px;
+        gap: 4px;
+      }
+
+      .lightbox-nav {
+        width: 30px;
+        height: 38px;
+        font-size: 19px;
+      }
+
+      .lightbox-bottom {
+        align-items: start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .lightbox-help {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- The back button -->
-    <div class="backBtn">
-        <a href="graphicdesigngrp.html">
-          <span class="line tLine"></span>
-          <span class="line mLine"></span>
-          <span class="label">Back</span>
-          <span class="line bLine"></span>
-        </a>
+
+  <!-- NAVIGATION -->
+
+  <header class="topbar">
+
+    <a class="back-link" href="graphicdesigngrp.html">
+      <span class="back-arrow" aria-hidden="true">←</span>
+      <span>Back to projects</span>
+    </a>
+
+    <div class="top-label">Selected work / Interactive experience</div>
+
+  </header>
+
+
+  <main>
+
+    <!-- PROJECT INTRODUCTION -->
+
+    <section class="hero">
+
+      <div>
+
+        <p class="eyebrow">Interactive experience · Storytelling · 2025</p>
+
+        <h1>
+          FIND
+          <span>BONI.</span>
+        </h1>
+
+      </div>
+
+
+      <div class="hero-aside">
+
+        <p>
+          Find Boni is an interactive marketing campaign created in collaboration with Love, Bonito, interior design students for the pop-up experience, and fashion students for styling and model shoots, encouraging women to discover and express their unique style identity.
+        </p>
+
+        <span class="project-number">PROJECT — FIND BONI</span>
+
+      </div>
+
+    </section>
+
+
+    <!-- FEATURE IMAGE -->
+
+    <figure class="hero-artwork">
+
+      <button
+        type="button"
+        class="image-trigger"
+        data-image="Graphicdesign/FindBoni01.png"
+        data-title="Find Boni — Project overview"
+        aria-label="Enlarge the Find Boni project image"
+      >
+
+        <img
+          src="Graphicdesign/FindBoni01.png"
+          alt="Find Boni project overview"
+          fetchpriority="high"
+        >
+
+      </button>
+
+    </figure>
+
+
+    <div class="artwork-caption">
+      <span>01 / PROJECT OVERVIEW</span>
+      <span>FIND BONI — INTERACTIVE EXPERIENCE</span>
     </div>
 
 
-<div style="text-align:center" class="header-color">
-  <h2>Cereal Box Cover Design</h2>
-  <p>Click on the images below:</p>
-</div>
+    <!-- PROJECT STORY AND METADATA -->
 
-<!-- The 4 columns -->
-<div class="row">
-  <div class="column">
-    <img src="Graphicdesign/cerealbox.jpg" alt="" style="width:100%; height: 600px; object-fit: cover;" onclick="myFunction(this);">
+    <section class="project-info">
+
+      <div class="project-description">
+
+        <p class="section-label">01 — The concept</p>
+
+        <h2>Find Boni.</h2>
+
+        <p>
+Find Boni is an interactive visual experience that explores how personal style can become a reflection of identity rather than a way of fitting into a fixed trend.
+        </p>
+
+        <p>
+          In a world where women are often pressured to conform to predefined style categories, the campaign invites users to discover their own evolving sense of self through a playful, personalized journey. Through an interactive quiz, users uncover their “Boni” — a unique style archetype inspired by their personality, preferences, and identity.
+        </p>
+
+        <p>
+          Each Boni represents a different expression of individuality, transforming the idea of a traditional style category into something more personal and fluid. The experience combines visual storytelling, interactive media, image sequences and motion to guide users from self-discovery towards a curated visual world that feels uniquely their own.
+          Rather than telling women what they should wear or who they should be, Find Boni encourages them to see style as a mirror of who they are becoming — a celebration of identity, change and personal expression.
+        </p>
+
+      </div>
+
+
+      <aside class="project-meta">
+
+        <div class="meta-row">
+          <span class="meta-label">Project</span>
+
+          <span class="meta-value">
+            Find Boni<br>
+            Marketing campaign
+          </span>
+        </div>
+
+
+        <div class="meta-row">
+          <span class="meta-label">Discipline</span>
+
+          <span class="meta-value">
+            Interactive design<br>
+            Visual storytelling<br>
+            Digital experience
+          </span>
+        </div>
+
+
+        <div class="meta-row">
+          <span class="meta-label">Format</span>
+
+          <span class="meta-value">
+            Interactive media<br>
+            Social media<br>
+            Video
+          </span>
+        </div>
+
+
+        <div class="meta-row">
+          <span class="meta-label">Date</span>
+
+          <span class="meta-value">2025</span>
+        </div>
+
+      </aside>
+
+    </section>
+
+
+    <!-- VIDEO -->
+
+    <section class="video-section" aria-labelledby="video-title">
+
+      <div class="video-heading">
+
+        <div>
+
+          <p class="section-label">02 — In action</p>
+
+          <h2 id="video-title">Find Boni in motion.</h2>
+
+        </div>
+
+        <p>
+          PROJECT VIDEO<br>
+          WATCH THE EXPERIENCE ↗
+        </p>
+
+      </div>
+
+
+      <div class="video-wrapper">
+
+        <iframe
+          src="https://drive.google.com/file/d/1IWIDQpzY_vSZsZ1eCrUjWO9mBE4xWSHY/preview"
+          title="Find Boni project video"
+          allow="autoplay"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+
+      </div>
+
+
+      <div class="video-caption">
+        <span>02 / PROJECT VIDEO</span>
+        <span>GOOGLE DRIVE</span>
+      </div>
+
+    </section>
+
+
+    <!-- IMAGE GALLERY -->
+
+    <section class="gallery-section" aria-labelledby="gallery-title">
+
+      <div class="gallery-heading">
+
+        <div>
+
+          <p class="section-label">03 — The experience</p>
+
+          <h2 id="gallery-title">Explore Find Boni.</h2>
+
+        </div>
+
+        <p>
+          SELECT AN IMAGE TO EXPLORE<br>
+          FULL-SIZE ARTWORK ↗
+        </p>
+
+      </div>
+
+
+      <div class="gallery-grid">
+
+
+        <!-- IMAGE 01 -->
+
+        <figure class="gallery-item">
+
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/FindBoni02.png"
+            data-title="Find Boni — Project overview"
+            aria-label="Enlarge Find Boni project overview"
+          >
+
+            <img
+              src="Graphicdesign/FindBoni02.png"
+              alt="Find Boni project overview"
+              loading="lazy"
+            >
+
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>Brand / Category Content</h3>
+            <span class="image-index">01</span>
+          </figcaption>
+
+        </figure>
+
+
+        <!-- IMAGE 02 -->
+
+        <figure class="gallery-item">
+
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/FindBoni03.png"
+            data-title="Find Boni — Visual development"
+            aria-label="Enlarge Find Boni visual development"
+          >
+
+            <img
+              src="Graphicdesign/FindBoni03.png"
+              alt="Find Boni visual development"
+              loading="lazy"
+            >
+
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>Competitor landscape</h3>
+            <span class="image-index">02</span>
+          </figcaption>
+
+        </figure>
+
+
+        <!-- IMAGE 03 -->
+
+        <figure class="gallery-item">
+
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/FindBoni04.png"
+            data-title="Find Boni — Visual system"
+            aria-label="Enlarge Find Boni visual system"
+          >
+
+            <img
+              src="Graphicdesign/FindBoni04.png"
+              alt="Find Boni visual system"
+              loading="lazy"
+            >
+
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>Visual system</h3>
+            <span class="image-index">03</span>
+          </figcaption>
+
+        </figure>
+
+
+        <!-- IMAGE 04 -->
+
+        <figure class="gallery-item">
+
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/FindBoni05.png"
+            data-title="Find Boni — Interaction"
+            aria-label="Enlarge Find Boni interaction"
+          >
+
+            <img
+              src="Graphicdesign/FindBoni05.png"
+              alt="Find Boni interaction"
+              loading="lazy"
+            >
+
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>Consumer journey</h3>
+            <span class="image-index">04</span>
+          </figcaption>
+
+        </figure>
+
+
+        <!-- IMAGE 05 -->
+
+        <figure class="gallery-item">
+
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/FindBoni06.png"
+            data-title="Find Boni — Interface"
+            aria-label="Enlarge Find Boni interface"
+          >
+
+            <img
+              src="Graphicdesign/FindBoni06.png"
+              alt="Find Boni interface"
+              loading="lazy"
+            >
+
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>OOH posters & Pop up experience</h3>
+            <span class="image-index">05</span>
+          </figcaption>
+
+        </figure>
+
+
+        <!-- IMAGE 06 -->
+
+        <figure class="gallery-item">
+
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/FindBoni07.png"
+            data-title="Find Boni — Detail"
+            aria-label="Enlarge Find Boni detail"
+          >
+
+            <img
+              src="Graphicdesign/FindBoni07.png"
+              alt="Find Boni project detail"
+              loading="lazy"
+            >
+
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>Social media stories</h3>
+            <span class="image-index">06</span>
+          </figcaption>
+
+        </figure>
+
+
+        <!-- IMAGE 07 -->
+
+        <figure class="gallery-item">
+
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/FindBoni08.png"
+            data-title="Find Boni — Storytelling"
+            aria-label="Enlarge Find Boni storytelling"
+          >
+
+            <img
+              src="Graphicdesign/FindBoni08.png"
+              alt="Find Boni storytelling"
+              loading="lazy"
+            >
+
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>Lanyard designs</h3>
+            <span class="image-index">07</span>
+          </figcaption>
+
+        </figure>
+
+
+        <!-- IMAGE 08 -->
+
+        <figure class="gallery-item">
+
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/FindBoni09.png"
+            data-title="Find Boni — Experience"
+            aria-label="Enlarge Find Boni experience"
+          >
+
+            <img
+              src="Graphicdesign/FindBoni09.png"
+              alt="Find Boni experience"
+              loading="lazy"
+            >
+
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>Card game, fabric stickers & voucher designs</h3>
+            <span class="image-index">08</span>
+          </figcaption>
+
+        </figure>
+
+
+        <!-- IMAGE 09 -->
+
+        <figure class="gallery-item">
+
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/FindBoni10.png"
+            data-title="Find Boni — Final outcome"
+            aria-label="Enlarge Find Boni final outcome"
+          >
+
+            <img
+              src="Graphicdesign/FindBoni10.png"
+              alt="Find Boni final outcome"
+              loading="lazy"
+            >
+
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>Pop up store experience</h3>
+            <span class="image-index">09</span>
+          </figcaption>
+
+        </figure>
+
+
+        <!-- IMAGE 10 -->
+
+        <figure class="gallery-item">
+
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Graphicdesign/FindBoni11.png"
+            data-title="Find Boni — Final presentation"
+            aria-label="Enlarge Find Boni final presentation"
+          >
+
+            <img
+              src="Graphicdesign/FindBoni11.png"
+              alt="Find Boni final presentation"
+              loading="lazy"
+            >
+
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>Character AR experience</h3>
+            <span class="image-index">10</span>
+          </figcaption>
+
+        </figure>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="closing">
+
+      <span>FIND BONI — INTERACTIVE EXPERIENCE</span>
+
+      <a href="graphicdesigngrp.html">← Back to selected work</a>
+
+    </footer>
+
+  </main>
+
+
+  <!-- FULL-SCREEN IMAGE VIEWER -->
+
+  <div
+    class="lightbox"
+    id="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Artwork image viewer"
+    aria-hidden="true"
+  >
+
+    <div class="lightbox-top">
+
+      <span class="lightbox-counter" id="lightboxCounter">
+        01 / 10
+      </span>
+
+      <button
+        class="lightbox-close"
+        id="lightboxClose"
+        type="button"
+        aria-label="Close image viewer"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="lightbox-stage">
+
+      <button
+        class="lightbox-nav"
+        id="lightboxPrev"
+        type="button"
+        aria-label="Previous image"
+      >
+        ‹
+      </button>
+
+
+      <div class="lightbox-image-wrap">
+
+        <img
+          class="lightbox-image"
+          id="lightboxImage"
+          src=""
+          alt=""
+        >
+
+      </div>
+
+
+      <button
+        class="lightbox-nav"
+        id="lightboxNext"
+        type="button"
+        aria-label="Next image"
+      >
+        ›
+      </button>
+
+    </div>
+
+
+    <div class="lightbox-bottom">
+
+      <p class="lightbox-title" id="lightboxTitle"></p>
+
+      <span class="lightbox-help">
+        USE ← → TO NAVIGATE · ESC TO CLOSE
+      </span>
+
+    </div>
+
   </div>
-  <div class="column">
-    <img src="Graphicdesign/cerealbox2.png" alt="" style="width:100%; height: 600px; object-fit: cover;" onclick="myFunction(this);">
-  </div>
-  <div class="column">
-    <img src="Graphicdesign/cerealbox3.png" alt="" style="width:100%; height: 600px; object-fit: cover;" onclick="myFunction(this);">
-  </div>
-  <div class="column">
-    <img src="Graphicdesign/cerealbox4.png" alt="" style="width:100%; height: 600px; object-fit: cover;" onclick="myFunction(this);">
-  </div>
-</div>
-  
-</div>
-
-<div class="container">
-  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
-  <div id="imgtext"></div>
-</div>
- 
-<!-- The img desc -->
-<div class="imgdesc" style="color:rgb(0, 0, 0)" >
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">Medium: Adobe Illustrator & Photoshop. Nov 2023.</p>
-
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">Cereal Box Cover design implemented with the famous quote, "You Can't Depend On Your Eyes, When Your Imagination Is Out Of Focus." - Mark Twain.   
-    </p>
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">
-        I have used high-quality designs and illustrations that represent the flavor or theme of the cereal and the quote.
-        The fun graphics of the wizard holding a spoon behind the eyeball shaped cereals on the gigantic bowl of milk that evoke positive emotions 
-        and convey the product's messages. I've carefully chosen a perfect colour scheme for the mood of the box design! Perfect typography with 
-        the letter "O" replaced as an illustration of an eye! I want to make it funky and unique, different from the usual cereal box. Added fun And
-        interactive minigames at the back that also represents the theme! I have successfully created a brand identity that makes it recognizable and 
-        unique.
-
-    </p>
-    
-  
-</div>
 
 
-<script>
-function myFunction(imgs) {
-  var expandImg = document.getElementById("expandedImg");
-  var imgText = document.getElementById("imgtext");
-  expandImg.src = imgs.src;
-  imgText.innerHTML = imgs.alt;
-  expandImg.parentElement.style.display = "block";
-}
-</script>
+  <script>
+
+    (() => {
+
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightboxImage");
+      const lightboxTitle = document.getElementById("lightboxTitle");
+      const lightboxCounter = document.getElementById("lightboxCounter");
+      const closeButton = document.getElementById("lightboxClose");
+      const prevButton = document.getElementById("lightboxPrev");
+      const nextButton = document.getElementById("lightboxNext");
+
+      const triggers = Array.from(
+        document.querySelectorAll(".image-trigger")
+      );
+
+      let currentIndex = 0;
+      let lastFocusedElement = null;
+
+
+      const images = triggers.map((trigger) => {
+
+        const image = trigger.querySelector("img");
+
+        return {
+          src: trigger.dataset.image,
+          title: trigger.dataset.title,
+          alt: image ? image.alt : trigger.dataset.title
+        };
+
+      });
+
+
+      function showImage(index) {
+
+        currentIndex =
+          (index + images.length) % images.length;
+
+        const image = images[currentIndex];
+
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.alt;
+        lightboxTitle.textContent = image.title;
+
+        lightboxCounter.textContent =
+          String(currentIndex + 1).padStart(2, "0") +
+          " / " +
+          String(images.length).padStart(2, "0");
+
+
+        [currentIndex + 1, currentIndex - 1].forEach((i) => {
+
+          const adjacent =
+            images[(i + images.length) % images.length];
+
+          const preload = new Image();
+
+          preload.src = adjacent.src;
+
+        });
+
+      }
+
+
+      function openLightbox(index) {
+
+        lastFocusedElement = document.activeElement;
+
+        showImage(index);
+
+        lightbox.classList.add("is-open");
+
+        lightbox.setAttribute(
+          "aria-hidden",
+          "false"
+        );
+
+        document.body.classList.add(
+          "lightbox-open"
+        );
+
+        closeButton.focus();
+
+      }
+
+
+      function closeLightbox() {
+
+        lightbox.classList.remove("is-open");
+
+        lightbox.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+        document.body.classList.remove(
+          "lightbox-open"
+        );
+
+        lightboxImage.src = "";
+
+        if (lastFocusedElement) {
+          lastFocusedElement.focus();
+        }
+
+      }
+
+
+      function nextImage() {
+        showImage(currentIndex + 1);
+      }
+
+
+      function previousImage() {
+        showImage(currentIndex - 1);
+      }
+
+
+      triggers.forEach((trigger, index) => {
+
+        trigger.addEventListener(
+          "click",
+          () => {
+            openLightbox(index);
+          }
+        );
+
+      });
+
+
+      closeButton.addEventListener(
+        "click",
+        closeLightbox
+      );
+
+
+      nextButton.addEventListener(
+        "click",
+        nextImage
+      );
+
+
+      prevButton.addEventListener(
+        "click",
+        previousImage
+      );
+
+
+      lightbox.addEventListener(
+        "click",
+        (event) => {
+
+          if (event.target === lightbox) {
+            closeLightbox();
+          }
+
+        }
+      );
+
+
+      document.addEventListener(
+        "keydown",
+        (event) => {
+
+          if (
+            !lightbox.classList.contains(
+              "is-open"
+            )
+          ) {
+            return;
+          }
+
+
+          if (event.key === "Escape") {
+
+            closeLightbox();
+
+          } else if (
+            event.key === "ArrowRight"
+          ) {
+
+            nextImage();
+
+          } else if (
+            event.key === "ArrowLeft"
+          ) {
+
+            previousImage();
+
+          }
+
+        }
+      );
+
+    })();
+
+  </script>
 
 </body>
 </html>
