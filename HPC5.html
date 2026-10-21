@@ -1,264 +1,1186 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
-<style>
+  <title>SEMBCORP SIWW | Portfolio</title>
 
-  
-* {
-  box-sizing: border-box;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-body {
-  margin: 0;
-  font-family: 'Ubuntu', sans-serif;
-  
-  background:  #d4fff4;
+  <style>
+    :root {
+      --bg: #f5f4ef;
+      --paper: #fbfaf7;
+      --ink: #202c50;
+      --muted: #777b86;
+      --line: #dcdcd5;
+      --accent: #303a95;
+      --lime: #d8e01e;
+      --orange: #ef7148;
+      --gutter: clamp(16px, 3.5vw, 56px);
+      --mono: "DM Mono", monospace;
+      --sans: "Manrope", sans-serif;
+    }
 
-}
+    * {
+      box-sizing: border-box;
+    }
 
-.imgdesc {
-  font-family: 'Ubuntu', sans-serif;
-  text-align: center;
-  background: #ebf1f0;
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
 
-}
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* The grid: Four equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 25%;
-  padding: 10px;
-}
+    body.lightbox-open {
+      overflow: hidden;
+    }
 
-/* Style the images inside the grid */
-.column img {
-  opacity: 0.8; 
-  cursor: pointer; 
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-.column img:hover {
-  opacity: 1;
-}
+    button {
+      font: inherit;
+    }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
-/* The expanding image container */
-.container {
-  position: relative;
-  display: none;
-}
+    ::selection {
+      background: var(--lime);
+      color: var(--ink);
+    }
 
-/* Expanding image text */
-#imgtext {
-  position: absolute;
-  bottom: 15px;
-  left: 50%; /* Position the left edge of the text at 50% of the parent width */
-  transform: translateX(-50%); /* Shift the text left by 50% of its own width */
-  color: rgb(251, 239, 255);
-  font-size: 20px;
-  background-color: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
-  padding: 10px; /* Add padding to create space around the text */
-  text-align: center; /* Center text within the element */
-}
+    /* NAVIGATION */
 
-/* Closable button inside the expanded image */
-.closebtn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  color: white;
-  font-size: 35px;
-  cursor: pointer;
-}
+    .topbar {
+      min-height: 76px;
+      padding: 0 var(--gutter);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      border-bottom: 1px solid var(--line);
+    }
 
+    .back-link,
+    .top-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
+    .back-link {
+      transition: opacity 0.2s ease;
+    }
 
-/* CSS for back button */
-div.backBtn {
-    width: 100px;
-    right: 100px;
-    top: 30px;
-    background-color: #f4f4f4;
-    transition: all 0.4s ease;
-    position: fixed;
-    cursor: pointer;
-  }
+    .back-link:hover {
+      opacity: 0.55;
+    }
 
-  span.line {
-    bottom: auto;
-    right: auto;
-    top: auto;
-    left: auto;
-    background-color: #8f7373;
-    border-radius: 10px;
-    width: 100%;
-    left: 0px;
-    height: 2px;
-    display: block;
-    position: absolute;
-    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
-  }
+    .back-arrow {
+      font-size: 19px;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
 
-  span.tLine {
-    top: 0px;
-  }
+    .back-link:hover .back-arrow {
+      transform: translateX(-4px);
+    }
 
-  span.mLine {
-    top: 13px;
-    opacity: 0;
-  }
+    .top-label {
+      color: var(--muted);
+      text-align: right;
+    }
 
-  span.bLine {
-    top: 26px;
-  }
+    /* MAIN CONTENT */
 
-  .label {
-    position: absolute;
-    left: 0px;
-    top: 5px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.4s ease;
-    font-size: 1em;
-    color: rgb(123, 123, 123);
-  }
+    main {
+      width: 100%;
+      padding: 0 var(--gutter);
+    }
 
-  div.backBtn:hover span.label {
-    left: 25px
-  }
+    .hero {
+      padding: clamp(48px, 9vw, 120px) 0 52px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(220px, 0.65fr);
+      gap: clamp(28px, 6vw, 100px);
+      align-items: end;
+    }
 
-  div.backBtn:hover span.line {
-    left: -10px;
-    height: 5px;
-    background-color: #a84141;
-  }
+    .eyebrow,
+    .section-label,
+    .meta-label,
+    .image-index {
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.6;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
 
-  div.backBtn:hover span.tLine {
-    width: 25px;
-    transform: rotate(-45deg);
-    left: -15px;
-    top: 6px;
-  }
-  
-  div.backBtn:hover span.mLine {
-    opacity: 1;
-    width: 30px;
-  }
+    .eyebrow {
+      margin: 0 0 26px;
+      color: var(--accent);
+    }
 
-  div.backBtn:hover span.bLine {
-    width: 25px;
-    transform: rotate(45deg);
-    left: -15px;
-    top: 20px;
-    
-  }
+    .eyebrow-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      vertical-align: 1px;
+    }
 
-  .header-color {
-    color:rgb(44, 34, 79);
-  }
-</style>
+    h1 {
+      max-width: 1100px;
+      margin: 0;
+      font-size: clamp(42px, 8.5vw, 112px);
+      font-weight: 600;
+      line-height: 0.94;
+      letter-spacing: -0.085em;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--accent);
+    }
+
+    .title-dot {
+      color: var(--orange);
+    }
+
+    .hero-aside {
+      padding-bottom: 5px;
+    }
+
+    .hero-aside p {
+      margin: 0;
+      max-width: 360px;
+      color: #565d6d;
+      font-size: clamp(14px, 1.2vw, 16px);
+      line-height: 1.9;
+    }
+
+    .project-number {
+      display: block;
+      margin-top: 32px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    /* FEATURED IMAGE */
+
+    .hero-artwork {
+      position: relative;
+      margin: 0;
+      overflow: hidden;
+      background: #e5e7f0;
+    }
+
+    .hero-artwork button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: zoom-in;
+    }
+
+    .hero-artwork img {
+      width: 100%;
+      max-height: 820px;
+      margin: auto;
+      object-fit: contain;
+      transition: transform 0.65s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .hero-artwork button:hover img {
+      transform: scale(1.015);
+    }
+
+    .artwork-caption {
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.7;
+      letter-spacing: 0.04em;
+    }
+
+    /* PROJECT INFORMATION */
+
+    .project-info {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: clamp(32px, 8vw, 130px);
+      padding: clamp(64px, 10vw, 130px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-label {
+      margin: 0 0 25px;
+      color: var(--accent);
+    }
+
+    h2 {
+      margin: 0 0 24px;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 500;
+      letter-spacing: -0.065em;
+      line-height: 1.1;
+    }
+
+    .project-description p {
+      max-width: 650px;
+      margin: 0 0 18px;
+      color: #565d6d;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .project-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-meta {
+      display: grid;
+      align-content: start;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+      padding: 17px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .meta-label {
+      color: var(--muted);
+    }
+
+    .meta-value {
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    /* GALLERY */
+
+    .gallery-section {
+      padding: clamp(64px, 9vw, 110px) 0;
+    }
+
+    .gallery-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+
+    .gallery-heading h2 {
+      margin: 0;
+    }
+
+    .gallery-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: 18px;
+      row-gap: 38px;
+    }
+
+    .gallery-item {
+      min-width: 0;
+      margin: 0;
+    }
+
+    .gallery-button {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      background: #e5e7f0;
+      cursor: zoom-in;
+    }
+
+    .gallery-item:nth-child(3n + 2) .gallery-button {
+      background: #e8e7e0;
+    }
+
+    .gallery-item:nth-child(3n + 3) .gallery-button {
+      background: #eee1d6;
+    }
+
+    .gallery-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.5s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .gallery-button:hover img {
+      transform: scale(1.035);
+    }
+
+    .zoom-hint {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      background: rgba(251,250,247,0.92);
+      color: var(--ink);
+      font-size: 18px;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .gallery-button:hover .zoom-hint,
+    .gallery-button:focus-visible .zoom-hint {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-caption {
+      padding-top: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .gallery-caption h3 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.7;
+    }
+
+    .image-index {
+      flex-shrink: 0;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    /* CLOSING BANNER */
+
+    .end-banner {
+      margin: 0 0 55px;
+      padding: clamp(24px, 4vw, 40px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      background: var(--accent);
+      color: var(--paper);
+    }
+
+    .end-banner p {
+      margin: 0 0 7px;
+      color: rgba(255,255,255,0.7);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      line-height: 1.8;
+      text-transform: uppercase;
+    }
+
+    .end-banner h2 {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 42px);
+      font-weight: 600;
+    }
+
+    .end-banner a {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--lime);
+      color: var(--ink);
+      font-size: 22px;
+      transition: transform 0.25s ease;
+    }
+
+    .end-banner a:hover {
+      transform: rotate(45deg);
+    }
+
+    /* FOOTER */
+
+    .closing {
+      padding: 30px 0 40px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+    }
+
+    .closing a {
+      color: var(--ink);
+    }
+
+    .closing a:hover {
+      color: var(--accent);
+    }
+
+    /* LIGHTBOX */
+
+    .lightbox {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: none;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      padding: 20px clamp(14px, 4vw, 56px);
+      background: rgba(20,25,42,0.97);
+      color: #fbfaf7;
+    }
+
+    .lightbox.is-open {
+      display: grid;
+    }
+
+    .lightbox-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      min-height: 48px;
+    }
+
+    .lightbox-counter {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    .lightbox-close {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 27px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .lightbox-stage {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) 48px;
+      align-items: center;
+      gap: clamp(8px, 2vw, 30px);
+    }
+
+    .lightbox-image-wrap {
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox-image {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .lightbox-nav {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .lightbox-bottom {
+      padding: 16px 0 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .lightbox-title {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .lightbox-help {
+      color: rgba(255,255,255,0.6);
+      font-family: var(--mono);
+      font-size: 10px;
+      text-align: right;
+    }
+
+    /* ACCESSIBILITY */
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--orange);
+      outline-offset: 4px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (min-width: 1500px) {
+      main {
+        max-width: 1800px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px 14px;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding-top: 70px;
+      }
+
+      .hero-aside {
+        max-width: 520px;
+      }
+
+      .project-number {
+        margin-top: 18px;
+      }
+
+      .project-info {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 38px minmax(0, 1fr) 38px;
+        gap: 6px;
+      }
+
+      .lightbox-nav {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .topbar {
+        min-height: 62px;
+      }
+
+      .top-label {
+        max-width: 145px;
+        font-size: 9px;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+
+      h1 {
+        font-size: clamp(42px, 13vw, 65px);
+      }
+
+      .gallery-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .gallery-heading p {
+        text-align: left;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        row-gap: 28px;
+      }
+
+      .meta-row {
+        grid-template-columns: 90px 1fr;
+      }
+
+      .closing {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .end-banner {
+        margin-bottom: 35px;
+      }
+
+      .lightbox {
+        padding: 12px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 32px minmax(0, 1fr) 32px;
+        gap: 4px;
+      }
+
+      .lightbox-nav {
+        width: 30px;
+        height: 38px;
+        font-size: 19px;
+      }
+
+      .lightbox-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .lightbox-help {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- The back button -->
-    <div class="backBtn">
-        <a href="HPCgrp.html">
-          <span class="line tLine"></span>
-          <span class="line mLine"></span>
-          <span class="label">Back</span>
-          <span class="line bLine"></span>
-        </a>
+
+  <!-- NAVIGATION -->
+  <header class="topbar">
+    <a class="back-link" href="HPCgrp.html">
+      <span class="back-arrow" aria-hidden="true">←</span>
+      <span>Back to projects</span>
+    </a>
+
+    <div class="top-label">Selected work / Sembcorp SIWW</div>
+  </header>
+
+  <main>
+
+    <!-- PROJECT INTRODUCTION -->
+    <section class="hero">
+      <div>
+        <p class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          Exhibition design · Sustainability · Sembcorp
+        </p>
+
+        <h1>
+          SEMBCORP
+          <span>SIWW<span class="title-dot">.</span></span>
+        </h1>
+      </div>
+
+      <div class="hero-aside">
+        <p>
+          Art direction and exhibition design for Sembcorp's showcase
+          at Singapore International Water Week, translating sustainability
+          and innovation into a physical visual experience.
+        </p>
+
+        <span class="project-number">PROJECT 04 — SINGAPORE</span>
+      </div>
+    </section>
+
+    <!-- FEATURE IMAGE -->
+    <figure class="hero-artwork">
+      <button
+        type="button"
+        class="image-trigger"
+        data-image="Expimg/SIWWgrace2.jpg"
+        data-title="Sembcorp SIWW — Featured showcase"
+        aria-label="Enlarge the featured Sembcorp showcase"
+      >
+        <img
+          src="Expimg/SIWWgrace2.jpg"
+          alt="Sembcorp showcase booth at Singapore International Water Week, viewed by Minister Grace Fu"
+          fetchpriority="high"
+        >
+      </button>
+    </figure>
+
+    <div class="artwork-caption">
+      <span>01 / FEATURED SHOWCASE</span>
+      <span>SEMBCORP · SIWW 2024</span>
     </div>
 
+    <!-- PROJECT STORY AND METADATA -->
+    <section class="project-info">
 
-<div style="text-align:center" class="header-color">
-  <h2>SEMBCORP showcase booth for Singapore International Water Week (SIWW) for Minister of Sustainability, MS GRACE FU, utility and city leaders.</h2>
-  <p>Click on the images below:</p>
-</div>
+      <div class="project-description">
+        <p class="section-label">01 — The project</p>
 
-<!-- The 4 columns -->
-<div class="row">
-  <div class="column">
-    <img src="Expimg/SIWWgrace2.jpg" alt="Honored to have Minister Grace Fu view my design at SIWW" style="width:100%" onclick="myFunction(this);">
+        <h2>Communicating sustainability through space and visuals.</h2>
+
+        <p>
+          I managed the art direction and design of Sembcorp's showcase
+          booth for Singapore International Water Week (SIWW), an event
+          bringing together leaders and experts in water and urban
+          sustainability. The showcase welcomed Minister for Sustainability
+          and the Environment Ms Grace Fu, alongside utility professionals
+          and city leaders.
+        </p>
+
+        <p>
+          The process began with understanding the brief, the audience
+          and Sembcorp's brand values. I explored how exhibition graphics
+          and visual storytelling could communicate sustainability,
+          innovation and the company's role in shaping more sustainable
+          urban environments.
+        </p>
+
+        <p>
+          Water and flow informed the visual direction, expressing
+          adaptability and interconnectedness. I also worked with
+          stakeholders to align the design with the intended message,
+          refining the presentation through feedback and attention to detail.
+        </p>
+
+        <p>
+          This project strengthened my ability to translate a corporate
+          message into a physical visual experience, balancing brand
+          consistency, audience engagement and the practical demands
+          of a public exhibition.
+        </p>
+      </div>
+
+      <aside class="project-meta">
+
+        <div class="meta-row">
+          <span class="meta-label">Project</span>
+          <span class="meta-value">
+            Sembcorp SIWW Showcase Booth
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Event</span>
+          <span class="meta-value">
+            Singapore International Water Week
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Role</span>
+          <span class="meta-value">
+            Art direction<br>
+            Exhibition design
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Audience</span>
+          <span class="meta-value">
+            Minister Grace Fu<br>
+            Utility and city leaders
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Medium</span>
+          <span class="meta-value">
+            Exhibition graphics<br>
+            Adobe Illustrator
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Location</span>
+          <span class="meta-value">Singapore</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Date</span>
+          <span class="meta-value">July 2024</span>
+        </div>
+
+      </aside>
+    </section>
+
+    <!-- IMAGE GALLERY -->
+    <section class="gallery-section" aria-labelledby="gallery-title">
+
+      <div class="gallery-heading">
+        <div>
+          <p class="section-label">02 — Behind the showcase</p>
+          <h2 id="gallery-title">A closer look.</h2>
+        </div>
+
+        <p>
+          SELECT AN IMAGE TO EXPLORE<br>
+          FULL-SIZE ARTWORK ↗
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+
+        <!-- IMAGE 01 -->
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Expimg/SIWWgrace2.jpg"
+            data-title="The showcase in context"
+            aria-label="Enlarge the showcase in context"
+          >
+            <img
+              src="Expimg/SIWWgrace2.jpg"
+              alt="Sembcorp showcase booth at SIWW viewed by Minister Grace Fu"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>The showcase in context</h3>
+            <span class="image-index">01</span>
+          </figcaption>
+        </figure>
+
+        <!-- IMAGE 02 -->
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Expimg/SIWWgrace.jpg"
+            data-title="Engaging with the design"
+            aria-label="Enlarge the SIWW stakeholder engagement photograph"
+          >
+            <img
+              src="Expimg/SIWWgrace.jpg"
+              alt="Minister Grace Fu experiencing the Sembcorp showcase at SIWW"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>Engaging with the design</h3>
+            <span class="image-index">02</span>
+          </figcaption>
+        </figure>
+
+        <!-- IMAGE 03 -->
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Expimg/SIWWdisplay.jpg"
+            data-title="The exhibition display"
+            aria-label="Enlarge the Sembcorp exhibition display"
+          >
+            <img
+              src="Expimg/SIWWdisplay.jpg"
+              alt="Sembcorp SIWW showcase display communicating water and urban sustainability"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>The exhibition display</h3>
+            <span class="image-index">03</span>
+          </figcaption>
+        </figure>
+
+        <!-- IMAGE 04 -->
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="Expimg/SIWWwork.jpg"
+            data-title="From design to installation"
+            aria-label="Enlarge the Sembcorp SIWW installation photograph"
+          >
+            <img
+              src="Expimg/SIWWwork.jpg"
+              alt="Sembcorp SIWW showcase installation and exhibition design"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>From design to installation</h3>
+            <span class="image-index">04</span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- CLOSING BANNER -->
+    <section class="end-banner">
+      <div>
+        <p>More collaborations / More possibilities</p>
+        <h2>Back to the bigger picture.</h2>
+      </div>
+
+      <a href="HPCgrp.html" aria-label="Return to selected collaborations">↗</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="closing">
+      <span>SEMBCORP SIWW — EXHIBITION DESIGN</span>
+      <a href="HPCgrp.html">← Back to selected work</a>
+    </footer>
+
+  </main>
+
+  <!-- FULL-SCREEN IMAGE VIEWER -->
+  <div
+    class="lightbox"
+    id="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Artwork image viewer"
+    aria-hidden="true"
+  >
+
+    <div class="lightbox-top">
+      <span class="lightbox-counter" id="lightboxCounter">01 / 04</span>
+
+      <button
+        class="lightbox-close"
+        id="lightboxClose"
+        type="button"
+        aria-label="Close image viewer"
+      >×</button>
+    </div>
+
+    <div class="lightbox-stage">
+
+      <button
+        class="lightbox-nav"
+        id="lightboxPrev"
+        type="button"
+        aria-label="Previous image"
+      >‹</button>
+
+      <div class="lightbox-image-wrap">
+        <img
+          class="lightbox-image"
+          id="lightboxImage"
+          src=""
+          alt=""
+        >
+      </div>
+
+      <button
+        class="lightbox-nav"
+        id="lightboxNext"
+        type="button"
+        aria-label="Next image"
+      >›</button>
+
+    </div>
+
+    <div class="lightbox-bottom">
+      <p class="lightbox-title" id="lightboxTitle"></p>
+
+      <span class="lightbox-help">
+        USE ← → TO NAVIGATE · ESC TO CLOSE
+      </span>
+    </div>
+
   </div>
-  <div class="column">
-    <img src="Expimg/SIWWgrace.jpg" alt="Minister Grace Fu experiences the vision behind our showcase at SIWW, where every element reflects sustainable innovation for urban living." style="width:100%" onclick="myFunction(this);">
-  </div>
-  <div class="column">
-    <img src="Expimg/SIWWdisplay.jpg" alt="The design invites thoughtful interaction, guiding Minister Grace Fu and other leaders through a story of resilience, innovation, and commitment to urban water solutions." style="width:100%" onclick="myFunction(this);">
-  </div>
-  <div class="column">
-    <img src="Expimg/SIWWwork.jpg" alt="Clean, open layouts symbolize transparency and clarity in Sembcorp’s approach to sustainability." style="width:100%" onclick="myFunction(this);">
-  </div>
-  </div>
-  
-</div>
 
-<div class="container">
-  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
-  <div id="imgtext"></div>
-</div>
- 
-<!-- The img desc -->
-<div class="imgdesc" style="color:rgb(0, 0, 0)" >
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">Medium: Adobe Illustrator. July 2024.</p>
+  <script>
+    (() => {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightboxImage");
+      const lightboxTitle = document.getElementById("lightboxTitle");
+      const lightboxCounter = document.getElementById("lightboxCounter");
 
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">
-        I manage art direction and designs Sembcorb showcase booth for Singapore International Water Week (SIWW) for Minister of Sustainability, Ms Grace Fu, utility and city leaders.
-    </p>
-    
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">
-        For the Sembcorp showcase booth at Singapore International Water Week, my design process began with a deep understanding of the brief, 
-        focusing on the needs of the target audience, including Minister Grace Fu, utility experts, and city leaders. The primary goal was to 
-        communicate Sembcorp’s brand values, sustainability, innovation, and leadership, through a booth that was both visually compelling and 
-        highly engaging.
-    </p>
-    
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">
-        I started by researching Sembcorp’s branding and exploring innovative trends in exhibition design to create a concept centered on water 
-        as a theme. Flowing elements symbolized adaptability and sustainability
-    </p>
-    
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">
-        Collaboration was integral to the process, as I worked closely with stakeholders to ensure the design aligned with Sembcorp’s 
-        message while incorporating feedback to refine the final presentation. Attention to detail during setup ensured that all 
-        elements, from lighting to finishes—delivered a polished, professional look. The project not only allowed me to showcase my 
-        creative and strategic skills but also pushed me to think innovatively about using visuals to capture and hold the attention 
-        of a high-profile audience.
-    </p>
-  
-</div>
+      const closeButton = document.getElementById("lightboxClose");
+      const prevButton = document.getElementById("lightboxPrev");
+      const nextButton = document.getElementById("lightboxNext");
 
+      const triggers = Array.from(
+        document.querySelectorAll(".image-trigger")
+      );
 
-<script>
-function myFunction(imgs) {
-  var expandImg = document.getElementById("expandedImg");
-  var imgText = document.getElementById("imgtext");
-  expandImg.src = imgs.src;
-  imgText.innerHTML = imgs.alt;
-  expandImg.parentElement.style.display = "block";
-}
-</script>
+      let currentIndex = 0;
+      let lastFocusedElement = null;
+
+      const images = triggers.map((trigger) => {
+        const image = trigger.querySelector("img");
+
+        return {
+          src: trigger.dataset.image,
+          title: trigger.dataset.title,
+          alt: image ? image.alt : trigger.dataset.title
+        };
+      });
+
+      function showImage(index) {
+        currentIndex = (index + images.length) % images.length;
+
+        const image = images[currentIndex];
+
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.alt;
+        lightboxTitle.textContent = image.title;
+
+        lightboxCounter.textContent =
+          String(currentIndex + 1).padStart(2, "0") +
+          " / " +
+          String(images.length).padStart(2, "0");
+
+        [currentIndex + 1, currentIndex - 1].forEach((i) => {
+          const adjacent = images[(i + images.length) % images.length];
+          const preload = new Image();
+          preload.src = adjacent.src;
+        });
+      }
+
+      function openLightbox(index) {
+        lastFocusedElement = document.activeElement;
+
+        showImage(index);
+
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.classList.add("lightbox-open");
+
+        closeButton.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("lightbox-open");
+
+        lightboxImage.src = "";
+
+        if (lastFocusedElement) {
+          lastFocusedElement.focus();
+        }
+      }
+
+      function nextImage() {
+        showImage(currentIndex + 1);
+      }
+
+      function previousImage() {
+        showImage(currentIndex - 1);
+      }
+
+      triggers.forEach((trigger, index) => {
+        trigger.addEventListener("click", () => openLightbox(index));
+      });
+
+      closeButton.addEventListener("click", closeLightbox);
+      nextButton.addEventListener("click", nextImage);
+      prevButton.addEventListener("click", previousImage);
+
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (!lightbox.classList.contains("is-open")) return;
+
+        if (event.key === "Escape") {
+          closeLightbox();
+        } else if (event.key === "ArrowRight") {
+          nextImage();
+        } else if (event.key === "ArrowLeft") {
+          previousImage();
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>
