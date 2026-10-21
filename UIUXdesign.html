@@ -1,217 +1,1197 @@
+ 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">  
+  <title>LOCAL EATS Smartwatch — Portfolio</title>
 
-<style>
-* {
-  box-sizing: border-box;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-body {
-  margin: 0;
-  font-family: 'Ubuntu', sans-serif;
-  background: #776c91;
-}
+  <style>
+    :root {
+      --bg: #f5f4ef;
+      --paper: #fbfaf7;
+      --ink: #202c50;
+      --muted: #777b86;
+      --line: #dcdcd5;
+      --accent: #776c91;
+      --gutter: clamp(16px, 3.5vw, 56px);
+      --mono: "DM Mono", monospace;
+      --sans: "Manrope", sans-serif;
+    }
 
-.imgdesc {
-  font-family: 'Ubuntu', sans-serif;
-  text-align: center;
-  background: rgb(145, 135, 170);
-  padding: 20px 0;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-/* FLEX GRID */
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 -10px;
-}
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
 
-.column {
-  flex: 0 0 25%;
-  padding: 10px;
-}
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* Images + Video same sizing */
-.column img,
-.column iframe {
-  width: 100%;
-  height: auto;
-  display: block;
-  opacity: 0.9;
-  transition: opacity 0.3s ease;
-  border: none;
-}
+    body.lightbox-open {
+      overflow: hidden;
+    }
 
-.column img:hover,
-.column iframe:hover {
-  opacity: 1;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-/* Expanding image container */
-.container {
-  position: relative;
-  display: none;
-}
+    button {
+      font: inherit;
+    }
 
-#expandedImg {
-  display: block;
-  margin: auto;
-  width: 50%;
-}
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
-#imgtext {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: rgb(134, 209, 255);
-  font-size: 20px;
-}
+    /* NAVIGATION */
 
-.closebtn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  color: white;
-  font-size: 35px;
-  cursor: pointer;
-}
+    .topbar {
+      min-height: 76px;
+      padding: 0 var(--gutter);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
 
-/* Back button */
-div.backBtn {
-  width: 100px;
-  right: 100px;
-  top: 30px;
-  background-color: #f4f4f4;
-  transition: all 0.4s ease;
-  position: fixed;
-  cursor: pointer;
-  z-index: 1000;
-}
+    .back-link,
+    .top-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
-span.line {
-  background-color: #8f7373;
-  border-radius: 10px;
-  width: 100%;
-  height: 2px;
-  display: block;
-  position: absolute;
-  transition: all 0.3s ease;
-}
+    .back-link {
+      transition: opacity 0.2s ease;
+    }
 
-span.tLine { top: 0px; }
-span.mLine { top: 13px; opacity: 0; }
-span.bLine { top: 26px; }
+    .back-link:hover {
+      opacity: 0.55;
+    }
 
-.label {
-  position: absolute;
-  top: 5px;
-  width: 100%;
-  text-align: center;
-  font-size: 1em;
-  color: rgb(123, 123, 123);
-}
+    .back-arrow {
+      font-size: 19px;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
 
-.header-color {
-  color: rgb(55, 28, 80);
-}
+    .back-link:hover .back-arrow {
+      transform: translateX(-4px);
+    }
 
-/* Paragraph styling */
-.imgdesc p {
-  margin: auto;
-  max-width: 600px;
-  padding: 10px;
-  line-height: 1.6;
-}
+    .top-label {
+      color: var(--muted);
+      text-align: right;
+    }
 
-/* Responsive */
-@media screen and (max-width: 768px) {
-  .column { flex: 0 0 50%; }
-  #expandedImg { width: 90%; }
-  .imgdesc p { width: 90%; }
-}
+    /* MAIN CONTENT */
 
-@media screen and (max-width: 480px) {
-  .column { flex: 0 0 100%; }
-  #expandedImg { width: 100%; }
-  .imgdesc p { width: 95%; font-size: 14px; }
-  div.backBtn { top: 10px; left: 10px; right: auto; width: 70px; }
-}
-</style>
+    main {
+      width: 100%;
+      padding: 0 var(--gutter);
+    }
+
+    .hero {
+      padding: clamp(48px, 9vw, 120px) 0 52px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(220px, 0.65fr);
+      gap: clamp(28px, 6vw, 100px);
+      align-items: end;
+    }
+
+    .eyebrow,
+    .section-label,
+    .meta-label,
+    .image-index {
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.6;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      margin: 0 0 26px;
+      color: var(--accent);
+    }
+
+    h1 {
+      max-width: 1000px;
+      margin: 0;
+      font-size: clamp(42px, 8.5vw, 112px);
+      font-weight: 600;
+      line-height: 0.94;
+      letter-spacing: -0.085em;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--accent);
+    }
+
+    .hero-aside {
+      padding-bottom: 5px;
+    }
+
+    .hero-aside p {
+      margin: 0;
+      max-width: 360px;
+      color: #565d6d;
+      font-size: clamp(14px, 1.2vw, 16px);
+      line-height: 1.9;
+    }
+
+    .project-number {
+      display: block;
+      margin-top: 32px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    /* FEATURED IMAGE */
+
+    .hero-artwork {
+      position: relative;
+      margin: 0;
+      overflow: hidden;
+      background: #e8e5ed;
+    }
+
+    .hero-artwork button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: zoom-in;
+    }
+
+    .hero-artwork img {
+      width: 100%;
+      max-height: 820px;
+      object-fit: contain;
+      margin: auto;
+      transition: transform 0.65s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .hero-artwork button:hover img {
+      transform: scale(1.015);
+    }
+
+    .artwork-caption {
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.7;
+      letter-spacing: 0.04em;
+    }
+
+    /* PROJECT INFORMATION */
+
+    .project-info {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: clamp(32px, 8vw, 130px);
+      padding: clamp(64px, 10vw, 130px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-label {
+      margin: 0 0 25px;
+      color: var(--accent);
+    }
+
+    h2 {
+      margin: 0 0 24px;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 500;
+      letter-spacing: -0.065em;
+      line-height: 1.1;
+    }
+
+    .project-description p {
+      max-width: 650px;
+      margin: 0 0 18px;
+      color: #565d6d;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .project-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-meta {
+      display: grid;
+      align-content: start;
+      gap: 0;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+      padding: 17px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .meta-label {
+      color: var(--muted);
+    }
+
+    .meta-value {
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    /* BRAND IMAGE */
+
+    .brand-section {
+      padding: clamp(55px, 8vw, 100px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .brand-heading h2 {
+      margin: 0;
+    }
+
+    .brand-heading p:last-child {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    .brand-artwork {
+      padding: clamp(24px, 6vw, 70px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #e8e5ed;
+    }
+
+    .brand-artwork img {
+      width: min(100%, 620px);
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* GALLERY */
+
+    .gallery-section {
+      padding: clamp(64px, 9vw, 110px) 0;
+    }
+
+    .gallery-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+
+    .gallery-heading h2 {
+      margin: 0;
+    }
+
+    .gallery-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 18px;
+      row-gap: 38px;
+    }
+
+    .gallery-item {
+      min-width: 0;
+      margin: 0;
+    }
+
+    .gallery-button {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      background: #e8e5ed;
+      cursor: zoom-in;
+    }
+
+    .gallery-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.5s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .gallery-button:hover img {
+      transform: scale(1.035);
+    }
+
+    .zoom-hint {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      background: rgba(251, 250, 247, 0.92);
+      color: var(--ink);
+      font-size: 18px;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .gallery-button:hover .zoom-hint,
+    .gallery-button:focus-visible .zoom-hint {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-caption {
+      padding-top: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .gallery-caption h3 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .image-index {
+      flex-shrink: 0;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    /* VIDEO */
+
+    .video-section {
+      padding: 0 0 clamp(64px, 9vw, 110px);
+    }
+
+    .video-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .video-heading h2 {
+      margin: 0;
+    }
+
+    .video-heading p:last-child {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #e8e5ed;
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-caption {
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    /* FOOTER */
+
+    .closing {
+      padding: 40px 0 70px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+    }
+
+    .closing a {
+      color: var(--ink);
+    }
+
+    .closing a:hover {
+      color: var(--accent);
+    }
+
+    /* LIGHTBOX */
+
+    .lightbox {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: none;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      padding: 20px clamp(14px, 4vw, 56px);
+      background: rgba(20, 25, 42, 0.97);
+      color: #fbfaf7;
+    }
+
+    .lightbox.is-open {
+      display: grid;
+    }
+
+    .lightbox-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      min-height: 48px;
+    }
+
+    .lightbox-counter {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    .lightbox-close {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 27px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .lightbox-stage {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) 48px;
+      align-items: center;
+      gap: clamp(8px, 2vw, 30px);
+    }
+
+    .lightbox-image-wrap {
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox-image {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .lightbox-nav {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .lightbox-bottom {
+      padding: 16px 0 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .lightbox-title {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .lightbox-help {
+      color: rgba(255,255,255,0.6);
+      font-family: var(--mono);
+      font-size: 10px;
+      text-align: right;
+    }
+
+    /* ACCESSIBILITY */
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (min-width: 1500px) {
+      main {
+        max-width: 1800px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding-top: 70px;
+      }
+
+      .hero-aside {
+        max-width: 520px;
+      }
+
+      .project-number {
+        margin-top: 18px;
+      }
+
+      .project-info {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px 14px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 38px minmax(0, 1fr) 38px;
+        gap: 6px;
+      }
+
+      .lightbox-nav {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .topbar {
+        min-height: 62px;
+      }
+
+      .top-label {
+        max-width: 145px;
+        font-size: 9px;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+
+      h1 {
+        font-size: clamp(42px, 13vw, 65px);
+      }
+
+      .artwork-caption {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .gallery-heading,
+      .brand-heading,
+      .video-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .gallery-heading p,
+      .brand-heading p:last-child,
+      .video-heading p:last-child {
+        text-align: left;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        row-gap: 28px;
+      }
+
+      .meta-row {
+        grid-template-columns: 90px 1fr;
+      }
+
+      .brand-artwork {
+        padding: 24px;
+      }
+
+      .video-caption {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .closing {
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .lightbox {
+        padding: 12px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 32px minmax(0, 1fr) 32px;
+        gap: 4px;
+      }
+
+      .lightbox-nav {
+        width: 30px;
+        height: 38px;
+        font-size: 19px;
+      }
+
+      .lightbox-bottom {
+        align-items: start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .lightbox-help {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="backBtn">
-  <a href="UIUXdesigngrp.html">
-    <span class="line tLine"></span>
-    <span class="line mLine"></span>
-    <span class="label">Back</span>
-    <span class="line bLine"></span>
-  </a>
-</div>
+  <!-- NAVIGATION -->
+  <header class="topbar">
+    <a class="back-link" href="UIUXdesigngrp.html">
+      <span class="back-arrow" aria-hidden="true">←</span>
+      <span>Back to projects</span>
+    </a>
 
-<div style="text-align:center" class="header-color">
-  <h2>LOCAL EATS Smartwatch</h2>
-  <p>Click on the images below:</p>
-</div>
+    <div class="top-label">Selected work / UI/UX design</div>
+  </header>
 
-<!-- GRID -->
-<div class="row">
-  <div class="column">
-    <img src="UIUX/prototypesmartwatch-01.png" alt="" onclick="myFunction(this);">
+  <main>
+
+    <!-- PROJECT INTRODUCTION -->
+    <section class="hero">
+      <div>
+        <p class="eyebrow">UI/UX design · Wearable technology · 2023</p>
+
+        <h1>
+          LOCAL
+          <span>EATS.</span>
+        </h1>
+      </div>
+
+      <div class="hero-aside">
+        <p>
+          A smartwatch concept designed to make discovering nearby hawker
+          food more convenient. LOCAL EATS explores how wearable technology
+          can connect people with local food spots while encouraging support
+          for Singapore's hawker culture.
+        </p>
+
+        <span class="project-number">PROJECT — MOBILE EXPERIENCE</span>
+      </div>
+    </section>
+
+    <!-- FEATURED IMAGE -->
+    <figure class="hero-artwork">
+      <button
+        type="button"
+        class="image-trigger"
+        data-image="UIUX/prototypesmartwatch-01.png"
+        data-title="LOCAL EATS — Smartwatch prototype"
+        aria-label="Enlarge the LOCAL EATS smartwatch prototype"
+      >
+        <img
+          src="UIUX/prototypesmartwatch-01.png"
+          alt="LOCAL EATS smartwatch interface prototype"
+          fetchpriority="high"
+        >
+      </button>
+    </figure>
+
+    <div class="artwork-caption">
+      <span>01 / FEATURED DESIGN</span>
+      <span>LOCAL EATS — SMARTWATCH INTERFACE</span>
+    </div>
+
+    <!-- PROJECT STORY AND METADATA -->
+    <section class="project-info">
+
+      <div class="project-description">
+        <p class="section-label">01 — The concept</p>
+
+        <h2>Bringing nearby hawker food closer to you.</h2>
+
+        <p>
+          LOCAL EATS is a smartwatch concept designed to help users explore
+          nearby food options and discover local hawker centres. The name
+          communicates the app's purpose directly, connecting the idea of
+          eating locally with the convenience of finding food around you.
+        </p>
+
+        <p>
+          The project was developed around the idea of supporting Singapore's
+          hawker culture, particularly as local food businesses continued
+          to navigate the challenges of the post-COVID period. By making
+          nearby food discovery more accessible, the concept encourages
+          users to explore and support the independent food businesses
+          around them.
+        </p>
+
+        <p>
+          Designing for a smartwatch introduced a different set of
+          considerations from a conventional mobile application. The
+          interface needed to communicate information clearly within a
+          smaller screen, making the organisation of content, readability
+          and simplicity important parts of the design process.
+        </p>
+
+        <p>
+          Using Figma, I developed the interface and planned the smartwatch
+          experience through digital prototypes. This project allowed me
+          to explore how UI/UX principles can be adapted to wearable
+          technology, balancing convenience and usability with a concept
+          rooted in Singapore's local food culture.
+        </p>
+      </div>
+
+      <aside class="project-meta">
+        <div class="meta-row">
+          <span class="meta-label">Project</span>
+          <span class="meta-value">LOCAL EATS Smartwatch</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Discipline</span>
+          <span class="meta-value">
+            UI/UX design<br>
+            Interface design<br>
+            Prototyping<br>
+            Wearable technology
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Platform</span>
+          <span class="meta-value">Smartwatch</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Software</span>
+          <span class="meta-value">Figma</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Date</span>
+          <span class="meta-value">February 2023</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Focus</span>
+          <span class="meta-value">
+            Nearby food discovery, compact interfaces and accessible
+            wearable experiences
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Purpose</span>
+          <span class="meta-value">
+            Encourage exploration of local hawker food and support
+            Singapore's hawker culture
+          </span>
+        </div>
+      </aside>
+
+    </section>
+
+    <!-- BRAND IDENTITY -->
+    <section class="brand-section">
+      <div class="brand-heading">
+        <div>
+          <p class="section-label">02 — Brand identity</p>
+          <h2>Meet LOCAL EATS.</h2>
+        </div>
+
+        <p>NAME &amp; VISUAL IDENTITY<br>DESIGNED IN FIGMA</p>
+      </div>
+
+      <div class="brand-artwork">
+        <img
+          src="UIUX/LOCALEATS.png"
+          alt="LOCAL EATS brand identity"
+          loading="lazy"
+        >
+      </div>
+    </section>
+
+    <!-- DESIGN GALLERY -->
+    <section class="gallery-section" aria-labelledby="gallery-title">
+      <div class="gallery-heading">
+        <div>
+          <p class="section-label">03 — Interface explorations</p>
+          <h2>Designed for the wrist.</h2>
+        </div>
+
+        <p>PROTOTYPE &amp; PLANNING<br>SELECT AN IMAGE TO EXPLORE ↗</p>
+      </div>
+
+      <div class="gallery-grid">
+
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="UIUX/Screenshot 2023-07-19 000338.png"
+            data-title="Smartwatch interface exploration"
+            aria-label="Enlarge smartwatch interface exploration"
+          >
+            <img
+              src="UIUX/Screenshot 2023-07-19 000338.png"
+              alt="LOCAL EATS smartwatch interface exploration"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>Interface exploration</h3>
+            <span class="image-index">02</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="UIUX/Planningsmartwatch.png"
+            data-title="Smartwatch planning and development"
+            aria-label="Enlarge smartwatch planning and development"
+          >
+            <img
+              src="UIUX/Planningsmartwatch.png"
+              alt="LOCAL EATS smartwatch planning and development"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>Planning and development</h3>
+            <span class="image-index">03</span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- PROTOTYPE VIDEO -->
+    <section class="video-section">
+      <div class="video-heading">
+        <div>
+          <p class="section-label">04 — Prototype walkthrough</p>
+          <h2>See it in action.</h2>
+        </div>
+
+        <p>SMARTWATCH PROTOTYPE<br>INTERACTION DEMONSTRATION</p>
+      </div>
+
+      <div class="video-frame">
+        <iframe
+          src="https://screenpal.com/player/cZV2I5VJ1Nm?"
+          title="LOCAL EATS smartwatch prototype walkthrough"
+          allow="fullscreen"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <div class="video-caption">
+        <span>04 / PROTOTYPE WALKTHROUGH</span>
+        <span>LOCAL EATS — SMARTWATCH EXPERIENCE</span>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="closing">
+      <span>LOCAL EATS — UI/UX DESIGN / 2023</span>
+      <a href="UIUXdesigngrp.html">← Back to selected work</a>
+    </footer>
+
+  </main>
+
+  <!-- FULL-SCREEN IMAGE VIEWER -->
+  <div
+    class="lightbox"
+    id="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Artwork image viewer"
+    aria-hidden="true"
+  >
+    <div class="lightbox-top">
+      <span class="lightbox-counter" id="lightboxCounter">01 / 03</span>
+
+      <button
+        class="lightbox-close"
+        id="lightboxClose"
+        type="button"
+        aria-label="Close image viewer"
+      >×</button>
+    </div>
+
+    <div class="lightbox-stage">
+      <button
+        class="lightbox-nav"
+        id="lightboxPrev"
+        type="button"
+        aria-label="Previous image"
+      >‹</button>
+
+      <div class="lightbox-image-wrap">
+        <img class="lightbox-image" id="lightboxImage" src="" alt="">
+      </div>
+
+      <button
+        class="lightbox-nav"
+        id="lightboxNext"
+        type="button"
+        aria-label="Next image"
+      >›</button>
+    </div>
+
+    <div class="lightbox-bottom">
+      <p class="lightbox-title" id="lightboxTitle"></p>
+      <span class="lightbox-help">
+        USE ← → TO NAVIGATE · ESC TO CLOSE
+      </span>
+    </div>
   </div>
 
-  <div class="column">
-    <img src="UIUX/Screenshot 2023-07-19 000338.png" alt="" onclick="myFunction(this);">
-  </div>
+  <script>
+    (() => {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightboxImage");
+      const lightboxTitle = document.getElementById("lightboxTitle");
+      const lightboxCounter = document.getElementById("lightboxCounter");
+      const closeButton = document.getElementById("lightboxClose");
+      const prevButton = document.getElementById("lightboxPrev");
+      const nextButton = document.getElementById("lightboxNext");
 
-  <div class="column">
-    <img src="UIUX/Planningsmartwatch.png" alt="" onclick="myFunction(this);">
-  </div>
+      const triggers = Array.from(
+        document.querySelectorAll(".image-trigger")
+      );
 
-  <div class="column">
-    <iframe 
-      src="https://screenpal.com/player/cZV2I5VJ1Nm?"
-      allowfullscreen>
-    </iframe>
-  </div>
-</div>
+      let currentIndex = 0;
+      let lastFocusedElement = null;
 
-<div class="container">
-  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg">
-  <div id="imgtext"></div>
-</div>
+      const images = triggers.map((trigger) => {
+        const image = trigger.querySelector("img");
 
-<div class="imgdesc">
-  <p>LOCAL EATS Smartwatch. Feb 2023.</p>
-  <p>Designed in Figma.</p>
+        return {
+          src: trigger.dataset.image,
+          title: trigger.dataset.title,
+          alt: image ? image.alt : trigger.dataset.title
+        };
+      });
 
-  <p>
-    The name “LOCALEATS” clearly communicates the app’s purpose. 
-    The design conveys the concept of exploring and enjoying food 
-    from nearby hawker centres, aiming to support hawker culture 
-    businesses in the post-COVID era.
-  </p>
+      function showImage(index) {
+        currentIndex = (index + images.length) % images.length;
 
-  <img src="UIUX/LOCALEATS.png" 
-       style="display:block; margin:0 auto; max-width:33%;">
-</div>
+        const image = images[currentIndex];
 
-<script>
-function myFunction(imgs) {
-  var expandImg = document.getElementById("expandedImg");
-  expandImg.src = imgs.src;
-  expandImg.parentElement.style.display = "block";
-}
-</script>
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.alt;
+        lightboxTitle.textContent = image.title;
+
+        lightboxCounter.textContent =
+          String(currentIndex + 1).padStart(2, "0") +
+          " / " +
+          String(images.length).padStart(2, "0");
+
+        // Preload adjacent images for smoother navigation.
+        [currentIndex + 1, currentIndex - 1].forEach((i) => {
+          const adjacent = images[(i + images.length) % images.length];
+          const preload = new Image();
+          preload.src = adjacent.src;
+        });
+      }
+
+      function openLightbox(index) {
+        lastFocusedElement = document.activeElement;
+
+        showImage(index);
+
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.classList.add("lightbox-open");
+
+        closeButton.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("lightbox-open");
+
+        lightboxImage.src = "";
+
+        if (lastFocusedElement) {
+          lastFocusedElement.focus();
+        }
+      }
+
+      function nextImage() {
+        showImage(currentIndex + 1);
+      }
+
+      function previousImage() {
+        showImage(currentIndex - 1);
+      }
+
+      triggers.forEach((trigger, index) => {
+        trigger.addEventListener("click", () => {
+          openLightbox(index);
+        });
+      });
+
+      closeButton.addEventListener("click", closeLightbox);
+      nextButton.addEventListener("click", nextImage);
+      prevButton.addEventListener("click", previousImage);
+
+      // Close when clicking the dark background.
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      // Keyboard navigation.
+      document.addEventListener("keydown", (event) => {
+        if (!lightbox.classList.contains("is-open")) return;
+
+        if (event.key === "Escape") {
+          closeLightbox();
+        } else if (event.key === "ArrowRight") {
+          nextImage();
+        } else if (event.key === "ArrowLeft") {
+          previousImage();
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>
