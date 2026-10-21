@@ -1,241 +1,1209 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
-<style>
+  <title>Candy Land — Portfolio</title>
 
-  
-* {
-  box-sizing: border-box;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-body {
-  margin: 0;
-  font-family: 'Ubuntu', sans-serif;
-  
-  background:  #ffc5c5;
+  <style>
+    :root {
+      --bg: #213249;
+      --paper: #f5f4ef;
+      --ink: #e8e4dc;
+      --muted: #a8adb5;
+      --line: #405269;
+      --accent: #d9a6dc;
+      --art-bg: #172536;
 
-}
+      --gutter: clamp(16px, 3.5vw, 56px);
 
-.imgdesc {
-  font-family: 'Ubuntu', sans-serif;
-  text-align: center;
-  background:  rgb(255, 141, 141)
-}
+      --mono: "DM Mono", monospace;
+      --sans: "Manrope", sans-serif;
+    }
 
-/* The grid: Four equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 25%;
-  padding: 10px;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-/* Style the images inside the grid */
-.column img {
-  opacity: 0.8; 
-  cursor: pointer; 
-}
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
 
-.column img:hover {
-  opacity: 1;
-}
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+    body.lightbox-open {
+      overflow: hidden;
+    }
 
-/* The expanding image container */
-.container {
-  position: relative;
-  display: none;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-/* Expanding image text */
-#imgtext {
-  position: absolute;
-  bottom: 15px;
-  left: 600px;
-  color: rgb(134, 209, 255);
-  font-size: 20px;
-}
+    button {
+      font: inherit;
+    }
 
-/* Closable button inside the expanded image */
-.closebtn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  color: white;
-  font-size: 35px;
-  cursor: pointer;
-}
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
+    /* NAVIGATION */
 
+    .topbar {
+      min-height: 76px;
+      padding: 0 var(--gutter);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
 
-/* CSS for back button */
-div.backBtn {
-    width: 100px;
-    right: 100px;
-    top: 30px;
-    background-color: #f4f4f4;
-    transition: all 0.4s ease;
-    position: fixed;
-    cursor: pointer;
-  }
+    .back-link,
+    .top-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
-  span.line {
-    bottom: auto;
-    right: auto;
-    top: auto;
-    left: auto;
-    background-color: #8f7373;
-    border-radius: 10px;
-    width: 100%;
-    left: 0px;
-    height: 2px;
-    display: block;
-    position: absolute;
-    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
-  }
+    .back-link {
+      transition: opacity 0.2s ease;
+    }
 
-  span.tLine {
-    top: 0px;
-  }
+    .back-link:hover {
+      opacity: 0.55;
+    }
 
-  span.mLine {
-    top: 13px;
-    opacity: 0;
-  }
+    .back-arrow {
+      font-size: 19px;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
 
-  span.bLine {
-    top: 26px;
-  }
+    .back-link:hover .back-arrow {
+      transform: translateX(-4px);
+    }
 
-  .label {
-    position: absolute;
-    left: 0px;
-    top: 5px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.4s ease;
-    font-size: 1em;
-    color: rgb(123, 123, 123);
-  }
+    .top-label {
+      color: var(--muted);
+      text-align: right;
+    }
 
-  div.backBtn:hover span.label {
-    left: 25px
-  }
+    main {
+      width: 100%;
+      padding: 0 var(--gutter);
+    }
 
-  div.backBtn:hover span.line {
-    left: -10px;
-    height: 5px;
-    background-color: #a84141;
-  }
+    /* HERO */
 
-  div.backBtn:hover span.tLine {
-    width: 25px;
-    transform: rotate(-45deg);
-    left: -15px;
-    top: 6px;
-  }
-  
-  div.backBtn:hover span.mLine {
-    opacity: 1;
-    width: 30px;
-  }
+    .hero {
+      padding: clamp(48px, 9vw, 120px) 0 52px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(220px, 0.65fr);
+      gap: clamp(28px, 6vw, 100px);
+      align-items: end;
+    }
 
-  div.backBtn:hover span.bLine {
-    width: 25px;
-    transform: rotate(45deg);
-    left: -15px;
-    top: 20px;
-    
-  }
+    .eyebrow,
+    .section-label,
+    .meta-label,
+    .image-index {
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.6;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
 
-  .header-color {
-    color:rgb(123, 123, 123);
-  }
-</style>
+    .eyebrow {
+      margin: 0 0 26px;
+      color: var(--accent);
+    }
+
+    h1 {
+      max-width: 1050px;
+      margin: 0;
+      font-size: clamp(42px, 8.5vw, 112px);
+      font-weight: 600;
+      line-height: 0.94;
+      letter-spacing: -0.085em;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--accent);
+    }
+
+    .hero-aside {
+      padding-bottom: 5px;
+    }
+
+    .hero-aside p {
+      margin: 0;
+      max-width: 380px;
+      color: #b4bac4;
+      font-size: clamp(14px, 1.2vw, 16px);
+      line-height: 1.9;
+    }
+
+    .project-number {
+      display: block;
+      margin-top: 32px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    /* FEATURED IMAGE */
+
+    .hero-artwork {
+      position: relative;
+      margin: 0;
+      overflow: hidden;
+      background: var(--art-bg);
+    }
+
+    .hero-artwork button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: zoom-in;
+    }
+
+    .hero-artwork img {
+      width: 100%;
+      max-height: 820px;
+      object-fit: contain;
+      margin: auto;
+      transition: transform 0.65s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .hero-artwork button:hover img {
+      transform: scale(1.015);
+    }
+
+    .artwork-caption {
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.7;
+      letter-spacing: 0.04em;
+    }
+
+    /* PROJECT INFORMATION */
+
+    .project-info {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: clamp(32px, 8vw, 130px);
+      padding: clamp(64px, 10vw, 130px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-label {
+      margin: 0 0 25px;
+      color: var(--accent);
+    }
+
+    h2 {
+      margin: 0 0 24px;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 500;
+      letter-spacing: -0.065em;
+      line-height: 1.1;
+    }
+
+    .project-description p:not(.section-label) {
+      max-width: 680px;
+      margin: 0 0 18px;
+      color: #b4bac4;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .project-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* PROJECT METADATA */
+
+    .project-meta {
+      display: grid;
+      align-content: start;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+      padding: 17px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .meta-label {
+      color: var(--muted);
+    }
+
+    .meta-value {
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    /* GALLERY */
+
+    .gallery-section {
+      padding: clamp(64px, 9vw, 110px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .gallery-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+
+    .gallery-heading h2 {
+      margin: 0;
+    }
+
+    .gallery-heading > p {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 18px;
+      row-gap: 38px;
+    }
+
+    .gallery-item {
+      min-width: 0;
+      margin: 0;
+    }
+
+    .gallery-button {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      background: var(--art-bg);
+      cursor: zoom-in;
+    }
+
+    .gallery-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.5s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .gallery-button:hover img {
+      transform: scale(1.035);
+    }
+
+    /* ZOOM ICON */
+
+    .zoom-hint {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      background: rgba(33, 50, 73, 0.92);
+      color: var(--accent);
+      font-size: 18px;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .gallery-button:hover .zoom-hint,
+    .gallery-button:focus-visible .zoom-hint {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-caption {
+      padding-top: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .gallery-caption h3 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .image-index {
+      flex-shrink: 0;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    /* PROCESS */
+
+    .process-section {
+      padding: clamp(64px, 9vw, 110px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .process-content {
+      max-width: 900px;
+    }
+
+    .process-content p:not(.section-label) {
+      margin: 0 0 20px;
+      color: #b4bac4;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .process-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* FOOTER */
+
+    .closing {
+      padding: 40px 0 70px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+    }
+
+    .closing a {
+      color: var(--ink);
+    }
+
+    .closing a:hover {
+      color: var(--accent);
+    }
+
+    /* FULL-SCREEN LIGHTBOX */
+
+    .lightbox {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: none;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      padding: 20px clamp(14px, 4vw, 56px);
+      background: rgba(13, 22, 34, 0.97);
+      color: var(--paper);
+    }
+
+    .lightbox.is-open {
+      display: grid;
+    }
+
+    .lightbox-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      min-height: 48px;
+    }
+
+    .lightbox-counter {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    .lightbox-close {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 27px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-close:hover,
+    .lightbox-nav:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .lightbox-stage {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) 48px;
+      align-items: center;
+      gap: clamp(8px, 2vw, 30px);
+    }
+
+    .lightbox-image-wrap {
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox-image {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .lightbox-nav {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-bottom {
+      padding: 16px 0 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .lightbox-title {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .lightbox-help {
+      color: rgba(255,255,255,0.6);
+      font-family: var(--mono);
+      font-size: 10px;
+      text-align: right;
+    }
+
+    /* ACCESSIBILITY */
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    /* LARGE SCREENS */
+
+    @media (min-width: 1500px) {
+      main {
+        max-width: 1800px;
+        margin: 0 auto;
+      }
+    }
+
+    /* TABLET */
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding-top: 70px;
+      }
+
+      .hero-aside {
+        max-width: 520px;
+      }
+
+      .project-number {
+        margin-top: 18px;
+      }
+
+      .project-info {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 38px minmax(0, 1fr) 38px;
+        gap: 6px;
+      }
+
+      .lightbox-nav {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 480px) {
+      .topbar {
+        min-height: 62px;
+      }
+
+      .top-label {
+        max-width: 145px;
+        font-size: 9px;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+
+      h1 {
+        font-size: clamp(42px, 13vw, 65px);
+      }
+
+      .artwork-caption {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .gallery-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .gallery-heading > p {
+        text-align: left;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        row-gap: 28px;
+      }
+
+      .meta-row {
+        grid-template-columns: 90px 1fr;
+      }
+
+      .closing {
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .lightbox {
+        padding: 12px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 32px minmax(0, 1fr) 32px;
+        gap: 4px;
+      }
+
+      .lightbox-nav {
+        width: 30px;
+        height: 38px;
+        font-size: 19px;
+      }
+
+      .lightbox-bottom {
+        align-items: start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .lightbox-help {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- The back button -->
-    <div class="backBtn">
-        <a href="3Ddesigngrp.html">
-          <span class="line tLine"></span>
-          <span class="line mLine"></span>
-          <span class="label">Back</span>
-          <span class="line bLine"></span>
-        </a>
+
+  <!-- NAVIGATION -->
+
+  <header class="topbar">
+    <a class="back-link" href="3Ddesigngrp.html">
+      <span class="back-arrow" aria-hidden="true">←</span>
+      <span>Back to projects</span>
+    </a>
+
+    <div class="top-label">
+      Selected work / 3D design
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+
+    <section class="hero">
+      <div>
+        <p class="eyebrow">
+          3D Design · Augmented Reality · December 2022
+        </p>
+
+        <h1>
+          Candy
+          <span>Land.</span>
+        </h1>
+      </div>
+
+      <div class="hero-aside">
+        <p>
+          An interactive augmented reality experience
+          bringing a playful ice cream truck into a
+          colourful candy-inspired world through 3D
+          modelling, digital texturing and animation.
+        </p>
+
+        <span class="project-number">
+          PROJECT — INTERACTIVE AR
+        </span>
+      </div>
+    </section>
+
+    <!-- FEATURED IMAGE -->
+
+    <figure class="hero-artwork">
+      <button
+        type="button"
+        class="image-trigger"
+        data-image="3Dimg/Screenshot_20230120_105712.png"
+        data-title="Candy Land — Interactive AR Experience"
+        aria-label="Enlarge Candy Land interactive AR experience"
+      >
+        <img
+          src="3Dimg/Screenshot_20230120_105712.png"
+          alt="3D AR of an ice cream truck in the Candy Land environment"
+          fetchpriority="high"
+        >
+      </button>
+    </figure>
+
+    <div class="artwork-caption">
+      <span>01 / FEATURED DESIGN</span>
+      <span>CANDY LAND — INTERACTIVE AR EXPERIENCE</span>
     </div>
 
+    <!-- PROJECT INFORMATION -->
 
-<div style="text-align:center" class="header-color">
-  <h2>interactive AR of truck in CandyLand</h2>
-  <p>Click on the images below:</p>
-</div>
+    <section class="project-info">
 
-<!-- The 4 columns -->
-<div class="row">
-  <div class="column">
-    <img src="3Dimg/Screenshot_20230120_105712.png" alt="3D AR of ice cream truck and background" style="width:100%" onclick="myFunction(this);">
+      <div class="project-description">
+        <p class="section-label">01 — The concept</p>
+
+        <h2>
+          Bringing a candy-coloured
+          world into augmented reality.
+        </h2>
+
+        <p>
+          Candy Land is an interactive augmented reality
+          project centred around an ice cream truck
+          designed for a playful, candy-inspired
+          environment. The project explores how 3D
+          modelling, digital illustration and interactive
+          technology can work together to create an
+          engaging visual experience.
+        </p>
+
+        <p>
+          I modelled the ice cream truck in Autodesk Maya
+          and textured it in Substance Painter. To build
+          the surrounding environment, I designed a
+          two-dimensional background in Adobe Illustrator,
+          combining illustrated scenery with a three-
+          dimensional object.
+        </p>
+
+        <p>
+          The completed assets were imported into Unity
+          as part of the AR development process. Using
+          Adobe Aero's interaction panel, I configured
+          animations and interactions that allowed the
+          truck to move automatically and jump when
+          tapped by the user.
+        </p>
+
+        <p>
+          By combining a static illustrated backdrop with
+          an animated 3D object, the project explored how
+          simple interactions could make a digital
+          environment feel more playful and responsive.
+        </p>
+      </div>
+
+      <aside class="project-meta">
+
+        <div class="meta-row">
+          <span class="meta-label">Project</span>
+          <span class="meta-value">Candy Land</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Discipline</span>
+          <span class="meta-value">
+            3D modelling<br>
+            Augmented reality<br>
+            Interactive design<br>
+            Digital illustration
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Software</span>
+          <span class="meta-value">
+            Autodesk Maya<br>
+            Substance Painter<br>
+            Adobe Illustrator<br>
+            Unity<br>
+            Adobe Aero
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Date</span>
+          <span class="meta-value">December 2022</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Project type</span>
+          <span class="meta-value">
+            Interactive augmented reality experience
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Interaction</span>
+          <span class="meta-value">
+            Automatic truck movement and tap-triggered
+            jumping animation
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Focus</span>
+          <span class="meta-value">
+            Asset creation, texturing, environmental
+            illustration and AR interaction design
+          </span>
+        </div>
+
+      </aside>
+    </section>
+
+    <!-- GALLERY -->
+
+    <section class="gallery-section" aria-labelledby="gallery-title">
+
+      <div class="gallery-heading">
+        <div>
+          <p class="section-label">02 — Process &amp; exploration</p>
+          <h2 id="gallery-title">Explore Candy Land.</h2>
+        </div>
+
+        <p>
+          FROM 3D MODELLING TO AR
+          <br>
+          SELECT AN IMAGE TO EXPLORE ↗
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+
+        <!-- IMAGE 02 -->
+
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="3Dimg/Screenshot_20221124_103919.png"
+            data-title="Candy Land — Imported into Unity"
+            aria-label="Enlarge imported Unity scene"
+          >
+            <img
+              src="3Dimg/Screenshot_20221124_103919.png"
+              alt="Candy Land 3D model imported into Unity"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>Imported into Unity</h3>
+            <span class="image-index">02</span>
+          </figcaption>
+        </figure>
+
+        <!-- IMAGE 03 -->
+
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="3Dimg/Screenshot_20221124_083540.png"
+            data-title="Candy Land — Texturing in Substance Painter"
+            aria-label="Enlarge Substance Painter texturing process"
+          >
+            <img
+              src="3Dimg/Screenshot_20221124_083540.png"
+              alt="Ice cream truck being textured in Substance Painter"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>Texturing in Substance Painter</h3>
+            <span class="image-index">03</span>
+          </figcaption>
+        </figure>
+
+        <!-- IMAGE 04 -->
+
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="3Dimg/Screenshot_20230120_111052.png"
+            data-title="Candy Land — Background Illustration"
+            aria-label="Enlarge Candy Land background illustration"
+          >
+            <img
+              src="3Dimg/Screenshot_20230120_111052.png"
+              alt="Candy Land background designed in Adobe Illustrator"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>Background illustration</h3>
+            <span class="image-index">04</span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+
+    <section class="process-section">
+
+      <div class="process-content">
+
+        <p class="section-label">03 — Documentation &amp; process</p>
+
+        <h2>
+          From a 3D model
+          to an interactive experience.
+        </h2>
+
+        <p>
+          The project began with the design and modelling
+          of an ice cream truck in Autodesk Maya. I
+          developed the truck as the main three-dimensional
+          asset, considering its overall form and visual
+          character within the playful Candy Land concept.
+        </p>
+
+        <p>
+          I then applied textures in Substance Painter to
+          develop the truck's surface appearance. Alongside
+          the 3D asset, I created a two-dimensional
+          illustrated background in Adobe Illustrator.
+          This allowed me to combine different visual
+          approaches within a single environment.
+        </p>
+
+        <p>
+          After preparing the assets, I brought the scene
+          into the AR workflow using Unity and Adobe Aero.
+          Through Adobe Aero's interaction panel, I set up
+          behaviours that allowed the truck to move
+          automatically and respond to a tap with a
+          jumping animation.
+        </p>
+
+        <p>
+          The interaction introduced a simple element of
+          surprise, encouraging users to engage directly
+          with the truck rather than only viewing it as
+          a static model. It also allowed me to explore
+          how movement and user input could add another
+          layer to a designed environment.
+        </p>
+
+        <p>
+          This project helped me understand how 3D asset
+          creation, illustration and interactive technology
+          can come together to create an augmented reality
+          experience. It also strengthened my understanding
+          of designing digital objects that respond to
+          user interaction.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer class="closing">
+      <span>CANDY LAND — INTERACTIVE AR / DECEMBER 2022</span>
+
+      <a href="3Ddesigngrp.html">
+        ← Back to selected work
+      </a>
+    </footer>
+
+  </main>
+
+  <!-- FULL-SCREEN IMAGE VIEWER -->
+
+  <div
+    class="lightbox"
+    id="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Candy Land artwork image viewer"
+    aria-hidden="true"
+  >
+
+    <div class="lightbox-top">
+      <span class="lightbox-counter" id="lightboxCounter">
+        01 / 04
+      </span>
+
+      <button
+        class="lightbox-close"
+        id="lightboxClose"
+        type="button"
+        aria-label="Close image viewer"
+      >
+        ×
+      </button>
+    </div>
+
+    <div class="lightbox-stage">
+
+      <button
+        class="lightbox-nav"
+        id="lightboxPrev"
+        type="button"
+        aria-label="Previous image"
+      >
+        ‹
+      </button>
+
+      <div class="lightbox-image-wrap">
+        <img
+          class="lightbox-image"
+          id="lightboxImage"
+          src=""
+          alt=""
+        >
+      </div>
+
+      <button
+        class="lightbox-nav"
+        id="lightboxNext"
+        type="button"
+        aria-label="Next image"
+      >
+        ›
+      </button>
+
+    </div>
+
+    <div class="lightbox-bottom">
+      <p class="lightbox-title" id="lightboxTitle"></p>
+
+      <span class="lightbox-help">
+        USE ← → TO NAVIGATE · ESC TO CLOSE
+      </span>
+    </div>
+
   </div>
-  <div class="column">
-    <img src="3Dimg/Screenshot_20221124_103919.png" alt="imported to UNITY" style="width:100%" onclick="myFunction(this);">
-  </div>
-  <div class="column">
-    <img src="3Dimg/Screenshot_20221124_083540.png" alt="Textured in Substance Painter" style="width:100%" onclick="myFunction(this);">
-  </div>
-  <div class="column">
-    <img src="3Dimg/Screenshot_20230120_111052.png" alt="Designed the background in illustrator" style="width:100%" onclick="myFunction(this);">
-  </div>
-  
-  
-</div>
 
-<div class="container">
-  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
-  <div id="imgtext"></div>
-</div>
- 
-<!-- The img desc -->
-<div class="imgdesc" style="color:rgb(0, 0, 0)" >
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">The Candy Land. Dec 2022.</p>
+  <!-- LIGHTBOX SCRIPT -->
 
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">I designed the ice cream truck in MAYA, textured in substance painter. Designed a 2D background in Adobe illustator. 
-  Use Adobe Aero's interaction panel to set up triggers and actions, such as animations or object transformations, 
-  based on user input. The truck can moves automatically, but with a hit on the truck, the truck jumps. 
-  
-    </p>
+  <script>
+    (() => {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightboxImage");
+      const lightboxTitle = document.getElementById("lightboxTitle");
+      const lightboxCounter = document.getElementById("lightboxCounter");
 
-    <p style="margin: auto;
-    width: 50%;
-    padding: 10px;">
-    </p>
-    
-  
-</div>
+      const closeButton = document.getElementById("lightboxClose");
+      const prevButton = document.getElementById("lightboxPrev");
+      const nextButton = document.getElementById("lightboxNext");
 
+      const triggers = Array.from(
+        document.querySelectorAll(".image-trigger")
+      );
 
-<script>
-function myFunction(imgs) {
-  var expandImg = document.getElementById("expandedImg");
-  var imgText = document.getElementById("imgtext");
-  expandImg.src = imgs.src;
-  imgText.innerHTML = imgs.alt;
-  expandImg.parentElement.style.display = "block";
-}
-</script>
+      let currentIndex = 0;
+      let lastFocusedElement = null;
+
+      const images = triggers.map((trigger) => {
+        const image = trigger.querySelector("img");
+
+        return {
+          src: trigger.dataset.image,
+          title: trigger.dataset.title,
+          alt: image ? image.alt : trigger.dataset.title
+        };
+      });
+
+      function showImage(index) {
+        currentIndex = (index + images.length) % images.length;
+
+        const image = images[currentIndex];
+
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.alt;
+        lightboxTitle.textContent = image.title;
+
+        lightboxCounter.textContent =
+          String(currentIndex + 1).padStart(2, "0") +
+          " / " +
+          String(images.length).padStart(2, "0");
+
+        [currentIndex + 1, currentIndex - 1].forEach((i) => {
+          const adjacent = images[(i + images.length) % images.length];
+          const preload = new Image();
+          preload.src = adjacent.src;
+        });
+      }
+
+      function openLightbox(index) {
+        lastFocusedElement = document.activeElement;
+
+        showImage(index);
+
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+
+        document.body.classList.add("lightbox-open");
+
+        closeButton.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+
+        document.body.classList.remove("lightbox-open");
+
+        lightboxImage.src = "";
+
+        if (lastFocusedElement) {
+          lastFocusedElement.focus();
+        }
+      }
+
+      function nextImage() {
+        showImage(currentIndex + 1);
+      }
+
+      function previousImage() {
+        showImage(currentIndex - 1);
+      }
+
+      triggers.forEach((trigger, index) => {
+        trigger.addEventListener("click", () => {
+          openLightbox(index);
+        });
+      });
+
+      closeButton.addEventListener("click", closeLightbox);
+      nextButton.addEventListener("click", nextImage);
+      prevButton.addEventListener("click", previousImage);
+
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (!lightbox.classList.contains("is-open")) {
+          return;
+        }
+
+        if (event.key === "Escape") {
+          closeLightbox();
+        } else if (event.key === "ArrowRight") {
+          nextImage();
+        } else if (event.key === "ArrowLeft") {
+          previousImage();
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>
