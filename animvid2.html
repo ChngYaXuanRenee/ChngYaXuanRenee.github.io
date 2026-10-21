@@ -1,241 +1,510 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
-<style>
+  <title>Escape with Slime! — Animation | Portfolio</title>
 
-  
-* {
-  box-sizing: border-box;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-body {
-  margin: 0;
-  font-family: 'Ubuntu', sans-serif;
-  
-  background:  #cacaca;
+  <style>
+    :root {
+      --bg: #f5f4ef;
+      --paper: #fbfaf7;
+      --ink: #202c50;
+      --muted: #777b86;
+      --line: #dcdcd5;
+      --accent: #5a80a9;
+      --gutter: clamp(16px, 3.5vw, 56px);
+      --mono: "DM Mono", monospace;
+      --sans: "Manrope", sans-serif;
+    }
 
-}
+    * {
+      box-sizing: border-box;
+    }
 
-.imgdesc {
-  font-family: 'Ubuntu', sans-serif;
-  text-align: center;
-  background:  #888888;
-}
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
 
-/* The grid: Four equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 25%;
-  padding: 10px;
-}
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* Style the images inside the grid */
-.column img {
-  opacity: 0.8; 
-  cursor: pointer; 
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-.column img:hover {
-  opacity: 1;
-}
+    button {
+      font: inherit;
+    }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
-/* The expanding image container */
-.container {
-  position: relative;
-  display: none;
-}
+    /* NAVIGATION */
 
-/* Expanding image text */
-#imgtext {
-  position: absolute;
-  bottom: 15px;
-  left: 600px;
-  color: rgb(134, 209, 255);
-  font-size: 20px;
-}
+    .topbar {
+      min-height: 76px;
+      padding: 0 var(--gutter);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
 
-/* Closable button inside the expanded image */
-.closebtn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  color: white;
-  font-size: 35px;
-  cursor: pointer;
-}
+    .back-link,
+    .top-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
+    .back-link {
+      transition: opacity 0.2s ease;
+    }
 
+    .back-link:hover {
+      opacity: 0.55;
+    }
 
-/* CSS for back button */
-div.backBtn {
-    width: 100px;
-    right: 100px;
-    top: 30px;
-    background-color: #f4f4f4;
-    transition: all 0.4s ease;
-    position: fixed;
-    cursor: pointer;
-  }
+    .back-arrow {
+      font-size: 19px;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
 
-  span.line {
-    bottom: auto;
-    right: auto;
-    top: auto;
-    left: auto;
-    background-color: #8f7373;
-    border-radius: 10px;
-    width: 100%;
-    left: 0px;
-    height: 2px;
-    display: block;
-    position: absolute;
-    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
-  }
+    .back-link:hover .back-arrow {
+      transform: translateX(-4px);
+    }
 
-  span.tLine {
-    top: 0px;
-  }
+    .top-label {
+      color: var(--muted);
+      text-align: right;
+    }
 
-  span.mLine {
-    top: 13px;
-    opacity: 0;
-  }
+    /* MAIN CONTENT */
 
-  span.bLine {
-    top: 26px;
-  }
+    main {
+      width: 100%;
+      padding: 0 var(--gutter);
+    }
 
-  .label {
-    position: absolute;
-    left: 0px;
-    top: 5px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.4s ease;
-    font-size: 1em;
-    color: rgb(123, 123, 123);
-  }
+    .hero {
+      padding: clamp(48px, 9vw, 120px) 0 52px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(220px, 0.65fr);
+      gap: clamp(28px, 6vw, 100px);
+      align-items: end;
+    }
 
-  div.backBtn:hover span.label {
-    left: 25px
-  }
+    .eyebrow,
+    .section-label,
+    .meta-label,
+    .media-index {
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.6;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
 
-  div.backBtn:hover span.line {
-    left: -10px;
-    height: 5px;
-    background-color: #a84141;
-  }
+    .eyebrow {
+      margin: 0 0 26px;
+      color: var(--accent);
+    }
 
-  div.backBtn:hover span.tLine {
-    width: 25px;
-    transform: rotate(-45deg);
-    left: -15px;
-    top: 6px;
-  }
-  
-  div.backBtn:hover span.mLine {
-    opacity: 1;
-    width: 30px;
-  }
+    h1 {
+      max-width: 1000px;
+      margin: 0;
+      font-size: clamp(42px, 8.5vw, 112px);
+      font-weight: 600;
+      line-height: 0.94;
+      letter-spacing: -0.085em;
+    }
 
-  div.backBtn:hover span.bLine {
-    width: 25px;
-    transform: rotate(45deg);
-    left: -15px;
-    top: 20px;
-    
-  }
+    h1 span {
+      display: block;
+      color: var(--accent);
+    }
 
-  .header-color {
-    color:rgb(123, 123, 123);
-  }
-</style>
+    .hero-aside {
+      padding-bottom: 5px;
+    }
+
+    .hero-aside p {
+      margin: 0;
+      max-width: 360px;
+      color: #565d6d;
+      font-size: clamp(14px, 1.2vw, 16px);
+      line-height: 1.9;
+    }
+
+    .project-number {
+      display: block;
+      margin-top: 32px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    /* FEATURED VIDEO */
+
+    .video-section {
+      margin: 0;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: #e6e6df;
+    }
+
+    .video-frame .sp-embed-player {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-top: 56.25%;
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-caption {
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.7;
+      letter-spacing: 0.04em;
+    }
+
+    /* PROJECT INFORMATION */
+
+    .project-info {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: clamp(32px, 8vw, 130px);
+      padding: clamp(64px, 10vw, 130px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-label {
+      margin: 0 0 25px;
+      color: var(--accent);
+    }
+
+    h2 {
+      margin: 0 0 24px;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 500;
+      letter-spacing: -0.065em;
+      line-height: 1.1;
+    }
+
+    .project-description p {
+      max-width: 650px;
+      margin: 0 0 18px;
+      color: #565d6d;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .project-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-meta {
+      display: grid;
+      align-content: start;
+      gap: 0;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+      padding: 17px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .meta-label {
+      color: var(--muted);
+    }
+
+    .meta-value {
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    /* CLOSING NOTE */
+
+    .closing {
+      padding: 40px 0 70px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+    }
+
+    .closing a {
+      color: var(--ink);
+    }
+
+    .closing a:hover {
+      color: var(--accent);
+    }
+
+    /* RESPONSIVE */
+
+    @media (min-width: 1500px) {
+      main {
+        max-width: 1800px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding-top: 70px;
+      }
+
+      .hero-aside {
+        max-width: 520px;
+      }
+
+      .project-number {
+        margin-top: 18px;
+      }
+
+      .project-info {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .topbar {
+        min-height: 62px;
+      }
+
+      .back-link,
+      .top-label {
+        gap: 7px;
+        font-size: 9px;
+      }
+
+      .top-label {
+        max-width: 145px;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+
+      h1 {
+        font-size: clamp(42px, 13vw, 65px);
+      }
+
+      .video-caption {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .meta-row {
+        grid-template-columns: 90px 1fr;
+      }
+
+      .closing {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- The back button -->
-    <div class="backBtn">
-        <a href="animvidgrp.html">
-          <span class="line tLine"></span>
-          <span class="line mLine"></span>
-          <span class="label">Back</span>
-          <span class="line bLine"></span>
-        </a>
-    </div>
 
+  <!-- NAVIGATION -->
+  <header class="topbar">
+    <a class="back-link" href="animvidgrp.html">
+      <span class="back-arrow" aria-hidden="true">←</span>
+      <span>Back to projects</span>
+    </a>
 
-<div style="text-align:center" class="header-color">
-  <h2>Data Space Video</h2>
-  <p>Click on the images below:</p>
-</div>
+    <div class="top-label">Selected work / Animation</div>
+  </header>
 
-<!-- The 4 columns -->
-<div class="row">
-  <div class="column">
-    <iframe width="600" height="300" style="border:0;" scrolling="no" src="https://screenpal.com/player/cZeeX6VKAB7?width=100%&height=100%&ff=1&title=0" allowfullscreen="true"></iframe></div>
-  </div>
-  
-  
-</div>
+  <main>
 
-<div class="container">
-  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg" style="display: block; margin: auto; width: 50%;">
-  <div id="imgtext"></div>
-</div>
-<br>
-<br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-<!-- The img desc -->
-<div class="imgdesc" style="color:rgb(0, 0, 0)" >
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">Data Space Video. Sept 2023.</p>
+    <!-- PROJECT INTRODUCTION -->
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Animation · Motion study · Video</p>
 
-<p style="margin: auto;
-width: 50%;
-padding: 10px;">Designed in Adobe Premiere Pro.</p>
+        <h1>
+          ESCAPE
+          <span>WITH SLIME!</span>
+        </h1>
+      </div>
 
-  <p style="margin: auto;
-  width: 50%;
-  padding: 10px;">I crafted a video to teach about Data Space in design!
-  
-    </p>
+      <div class="hero-aside">
+        <p>
+          An animation project exploring movement, playful visuals and
+          the unexpected possibilities of slime through a moving-image
+          experience.
+        </p>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    
+        <span class="project-number">PROJECT 02 — ANIMATION</span>
+      </div>
+    </section>
 
-</div>
+    <!-- FEATURED VIDEO -->
+    <section class="video-section" aria-label="Escape with Slime animation">
+      <div class="video-frame">
+        <div
+          class="sp-embed-player"
+          data-id="cTh2n9nQNuA"
+          data-aspect-ratio="1.777778"
+          data-padding-top="56.250000%"
+          style="position:relative;width:100%;padding-top:56.250000%;height:0;"
+        >
+          <script src="https://go.screenpal.com/consumption/player_appearance/cTh2n9nQNuA/1.777778"></script>
 
+          <iframe
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+            scrolling="no"
+            src="https://go.screenpal.com/player/cTh2n9nQNuA?ff=1&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1"
+            allow="fullscreen *;"
+            allowfullscreen
+            title="Escape with Slime animation video"
+          ></iframe>
+        </div>
+      </div>
 
-<script>
-function myFunction(imgs) {
-  var expandImg = document.getElementById("expandedImg");
-  var imgText = document.getElementById("imgtext");
-  expandImg.src = imgs.src;
-  imgText.innerHTML = imgs.alt;
-  expandImg.parentElement.style.display = "block";
-}
-</script>
+      <div class="video-caption">
+        <span>01 / ANIMATION FILM</span>
+        <span>ESCAPE WITH SLIME! — MOTION STUDY</span>
+      </div>
+    </section>
+
+    <!-- PROJECT STORY AND METADATA -->
+    <section class="project-info">
+      <div class="project-description">
+        <p class="section-label">01 — The concept</p>
+
+        <h2>A playful escape into a world of slime.</h2>
+
+        <p>
+          Escape with Slime! explores the visual possibilities of
+          animation through the playful character of slime. The project
+          uses movement and visual storytelling to create an engaging
+          moving-image experience.
+        </p>
+
+        <p>
+          By bringing the concept to life through animation, the project
+          explores how motion can shape the viewer's experience, giving
+          the visuals a sense of energy, personality and progression.
+        </p>
+
+        <p>
+          The final video brings the concept together into an animated
+          piece, translating the initial idea into a visual experience
+          through timing, movement and digital media.
+        </p>
+      </div>
+
+      <aside class="project-meta">
+        <div class="meta-row">
+          <span class="meta-label">Project</span>
+          <span class="meta-value">Escape with Slime!</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Discipline</span>
+          <span class="meta-value">
+            Animation<br>
+            Motion design<br>
+            Visual storytelling
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Format</span>
+          <span class="meta-value">
+            Digital animation<br>
+            Video
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Software</span>
+          <span class="meta-value">Adobe After Effects</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Date</span> 
+          <span class="meta-value">2024</span>
+        </div>
+      </aside>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="closing">
+      <span>ESCAPE WITH SLIME! — ANIMATION</span>
+      <a href="animvidgrp.html">← Back to selected work</a>
+    </footer>
+
+  </main>
 
 </body>
 </html>
