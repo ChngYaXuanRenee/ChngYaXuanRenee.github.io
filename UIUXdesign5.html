@@ -1,240 +1,1104 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">  
+  <title>FOODHOOD App — Portfolio</title>
 
-<style>
-* {
-  box-sizing: border-box;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-body {
-  margin: 0;
-  font-family: 'Ubuntu', sans-serif;
-  background: #ffb363;
-}
+  <style>
+    :root {
+      --bg: #f5f4ef;
+      --paper: #fbfaf7;
+      --ink: #202c50;
+      --muted: #777b86;
+      --line: #dcdcd5;
+      --accent: #d77c2f;
+      --art-bg: #ffead2;
+      --gutter: clamp(16px, 3.5vw, 56px);
+      --mono: "DM Mono", monospace;
+      --sans: "Manrope", sans-serif;
+    }
 
-.imgdesc {
-  font-family: 'Ubuntu', sans-serif;
-  text-align: center;
-  background: #ffc44f;
-  padding: 20px 0;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-/* FLEX GRID */
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 -10px;
-}
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
 
-.column {
-  flex: 0 0 25%;
-  padding: 10px;
-}
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* Images */
-.column img {
-  width: 100%;
-  height: auto;
-  display: block;
-  opacity: 0.9;
-  transition: opacity 0.3s ease;
-  border: none;
-}
+    body.lightbox-open {
+      overflow: hidden;
+    }
 
-.column img:hover {
-  opacity: 1;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-/* VIDEO WRAPPER (16:9 ratio) */
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 ratio */
-}
+    button {
+      font: inherit;
+    }
 
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  opacity: 0.9;
-  transition: opacity 0.3s ease;
-}
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
-.video-wrapper iframe:hover {
-  opacity: 1;
-}
+    /* NAVIGATION */
 
-/* Expanding image container */
-.container {
-  position: relative;
-  display: none;
-}
+    .topbar {
+      min-height: 76px;
+      padding: 0 var(--gutter);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
 
-#expandedImg {
-  display: block;
-  margin: auto;
-  width: 50%;
-  border-radius: 10px;
-}
+    .back-link,
+    .top-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
-#imgtext {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: rgb(251, 239, 255);
-  font-size: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  text-align: center;
-}
+    .back-link {
+      transition: opacity 0.2s ease;
+    }
 
-.closebtn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  color: white;
-  font-size: 35px;
-  cursor: pointer;
-}
+    .back-link:hover {
+      opacity: 0.55;
+    }
 
-/* Back button */
-div.backBtn {
-  width: 100px;
-  right: 100px;
-  top: 30px;
-  background-color: #f4f4f4;
-  transition: all 0.4s ease;
-  position: fixed;
-  cursor: pointer;
-  z-index: 1000;
-}
+    .back-arrow {
+      font-size: 19px;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
 
-span.line {
-  background-color: #8f7373;
-  border-radius: 10px;
-  width: 100%;
-  height: 2px;
-  display: block;
-  position: absolute;
-  transition: all 0.3s ease;
-}
+    .back-link:hover .back-arrow {
+      transform: translateX(-4px);
+    }
 
-span.tLine { top: 0px; }
-span.mLine { top: 13px; opacity: 0; }
-span.bLine { top: 26px; }
+    .top-label {
+      color: var(--muted);
+      text-align: right;
+    }
 
-.label {
-  position: absolute;
-  top: 5px;
-  width: 100%;
-  text-align: center;
-  font-size: 1em;
-  color: rgb(123, 123, 123);
-}
+    /* MAIN CONTENT */
 
-.header-color {
-  color: rgb(123, 123, 123);
-}
+    main {
+      width: 100%;
+      padding: 0 var(--gutter);
+    }
 
-/* Paragraph styling */
-.imgdesc p {
-  margin: auto;
-  max-width: 600px;
-  padding: 10px;
-  line-height: 1.6;
-}
+    .hero {
+      padding: clamp(48px, 9vw, 120px) 0 52px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(220px, 0.65fr);
+      gap: clamp(28px, 6vw, 100px);
+      align-items: end;
+    }
 
-/* Responsive */
-@media screen and (max-width: 768px) {
-  .column { flex: 0 0 50%; }
-  #expandedImg { width: 90%; }
-  .imgdesc p { width: 90%; }
-}
+    .eyebrow,
+    .section-label,
+    .meta-label,
+    .image-index {
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.6;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
 
-@media screen and (max-width: 480px) {
-  .column { flex: 0 0 100%; }
-  #expandedImg { width: 100%; }
-  .imgdesc p { width: 95%; font-size: 14px; }
-  div.backBtn { top: 10px; left: 10px; right: auto; width: 70px; }
-}
-</style>
+    .eyebrow {
+      margin: 0 0 26px;
+      color: var(--accent);
+    }
+
+    h1 {
+      max-width: 1000px;
+      margin: 0;
+      font-size: clamp(42px, 8.5vw, 112px);
+      font-weight: 600;
+      line-height: 0.94;
+      letter-spacing: -0.085em;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--accent);
+    }
+
+    .hero-aside {
+      padding-bottom: 5px;
+    }
+
+    .hero-aside p {
+      margin: 0;
+      max-width: 360px;
+      color: #565d6d;
+      font-size: clamp(14px, 1.2vw, 16px);
+      line-height: 1.9;
+    }
+
+    .project-number {
+      display: block;
+      margin-top: 32px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    /* FEATURED ARTWORK */
+
+    .hero-artwork {
+      position: relative;
+      margin: 0;
+      overflow: hidden;
+      background: var(--art-bg);
+    }
+
+    .hero-artwork button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: zoom-in;
+    }
+
+    .hero-artwork img {
+      width: 100%;
+      max-height: 820px;
+      object-fit: contain;
+      margin: auto;
+      transition: transform 0.65s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .hero-artwork button:hover img {
+      transform: scale(1.015);
+    }
+
+    .artwork-caption {
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.7;
+      letter-spacing: 0.04em;
+    }
+
+    /* PROJECT INFORMATION */
+
+    .project-info {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: clamp(32px, 8vw, 130px);
+      padding: clamp(64px, 10vw, 130px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-label {
+      margin: 0 0 25px;
+      color: var(--accent);
+    }
+
+    h2 {
+      margin: 0 0 24px;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 500;
+      letter-spacing: -0.065em;
+      line-height: 1.1;
+    }
+
+    .project-description p {
+      max-width: 650px;
+      margin: 0 0 18px;
+      color: #565d6d;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .project-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-meta {
+      display: grid;
+      align-content: start;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+      padding: 17px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .meta-label {
+      color: var(--muted);
+    }
+
+    .meta-value {
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    /* GALLERY */
+
+    .gallery-section {
+      padding: clamp(64px, 9vw, 110px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .gallery-heading,
+    .video-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+
+    .gallery-heading h2,
+    .video-heading h2 {
+      margin: 0;
+    }
+
+    .gallery-heading p:last-child,
+    .video-heading p:last-child {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 18px;
+      row-gap: 38px;
+    }
+
+    .gallery-item {
+      min-width: 0;
+      margin: 0;
+    }
+
+    .gallery-button {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      background: var(--art-bg);
+      cursor: zoom-in;
+    }
+
+    .gallery-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.5s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .gallery-button:hover img {
+      transform: scale(1.035);
+    }
+
+    .zoom-hint {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      background: rgba(251, 250, 247, 0.92);
+      color: var(--ink);
+      font-size: 18px;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .gallery-button:hover .zoom-hint,
+    .gallery-button:focus-visible .zoom-hint {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-caption {
+      padding-top: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .gallery-caption h3 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .image-index {
+      flex-shrink: 0;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    /* PROTOTYPE VIDEO */
+
+    .video-section {
+      padding: clamp(64px, 9vw, 110px) 0;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--art-bg);
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-caption {
+      padding: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    /* FOOTER */
+
+    .closing {
+      padding: 40px 0 70px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+    }
+
+    .closing a {
+      color: var(--ink);
+    }
+
+    .closing a:hover {
+      color: var(--accent);
+    }
+
+    /* LIGHTBOX */
+
+    .lightbox {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: none;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      padding: 20px clamp(14px, 4vw, 56px);
+      background: rgba(20, 25, 42, 0.97);
+      color: var(--paper);
+    }
+
+    .lightbox.is-open {
+      display: grid;
+    }
+
+    .lightbox-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      min-height: 48px;
+    }
+
+    .lightbox-counter {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    .lightbox-close {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 27px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-close:hover,
+    .lightbox-nav:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .lightbox-stage {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) 48px;
+      align-items: center;
+      gap: clamp(8px, 2vw, 30px);
+    }
+
+    .lightbox-image-wrap {
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox-image {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .lightbox-nav {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-bottom {
+      padding: 16px 0 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .lightbox-title {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .lightbox-help {
+      color: rgba(255,255,255,0.6);
+      font-family: var(--mono);
+      font-size: 10px;
+      text-align: right;
+    }
+
+    /* ACCESSIBILITY */
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (min-width: 1500px) {
+      main {
+        max-width: 1800px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding-top: 70px;
+      }
+
+      .hero-aside {
+        max-width: 520px;
+      }
+
+      .project-number {
+        margin-top: 18px;
+      }
+
+      .project-info {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 38px minmax(0, 1fr) 38px;
+        gap: 6px;
+      }
+
+      .lightbox-nav {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .topbar {
+        min-height: 62px;
+      }
+
+      .top-label {
+        max-width: 145px;
+        font-size: 9px;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+
+      h1 {
+        font-size: clamp(42px, 13vw, 65px);
+      }
+
+      .artwork-caption {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .gallery-heading,
+      .video-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .gallery-heading p:last-child,
+      .video-heading p:last-child {
+        text-align: left;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        row-gap: 28px;
+      }
+
+      .meta-row {
+        grid-template-columns: 90px 1fr;
+      }
+
+      .video-caption {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .closing {
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .lightbox {
+        padding: 12px;
+      }
+
+      .lightbox-stage {
+        grid-template-columns: 32px minmax(0, 1fr) 32px;
+        gap: 4px;
+      }
+
+      .lightbox-nav {
+        width: 30px;
+        height: 38px;
+        font-size: 19px;
+      }
+
+      .lightbox-bottom {
+        align-items: start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .lightbox-help {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="backBtn">
-  <a href="UIUXdesigngrp.html">
-    <span class="line tLine"></span>
-    <span class="line mLine"></span>
-    <span class="label">Back</span>
-    <span class="line bLine"></span>
-  </a>
-</div>
+  <!-- NAVIGATION -->
+  <header class="topbar">
+    <a class="back-link" href="UIUXdesigngrp.html">
+      <span class="back-arrow" aria-hidden="true">←</span>
+      <span>Back to projects</span>
+    </a>
 
-<div style="text-align:center" class="header-color">
-  <h2>FOODHOOD App</h2>
-  <p>Click on the images below:</p>
-</div>
+    <div class="top-label">Selected work / UI/UX design</div>
+  </header>
 
-<!-- GRID -->
-<div class="row">
-  <div class="column">
-    <img src="UIUX/foodhoodmockup.png" alt="FOODHOOD Mockup" onclick="myFunction(this);">
-  </div>
+  <main>
 
-  <div class="column">
-    <div class="video-wrapper">
-      <iframe 
-        src="https://go.screenpal.com/player/cZln22nnecn?width=100%&height=100%&ff=1&title=0" 
-        allowfullscreen>
-      </iframe>
+    <!-- PROJECT INTRODUCTION -->
+    <section class="hero">
+      <div>
+        <p class="eyebrow">UI/UX design · Food community · App design</p>
+
+        <h1>
+          FOOD
+          <span>HOOD.</span>
+        </h1>
+      </div>
+
+      <div class="hero-aside">
+        <p>
+          A community-driven food platform connecting people through
+          home-cooked meals, personal food stories and shared culinary
+          traditions. FOODHOOD explores how digital design can help
+          home cooks showcase their skills while bringing local food
+          communities closer together.
+        </p>
+
+        <span class="project-number">PROJECT — COMMUNITY FOOD PLATFORM</span>
+      </div>
+    </section>
+
+    <!-- FEATURED IMAGE -->
+    <figure class="hero-artwork">
+      <button
+        type="button"
+        class="image-trigger"
+        data-image="UIUX/foodhoodmockup.png"
+        data-title="FOODHOOD — App mockup"
+        aria-label="Enlarge the FOODHOOD app mockup"
+      >
+        <img
+          src="UIUX/foodhoodmockup.png"
+          alt="FOODHOOD mobile app mockup"
+          fetchpriority="high"
+        >
+      </button>
+    </figure>
+
+    <div class="artwork-caption">
+      <span>01 / FEATURED DESIGN</span>
+      <span>FOODHOOD — COMMUNITY FOOD APP</span>
+    </div>
+
+    <!-- PROJECT STORY AND METADATA -->
+    <section class="project-info">
+
+      <div class="project-description">
+        <p class="section-label">01 — The concept</p>
+
+        <h2>Connecting people through the food that feels like home.</h2>
+
+        <p>
+          FOODHOOD is more than just a food-ordering app. It is a
+          community-driven platform inspired by the memories, family
+          traditions and personal stories connected to home-cooked meals.
+          By bringing food and storytelling together, the concept creates
+          opportunities for people to discover dishes and connect through
+          shared culinary experiences.
+        </p>
+
+        <p>
+          The project responds to the economic impact of COVID-19, when
+          retrenchment and employment uncertainty pushed many people to
+          explore alternative sources of income. FOODHOOD aims to help
+          displaced workers in Singapore showcase their cooking skills
+          and sell their homemade creations to the wider community.
+        </p>
+
+        <p>
+          Through an on-demand home-cooked food platform, users can
+          discover and order meals prepared by local home cooks. The
+          concept brings together convenience and community, while
+          creating a space for individual cooks to share their skills,
+          food traditions and personal creations.
+        </p>
+
+        <p>
+          The design process explores how a digital platform can make
+          home-cooked food more accessible while communicating the
+          warmth and familiarity associated with sharing a meal.
+          The interface, user task flow and low-fidelity wireframes
+          help establish the structure of the experience before moving
+          into the visual mockup and prototype.
+        </p>
+      </div>
+
+      <aside class="project-meta">
+        <div class="meta-row">
+          <span class="meta-label">Project</span>
+          <span class="meta-value">FOODHOOD App</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Discipline</span>
+          <span class="meta-value">
+            UI/UX design<br>
+            Interface design<br>
+            User journey planning<br>
+            Prototyping
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Platform</span>
+          <span class="meta-value">Mobile application</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Focus</span>
+          <span class="meta-value">
+            Home-cooked food, community connection and supporting
+            home cooks
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Audience</span>
+          <span class="meta-value">
+            Home cooks, food lovers and people seeking alternative
+            income opportunities
+          </span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Deliverables</span>
+          <span class="meta-value">
+            App mockup<br>
+            Low-fidelity wireframes<br>
+            User task flow<br>
+            Prototype walkthrough
+          </span>
+        </div>
+      </aside>
+
+    </section>
+
+    <!-- DESIGN GALLERY -->
+    <section class="gallery-section" aria-labelledby="gallery-title">
+      <div class="gallery-heading">
+        <div>
+          <p class="section-label">02 — Design development</p>
+          <h2>From structure to experience.</h2>
+        </div>
+
+        <p>WIREFRAMES &amp; USER FLOW<br>SELECT AN IMAGE TO EXPLORE ↗</p>
+      </div>
+
+      <div class="gallery-grid">
+
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="UIUX/FHlowfid.png"
+            data-title="FOODHOOD — Low-fidelity wireframes"
+            aria-label="Enlarge FOODHOOD low-fidelity wireframes"
+          >
+            <img
+              src="UIUX/FHlowfid.png"
+              alt="FOODHOOD low-fidelity interface designs"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>Low-fidelity wireframes</h3>
+            <span class="image-index">02</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <button
+            type="button"
+            class="gallery-button image-trigger"
+            data-image="UIUX/Frame 1.png"
+            data-title="FOODHOOD — User task flow"
+            aria-label="Enlarge FOODHOOD user task flow"
+          >
+            <img
+              src="UIUX/Frame 1.png"
+              alt="FOODHOOD user task flow diagram"
+              loading="lazy"
+            >
+            <span class="zoom-hint" aria-hidden="true">↗</span>
+          </button>
+
+          <figcaption class="gallery-caption">
+            <h3>User task flow</h3>
+            <span class="image-index">03</span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- PROTOTYPE VIDEO -->
+    <section class="video-section">
+      <div class="video-heading">
+        <div>
+          <p class="section-label">03 — Prototype walkthrough</p>
+          <h2>Explore FOODHOOD in action.</h2>
+        </div>
+
+        <p>APP PROTOTYPE<br>INTERACTION DEMONSTRATION</p>
+      </div>
+
+      <div class="video-frame">
+        <iframe
+          src="https://go.screenpal.com/player/cZln22nnecn?width=100%&height=100%&ff=1&title=0"
+          title="FOODHOOD app prototype walkthrough"
+          allow="fullscreen"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <div class="video-caption">
+        <span>04 / PROTOTYPE WALKTHROUGH</span>
+        <span>FOODHOOD — COMMUNITY FOOD APP</span>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="closing">
+      <span>FOODHOOD — UI/UX DESIGN</span>
+      <a href="UIUXdesigngrp.html">← Back to selected work</a>
+    </footer>
+
+  </main>
+
+  <!-- FULL-SCREEN IMAGE VIEWER -->
+  <div
+    class="lightbox"
+    id="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Artwork image viewer"
+    aria-hidden="true"
+  >
+    <div class="lightbox-top">
+      <span class="lightbox-counter" id="lightboxCounter">01 / 03</span>
+
+      <button
+        class="lightbox-close"
+        id="lightboxClose"
+        type="button"
+        aria-label="Close image viewer"
+      >×</button>
+    </div>
+
+    <div class="lightbox-stage">
+      <button
+        class="lightbox-nav"
+        id="lightboxPrev"
+        type="button"
+        aria-label="Previous image"
+      >‹</button>
+
+      <div class="lightbox-image-wrap">
+        <img class="lightbox-image" id="lightboxImage" src="" alt="">
+      </div>
+
+      <button
+        class="lightbox-nav"
+        id="lightboxNext"
+        type="button"
+        aria-label="Next image"
+      >›</button>
+    </div>
+
+    <div class="lightbox-bottom">
+      <p class="lightbox-title" id="lightboxTitle"></p>
+      <span class="lightbox-help">
+        USE ← → TO NAVIGATE · ESC TO CLOSE
+      </span>
     </div>
   </div>
 
-  <div class="column">
-    <img src="UIUX/FHlowfid.png" alt="Low fidelity design" onclick="myFunction(this);">
-  </div>
+  <script>
+    (() => {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightboxImage");
+      const lightboxTitle = document.getElementById("lightboxTitle");
+      const lightboxCounter = document.getElementById("lightboxCounter");
+      const closeButton = document.getElementById("lightboxClose");
+      const prevButton = document.getElementById("lightboxPrev");
+      const nextButton = document.getElementById("lightboxNext");
 
-  <div class="column">
-    <img src="UIUX/Frame 1.png" alt="User task flow" onclick="myFunction(this);">
-  </div>
-</div>
+      const triggers = Array.from(
+        document.querySelectorAll(".image-trigger")
+      );
 
-<div class="container">
-  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-  <img id="expandedImg">
-  <div id="imgtext"></div>
-</div>
+      let currentIndex = 0;
+      let lastFocusedElement = null;
 
-<div class="imgdesc">
-  <p>FOODHOOD App</p>
+      const images = triggers.map((trigger) => {
+        const image = trigger.querySelector("img");
 
-  <p>
-    FOODHOOD is more than just an app—it’s a community-driven platform that evokes memories of shared meals, family traditions, and the sensory delights of home-cooked dishes. Inspired by personal and collective nostalgia, it connects users through food stories, flavors, and traditions.
-  </p>
+        return {
+          src: trigger.dataset.image,
+          title: trigger.dataset.title,
+          alt: image ? image.alt : trigger.dataset.title
+        };
+      });
 
-  <p>
-    With the economic impact of Covid-19 leading to retrenchment, many turn to different avenues of work. This start-up is on a mission to develop software to help displaced workers in Singapore showcase their culinary skills and sell creations to the community. FOODHOOD allows anyone to order home-cooked food on demand.
-  </p>
-</div>
+      function showImage(index) {
+        currentIndex = (index + images.length) % images.length;
 
-<script>
-function myFunction(imgs) {
-  var expandImg = document.getElementById("expandedImg");
-  expandImg.src = imgs.src;
-  expandImg.parentElement.style.display = "block";
-}
-</script>
+        const image = images[currentIndex];
+
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.alt;
+        lightboxTitle.textContent = image.title;
+
+        lightboxCounter.textContent =
+          String(currentIndex + 1).padStart(2, "0") +
+          " / " +
+          String(images.length).padStart(2, "0");
+
+        [currentIndex + 1, currentIndex - 1].forEach((i) => {
+          const adjacent = images[(i + images.length) % images.length];
+          const preload = new Image();
+          preload.src = adjacent.src;
+        });
+      }
+
+      function openLightbox(index) {
+        lastFocusedElement = document.activeElement;
+
+        showImage(index);
+
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.classList.add("lightbox-open");
+
+        closeButton.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("lightbox-open");
+
+        lightboxImage.src = "";
+
+        if (lastFocusedElement) {
+          lastFocusedElement.focus();
+        }
+      }
+
+      function nextImage() {
+        showImage(currentIndex + 1);
+      }
+
+      function previousImage() {
+        showImage(currentIndex - 1);
+      }
+
+      triggers.forEach((trigger, index) => {
+        trigger.addEventListener("click", () => {
+          openLightbox(index);
+        });
+      });
+
+      closeButton.addEventListener("click", closeLightbox);
+      nextButton.addEventListener("click", nextImage);
+      prevButton.addEventListener("click", previousImage);
+
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (!lightbox.classList.contains("is-open")) return;
+
+        if (event.key === "Escape") {
+          closeLightbox();
+        } else if (event.key === "ArrowRight") {
+          nextImage();
+        } else if (event.key === "ArrowLeft") {
+          previousImage();
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>
