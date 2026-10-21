@@ -1,332 +1,1416 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Photography Gallery — Renee Chng</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Orbitron:wght@500&family=Roboto+Mono:wght@200&family=Ubuntu&display=swap" rel="stylesheet">  
-<style>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-body {
-  background:  #ffeaa3;
-  font-family: 'Ubuntu', sans-serif;
-}
+  <style>
 
+    :root {
+      --paper: #f6f3eb;
+      --ink: #202c50;
+      --blue: #303a95;
+      --lime: #d8e01e;
+      --orange: #ef7148;
+      --muted: #77796f;
+      --line: #d9d7ce;
+    }
 
-div.gallery {
-  border: 1px solid #ccc;
-  
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/*
-div.gallery img {
-  max-width: 300px; 
-  max-height: 200px; 
-  width: auto; 
-  height: auto; 
-}
-*/
+    html {
+      scroll-behavior: smooth;
+    }
 
-div.gallery img {
-  width: 367px; 
-  height: 289px; 
-  object-fit: cover; 
-}
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Manrope", sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-div.desc {
-  padding: 15px;
-  text-align: center;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-* {
-  box-sizing: border-box;
-}
-
-.responsive {
-  padding: 0 6px;
-  float: left;
-  width: 24.99999%;
-}
-
-@media only screen and (max-width: 700px) {
-  .responsive {
-    width: 49.99999%;
-    margin: 6px 0;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .responsive {
-    width: 100%;
-  }
-}
-
-.clearfix:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+    ::selection {
+      background: var(--lime);
+      color: var(--ink);
+    }
 
 
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 5%;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+    }
+
+    .nav-middle {
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .back-link {
+      font-size: 11px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 4px;
+      transition: 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--orange);
+      border-color: var(--orange);
+    }
 
 
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      padding: 48px 5% 0;
+    }
+
+    .hero-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--orange);
+    }
+
+    .hero-year {
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .hero-title {
+      font-size: clamp(75px, 15vw, 205px);
+      font-weight: 800;
+      line-height: 0.76;
+      letter-spacing: -0.11em;
+      text-transform: uppercase;
+      margin-left: -0.5%;
+    }
+
+    .hero-title span {
+      display: block;
+    }
+
+    .hero-title .second {
+      color: var(--blue);
+      padding-left: 12%;
+    }
+
+    .hero-title .dot {
+      color: var(--orange);
+    }
+
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+      padding: 42px 0 34px;
+    }
+
+    .hero-description {
+      max-width: 460px;
+      font-size: 13px;
+      line-height: 1.9;
+      color: #555d70;
+    }
+
+    .hero-count {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      white-space: nowrap;
+      font-family: "DM Mono", monospace;
+      text-transform: uppercase;
+    }
+
+    .hero-count strong {
+      font-family: "Manrope", sans-serif;
+      font-size: 38px;
+      letter-spacing: -0.08em;
+    }
+
+    .hero-count span {
+      font-size: 9px;
+      color: var(--muted);
+    }
 
 
+    /* =========================
+       TICKER
+    ========================= */
 
-div.backBtn {
-    width: 100px;
-    right: 100px;
-    top: 30px;
-    background-color: #f4f4f4;
-    transition: all 0.4s ease;
-    position: fixed;
-    cursor: pointer;
-  }
+    .ticker {
+      background: var(--lime);
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 12px 0;
+    }
 
-  span.line {
-    bottom: auto;
-    right: auto;
-    top: auto;
-    left: auto;
-    background-color: #333;
-    border-radius: 10px;
-    width: 100%;
-    left: 0px;
-    height: 2px;
-    display: block;
-    position: absolute;
-    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
-  }
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: ticker 28s linear infinite;
+    }
 
-  span.tLine {
-    top: 0px;
-  }
+    .ticker-content {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding-right: 28px;
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
 
-  span.mLine {
-    top: 13px;
-    opacity: 0;
-  }
+    .ticker-star {
+      color: var(--orange);
+      font-size: 17px;
+    }
 
-  span.bLine {
-    top: 26px;
-  }
+    @keyframes ticker {
+      from {
+        transform: translateX(0);
+      }
 
-  .label {
-    position: absolute;
-    left: 0px;
-    top: 5px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.4s ease;
-    font-size: 1em;
-  }
+      to {
+        transform: translateX(-50%);
+      }
+    }
 
-  div.backBtn:hover span.label {
-    left: 25px
-  }
 
-  div.backBtn:hover span.line {
-    left: -10px;
-    height: 5px;
-    background-color: #F76060;
-  }
+    /* =========================
+       GALLERY
+    ========================= */
 
-  div.backBtn:hover span.tLine {
-    width: 25px;
-    transform: rotate(-45deg);
-    left: -15px;
-    top: 6px;
-  }
+    .gallery {
+      padding: 65px 5% 100px;
+    }
 
-  div.backBtn:hover span.mLine {
-    opacity: 1;
-    width: 30px;
-  }
+    .gallery-intro {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 50px;
+      gap: 30px;
+    }
 
-  div.backBtn:hover span.bLine {
-    width: 25px;
-    transform: rotate(45deg);
-    left: -15px;
-    top: 20px;
-  }
-</style>
+    .section-kicker {
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 9px;
+    }
+
+    .section-title {
+      font-size: clamp(27px, 4vw, 45px);
+      letter-spacing: -0.07em;
+      line-height: 1;
+    }
+
+    .gallery-note {
+      text-align: right;
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      line-height: 1.8;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+
+    /* =========================
+       CATEGORY
+    ========================= */
+
+    .category {
+      margin-bottom: 85px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+    }
+
+    .category-left {
+      display: flex;
+      align-items: baseline;
+      gap: 13px;
+    }
+
+    .category-number {
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      color: var(--orange);
+    }
+
+    .category-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+    }
+
+    .category-description {
+      font-family: "DM Mono", monospace;
+      font-size: 8px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+
+    /* =========================
+       PHOTO GALLERY GRID
+    ========================= */
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .photo {
+      position: relative;
+      overflow: hidden;
+      background: #e7e5dc;
+      cursor: pointer;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition:
+        transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+        filter 0.5s ease;
+    }
+
+    .photo:hover img {
+      transform: scale(1.04);
+    }
+
+    .photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(32, 44, 80, 0.65),
+        transparent 45%
+      );
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .photo:hover::after {
+      opacity: 1;
+    }
+
+
+    /* IMAGE CAPTION */
+
+    .photo-caption {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 14px;
+      z-index: 3;
+      color: white;
+      opacity: 0;
+      transform: translateY(7px);
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .photo:hover .photo-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .photo-caption strong {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .photo-caption span {
+      display: block;
+      margin-top: 3px;
+      font-family: "DM Mono", monospace;
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      opacity: 0.75;
+    }
+
+
+    /* SMALL INDEX */
+
+    .photo-index {
+      position: absolute;
+      top: 11px;
+      left: 11px;
+      z-index: 4;
+      background: var(--paper);
+      color: var(--ink);
+      padding: 6px 8px;
+      font-family: "DM Mono", monospace;
+      font-size: 8px;
+      letter-spacing: 0.04em;
+      transition: 0.3s ease;
+    }
+
+    .photo:hover .photo-index {
+      background: var(--lime);
+    }
+
+
+    /* =========================
+       DIFFERENT IMAGE SIZES
+    ========================= */
+
+    .wide {
+      grid-column: span 7;
+      aspect-ratio: 16 / 10;
+    }
+
+    .medium {
+      grid-column: span 5;
+      aspect-ratio: 4 / 3;
+    }
+
+    .third {
+      grid-column: span 4;
+      aspect-ratio: 4 / 3;
+    }
+
+    .two-third {
+      grid-column: span 8;
+      aspect-ratio: 16 / 10;
+    }
+
+    .half {
+      grid-column: span 6;
+      aspect-ratio: 4 / 3;
+    }
+
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    /* =========================
+       END BANNER
+    ========================= */
+
+    .end-banner {
+      margin-top: 30px;
+      padding: 35px;
+      background: var(--blue);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .end-banner p {
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .end-banner h3 {
+      margin-top: 6px;
+      font-size: clamp(23px, 4vw, 40px);
+      line-height: 1.1;
+      letter-spacing: -0.07em;
+    }
+
+    .end-banner a {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--lime);
+      color: var(--ink);
+      font-size: 21px;
+      transition: transform 0.25s ease;
+    }
+
+    .end-banner a:hover {
+      transform: rotate(45deg);
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 24px 5%;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer p,
+    .footer a {
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .footer a:hover {
+      color: var(--orange);
+    }
+
+
+    /* =========================
+       TABLET
+    ========================= */
+
+    @media (max-width: 900px) {
+
+      .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .wide,
+      .medium,
+      .third,
+      .two-third,
+      .half {
+        grid-column: span 1;
+        aspect-ratio: 4 / 3;
+      }
+
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      .topbar {
+        padding: 18px 6%;
+      }
+
+      .nav-middle {
+        display: none;
+      }
+
+      .hero {
+        padding: 43px 6% 0;
+      }
+
+      .hero-meta {
+        margin-bottom: 30px;
+      }
+
+      .hero-title {
+        font-size: clamp(58px, 15vw, 90px);
+        line-height: 0.84;
+      }
+
+      .hero-title .second {
+        padding-left: 3%;
+      }
+
+      .hero-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 35px 0 30px;
+      }
+
+      .hero-description {
+        font-size: 13px;
+      }
+
+      .hero-count strong {
+        font-size: 30px;
+      }
+
+      .gallery {
+        padding: 45px 6% 65px;
+      }
+
+      .gallery-intro {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 45px;
+      }
+
+      .gallery-note {
+        text-align: left;
+      }
+
+      .category {
+        margin-bottom: 60px;
+      }
+
+      .category-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .photo-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .wide,
+      .medium,
+      .third,
+      .two-third,
+      .half {
+        grid-column: span 1;
+        aspect-ratio: 4 / 3;
+      }
+
+      .photo-caption {
+        opacity: 1;
+        transform: none;
+      }
+
+      .photo::after {
+        opacity: 1;
+      }
+
+      .photo-caption {
+        background: linear-gradient(
+          to top,
+          rgba(32,44,80,0.65),
+          transparent
+        );
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 35px 14px 13px;
+      }
+
+      .end-banner {
+        margin-top: 30px;
+        padding: 25px 20px;
+      }
+
+      .end-banner a {
+        width: 43px;
+        height: 43px;
+      }
+
+      .footer {
+        padding: 22px 6%;
+      }
+
+    }
+
+
+    /* =========================
+       REDUCED MOTION
+    ========================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+    }
+
+  </style>
 </head>
-<body>
 
-    <div class="backBtn">
-        <a href="index.html#portfolio">
-          <span class="line tLine"></span>
-          <span class="line mLine"></span>
-          <span class="label">Back</span>
-          <span class="line bLine"></span>
-        </a>
+
+<body id="top">
+
+
+  <!-- NAVIGATION -->
+
+  <header class="topbar">
+
+    <a href="index.html" class="logo">
+      RENEE CHNG®
+    </a>
+
+    <span class="nav-middle">
+      Independent visual practice / 2023—2026
+    </span>
+
+    <a href="index.html#portfolio" class="back-link">
+      ← Back home
+    </a>
+
+  </header>
+
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-meta">
+
+      <p class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Portfolio / Photography
+      </p>
+
+      <p class="hero-year">
+        Singapore · Visual archive
+      </p>
+
     </div>
 
-<h1>Renee's Photography!</h1>
 
-<h2>Product Photography</h2>
-<div class="responsive"><div class="gallery"><img src="Photography/CNY.png" alt="CNYphotography" style="display: block; max-width: 100%; height: auto;"><div class="desc">FAIRPRICE X CNY</div></div></div>
+    <h1 class="hero-title">
 
-<div class="responsive"><div class="gallery"><img src="Photography/CNY2.png" alt="CNYphotography" style="display: block; max-width: 100%; height: auto;"><div class="desc">FAIRPRICE X CNY</div></div></div>
+      <span>
+        PHOTO
+      </span>
 
-<div class="responsive"><div class="gallery"><img src="Photography/CNY3.png" alt="CNYphotography" style="display: block; max-width: 100%; height: auto;"><div class="desc">FAIRPRICE X CNY</div></div></div>
+      <span class="second">
+        GRAPHY<span class="dot">.</span>
+      </span>
 
-<div class="responsive"><div class="gallery"><img src="Photography/CNY.png" alt="CNYphotography" style="display: block; max-width: 100%; height: auto;"><div class="desc">FAIRPRICE X CNY</div></div></div>
+    </h1>
 
 
-<div class="responsive">
-    <div class="gallery">
-  
-        <img src="Photography/product1.jpg" alt="Product Photography Project" width="600" height="400">
-      </a>
-      <div class="desc">Product Photography Project</div>
+    <div class="hero-bottom">
+
+      <p class="hero-description">
+        A visual archive of <strong>products, portraits and places</strong>.
+        A collection of images exploring composition, light, colour,
+        texture and everyday observation.
+      </p>
+
+      <div class="hero-count">
+
+        <strong>20</strong>
+
+        <span>
+          Photographs
+        </span>
+
+      </div>
+
     </div>
+
+  </section>
+
+
+
+  <!-- TICKER -->
+
+  <div class="ticker">
+
+    <div class="ticker-track">
+
+      <div class="ticker-content">
+
+        <span>Product photography</span>
+        <span class="ticker-star">✳</span>
+
+        <span>Studio portrait</span>
+        <span class="ticker-star">✳</span>
+
+        <span>Outdoor observation</span>
+        <span class="ticker-star">✳</span>
+
+        <span>Light · Space · Form</span>
+        <span class="ticker-star">✳</span>
+
+      </div>
+
+
+      <div class="ticker-content">
+
+        <span>Product photography</span>
+        <span class="ticker-star">✳</span>
+
+        <span>Studio portrait</span>
+        <span class="ticker-star">✳</span>
+
+        <span>Outdoor observation</span>
+        <span class="ticker-star">✳</span>
+
+        <span>Light · Space · Form</span>
+        <span class="ticker-star">✳</span>
+
+      </div>
+
+    </div>
+
   </div>
 
-  <div class="responsive">
-    <div class="gallery">
-  
-        <img src="Photography/product2.jpg" alt="Product Photography Project" width="600" height="400">
-      </a>
-      <div class="desc">Product Photography Project</div>
-    </div>
-  </div>
 
-  <div class="responsive">
-    <div class="gallery">
-  
-        <img src="Photography/product3.jpg" alt="Product Photography Project" width="600" height="400">
-      </a>
-      <div class="desc">Product Photography Project</div>
-    </div>
-  </div>
 
-  <div class="responsive">
-    <div class="gallery">
-  
-        <img src="Photography/product4.jpg" alt="Product Photography Project" width="600" height="400">
-      </a>
-      <div class="desc">Product Photography Project</div>
-    </div>
-  </div>
+  <!-- GALLERY -->
 
-<h2>Studio Portrait Photography</h2>
+  <main class="gallery">
 
-<div class="responsive">
-    <div class="gallery">
-  
-        <img src="Photography/portrait.jpg" alt="Studio Portrait Photography" width="600" height="400">
-      </a>
-      <div class="desc">Studio Portrait Photography</div>
-    </div>
-  </div>
-  
-  
-  <div class="responsive">
-    <div class="gallery">
-  
-        <img src="Photography/portrait2.jpg" alt="Studio Portrait Photography" width="600" height="400">
-      </a>
-      <div class="desc">Studio Portrait Photography</div>
-    </div>
-  </div>
-  
-  <div class="responsive">
-    <div class="gallery">
-  
-        <img src="Photography/photographyred.png" alt="Studio Portrait Photography" width="600" height="400">
-      </a>
-      <div class="desc">Studio Portrait Photography</div>
-    </div>
-  </div>
-  
-  <div class="responsive">
-    <div class="gallery">
-  
-        <img src="Photography/photographyrednblue.png" alt="Studio Portrait Photography" width="600" height="400">
-      </a>
-      <div class="desc">Studio Portrait Photography</div>
-    </div>
-  </div>
-  
-  
-<h2>Outdoor Photography</h2>
 
-<div class="responsive">
-    <div class="gallery">
-  
-        <img src="Photography/58c51284-50cc-40ee-b790-7a5baeac088a (1).jpg" alt="Outdoor Photography" width="600" height="400">
-      </a>
-      <div class="desc">Bird & Roof</div>
-    </div>
-  </div>
+    <div class="gallery-intro">
 
-  <div class="responsive">
-    <div class="gallery">
-  
-        <img src="Photography/IMG_2376.jpg" alt="Outdoor Photography" width="600" height="400">
-      </a>
-      <div class="desc">Banners</div>
-    </div>
-  </div>
+      <div>
 
-  <div class="responsive">
-    <div class="gallery">
-  
-        <img src="Photography/IMG_2377.jpg" alt="Outdoor Photography" width="600" height="400">
-      </a>
-      <div class="desc">Singapore</div>
-    </div>
-  </div>
+        <p class="section-kicker">
+          05 / Image archive
+        </p>
 
-  <div class="responsive">
-    <div class="gallery">
-  
-        <img src="Photography/IMG_2379.jpg" alt="Outdoor Photography" width="600" height="400">
-      </a>
-      <div class="desc">Shadows</div>
-    </div>
-  </div>
-  <div class="responsive">
-    <div class="gallery">
-  
-        <img src="Photography/IMG_2378.jpg" alt="Outdoor Photography" width="600" height="400">
-      </a>
-      <div class="desc">Singapore</div>
-    </div>
-  </div>
+        <h2 class="section-title">
+          A collection of moments.
+        </h2>
 
-  <div class="responsive">
-    <div class="gallery">
-  
-        <img src="Photography/Repetitive buildings (1).jpg" alt="Outdoor Photography" width="600" height="400">
-      </a>
-      <div class="desc">Balance & Rhythm</div>
+      </div>
+
+      <p class="gallery-note">
+        Selected photographs<br>
+        2023—2026
+      </p>
+
     </div>
-  </div>
 
-  <div class="responsive">
-    <div class="gallery">
-  
-        <img src="Photography/IMG_2030 (1).JPG" alt="Outdoor Photography" width="600" height="400">
+
+
+    <!-- =========================
+         PRODUCT
+    ========================= -->
+
+    <section class="category">
+
+      <div class="category-header">
+
+        <div class="category-left">
+
+          <span class="category-number">
+            01 /
+          </span>
+
+          <h2 class="category-title">
+            Product Photography
+          </h2>
+
+        </div>
+
+        <span class="category-description">
+          Objects / Styling / Composition
+        </span>
+
+      </div>
+
+
+      <div class="photo-grid">
+
+
+        <div class="photo wide">
+
+          <img
+            src="Photography/CNY.png"
+            alt="FairPrice Chinese New Year product photography"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            01
+          </span>
+
+          <div class="photo-caption">
+            <strong>FAIRPRICE X CNY</strong>
+            <span>Product / Campaign</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo medium">
+
+          <img
+            src="Photography/CNY2.png"
+            alt="FairPrice Chinese New Year product photography"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            02
+          </span>
+
+          <div class="photo-caption">
+            <strong>FAIRPRICE X CNY</strong>
+            <span>Product / Campaign</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo third">
+
+          <img
+            src="Photography/CNY3.png"
+            alt="FairPrice Chinese New Year product photography"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            03
+          </span>
+
+          <div class="photo-caption">
+            <strong>FAIRPRICE X CNY</strong>
+            <span>Product / Campaign</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo third">
+
+          <img
+            src="Photography/CNY.png"
+            alt="FairPrice Chinese New Year product photography"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            04
+          </span>
+
+          <div class="photo-caption">
+            <strong>FAIRPRICE X CNY</strong>
+            <span>Product / Campaign</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo third">
+
+          <img
+            src="Photography/product1.jpg"
+            alt="Product photography"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            05
+          </span>
+
+          <div class="photo-caption">
+            <strong>PRODUCT STUDY</strong>
+            <span>Styling / Composition</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo third">
+
+          <img
+            src="Photography/product2.jpg"
+            alt="Product photography"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            06
+          </span>
+
+          <div class="photo-caption">
+            <strong>PRODUCT STUDY</strong>
+            <span>Styling / Composition</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo third">
+
+          <img
+            src="Photography/product3.jpg"
+            alt="Product photography"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            07
+          </span>
+
+          <div class="photo-caption">
+            <strong>PRODUCT STUDY</strong>
+            <span>Styling / Composition</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo two-third">
+
+          <img
+            src="Photography/product4.jpg"
+            alt="Product photography"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            08
+          </span>
+
+          <div class="photo-caption">
+            <strong>PRODUCT STUDY</strong>
+            <span>Styling / Composition</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         PORTRAIT
+    ========================= -->
+
+    <section class="category">
+
+      <div class="category-header">
+
+        <div class="category-left">
+
+          <span class="category-number">
+            02 /
+          </span>
+
+          <h2 class="category-title">
+            Studio Portrait Photography
+          </h2>
+
+        </div>
+
+        <span class="category-description">
+          People / Light / Colour
+        </span>
+
+      </div>
+
+
+      <div class="photo-grid">
+
+
+        <div class="photo half">
+
+          <img
+            src="Photography/portrait.jpg"
+            alt="Studio portrait photography"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            09
+          </span>
+
+          <div class="photo-caption">
+            <strong>STUDIO PORTRAIT</strong>
+            <span>Portrait / Lighting</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo half">
+
+          <img
+            src="Photography/portrait2.jpg"
+            alt="Studio portrait photography"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            10
+          </span>
+
+          <div class="photo-caption">
+            <strong>STUDIO PORTRAIT</strong>
+            <span>Portrait / Lighting</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo half">
+
+          <img
+            src="Photography/photographyred.png"
+            alt="Red studio portrait photography"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            11
+          </span>
+
+          <div class="photo-caption">
+            <strong>RED STUDY</strong>
+            <span>Colour / Portrait</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo half">
+
+          <img
+            src="Photography/photographyrednblue.png"
+            alt="Red and blue studio portrait photography"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            12
+          </span>
+
+          <div class="photo-caption">
+            <strong>RED / BLUE STUDY</strong>
+            <span>Colour / Portrait</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         OUTDOOR
+    ========================= -->
+
+    <section class="category">
+
+      <div class="category-header">
+
+        <div class="category-left">
+
+          <span class="category-number">
+            03 /
+          </span>
+
+          <h2 class="category-title">
+            Outdoor Photography
+          </h2>
+
+        </div>
+
+        <span class="category-description">
+          Space / Architecture / Observation
+        </span>
+
+      </div>
+
+
+      <div class="photo-grid">
+
+
+        <div class="photo medium">
+
+          <img
+            src="Photography/58c51284-50cc-40ee-b790-7a5baeac088a (1).jpg"
+            alt="Bird and roof"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            13
+          </span>
+
+          <div class="photo-caption">
+            <strong>BIRD & ROOF</strong>
+            <span>Observation / Space</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo wide">
+
+          <img
+            src="Photography/IMG_2376.jpg"
+            alt="Banners"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            14
+          </span>
+
+          <div class="photo-caption">
+            <strong>BANNERS</strong>
+            <span>Detail / Observation</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo third">
+
+          <img
+            src="Photography/IMG_2377.jpg"
+            alt="Singapore"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            15
+          </span>
+
+          <div class="photo-caption">
+            <strong>SINGAPORE</strong>
+            <span>Place / Observation</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo third">
+
+          <img
+            src="Photography/IMG_2379.jpg"
+            alt="Shadows"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            16
+          </span>
+
+          <div class="photo-caption">
+            <strong>SHADOWS</strong>
+            <span>Light / Contrast</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo third">
+
+          <img
+            src="Photography/IMG_2378.jpg"
+            alt="Singapore"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            17
+          </span>
+
+          <div class="photo-caption">
+            <strong>SINGAPORE</strong>
+            <span>Place / Observation</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo two-third">
+
+          <img
+            src="Photography/Repetitive buildings (1).jpg"
+            alt="Balance and rhythm"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            18
+          </span>
+
+          <div class="photo-caption">
+            <strong>BALANCE & RHYTHM</strong>
+            <span>Architecture / Repetition</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo third">
+
+          <img
+            src="Photography/IMG_2030 (1).JPG"
+            alt="Scale and contrast"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            19
+          </span>
+
+          <div class="photo-caption">
+            <strong>SCALE & CONTRAST</strong>
+            <span>Architecture / Scale</span>
+          </div>
+
+        </div>
+
+
+        <div class="photo wide">
+
+          <img
+            src="Photography/IMG_2031 (1).JPG"
+            alt="Carnival"
+            loading="lazy"
+          >
+
+          <span class="photo-index">
+            20
+          </span>
+
+          <div class="photo-caption">
+            <strong>CARNIVAL</strong>
+            <span>Movement / Place</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- END -->
+
+    <div class="end-banner">
+
+      <div>
+
+        <p>
+          That's the collection / for now
+        </p>
+
+        <h3>
+          More moments in the making.
+        </h3>
+
+      </div>
+
+      <a href="index.html#portfolio">
+        ↗
       </a>
-      <div class="desc">Scale & Contrast</div>
+
     </div>
-  </div>
 
-  <div class="responsive">
-    <div class="gallery">
-  
-        <img src="Photography/IMG_2031 (1).JPG" alt="Outdoor Photography" width="600" height="400">
-      </a>
-      <div class="desc">Carnival</div>
-    </div>
-  </div>
+  </main>
 
-<div class="clearfix"></div>
 
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <p>
+      © Renee Chng · 2026
+    </p>
+
+    <p>
+      Photography archive ✳
+    </p>
+
+    <a href="#top">
+      Back to top ↑
+    </a>
+
+  </footer>
 
 
 </body>
 </html>
-
-
